@@ -1,11 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home - Cửa Hàng Online</title>
+    <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
-    this page is the landing page
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Cửa Hàng Online</div>
+    </header>
+
+    <!-- MENU -->
+    <nav>
+        <ul class="menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="vietnam.html">Giới Thiệu Tỉnh Thành</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+        </ul>
+    </nav>
+
+    <!-- SLIDER -->
+    <!-- <div class="slider">
+        <div class="slides">
+            <img src="image/homeSlider/homeSlider1.png" class="logo-slide" alt="Slide 1">
+            <img src="image/homeSlider/homeSlider2.png" class="logo-slide" alt="Slide 2">
+            <img src="image/homeSlider/homeSlider3.png" class="logo-slide" alt="Slide 3">
+        </div>
+    </div> -->
+
+    <!-- SLIDER -->
+  <div class="slider" id="slider">
+    <div class="slides">
+      <div class="slide-wrapper">
+        <img src="image/homeSlider/homeSlider1.png" alt="QR Logo">
+      </div>
+      <div class="slide-wrapper">
+        <img src="image/homeSlider/homeSlider2.png" alt="Sản phẩm 1">
+      </div>
+      <div class="slide-wrapper">
+        <img src="image/homeSlider/homeSlider3.png" alt="Sản phẩm 2">
+      </div>
+    </div>
+  </div>
+
+
+
+    <!-- NỘI DUNG BÁN HÀNG -->
+    <main class="product-section">
+        <h2>Sản phẩm nổi bật</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://via.placeholder.com/150" alt="Sản phẩm 1">
+                <h3>Sản phẩm 1</h3>
+                <p>Giá: 100.000đ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/150" alt="Sản phẩm 2">
+                <h3>Sản phẩm 2</h3>
+                <p>Giá: 150.000đ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Cửa Hàng Online. Mọi quyền được bảo lưu.</p>
+        <p>Liên hệ: 0123 456 789 | email@example.com</p>
+    </footer>
+    <script src="js/slider.js"></script>
 </body>
+
 </html>
