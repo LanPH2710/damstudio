@@ -2,21 +2,19 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Trang Chủ - Áo QR Việt Nam</title>
-    <link rel="stylesheet" href="css/home1.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/home1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
 </head>
 
-<section>
-    <!-- Header -->
+<body>
     <header class="header">
         <div class="header-top">
             <div class="header-left">
-                <a href="home1.html"><img src="image/logo/logoIMG.png" alt="Logo" class="logo"></a>
+                <a href="home1.html"><img src="image/logo/logoIMG.png" alt="Logo" class="logo" /></a>
             </div>
             <button class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -24,28 +22,20 @@
         </div>
         <nav class="header-center">
             <ul class="menu">
-                <li class="dropdown">ABOUT
-                    <ul class="submenu">
-                        <!-- <li><a href="hanoi.html">About</a></li>
-                        <li><a href="haiphong.html">Product</a></li>
-                        <li><a href="quangninh.html">Place</a></li>
-                        <li><a href="quangninh.html">Contact</a></li>
-                        <li><a href="quangninh.html">Feedback</a></li> -->
-                    </ul>
-                </li>
-
-                <li class="dropdown">PRODUCT
-                    <ul class="submenu">
-                        <!-- <li>Đà Nẵng</li>
-                        <li>Huế</li>
-                        <li>Nghệ An</li> -->
-                    </ul>
-                </li>
+                <li>ABOUT</li>
+                <li>PRODUCT</li>
                 <li class="dropdown">PLACE
                     <ul class="submenu">
-                        <!-- <li>TP.HCM</li>
-                        <li>Cần Thơ</li>
-                        <li>Bình Dương</li> -->
+                        <li><a href="hanoiInfo.html">Hà Nội</a></li>
+                        <li><a href="#">TP. Hồ Chí Minh</a></li>
+                        <li><a href="#">Đà Nẵng</a></li>
+                        <li><a href="#">Huế</a></li>
+                        <li><a href="#">Hội An</a></li>
+                        <li><a href="#">Hạ Long</a></li>
+                        <li><a href="#">Đà Lạt</a></li>
+                        <li><a href="#">Nha Trang</a></li>
+                        <li><a href="#">Cần Thơ</a></li>
+                        <li><a href="#">Phú Quốc</a></li>
                     </ul>
                 </li>
                 <li>CONTACT</li>
@@ -53,22 +43,22 @@
             </ul>
         </nav>
         <div class="header-right">
-            <a href="#"><i class="fas fa-search"></i></a> <!-- Tìm kiếm -->
-            <a href="#"><i class="fas fa-shopping-cart"></i></a> <!-- Giỏ hàng -->
-            <a href="#"><i class="fas fa-globe"></i></a> <!-- Thế giới / Ngôn ngữ -->
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-globe"></i></a>
         </div>
-
     </header>
 
     <!-- Slide -->
     <section class="slide">
-        <div class="slide-container">
+        <div class="slide-container" id="slideContainer">
             <img src="image/homeSlider/mceu_67032867531716201705287.jpg" alt="Slide 1">
             <img src="image/homeSlider/buu-dien-trung-tam-sai-gon-1.jpg" alt="Slide 2">
             <img src="image/homeSlider/Dragon-Bridge2_lg.jpg" alt="Slide 3">
             <img src="image/homeSlider/tp-ho-chi-minh-du-dieu-kien-la-trung-tam-tai-chinh-khu-vuc-va-quoc-te.jpg"
                 alt="Slide 4">
         </div>
+        <div class="dots" id="dots"></div>
     </section>
     <!-- Say hello -->
     <section class="hello">
@@ -99,11 +89,6 @@
     <section class="all-products">
         <h2>ALL PRODUCTS</h2>
         <div class="products">
-            <div class="product">
-                <img src="image/homeSlider/homeSlider3.png" alt="Áo Hà Nội">
-                <p>Áo 1</p>
-                <p>150.000</p>
-            </div>
             <div class="product">
                 <img src="image/homeSlider/homeSlider3.png" alt="Áo Đà Nẵng">
                 <p>Áo 1</p>
@@ -145,13 +130,16 @@
                 <p>150.000</p>
             </div>
         </div>
+        <div class="learnmore">
+            <button class="learn-more-btn">View More</button>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo-box">
-                <img src="image/logo/logoIMG.png" alt="Logo" class="footer-logo">
+                <img src="image/logo/logoIMG.png" alt="Logo" class="footer-logo" />
             </div>
             <div class="footer-section">
                 <h2>Contact Info</h2>
@@ -163,12 +151,13 @@
                 <h2>Subscribe</h2>
                 <p>Stay informed with our latest news and updates.</p>
                 <div class="email-box">
-                    <input type="email" placeholder="Nhập email của bạn">
+                    <input type="email" placeholder="Nhập email của bạn" />
                     <button>Subscribe</button>
                 </div>
             </div>
         </div>
     </footer>
+
 
 
     <!-- Toggle Menu Script -->
@@ -177,6 +166,74 @@
             document.querySelector('.header-center .menu').classList.toggle('show');
         });
     </script>
-    </body>
+</body>
+<script>
+    const slideContainer = document.getElementById("slideContainer");
+    const slides = slideContainer.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots");
+    let currentIndex = 0;
+    let autoSlide;
+
+    // Tạo chấm
+    slides.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.dataset.index = i;
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function goToSlide(index) {
+        currentIndex = index;
+        slideContainer.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach(dot => dot.classList.remove("active"));
+        dots[index].classList.add("active");
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        goToSlide(currentIndex);
+    }
+
+    function startAutoSlide() {
+        autoSlide = setInterval(nextSlide, 10000); // 10s
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlide);
+    }
+
+    // Dấu chấm click
+    dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+            stopAutoSlide();
+            goToSlide(Number(dot.dataset.index));
+            startAutoSlide();
+        });
+    });
+
+    // Kéo (touch)
+    let startX = 0;
+    slideContainer.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+        stopAutoSlide();
+    });
+
+    slideContainer.addEventListener("touchend", e => {
+        const diff = e.changedTouches[0].clientX - startX;
+        if (diff > 50) {
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+        } else if (diff < -50) {
+            currentIndex = (currentIndex + 1) % slides.length;
+        }
+        goToSlide(currentIndex);
+        startAutoSlide();
+    });
+
+    // Khởi động
+    startAutoSlide();
+</script>
 
 </html>
