@@ -591,6 +591,20 @@ body {
   .all-products h2 {
     font-size: 32px;
   }
+
+  .footer-container {
+        justify-content: center;
+    }
+
+    .footer-section,
+    .footer-logo-box {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .email-box {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 600px) {
@@ -631,56 +645,44 @@ body {
   }
 
   .header-center {
-    order: 3;
+    /* order: 3;
     width: 100%;
     justify-content: center;
     margin-top: 0;
-    /* Đặt lại margin-top vì nó sẽ trượt xuống */
+    Đặt lại margin-top vì nó sẽ trượt xuống */
+    display: none;
   }
 
   .header-center .menu {
-    flex-direction: column;
-    /* Hiển thị các mục menu theo cột */
-    width: 100%;
-    max-height: 0;
-    /* Ẩn menu mặc định */
-    overflow: hidden;
-    /* Cắt bỏ phần tràn ra ngoài */
-    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-    /* Tạo hiệu ứng trượt */
-    background-color: #fff;
-    /* Nền cho menu khi mở ra */
-    position: absolute;
-    /* Để nó phủ lên nội dung khác */
-    top: 83px;
-    /* Ngay dưới header */
-    left: 0;
-    border-bottom: 3px solid #c62828;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    padding: 0 20px;
-    /* Bỏ padding-bottom cũ, dùng padding cho cả menu */
-    align-items: center;
-    /* Căn giữa các mục menu */
+    display: flex; /* Bật lại display: flex khi menu được show */
+        flex-direction: column;
+        width: 100%;
+        height: 100vh; /* Menu sẽ chiếm toàn bộ chiều cao viewport */
+        background-color: #fff;
+        position: fixed; /* Rất quan trọng: Để menu là một lớp phủ cố định */
+        top: 0; /* Ban đầu đặt ở top 0, JS sẽ điều chỉnh padding-top */
+        left: 0;
+        right: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        padding-top: 0; /* Sẽ được JS thiết lập để đẩy nội dung xuống dưới header */
+        align-items: center;
+        transform: translateY(-100%); /* Ban đầu ẩn hoàn toàn ở trên màn hình */
+        transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt */
+        z-index: 999; /* Đảm bảo nó nằm dưới header cố định (z-index 1000) */
+        overflow-y: auto; /* Cho phép cuộn nếu nội dung menu quá dài */
   }
 
-  .header-center .menu.show {
-    max-height: 500px;
-    /* Hoặc một giá trị đủ lớn để chứa tất cả các mục */
-    padding-top: 10px;
-    /* Thêm padding khi menu mở */
-    padding-bottom: 10px;
-  }
+.header-center .menu.show {
+        transform: translateY(0); /* Trượt xuống hiển thị */
+        /* padding-top sẽ được thiết lập bởi JS */
+    }
 
   .menu li {
-    width: 100%;
-    /* Đảm bảo các mục menu chiếm toàn bộ chiều rộng */
-    text-align: center;
-    padding: 12px 0;
-    /* Tăng padding để dễ chạm hơn */
-    border-bottom: 1px solid #eee;
-    /* Thêm đường phân cách */
-    border-radius: 0;
-    /* Bỏ border-radius */
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+        border-radius: 0;
   }
 
   .menu li:last-child {
@@ -699,36 +701,22 @@ body {
 
   /* Mobile Dropdown (STORY) */
   .submenu {
-    position: static;
-    /* Rất quan trọng: Đặt lại position thành static để nó nằm trong luồng tài liệu của menu cha */
-    width: 100%;
-    /* Chiếm toàn bộ chiều rộng của menu cha */
-    min-width: unset;
-    /* Bỏ min-width */
-    border: none;
-    /* Bỏ viền */
-    box-shadow: none;
-    /* Bỏ box-shadow */
-    opacity: 1;
-    /* Luôn hiển thị (chúng ta sẽ điều khiển bằng max-height) */
-    visibility: visible;
-    /* Luôn hiển thị */
-    transform: none;
-    /* Bỏ transform */
-    pointer-events: auto;
-    /* Cho phép tương tác */
-    background-color: #f8f8f8;
-    /* Nền cho submenu */
-    padding: 0;
-    /* Bỏ padding chung để mỗi li tự padding */
-    max-height: 0;
-    /* Ẩn mặc định với hiệu ứng trượt */
-    overflow: hidden;
-    display: block;
-    /* Đặt lại display thành block để không bị grid */
-    transition: max-height 0.4s ease-out;
-    /* Hiệu ứng trượt */
-  }
+        position: static;
+        width: 100%;
+        min-width: unset;
+        border: none;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        background-color: #f8f8f8;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        display: block;
+        transition: max-height 0.4s ease-out;
+    }
 
   .dropdown.active .submenu {
     /* Thêm class 'active' bằng JS */
