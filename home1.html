@@ -160,139 +160,168 @@
 
 
     <!-- Toggle Menu Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // --- Menu Toggle and Dropdown for Mobile ---
-            const menuToggle = document.getElementById('menuToggle');
-            const headerMenu = document.querySelector('.header-center .menu');
-            const dropdown = document.querySelector('.menu .dropdown'); // The 'STORY' li element
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- Menu Toggle and Dropdown for Mobile ---
+        const menuToggle = document.getElementById('menuToggle');
+        const headerMenu = document.querySelector('.header-center .menu');
+        const dropdown = document.querySelector('.menu .dropdown'); // The 'STORY' li element
+        const header = document.querySelector('.header'); // Lấy phần tử header
 
-            // Function to handle mobile dropdown click
-            function dropdownClickHandler(event) {
-                // Only toggle if click is not on a link within the submenu
-                if (event.target.tagName !== 'A') {
-                    event.preventDefault(); // Prevent default li behavior (e.g., navigating if it were a link)
-                    dropdown.classList.toggle('active');
-                }
+        // Function to handle mobile dropdown click
+        function dropdownClickHandler(event) {
+            // Only toggle if click is not on a link within the submenu
+            if (event.target.tagName !== 'A') {
+                event.preventDefault(); // Prevent default li behavior
+                dropdown.classList.toggle('active');
+            }
+        }
+
+        // Setup/Remove mobile dropdown listener based on screen size
+        function setupMobileDropdownListener() {
+            if (window.innerWidth <= 600) {
+                dropdown.addEventListener('click', dropdownClickHandler);
+            } else {
+                dropdown.removeEventListener('click', dropdownClickHandler);
+                dropdown.classList.remove('active');
+            }
+        }
+
+        // Toggle main menu on mobile
+        menuToggle.addEventListener('click', function () {
+            const headerHeight = header.offsetHeight; // Lấy chiều cao hiện tại của header
+
+            if (!headerMenu.classList.contains('show')) {
+                // Nếu menu sắp mở
+                headerMenu.style.paddingTop = headerHeight + 'px'; // Đặt padding để đẩy nội dung xuống dưới header
+                headerMenu.style.display = 'flex'; // Hiển thị menu trước khi trượt
+                // Đợi một chút để CSS transform có thể áp dụng mượt mà
+                setTimeout(() => {
+                    headerMenu.classList.add('show');
+                }, 10); // Khoảng thời gian nhỏ
+            } else {
+                // Nếu menu sắp đóng
+                headerMenu.classList.remove('show');
+                // Đợi transition hoàn tất rồi mới ẩn display
+                setTimeout(() => {
+                    headerMenu.style.display = 'none';
+                    headerMenu.style.paddingTop = '0'; // Reset padding
+                }, 500); // Phù hợp với thời gian transition (0.5s)
             }
 
-            // Setup/Remove mobile dropdown listener based on screen size
-            function setupMobileDropdownListener() {
-                if (window.innerWidth <= 600) {
-                    dropdown.addEventListener('click', dropdownClickHandler);
-                } else {
-                    dropdown.removeEventListener('click', dropdownClickHandler);
-                    // Ensure dropdown is closed if resizing from mobile to desktop
-                    dropdown.classList.remove('active');
-                }
+            // Nếu menu chính đang đóng, đảm bảo submenu cũng đóng
+            if (!headerMenu.classList.contains('show')) {
+                dropdown.classList.remove('active');
             }
+        });
 
-            // Toggle main menu on mobile
-            menuToggle.addEventListener('click', function () {
-                headerMenu.classList.toggle('show');
-                // If main menu is being closed, ensure submenu is also closed
-                if (!headerMenu.classList.contains('show')) {
-                    dropdown.classList.remove('active');
-                }
-            });
-
-            // Close menu when clicking outside (only for mobile)
-            document.addEventListener('click', function (event) {
-                if (window.innerWidth <= 600) {
-                    const isClickInsideMenu = headerMenu.contains(event.target) || menuToggle.contains(event.target);
-                    if (!isClickInsideMenu && headerMenu.classList.contains('show')) {
-                        headerMenu.classList.remove('show');
-                        dropdown.classList.remove('active'); // Also close dropdown if main menu closes
-                    }
-                }
-            });
-
-            // Handle window resize events
-            window.addEventListener('resize', function () {
-                if (window.innerWidth > 600) {
-                    // On desktop, ensure mobile menu classes are removed
+        // Close menu when clicking outside (only for mobile)
+        document.addEventListener('click', function (event) {
+            if (window.innerWidth <= 600) {
+                const isClickInsideMenu = headerMenu.contains(event.target) || menuToggle.contains(event.target);
+                if (!isClickInsideMenu && headerMenu.classList.contains('show')) {
                     headerMenu.classList.remove('show');
-                    // Reset max-height on menu and submenu to allow CSS hover to work
-                    headerMenu.style.maxHeight = '';
-                    const submenu = dropdown.querySelector('.submenu');
-                    if (submenu) submenu.style.maxHeight = '';
+                    setTimeout(() => {
+                        headerMenu.style.display = 'none';
+                        headerMenu.style.paddingTop = '0';
+                    }, 500);
+                    dropdown.classList.remove('active');
                 }
-                // Re-evaluate and setup/remove mobile dropdown listener
+            }
+        });
+
+        // Handle window resize events
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 600) {
+                // On desktop, ensure mobile menu classes are removed and display is reset
+                headerMenu.classList.remove('show');
+                headerMenu.style.paddingTop = ''; // Xóa padding động
+                headerMenu.style.transform = ''; // Xóa transform
+                headerMenu.style.display = ''; // Reset display để header-center trở lại mặc định (flex)
+                dropdown.classList.remove('active'); // Đảm bảo submenu ẩn
+            } else {
+                // On mobile, if menu is shown, re-adjust padding (in case header height changed)
+                if (headerMenu.classList.contains('show')) {
+                    const headerHeight = header.offsetHeight;
+                    headerMenu.style.paddingTop = headerHeight + 'px';
+                }
+                // Luôn gọi lại để thiết lập/xóa listener mobile dropdown
                 setupMobileDropdownListener();
-            });
-
-            // Initial setup for mobile dropdown on page load
-            setupMobileDropdownListener();
-
-
-            // --- Image Slider Script ---
-            const slideContainer = document.getElementById("slideContainer");
-            const slides = slideContainer.querySelectorAll("img");
-            const dotsContainer = document.getElementById("dots");
-            let currentIndex = 0;
-            let autoSlide;
-
-            // Tạo chấm
-            slides.forEach((_, i) => {
-                const dot = document.createElement("span");
-                dot.dataset.index = i;
-                dot.classList.add("dot");
-                if (i === 0) dot.classList.add("active");
-                dotsContainer.appendChild(dot);
-            });
-
-            const dots = document.querySelectorAll(".dot");
-
-            function goToSlide(index) {
-                currentIndex = index;
-                slideContainer.style.transform = `translateX(-${index * 100}%)`;
-                dots.forEach(dot => dot.classList.remove("active"));
-                dots[index].classList.add("active");
             }
+        });
 
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % slides.length;
-                goToSlide(currentIndex);
-            }
+        // Initial setup for mobile dropdown on page load
+        setupMobileDropdownListener();
 
-            function startAutoSlide() {
-                autoSlide = setInterval(nextSlide, 10000); // 10s
-            }
 
-            function stopAutoSlide() {
-                clearInterval(autoSlide);
-            }
+        // --- Image Slider Script ---
+        const slideContainer = document.getElementById("slideContainer");
+        const slides = slideContainer.querySelectorAll("img");
+        const dotsContainer = document.getElementById("dots");
+        let currentIndex = 0;
+        let autoSlide;
 
-            // Dấu chấm click
-            dots.forEach(dot => {
-                dot.addEventListener("click", () => {
-                    stopAutoSlide();
-                    goToSlide(Number(dot.dataset.index));
-                    startAutoSlide();
-                });
-            });
+        // Tạo chấm
+        slides.forEach((_, i) => {
+            const dot = document.createElement("span");
+            dot.dataset.index = i;
+            dot.classList.add("dot");
+            if (i === 0) dot.classList.add("active");
+            dotsContainer.appendChild(dot);
+        });
 
-            // Kéo (touch)
-            let startX = 0;
-            slideContainer.addEventListener("touchstart", e => {
-                startX = e.touches[0].clientX;
+        const dots = document.querySelectorAll(".dot");
+
+        function goToSlide(index) {
+            currentIndex = index;
+            slideContainer.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove("active"));
+            dots[index].classList.add("active");
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        }
+
+        function startAutoSlide() {
+            autoSlide = setInterval(nextSlide, 10000); // 10s
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlide);
+        }
+
+        // Dấu chấm click
+        dots.forEach(dot => {
+            dot.addEventListener("click", () => {
                 stopAutoSlide();
-            });
-
-            slideContainer.addEventListener("touchend", e => {
-                const diff = e.changedTouches[0].clientX - startX;
-                if (diff > 50) {
-                    currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
-                } else if (diff < -50) {
-                    currentIndex = (currentIndex + 1) % slides.length;
-                }
-                goToSlide(currentIndex);
+                goToSlide(Number(dot.dataset.index));
                 startAutoSlide();
             });
+        });
 
-            // Khởi động
+        // Kéo (touch)
+        let startX = 0;
+        slideContainer.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+            stopAutoSlide();
+        });
+
+        slideContainer.addEventListener("touchend", e => {
+            const diff = e.changedTouches[0].clientX - startX;
+            if (diff > 50) {
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+            } else if (diff < -50) {
+                currentIndex = (currentIndex + 1) % slides.length;
+            }
+            goToSlide(currentIndex);
             startAutoSlide();
         });
-    </script>
+
+        // Khởi động
+        startAutoSlide();
+    });
+</script>
 
 </html>
