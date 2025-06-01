@@ -49,6 +49,7 @@ body {
 
 .menu-toggle {
   display: none;
+  /* Mặc định ẩn trên desktop */
   background: none;
   border: none;
   font-size: 28px;
@@ -85,6 +86,7 @@ body {
 .header-center .menu {
   list-style: none;
   display: flex;
+  /* Hiển thị ngang trên desktop */
   gap: 36px;
   font-weight: 700;
   font-size: 18px;
@@ -94,6 +96,7 @@ body {
   user-select: none;
   flex-wrap: wrap;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .menu li {
@@ -115,44 +118,74 @@ body {
   list-style: none;
 }
 
+/* Mega Menu Styles (Desktop) */
 .submenu {
   position: absolute;
   top: 100%;
-  left: 0;
+  /* Ngay dưới mục menu cha */
+  left: 50%;
+  /* Căn giữa theo chiều ngang của dropdown li */
+  transform: translateX(-50%);
+  /* Dịch chuyển sang trái 50% chiều rộng của nó để căn giữa */
+  width: 900px;
+  /* Chiều rộng của mega menu */
+  max-width: calc(100vw - 60px);
+  /* Đảm bảo menu không tràn màn hình */
   background-color: #fff;
   border: 1px solid #ddd;
-  min-width: 160px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  /* Tăng shadow để nổi bật hơn */
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   z-index: 1000;
   pointer-events: none;
   list-style: none;
+  display: grid;
+  /* Sử dụng Grid để tạo các cột bên trong mega menu */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* Tự động tạo cột */
+  gap: 20px;
+  /* Khoảng cách giữa các cột và hàng */
+  padding: 25px;
+  /* Padding bên trong mega menu */
+  box-sizing: border-box;
+  /* Đảm bảo padding không làm tăng chiều rộng */
+  border-radius: 12px;
+  /* Bo góc cho mega menu */
 }
 
 .submenu li {
-  padding: 5px 5px;
-  white-space: nowrap;
+  padding: 0;
+  /* Bỏ padding mặc định của li trong submenu */
+  white-space: normal;
+  /* Cho phép chữ xuống dòng */
 }
 
 .submenu li a {
   text-decoration: none;
   color: #333;
   display: block;
+  padding: 8px 10px;
+  /* Padding cho từng link trong submenu */
   transition: background-color 0.3s ease;
-  border-radius: 5px;
+  border-radius: 8px;
+  /* Bo góc cho từng link */
+  font-weight: 500;
+  /* Điều chỉnh độ đậm chữ */
 }
 
 .submenu li a:hover {
   background-color: #f5f5f5;
+  color: #b71c1c;
+  /* Thay đổi màu chữ khi hover */
 }
 
 .dropdown:hover .submenu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
+  /* Đảm bảo transform đúng khi hover */
   pointer-events: auto;
 }
 
@@ -198,7 +231,7 @@ body {
   box-shadow: 0 4px 14px rgba(198, 40, 40, 0.6);
 }
 
-/* Slide */
+/* Slide Section */
 .slide {
   max-height: 610px;
   width: auto;
@@ -248,7 +281,6 @@ body {
 .dots span.active {
   opacity: 1;
 }
-
 
 /* Hello Section */
 .hello {
@@ -568,33 +600,198 @@ body {
     padding: 10px 20px;
   }
 
-  .header-center {
-    order: 3;
+  .header-top {
     width: 100%;
-    justify-content: center;
-    margin-top: 10px;
+    /* Đảm bảo header-top chiếm toàn bộ chiều rộng */
+    justify-content: space-between;
+    /* Giữ logo và toggle menu ở hai bên */
   }
 
   .header-left {
     order: 1;
-    width: 100%;
+    /* Đảm bảo logo ở vị trí đầu */
+    /* width: 100%; */
+    /* Loại bỏ width: 100% để logo không chiếm hết hàng */
     justify-content: flex-start;
   }
 
   .header-right {
     order: 2;
     width: 100%;
+    /* Vẫn cần width 100% để icon nằm đúng hàng */
     justify-content: flex-end;
     margin-bottom: 8px;
+    margin-top: 10px;
+    /* Thêm margin trên để tách biệt khỏi header-top */
+  }
+
+  .menu-toggle {
+    display: block;
+    /* Hiển thị nút toggle menu */
+  }
+
+  .header-center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
+    /* Đặt lại margin-top vì nó sẽ trượt xuống */
   }
 
   .header-center .menu {
     flex-direction: column;
-    gap: 14px;
+    /* Hiển thị các mục menu theo cột */
+    width: 100%;
+    max-height: 0;
+    /* Ẩn menu mặc định */
+    overflow: hidden;
+    /* Cắt bỏ phần tràn ra ngoài */
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    /* Tạo hiệu ứng trượt */
+    background-color: #fff;
+    /* Nền cho menu khi mở ra */
+    position: absolute;
+    /* Để nó phủ lên nội dung khác */
+    top: 83px;
+    /* Ngay dưới header */
+    left: 0;
+    border-bottom: 3px solid #c62828;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 0 20px;
+    /* Bỏ padding-bottom cũ, dùng padding cho cả menu */
+    align-items: center;
+    /* Căn giữa các mục menu */
   }
 
+  .header-center .menu.show {
+    max-height: 500px;
+    /* Hoặc một giá trị đủ lớn để chứa tất cả các mục */
+    padding-top: 10px;
+    /* Thêm padding khi menu mở */
+    padding-bottom: 10px;
+  }
+
+  .menu li {
+    width: 100%;
+    /* Đảm bảo các mục menu chiếm toàn bộ chiều rộng */
+    text-align: center;
+    padding: 12px 0;
+    /* Tăng padding để dễ chạm hơn */
+    border-bottom: 1px solid #eee;
+    /* Thêm đường phân cách */
+    border-radius: 0;
+    /* Bỏ border-radius */
+  }
+
+  .menu li:last-child {
+    border-bottom: none;
+    /* Bỏ đường phân cách ở mục cuối cùng */
+  }
+
+  .menu li:hover {
+    background: #f0f0f0;
+    /* Thay đổi màu nền hover cho mobile */
+    color: #c62828;
+    /* Giữ màu chữ đỏ */
+    box-shadow: none;
+    /* Bỏ box-shadow trên mobile */
+  }
+
+  /* Mobile Dropdown (STORY) */
+  .submenu {
+    position: static;
+    /* Rất quan trọng: Đặt lại position thành static để nó nằm trong luồng tài liệu của menu cha */
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của menu cha */
+    min-width: unset;
+    /* Bỏ min-width */
+    border: none;
+    /* Bỏ viền */
+    box-shadow: none;
+    /* Bỏ box-shadow */
+    opacity: 1;
+    /* Luôn hiển thị (chúng ta sẽ điều khiển bằng max-height) */
+    visibility: visible;
+    /* Luôn hiển thị */
+    transform: none;
+    /* Bỏ transform */
+    pointer-events: auto;
+    /* Cho phép tương tác */
+    background-color: #f8f8f8;
+    /* Nền cho submenu */
+    padding: 0;
+    /* Bỏ padding chung để mỗi li tự padding */
+    max-height: 0;
+    /* Ẩn mặc định với hiệu ứng trượt */
+    overflow: hidden;
+    display: block;
+    /* Đặt lại display thành block để không bị grid */
+    transition: max-height 0.4s ease-out;
+    /* Hiệu ứng trượt */
+  }
+
+  .dropdown.active .submenu {
+    /* Thêm class 'active' bằng JS */
+    max-height: 400px;
+    /* Hoặc một giá trị đủ lớn để hiển thị tất cả các mục */
+    padding: 10px 0;
+    /* Padding khi submenu mở */
+  }
+
+  .submenu li {
+    padding: 8px 0;
+    /* Padding cho các mục con */
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    /* Thêm đường phân cách cho mỗi item trong submenu */
+  }
+
+  .submenu li:last-child {
+    border-bottom: none;
+    /* Bỏ đường phân cách ở cuối submenu */
+  }
+
+
+  .submenu li a {
+    padding: 8px 20px;
+    /* Padding cho link trong submenu */
+    color: #555;
+    /* Màu chữ cho link trong submenu */
+  }
+
+  .submenu li a:hover {
+    background-color: #e0e0e0;
+    /* Màu nền hover cho link submenu */
+  }
+
+  /* Đảm bảo dropdown arrow không hiển thị khi menu đang ở dạng mobile (dạng cột) */
+  .menu li.dropdown::after {
+    display: none;
+  }
+
+  /* Slide Section on mobile */
   .slide {
-    height: 60vh;
+    height: auto;
+    /* Điều chỉnh chiều cao tự động dựa trên tỷ lệ khung hình */
+    aspect-ratio: 16 / 9;
+    /* Giữ nguyên tỷ lệ khung hình gốc */
+    margin: 20px auto;
+    /* Giảm margin để phù hợp với màn hình nhỏ hơn */
+    border-radius: 8px;
+    /* Giảm bo góc */
+  }
+
+  .dots {
+    bottom: 8px;
+    /* Điều chỉnh vị trí các chấm cho phù hợp */
+    gap: 6px;
+    /* Giảm khoảng cách giữa các chấm */
+  }
+
+  .dots span {
+    width: 10px;
+    /* Giảm kích thước các chấm */
+    height: 10px;
   }
 
   .hello {
@@ -638,19 +835,22 @@ body {
     height: 30px;
   }
 
-  @media (max-width: 900px) {
-    .footer-container {
-      justify-content: center;
-    }
+  /* Điều chỉnh lại footer cho màn hình nhỏ hơn */
+  .footer-container {
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    /* Giảm khoảng cách giữa các phần footer */
+  }
 
-    .footer-section,
-    .footer-logo-box {
-      flex: 1 1 100%;
-      text-align: center;
-    }
+  .footer-section,
+  .footer-logo-box {
+    flex: 1 1 100%;
+    /* Mỗi phần footer chiếm toàn bộ chiều rộng */
+  }
 
-    .email-box {
-      justify-content: center;
-    }
+  .email-box {
+    justify-content: center;
+    /* Căn giữa input email */
   }
 }
