@@ -292,7 +292,12 @@
                 let slides = document.querySelectorAll('.slides');
                 slider.prepend(slides[slides.length - 1]);
             })
+            setInterval(function () {
+                let slides = document.querySelectorAll('.slides');
+                slider.appendChild(slides[0]);
+            }, 15000);
         });
     </script>
 </body>
+
 </html>
