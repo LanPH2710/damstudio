@@ -1,0 +1,109 @@
+/* Footer */
+.footer {
+    background-color: #fff;
+    color: #c62828;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 30px 40px;
+    border-top: 3px solid #c62828;
+    box-shadow: 0 -4px 12px rgba(198, 40, 40, 0.12);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-logo-box {
+    flex: 1 1 150px;
+}
+
+.footer-logo {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 0 3px #b71c1c);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.07);
+}
+
+.footer-section {
+    flex: 1 1 250px;
+}
+
+.footer-section h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #8b0000;
+    font-weight: 800;
+}
+
+.footer-section p {
+    letter-spacing: 0.07em;
+    color: #8b0000;
+    user-select: none;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.email-box {
+    display: flex;
+    margin-top: 10px;
+    max-width: 320px;
+}
+
+.email-box input[type="email"] {
+    flex-grow: 1;
+    padding: 10px 16px;
+    border: 2px solid #b71c1c;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 14px;
+    color: #8b0000;
+    transition: border-color 0.3s ease;
+}
+
+.email-box input[type="email"]:focus {
+    border-color: #d32f2f;
+}
+
+.email-box button {
+    padding: 10px 20px;
+    border: 2px solid #b71c1c;
+    background-color: #b71c1c;
+    color: white;
+    font-weight: 700;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.email-box button:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .footer-container {
+        justify-content: center;
+    }
+
+    .footer-section,
+    .footer-logo-box {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .email-box {
+        justify-content: center;
+    }
+}
