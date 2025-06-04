@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
         <header class="header">
             <div class="header-top">
                 <div class="header-left">
-                    <a href="home1.html"><img src="image/logo/logoIMG.png" alt="Logo" class="logo" /></a>
+                    <a href="homepage"><img src="image/logo/logoIMG.png" alt="Logo" class="logo" /></a>
                 </div>
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
@@ -23,6 +24,16 @@
             </div>
             <nav class="header-center">
                 <ul class="menu">
+                    <c:choose>
+                        <c:when test="${sessionScope.account.roleId == 1}">
+                            <li><a href="#">ADMIN</a></li>
+                            </c:when>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${sessionScope.account.roleId == 2}">
+                            <li><a href="#">MARKETING</a></li>
+                            </c:when>
+                        </c:choose>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#">PRODUCT</a></li>
                     <li class="dropdown">STORY
@@ -44,9 +55,21 @@
                 </ul>
             </nav>
             <div class="header-right">
-                <a href="#"><i class="fas fa-search"></i></a>
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                <a href="#"><i class="fas fa-globe"></i></a>
+                <a href="profile"><i class="fas fa-user"></i></a>
+                <a href="cart" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-cart"></i>
+                    <c:if test="${sizeCart > 0}">
+                        <span class="cart-amount">${sizeCart}</span>
+                    </c:if>
+                </a>
+                <c:choose>
+                    <c:when test="${sessionScope.account == null}">
+                        <a href="login.jsp"><i class="fas fa-sign-in-alt"></i></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="logout"><i class="fas fa-sign-out-alt"></i></a>
+                        </c:otherwise>
+                    </c:choose>
             </div>
         </header>
         <script>

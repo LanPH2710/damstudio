@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Login Page</title>
@@ -14,6 +14,43 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <main>
+            <div class="login-container">
+                <h2>Đăng Nhập</h2>
+
+                <% 
+                    String errorMessage = (String) request.getAttribute("mess");
+                    if (errorMessage != null && !errorMessage.isEmpty()) {
+                %>
+                    <p style="color: red; text-align: center; margin-bottom: 20px; font-weight: 500;"><%= errorMessage %></p>
+                <%
+                    }
+                %>
+
+                <form action="loginbyaccount" method="post" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập / Email</label>
+                        <input type="text" id="username" name="username" required 
+                               placeholder="Nhập tên đăng nhập hoặc email" 
+                               value="${requestScope.userName != null ? requestScope.userName : (requestScope.user != null ? requestScope.user : '')}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" required placeholder="Nhập mật khẩu">
+                        <%-- KHÔNG NÊN điền lại mật khẩu vì lý do bảo mật --%>
+                    </div>
+                    
+                    <div class="form-group checkbox-group" style="text-align: left; margin-bottom: 25px;">
+                        <input type="checkbox" id="remember" name="remember" 
+                               <%= (request.getAttribute("userCookie") != null && !((String)request.getAttribute("userCookie")).isEmpty()) ? "checked" : "" %>>
+                        <label for="remember" style="display: inline-block; margin-left: 5px; font-weight: 400;">Ghi nhớ đăng nhập</label>
+                    </div>
+
+                    <button type="submit">Đăng Nhập</button>
+                    <p class="register-link">Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+                </form>
+            </div>
+        </main>
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

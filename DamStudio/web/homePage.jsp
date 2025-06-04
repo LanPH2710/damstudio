@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,54 +73,24 @@
         <section class="all-products">
             <h2>ALL PRODUCTS</h2>
             <div class="products">
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Đà Nẵng">
-                    <p>Áo Đà Nẵng</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Sài Gòn">
-                    <p>Áo Sài Gòn</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Huế">
-                    <p>Áo Huế</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Hội An">
-                    <p>Áo Hội An</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Miền Tây">
-                    <p>Áo Miền Tây</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Buôn Mê">
-                    <p>Áo Buôn Mê</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Tây Bắc">
-                    <p>Áo Tây Bắc</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
-                <div class="product">
-                    <img src="image/homeSlider/homeSlider3.png" alt="Áo Biển">
-                    <p>Áo Biển</p>
-                    <p class="price">150.000 VNĐ</p>
-                    <button class="button">Thêm vào giỏ</button>
-                </div>
+                <c:forEach var="product" items="${featuredProducts}">
+                    <div class="product">
+                        <c:choose>
+                            <c:when test="${not empty product.images}">
+<!--                                <img src="${product.images[0].imageUrl}" alt="${product.name}">-->
+                                <img src="image/homeSlider/homeSlider3.png" alt="${product.name}">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="image/homeSlider/homeSlider3.png" alt="${product.name}">
+                            </c:otherwise>
+                        </c:choose>
+                        <p>${product.name}</p>
+                        <p class="price">
+                            <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ
+                        </p>
+                        <button class="button">Thêm vào giỏ</button>
+                    </div>
+                </c:forEach>
             </div>
             <div class="learnmore">
                 <button class="learn-more-btn">View More</button>

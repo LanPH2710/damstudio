@@ -180,6 +180,7 @@
 }
 
 .header-right a {
+    
     text-decoration: none;
     font-size: 21px;
     display: inline-flex;
@@ -192,6 +193,9 @@
     height: 40px;
     box-shadow: 0 2px 8px rgba(198, 40, 40, 0.25);
     transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    /* Thêm vào đây để định vị số lượng giỏ hàng */
+    position: relative; 
+    gap: 5px;/* Quan trọng: Tạo ngữ cảnh cho position: absolute của .cart-amount */
 }
 
 .header-right a:hover {
@@ -199,6 +203,25 @@
     color: #fff;
     transform: scale(1.15);
     box-shadow: 0 4px 14px rgba(198, 40, 40, 0.6);
+}
+
+.cart-amount {
+    position: absolute;
+    top: -5px; /* Điều chỉnh vị trí theo chiều dọc */
+    right: -5px; /* Điều chỉnh vị trí theo chiều ngang */
+    background-color: #ff0000; /* Màu nền đỏ nổi bật */
+    color: #fff; /* Chữ màu trắng */
+    font-size: 11px; /* Kích thước chữ nhỏ hơn */
+    font-weight: bold;
+    border-radius: 50%; /* Hình tròn */
+    padding: 2px 6px; /* Khoảng cách bên trong */
+    min-width: 18px; /* Đảm bảo đủ rộng cho số 1 chữ số */
+    height: 18px; /* Đảm bảo đủ cao */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+    z-index: 10; /* Đảm bảo nổi lên trên icon */
 }
 
 /* Responsive */
@@ -212,5 +235,13 @@
         width: 34px;
         height: 34px;
         font-size: 18px;
+    }
+
+    .cart-amount {
+        font-size: 10px; /* Nhỏ hơn trên mobile */
+        top: -3px;
+        right: -3px;
+        min-width: 16px;
+        height: 16px;
     }
 }
