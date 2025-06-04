@@ -22,18 +22,6 @@ public class DBContext {
 
             String url = "jdbc:mysql://localhost:3306/damstudio"; // MySQL URL format - your schema name
             Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL driver class
-
-//            String user = "admin1"; // Your MySQL username
-//
-//
-//
-//            String pass = "Password1"; // Your MySQL password
-//
-//
-//
-//
-//            String url = "jdbc:mysql://carpipitest.mysql.database.azure.com:3306/carpipi_db?useSSL=true&requireSSL=true"; // MySQL URL format - your schema name
-//            Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL driver class
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException e) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, "Driver class not found", e);
@@ -58,12 +46,5 @@ public class DBContext {
     }
 
     public static void main(String[] args) {
-        DBContext db = new DBContext();
-        System.out.println(db.getConnection());
-        //   AccountDAO accountDAO = new AccountDAO();
-
-        // Gọi phương thức để mã hóa mật khẩu
-        // accountDAO.updatePasswordHash();
-        db.closeConnection();
     }
 }
