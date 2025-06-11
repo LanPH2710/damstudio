@@ -104,22 +104,22 @@ public class ProfileServlet extends HttpServlet {
         int gender = Integer.parseInt(request.getParameter("gender"));
         String mobile = request.getParameter("mobile");
         String address = request.getParameter("address");
-        //Verifile moblie
-        boolean isMobileValid = adao.isValidMobile(mobile);
-        if (!isMobileValid) {
-            request.setAttribute("errorMessage", "Số điện thoại phải có 10 số.");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
-            return;
-        }
+//        //Verifile moblie
+//        boolean isMobileValid = adao.isValidMobile(mobile);
+//        if (!isMobileValid) {
+//            request.setAttribute("errorMessage", "Số điện thoại phải có 10 số.");
+//            request.getRequestDispatcher("profile.jsp").forward(request, response);
+//            return;
+//        }
 
         // Xử lý upload avatar nếu có file mới
         Part file = request.getPart("avatar");
         if (file != null && file.getSize() > 0) {
             String fileName = Paths.get(file.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("/img") + File.separator + fileName;
+            String uploadPath = getServletContext().getRealPath("/image/logo") + File.separator + fileName;
 
             // Tạo thư mục nếu chưa tồn tại
-            File uploadDir = new File(getServletContext().getRealPath("/img"));
+            File uploadDir = new File(getServletContext().getRealPath("/image/logo"));
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs(); // Tạo thư mục
             }

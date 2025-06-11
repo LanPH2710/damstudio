@@ -1,4 +1,4 @@
-/* Reset mặc định */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,15 +6,14 @@
 }
 
 body {
-    background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
+    background: linear-gradient(to bottom right, #eef2f3, #cfd9df);
     height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     color: #333;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 main {
@@ -27,22 +26,64 @@ main {
 /* Container đăng nhập */
 .login-container {
     background: #ffffff;
-    padding: 50px 40px;
+    padding: 48px 40px;
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    width: 100%;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
     max-width: 420px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(12px);
+}
+
+.login-container h2 {
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #2c3e50;
+}
+/* Đăng nhập bằng Google */
+.social-login {
+    margin-top: 20px;
     text-align: center;
 }
 
-/* Tiêu đề */
-.login-container h2 {
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: #2c3e50;
+.social-login p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
 }
 
-/* Nhóm form */
+.google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1.5px solid #ccc;
+    background-color: #fff;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s ease;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.google-btn i {
+    color: #db4437;
+    font-size: 16px;
+}
+
+.google-btn:hover {
+    background-color: #f5f5f5;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.google-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Form group */
 .login-form .form-group {
     margin-bottom: 25px;
     text-align: left;
@@ -56,97 +97,117 @@ main {
 }
 
 .login-form input {
+    background: #f1f5f9;
+    border: 1px solid #ccd6dd;
+    font-size: 15px;
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 15px;
-    background-color: #f9f9f9;
-    transition: 0.3s ease-in-out;
+    border-radius: 8px;
 }
 
 .login-form input:focus {
     border-color: #007bff;
-    background-color: #fff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 4px rgba(0,123,255,0.25);
 }
 
 /* Nút đăng nhập */
 .login-form button {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(90deg, #007bff, #0056b3);
-    color: #fff;
+    background: linear-gradient(to right, #007bff, #0056b3);
     border: none;
-    border-radius: 10px;
     font-size: 16px;
+    padding: 14px;
+    border-radius: 10px;
     font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
 }
 
 .login-form button:hover {
-    background: linear-gradient(90deg, #0056b3, #004080);
+    background: linear-gradient(to right, #0056b3, #003f7f);
 }
 
-/* Link đăng ký */
-.register-link {
-    margin-top: 20px;
+/* Link phụ */
+.form-links {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     color: #555;
 }
 
-.register-link a {
+.form-links a {
     color: #007bff;
     text-decoration: none;
     font-weight: 500;
 }
 
-.register-link a:hover {
+.form-links a:hover {
     text-decoration: underline;
 }
-.login-form .checkbox-group {
-    display: flex; /* Dùng flexbox để căn chỉnh checkbox và label */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    margin-bottom: 25px; /* Giữ khoảng cách với nút Đăng nhập */
-    /* text-align: left;  Đã được đặt ở form-group, nếu cần có thể ghi đè */
-}
 
-.login-form .checkbox-group input[type="checkbox"] {
-    width: auto; /* Để checkbox có kích thước tự nhiên */
-    margin-right: 8px; /* Khoảng cách giữa checkbox và label */
-    padding: 0; /* Loại bỏ padding mặc định */
-    height: 18px; /* Kích thước chiều cao của checkbox */
-    width: 18px; /* Kích thước chiều rộng của checkbox */
-    accent-color: #007bff; /* Thay đổi màu mặc định của checkbox (cho trình duyệt hiện đại) */
-    cursor: pointer;
-    border-radius: 4px; /* Bo góc nhẹ cho checkbox */
-}
-
-.login-form .checkbox-group label {
-    display: inline-block; /* Đảm bảo label nằm cùng dòng với checkbox */
-    margin-bottom: 0; /* Loại bỏ margin-bottom mặc định của label */
-    font-weight: 500; /* Có thể làm đậm hơn nếu bạn muốn nhấn mạnh */
-    color: #555; /* Màu sắc dễ chịu hơn */
-    cursor: pointer; /* Thêm con trỏ để người dùng biết có thể nhấp vào label */
-    user-select: none; /* Ngăn chặn chọn văn bản khi nhấp nhanh */
-}
-
-/* Hiệu ứng khi hover qua checkbox hoặc label */
-.login-form .checkbox-group label:hover {
-    color: #007bff; /* Đổi màu khi hover để có phản hồi thị giác */
-}
-
-/* CSS cho thông báo lỗi */
-p.error-message { /* Thêm class "error-message" vào thẻ p hiển thị lỗi trong JSP */
-    color: #dc3545; /* Màu đỏ tiêu chuẩn cho lỗi */
-    background-color: #f8d7da; /* Nền màu đỏ nhạt */
-    border: 1px solid #f5c6cb; /* Viền đỏ nhạt */
-    padding: 10px 15px; /* Padding xung quanh thông báo */
-    border-radius: 8px; /* Bo góc */
-    margin-bottom: 25px; /* Khoảng cách với form */
+/* Thông báo lỗi */
+p.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
     font-size: 15px;
     font-weight: 500;
 }
 
+/* Bố cục remember + forgot password */
+    .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 25px;
+        color: #555;
+        flex-wrap: wrap;
+    }
+
+    .remember-forgot .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .remember-forgot input[type="checkbox"] {
+        accent-color: #007bff;
+        width: 16px;
+        height: 16px;
+    }
+
+    .remember-forgot .forgot-password {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .remember-forgot .forgot-password:hover {
+        text-decoration: underline;
+    }
+    
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 20px;
+    }
+
+    .login-container h2 {
+        font-size: 24px;
+    }
+
+    .login-form button {
+        font-size: 15px;
+    }
+
+    .google-btn {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+}

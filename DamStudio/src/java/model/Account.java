@@ -36,6 +36,20 @@ public class Account {
         this.money = money;
     }
 
+    public Account(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, String address, int accountStatus) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        this.accountStatus = accountStatus;
+    }
+    
+    
+
     public int getUserId() {
         return userId;
     }
