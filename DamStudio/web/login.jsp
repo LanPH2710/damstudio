@@ -22,12 +22,18 @@
                     String errorMessage = (String) request.getAttribute("mess");
                     if (errorMessage != null && !errorMessage.isEmpty()) {
                 %>
-                    <p style="color: red; text-align: center; margin-bottom: 20px; font-weight: 500;"><%= errorMessage %></p>
+                <p style="color: red; text-align: center; margin-bottom: 20px; font-weight: 500;"><%= errorMessage %></p>
                 <%
                     }
                 %>
 
                 <form action="loginbyaccount" method="post" class="login-form">
+                    <div class="social-login">
+                        <a href="login-google" class="google-btn">
+                            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon">
+                            Đăng nhập bằng Google
+                        </a>
+                    </div>
                     <div class="form-group">
                         <label for="username">Tên đăng nhập / Email</label>
                         <input type="text" id="username" name="username" required 
@@ -39,15 +45,18 @@
                         <input type="password" id="password" name="password" required placeholder="Nhập mật khẩu">
                         <%-- KHÔNG NÊN điền lại mật khẩu vì lý do bảo mật --%>
                     </div>
-                    
-                    <div class="form-group checkbox-group" style="text-align: left; margin-bottom: 25px;">
-                        <input type="checkbox" id="remember" name="remember" 
-                               <%= (request.getAttribute("userCookie") != null && !((String)request.getAttribute("userCookie")).isEmpty()) ? "checked" : "" %>>
-                        <label for="remember" style="display: inline-block; margin-left: 5px; font-weight: 400;">Ghi nhớ đăng nhập</label>
+
+                    <div class="form-group remember-forgot">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember" name="remember" 
+                                   <%= (request.getAttribute("userCookie") != null && !((String)request.getAttribute("userCookie")).isEmpty()) ? "checked" : "" %>>
+                            Ghi nhớ đăng nhập
+                        </label>
+                        <a href="forgotPassword.jsp" class="forgot-password">Quên mật khẩu?</a>
                     </div>
 
                     <button type="submit">Đăng Nhập</button>
-                    <p class="register-link">Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+                    <p class="register-link">Chưa có tài khoản? <a href="register.jsp">Đăng ký ngay</a></p>
                 </form>
             </div>
         </main>

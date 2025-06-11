@@ -35,7 +35,7 @@
                             </c:when>
                         </c:choose>
                     <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">PRODUCT</a></li>
+                    <li><a href="productlist">PRODUCT</a></li>
                     <li class="dropdown">STORY
                         <ul class="submenu">
                             <li><a href="hanoiInfo.html">Sự tích hồ Gươm</a></li>

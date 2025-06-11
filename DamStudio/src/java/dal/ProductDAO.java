@@ -94,6 +94,156 @@ public class ProductDAO extends DBContext {
         return product;
     }
 
+    public List<Product> searchProductsByKeyword(String keyword) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM product WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%') AND status = 1";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, "%" + keyword + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<ProductImage> getImagesByProductId(String productId) {
+        List<ProductImage> images = new ArrayList<>();
+        String query = "SELECT pi.imageId, pi.imageUrl "
+                + "FROM damstudio.detail_product dp "
+                + "JOIN damstudio.productimage pi ON dp.imageId = pi.imageId "
+                + "WHERE dp.productId = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, productId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    ProductImage image = new ProductImage();
+                    image.setImageId(resultSet.getInt("imageId"));
+                    image.setImageUrl(resultSet.getString("imageUrl"));
+                    images.add(image);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return images;
+    }
+
+    public List<Product> getAllProductByBrandId(String braId) {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "select * from damstudio.product where brandId = ? AND status = 1";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, braId);
+
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+    
+    public List<Product> getAllProductByStyleId(String styleId) {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "select * from product where styleId = ? AND status = 1";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, styleId);
+
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+    
+    public List<Product> getAllProductBySizeId(String sizeId) {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "select * from damstudio.product where sizeId = ? AND status = 1";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, sizeId);
+
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+    
+    public List<Product> getAllProductsCommon() {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM product where status = 1"; // Thay đổi tên bảng cho đúng
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return products;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         System.out.println("--- Lấy 5 sản phẩm có tiền tố 'TT' ---");

@@ -4,6 +4,8 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
 
 public class AccountDAO extends DBContext{
@@ -73,6 +75,119 @@ public class AccountDAO extends DBContext{
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+    
+    // Kiểm tra nếu username đã tồn tại trong database
+    public Account checkUserNameExists(String userName) {
+        String sql = "SELECT * FROM account WHERE userName = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, userName);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return new Account(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getString(11),
+                        rs.getInt(12),
+                        rs.getBigDecimal(13)
+                );
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, "Error checking username", e);
+        }
+        return null;
+    }
+    
+    public Account checkEmailExists(String email) {
+        String sql = "SELECT * FROM account WHERE email = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return new Account(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getString(11),
+                        rs.getInt(12),
+                        rs.getBigDecimal(13)
+                );
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, "Error checking email", e);
+        }
+        return null;
+    }
+    
+    public Account checkMobileExists(String mobile) {
+        String sql = "SELECT * FROM account WHERE mobile = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, mobile);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return new Account(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getString(11),
+                        rs.getInt(12),
+                        rs.getBigDecimal(13)
+                );
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, "Error checking mobile", e);
+        }
+        return null;
+    }
+    
+    public void insertAccount(Account acc) {
+        try {
+
+            String sql = "INSERT INTO account "
+                    + "(userName, password, firstName, lastName, gender, email, mobile, address, roleId, avatar) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, acc.getUserName());
+            //stm.setString(2, hashedPassword);
+            stm.setString(2, acc.getPassword());
+            stm.setString(3, acc.getFirstName());
+            stm.setString(4, acc.getLastName());
+            stm.setInt(5, acc.getGender());
+            stm.setString(6, acc.getEmail());
+            stm.setString(7, acc.getMobile());
+            stm.setString(8, acc.getAddress());
+            stm.setInt(9, 4); //role mac dinh - customer
+            stm.setString(10, "avatar-trang-4.jpg"); //ava mac dinh
+            stm.executeUpdate();
+            System.out.println("Account đã được thêm thành công!");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm account: " + e.getMessage());
         }
     }
 }
