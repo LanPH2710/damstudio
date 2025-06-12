@@ -98,11 +98,11 @@ public class ProductListServlet extends HttpServlet {
 
         int totalPro = allPro.size();
         // Tính toán chỉ số sản phẩm bắt đầu và kết thúc cho trang hiện tại
-        int start = (page - 1) * 12;
-        int end = Math.min(start + 12, totalPro);
+        int start = (page - 1) * 2;
+        int end = Math.min(start + 2, totalPro);
         // Lấy danh sách sản phẩm cho trang hiện tại
         List<Product> productsForCurrentPage = allPro.subList(start, end);
-        int totalPages = (int) Math.ceil((double) totalPro / 12);
+        int totalPages = (int) Math.ceil((double) totalPro / 2);
 
         List<Style> styList = styleDao.getAllStyle();
         List<Brand> brandList = brandDao.getAllBrand();

@@ -1,15 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
     <head>
         <meta charset="UTF-8">
         <title>Danh sách sản phẩm</title>
         <link rel="stylesheet" href="css/product.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
         <jsp:include page="header.jsp" />
-
         <div class="product-page">
             <h2 class="title">Danh sách sản phẩm</h2>
             <!-- Thanh tìm kiếm -->
@@ -28,13 +29,19 @@
             <div class="product-content">
                 <!-- Sidebar mục lục -->
                 <aside class="product-sidebar">
-                    <h3>Danh mục</h3>
+                    <h2>Danh mục</h2>
+                    <h3>Brand</h3>
                     <ul>
-                        <li><a href="#">Tất cả</a></li>
-                        <li><a href="#">Điện thoại</a></li>
-                        <li><a href="#">Laptop</a></li>
-                        <li><a href="#">Phụ kiện</a></li>
-                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="productlist">Tất cả</a></li>
+                            <c:forEach var="brand" items="${brandList}">
+                            <li><a href="productlist?brandId=${brand.brandId}&sizeId=${param.sizeId}&page=1&sort=${param.sort}">${brand.name}</a></li>
+                            </c:forEach>
+                    </ul>
+                    <h3>Size</h3>
+                    <ul>
+                        <c:forEach var="size" items="${sizeList}">
+                            <li><a href="productlist?sizeId=${size.sizeId}&brandId=${param.brandId}&page=1&sort=${param.sort}">${size.sizeName}</a></li>
+                            </c:forEach>
                     </ul>
                 </aside>
                 <!-- Lưới sản phẩm -->
@@ -42,30 +49,74 @@
                     <c:forEach var = "product" items="${productList}">
                         <div class="product-card">
                             <img src="image/logo/logoIMG.png" alt="Sản phẩm 1"/>
-                            <h3>${productList.name}</h3>
-                            <p class="description">${productList.description}</p>
-                            <p class="price">${productList.price}</p>
-                            <a href="#" class="btn">Xem chi tiết</a>
+                            <h3>${product.name}</h3>
+                            <p class="description">${product.description}</p>
+                            <p class="price"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ</p>
+                            <a href="productDetail.jsp" class="btn">Xem chi tiết</a>
                         </div>
                     </c:forEach>
-                    <div class="product-card">
-                        <img src="image/logo/logoIMG.png" alt="Sản phẩm 2" class="product-image" />
-                        <h3>Sản phẩm 2</h3>
-                        <p class="description">Mô tả ngắn gọn về sản phẩm 2.</p>
-                        <p class="price">Giá: 320,000 VND</p>
-                        <a href="#" class="btn">Xem chi tiết</a>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="image/logo/logoIMG.png" alt="Sản phẩm 3" class="product-image" />
-                        <h3>Sản phẩm 3</h3>
-                        <p class="description">Mô tả ngắn gọn về sản phẩm 3.</p>
-                        <p class="price">Giá: 150,000 VND</p>
-                        <a href="#" class="btn">Xem chi tiết</a>
-                    </div>
                 </div>
             </div>
+            <div class="clearfix">
+                <ul class="paginationProList justify-content-center">
+                    <!-- Nút về trang đầu -->
+                    <c:if test="${currentPage > 2}">
+                        <li class="page-item">
+                            <a class="page-link" href="productlist?page=1&brandId=${selectedBrandId}&styleId=${selectedStyleId}&keyword=${keyword}&sort=${sort}">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <!-- Nút về trang trước -->
+                    <c:if test="${currentPage > 1}">
+                        <li class="page-item">
+                            <a class="page-link" href="productlist?page=${currentPage - 1}&brandId=${selectedBrandId}&styleId=${selectedStyleId}&keyword=${keyword}&sort=${sort}">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <!-- Vòng lặp trang -->
+                    <c:forEach var="i" begin="${currentPage - 2 <= 0 ? 1 : currentPage - 2}"
+                               end="${currentPage + 2 >= totalPages ? totalPages : currentPage + 2}">
+                        <c:choose>
+                            <c:when test="${i == currentPage}">
+                                <li class="page-item active">
+                                    <a class="page-link">${i}</a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a class="page-link" href="productlist?page=${i}&brandId=${selectedBrandId}&styleId=${selectedStyleId}&keyword=${keyword}&sort=${sort}">
+                                        ${i}
+                                    </a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <!-- Nút trang kế tiếp -->
+                    <c:if test="${currentPage < totalPages}">
+                        <li class="page-item">
+                            <a class="page-link" href="productlist?page=${currentPage + 1}&brandId=${selectedBrandId}&styleId=${selectedStyleId}&keyword=${keyword}&sort=${sort}">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <!-- Nút trang cuối -->
+                    <c:if test="${currentPage + 2 < totalPages}">
+                        <li class="page-item">
+                            <a class="page-link" href="productlist?page=${totalPages}&brandId=${selectedBrandId}&styleId=${selectedStyleId}&keyword=${keyword}&sort=${sort}">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
         </div>
+
 
         <jsp:include page="footer.jsp" />
     </body>
