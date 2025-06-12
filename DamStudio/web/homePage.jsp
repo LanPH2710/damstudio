@@ -17,27 +17,13 @@
     <body>
         <jsp:include page="header.jsp"/>
 
+        <!-- Slider Section -->
         <section class="slider-section">
             <div class="slider-container">
                 <div class="slider">
-                    <div class="slides"
-                         style="--img: url('https://reviewcongnghe.net/wp-content/uploads/2024/04/hinh-nen-may-tinh-dep-thumb.jpg')">
-                    </div>
-                    <div class="slides"
-                         style="--img: url('https://reviewcongnghe.net/wp-content/uploads/2024/04/hinh-nen-may-tinh-dep-thumb.jpg')">
-                    </div>
-                    <div class="slides"
-                         style="--img: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv9IYIPZbdPBvORBwRSj3nUwBExjzuxsK9PA&s')">
-                    </div>
-                    <div class="slides"
-                         style="--img: url('https://taoanhdep.com/wp-content/uploads/2022/08/65d0d901c19d92bded2e1a0defa3b95e_original.jpeg')">
-                    </div>
-                    <div class="slides"
-                         style="--img: url('https://www.vietnamworks.com/hrinsider/wp-content/uploads/2023/12/ai-la-nguoi-dam-me-nhung-bau-troi-dem-day-sao-dep-den-nao-long-nao.jpg')">
-                    </div>
-                    <div class="slides"
-                         style="--img: url('https://gcs.tripi.vn/public-tripi/tripi-feed/img/482854hIy/anh-mo-ta.png')">
-                    </div>
+                    <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Son tinh thuy tinh.png')"></div>
+                    <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Su tich ho guom.png')"></div>
+                    <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/con rong chau tien.png')"></div>
                 </div>
                 <div class="buttons">
                     <span class="prev"></span>
@@ -46,39 +32,33 @@
             </div>
         </section>
 
+        <!-- Hello Section -->
         <section class="hello">
             <div class="mid">
                 <div class="hello-img">
                     <img src="image/logo/logoIMG.png" alt="Dám Studio Image">
                 </div>
                 <div class="hello-text">
-                    <h2>"Chúng tôi không chỉ bán áo. Chúng tôi mang đến một mảnh đất Việt Nam mà bạn có thể mặc lên"</h2>
-                    <p>
-                        Dám Studio ra đời với sứ mệnh kể lại câu chuyện của quê hương Việt Nam theo cách trẻ trung, sáng tạo
-                        và có chiều sâu.</p>
-                    <p> Chúng tôi "dám" làm khác - từ một chiếc áo phông đơn giản, biến thành cây cầu kết nối giữa con người
-                        và văn hóa, giữa quá khứ và hiện tại.</p>
-                    <p> Mỗi thiết kế là một lát cắt văn hóa - từ phố cổ Hà Nội đến phố đèn lồng Hội An, từ Huế cổ kính đến
-                        Sài Gòn sôi động - gói gọn trong chiếc áo bạn mặc và trang web bạn quét mã.</p>
-                    <p> Chúng tôi không chỉ in hình, chúng tôi thổi hồn vào từng chi tiết.
-                    </p>
-                    <br>
+                    <h2>"Chúng tôi không chỉ bán áo – chúng tôi kể câu chuyện Việt Nam"</h2>
+                    <p>Dám Studio truyền tải văn hóa Việt qua từng chiếc áo – sáng tạo, sâu sắc và hiện đại.</p>
+                    <p>Chúng tôi dám làm khác biệt, biến áo phông thành cầu nối giữa con người và di sản.</p>
+                    <p>Mỗi thiết kế là một bản đồ thu nhỏ – từ phố cổ Hà Nội đến ánh đèn Hội An.</p>
                     <div class="learnmore">
-                        <a href="#more" class="learn-more-btn">LEARN MORE</a>
+                        <a href="#more" class="learn-more-btn">TÌM HIỂU THÊM</a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Product Section -->
         <section class="all-products">
-            <h2>ALL PRODUCTS</h2>
+            <h2>SẢN PHẨM NỔI BẬT</h2>
             <div class="products">
                 <c:forEach var="product" items="${featuredProducts}">
                     <div class="product">
                         <c:choose>
                             <c:when test="${not empty product.images}">
-<!--                                <img src="${product.images[0].imageUrl}" alt="${product.name}">-->
-                                <img src="image/homeSlider/homeSlider3.png" alt="${product.name}">
+                                <img src="${product.images[0].imageUrl}" alt="${product.name}">
                             </c:when>
                             <c:otherwise>
                                 <img src="image/homeSlider/homeSlider3.png" alt="${product.name}">
@@ -88,12 +68,40 @@
                         <p class="price">
                             <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ
                         </p>
-                        <button class="button">Thêm vào giỏ</button>
+                        <a class="learn-more-btn" href="productDetail.jsp">Xem chi tiết</a>
                     </div>
                 </c:forEach>
             </div>
             <div class="learnmore">
-                <button class="learn-more-btn">View More</button>
+                <a class="learn-more-btn" href="productlist">XEM TẤT CẢ</a>
+            </div>
+        </section>
+
+        <!-- Highlighted Section -->
+        <section class="highlighted-section">
+            <div class="highlighted-wrapper">
+                <h2 class="highlighted-title">MẪU ÁO NỔI BẬT</h2>
+                <p class="highlighted-subtitle">Một lát cắt văn hóa – Một phong cách riêng biệt từ Dám Studio</p>
+
+                <div class="highlighted-showcase">
+                    <div class="highlight-card">
+                        <div class="highlight-img-wrapper">
+                            <img src="image/logo/img_testing.jpg" alt="Sơn Tinh Thủy Tinh">
+                        </div>
+                        <div class="highlight-caption">Sơn Tinh - Thủy Tinh</div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-img-wrapper">
+                            <img src="image/logo/img_testing.jpg" alt="Hồn Việt">
+                        </div>
+                        <div class="highlight-caption">Hồn Việt</div>
+                    </div>
+                </div>
+
+                <div class="highlight-btn-wrapper">
+                    <a href="productlist" class="highlight-buy-btn">KHÁM PHÁ NGAY</a>
+                </div>
             </div>
         </section>
 
