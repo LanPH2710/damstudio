@@ -243,9 +243,66 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
+    
+    public Product getProductById(String productId) { // Thay đổi kiểu tham số về String
+        Product product = null;
+        try {
+            // Câu truy vấn lấy thông tin sản phẩm dựa trên productId
+            String sql = "SELECT * FROM product WHERE productId = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productId); // Sửa đổi để phù hợp với kiểu dữ liệu
+            ResultSet resultSet = st.executeQuery();
+
+            if (resultSet.next()) {
+                // Tạo đối tượng Product với các thông tin lấy từ ResultSet
+                product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId()));
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi lấy sản phẩm theo ID: " + e.getMessage());
+        }
+        return product;
+    }
+    
+    public List<Product> getProductByPrice(double price) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM Product WHERE price BETWEEN ? AND ? LIMIT 8;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setDouble(1, price - 20000);
+            st.setDouble(2, price + 20000);
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getString("productId"));
+                product.setName(resultSet.getString("name"));
+                product.setPrice(resultSet.getDouble("price"));
+                product.setDescription(resultSet.getString("description"));
+                product.setVAT(resultSet.getDouble("VAT"));
+                product.setBrandId(resultSet.getInt("brandId"));
+                product.setStyleId(resultSet.getInt("styleId"));
+                product.setImages(getImagesByProductId(product.getProductId()));
+                list.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
+        Product pro = dao.getProductById("ST0001");
+        List<Product> price = dao.getProductByPrice(200000);
+        System.out.println(price.get(2).getName() + price.get(1).getName());
+        System.out.println(pro.getName());
         System.out.println("--- Lấy 5 sản phẩm có tiền tố 'TT' ---");
         List<Product> ttProducts = dao.getProductsByProductIdPrefix("TT", 5);
         if (ttProducts.isEmpty()) {

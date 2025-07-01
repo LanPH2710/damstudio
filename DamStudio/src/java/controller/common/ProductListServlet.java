@@ -68,7 +68,6 @@ public class ProductListServlet extends HttpServlet {
         String pageParam = request.getParameter("page");
         String brandId = request.getParameter("brandId");
         String styleId = request.getParameter("styleId");
-        String sizeId = request.getParameter("sizeId");
         String keyword = request.getParameter("keyword");
         String sort = request.getParameter("sort");
 
@@ -84,8 +83,6 @@ public class ProductListServlet extends HttpServlet {
             allPro = productDao.getAllProductByBrandId(brandId);
         } else if (styleId != null && !styleId.isEmpty()) {
             allPro = productDao.getAllProductByStyleId(styleId);
-        } else if(sizeId != null && !sizeId.isEmpty()){
-            allPro = productDao.getAllProductBySizeId(sizeId);
         }else {
             // Nếu không có brandId, lấy tất cả sản phẩm
             allPro = productDao.getAllProductsCommon();

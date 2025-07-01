@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Trang Chủ - Áo QR Việt Nam</title>
-        <link rel="stylesheet" href="css/home.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css?v=${System.currentTimeMillis()}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
@@ -24,6 +24,7 @@
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Son tinh thuy tinh.png')"></div>
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Su tich ho guom.png')"></div>
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/con rong chau tien.png')"></div>
+                    
                 </div>
                 <div class="buttons">
                     <span class="prev"></span>
@@ -68,7 +69,7 @@
                         <p class="price">
                             <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ
                         </p>
-                        <a class="learn-more-btn" href="productDetail.jsp">Xem chi tiết</a>
+                        <a class="learn-more-btn" href="productdetail?productId=${product.productId}">Xem chi tiết</a>
                     </div>
                 </c:forEach>
             </div>
@@ -80,20 +81,17 @@
         <!-- Highlighted Section -->
         <section class="highlighted-section">
             <div class="highlighted-wrapper">
-                <h2 class="highlighted-title">MẪU ÁO NỔI BẬT</h2>
-                <p class="highlighted-subtitle">Một lát cắt văn hóa – Một phong cách riêng biệt từ Dám Studio</p>
-
                 <div class="highlighted-showcase">
                     <div class="highlight-card">
                         <div class="highlight-img-wrapper">
-                            <img src="image/logo/img_testing.jpg" alt="Sơn Tinh Thủy Tinh">
+                            <img src="image/homeSlider/Son tinh thuy tinh.png" alt="Sơn Tinh Thủy Tinh">
                         </div>
                         <div class="highlight-caption">Sơn Tinh - Thủy Tinh</div>
                     </div>
 
                     <div class="highlight-card">
                         <div class="highlight-img-wrapper">
-                            <img src="image/logo/img_testing.jpg" alt="Hồn Việt">
+                            <img src="image/homeSlider/Son tinh thuy tinh.png" alt="Hồn Việt">
                         </div>
                         <div class="highlight-caption">Hồn Việt</div>
                     </div>

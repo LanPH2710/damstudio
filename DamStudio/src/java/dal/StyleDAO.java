@@ -30,4 +30,26 @@ public class StyleDAO extends DBContext{
         }
         return listStyle;
     }
+    
+    public String getStyleNameByStyleId(int styleId) {
+        String styleName = null;
+        String sql = "SELECT styleName FROM style WHERE styleId = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, styleId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                styleName = rs.getString("styleName");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return styleName;
+    }
+    
+    public static void main(String[] args) {
+        StyleDAO dao = new StyleDAO();
+        String name = dao.getStyleNameByStyleId(1);
+        System.out.println(name);
+    }
 }

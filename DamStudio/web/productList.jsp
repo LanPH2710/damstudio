@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Danh sách sản phẩm</title>
-        <link rel="stylesheet" href="css/product.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product.css?v=${System.currentTimeMillis()}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
@@ -29,19 +29,16 @@
             <div class="product-content">
                 <!-- Sidebar mục lục -->
                 <aside class="product-sidebar">
-                    <h2>Danh mục</h2>
-                    <h3>Brand</h3>
+                    <h3>Danh mục</h3>
                     <ul>
-                        <li><a href="productlist">Tất cả</a></li>
-                            <c:forEach var="brand" items="${brandList}">
-                            <li><a href="productlist?brandId=${brand.brandId}&sizeId=${param.sizeId}&page=1&sort=${param.sort}">${brand.name}</a></li>
-                            </c:forEach>
-                    </ul>
-                    <h3>Size</h3>
-                    <ul>
-                        <c:forEach var="size" items="${sizeList}">
-                            <li><a href="productlist?sizeId=${size.sizeId}&brandId=${param.brandId}&page=1&sort=${param.sort}">${size.sizeName}</a></li>
-                            </c:forEach>
+                        <li class="${empty param.brandId ? 'active' : ''}">
+                            <a href="productlist?sizeId=${param.sizeId}&page=1&sort=${param.sort}">Tất cả</a>
+                        </li>
+                        <c:forEach var="brand" items="${brandList}">
+                            <li class="${param.brandId == brand.brandId ? 'active' : ''}">
+                                <a href="productlist?brandId=${brand.brandId}&page=1&sort=${param.sort}">${brand.name}</a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </aside>
                 <!-- Lưới sản phẩm -->
@@ -50,13 +47,13 @@
                         <div class="product-card">
                             <img src="image/logo/logoIMG.png" alt="Sản phẩm 1"/>
                             <h3>${product.name}</h3>
-                            <p class="description">${product.description}</p>
                             <p class="price"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ</p>
-                            <a href="productDetail.jsp" class="btn">Xem chi tiết</a>
+                            <a href="productdetail?productId=${product.productId}" class="btn">Xem chi tiết</a>
                         </div>
                     </c:forEach>
                 </div>
             </div>
+
             <div class="clearfix">
                 <ul class="paginationProList justify-content-center">
                     <!-- Nút về trang đầu -->
@@ -116,8 +113,6 @@
                 </ul>
             </div>
         </div>
-
-
         <jsp:include page="footer.jsp" />
     </body>
 </html>
