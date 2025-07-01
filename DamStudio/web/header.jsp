@@ -58,20 +58,21 @@
                 <a href="profile"><i class="fas fa-user"></i></a>
                 <a href="cart" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart"></i>
-                    <c:if test="${sizeCart > 0}">
-                        <span class="cart-amount">${sizeCart}</span>
+                    <c:if test="${sessionScope.sizeCart > 0}">
+                        <span class="cart-amount">${sessionScope.sizeCart}</span>
                     </c:if>
                 </a>
                 <c:choose>
                     <c:when test="${sessionScope.account == null}">
                         <a href="login.jsp"><i class="fas fa-sign-in-alt"></i></a>
-                    </c:when>
-                    <c:otherwise>
+                        </c:when>
+                        <c:otherwise>
                         <a href="logout"><i class="fas fa-sign-out-alt"></i></a>
                         </c:otherwise>
                     </c:choose>
             </div>
         </header>
+        <div id="addToCartAlert" class="cart-alert" style="display:none;">Đã thêm sản phẩm vào giỏ hàng!</div>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
             // --- Menu Toggle and Dropdown for Mobile ---
@@ -163,6 +164,17 @@
                             });
                             // Initial setup for mobile dropdown on page load
                             setupMobileDropdownListener();
+                            document.addEventListener('DOMContentLoaded', function() {
+                            const addToCartForm = document.querySelector('form[action="addtocart"]');
+                                    const cartAlert = document.getElementById('addToCartAlert');
+                                    if (addToCartForm && cartAlert) {
+                            addToCartForm.addEventListener('submit', function(e) {
+                            e.preventDefault(); // Chặn submit đi đâu
+                                    cartAlert.classList.add('show');
+                                    setTimeout(() => cartAlert.classList.remove('show'), 1800);
+                            });
+                            }
+                            });
         </script>
     </body>
 </html>

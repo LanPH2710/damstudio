@@ -4,11 +4,15 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import java.math.BigDecimal;
 
-public class AccountDAO extends DBContext{
+public class AccountDAO extends DBContext {
+
     public Account getAccountById(int userId) {
         String sql = "SELECT * FROM Account WHERE userId=?";
         try {
@@ -37,12 +41,12 @@ public class AccountDAO extends DBContext{
         }
         return null;
     }
-    
+
     public boolean isValidMobile(String mobile) {
         System.out.println("Checking mobile validity: " + mobile);
         return mobile != null && mobile.matches("\\d{10}");
     }
-    
+
     public void editAccount(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, String address, int roleId, String avatar, int status, int userId) {
         String sql = "UPDATE Account SET "
                 + "userName = ?, "
@@ -77,7 +81,7 @@ public class AccountDAO extends DBContext{
             System.out.println(e);
         }
     }
-    
+
     // Kiểm tra nếu username đã tồn tại trong database
     public Account checkUserNameExists(String userName) {
         String sql = "SELECT * FROM account WHERE userName = ?";
@@ -107,7 +111,7 @@ public class AccountDAO extends DBContext{
         }
         return null;
     }
-    
+
     public Account checkEmailExists(String email) {
         String sql = "SELECT * FROM account WHERE email = ?";
         try {
@@ -136,7 +140,7 @@ public class AccountDAO extends DBContext{
         }
         return null;
     }
-    
+
     public Account checkMobileExists(String mobile) {
         String sql = "SELECT * FROM account WHERE mobile = ?";
         try {
@@ -165,7 +169,7 @@ public class AccountDAO extends DBContext{
         }
         return null;
     }
-    
+
     public void insertAccount(Account acc) {
         try {
 
@@ -189,5 +193,43 @@ public class AccountDAO extends DBContext{
         } catch (SQLException e) {
             System.err.println("Lỗi khi thêm account: " + e.getMessage());
         }
+    }
+
+    public List<Account> getUserNameByProductId(String productId) {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT a.* FROM feedback f JOIN account a ON f.userId = a.userId WHERE f.productId like ?;";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, productId);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Account p = new Account(
+                            rs.getInt("userId"),
+                            rs.getString("userName"),
+                            rs.getString("password"),
+                            rs.getString("firstName"),
+                            rs.getString("lastName"),
+                            rs.getInt("gender"),
+                            rs.getString("email"),
+                            rs.getString("mobile"),
+                            rs.getString("address"),
+                            rs.getInt("roleId"),
+                            rs.getString("avatar"),
+                            rs.getInt("accountStatus"),
+                            rs.getBigDecimal("money")
+                    );
+                    list.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+        List<Account> acc = dao.getUserNameByProductId("ST0001");
+        System.out.println(acc.get(0).getFirstName());
     }
 }

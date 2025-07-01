@@ -8,21 +8,17 @@ public class Cart {
     private int sizeId;
     private int colorId;
     private int cartQuantity;
-    private int isDelete;
-    private int isSelect;
 
     public Cart() {
     }
 
-    public Cart(int cartId, int userId, String productId, int sizeId, int colorId, int cartQuantity, int isDelete, int isSelect) {
+    public Cart(int cartId, int userId, String productId, int sizeId, int colorId, int cartQuantity) {
         this.cartId = cartId;
         this.userId = userId;
         this.productId = productId;
         this.sizeId = sizeId;
         this.colorId = colorId;
         this.cartQuantity = cartQuantity;
-        this.isDelete = isDelete;
-        this.isSelect = isSelect;
     }
 
     public int getCartId() {
@@ -71,22 +67,6 @@ public class Cart {
 
     public void setCartQuantity(int cartQuantity) {
         this.cartQuantity = cartQuantity;
-    }
-
-    public int getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public int getIsSelect() {
-        return isSelect;
-    }
-
-    public void setIsSelect(int isSelect) {
-        this.isSelect = isSelect;
     }
    
 }

@@ -69,6 +69,34 @@
         <servlet-name>ProductListServlet</servlet-name>
         <servlet-class>controller.common.ProductListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>controller.common.ProductDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetQuantityServlet</servlet-name>
+        <servlet-class>controller.common.GetQuantityServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>controller.cart.AddToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartServlet</servlet-name>
+        <servlet-class>controller.cart.DeleteCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCartQuantityServlet</servlet-name>
+        <servlet-class>controller.cart.UpdateCartQuantityServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeCartServlet</servlet-name>
+        <servlet-class>controller.cart.ChangeCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>controller.cart.CheckoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginByAccountServlet</servlet-name>
         <url-pattern>/loginbyaccount</url-pattern>
@@ -104,6 +132,34 @@
     <servlet-mapping>
         <servlet-name>ProductListServlet</servlet-name>
         <url-pattern>/productlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/productdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetQuantityServlet</servlet-name>
+        <url-pattern>/getquantity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/addtocart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartServlet</servlet-name>
+        <url-pattern>/deletecart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartQuantityServlet</servlet-name>
+        <url-pattern>/updatecartquantity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeCartServlet</servlet-name>
+        <url-pattern>/changecart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>
