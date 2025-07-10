@@ -1,6 +1,7 @@
 package controller.common;
 
 import dal.AccountDAO;
+import dal.AddressUserDAO;
 import dal.RoleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +16,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.file.Paths;
+import java.util.List;
 import model.Account;
+import model.AddressUser;
 
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5, // 5 MB
@@ -23,72 +26,33 @@ import model.Account;
 )
 public class ProfileServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProfileServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AccountDAO adao = new AccountDAO();
+        AddressUserDAO addressDAO = new AddressUserDAO();
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("account");
         if (acc == null) {
             response.sendRedirect("login.jsp");
             return;
         }
+        List<AddressUser> address = addressDAO.getAddressByUserId(acc.getUserId());
         Account user = adao.getAccountById(acc.getUserId());
         session.setAttribute("user1", user);
+        session.setAttribute("address", address);
         RoleDAO rdao = new RoleDAO();
         String role = rdao.getRoleNameById(user.getRoleId());
         session.setAttribute("role", role);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         AccountDAO adao = new AccountDAO();
+        AddressUserDAO addressDAO = new AddressUserDAO();
         Account user = (Account) session.getAttribute("user1");
         // Lấy thông tin cũ
         int userId = user.getUserId();
@@ -104,13 +68,7 @@ public class ProfileServlet extends HttpServlet {
         int gender = Integer.parseInt(request.getParameter("gender"));
         String mobile = request.getParameter("mobile");
         String address = request.getParameter("address");
-//        //Verifile moblie
-//        boolean isMobileValid = adao.isValidMobile(mobile);
-//        if (!isMobileValid) {
-//            request.setAttribute("errorMessage", "Số điện thoại phải có 10 số.");
-//            request.getRequestDispatcher("profile.jsp").forward(request, response);
-//            return;
-//        }
+        int addressId = Integer.parseInt(request.getParameter("addressId"));
 
         // Xử lý upload avatar nếu có file mới
         Part file = request.getPart("avatar");
@@ -138,15 +96,11 @@ public class ProfileServlet extends HttpServlet {
         }
 
         // Cập nhật account
-        adao.editAccount(userName, password, firstName, lastName, gender, email, mobile, address, roleId, avatar, status, userId);
+        adao.editAccount(userName, password, firstName, lastName, gender, email, mobile, roleId, avatar, status, userId);
+        addressDAO.editAddress(userId, addressId, address);
         response.sendRedirect("profile");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

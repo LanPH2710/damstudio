@@ -4,15 +4,15 @@ public class Role {
 
     private int roleId;
     private String roleName;
-    private int status;
+    private int roleStatus;
 
     public Role() {
     }
 
-    public Role(int roleId, String roleName, int status) {
+    public Role(int roleId, String roleName, int roleStatus) {
         this.roleId = roleId;
         this.roleName = roleName;
-        this.status = status;
+        this.roleStatus = roleStatus;
     }
 
     public int getRoleId() {
@@ -32,11 +32,10 @@ public class Role {
     }
 
     public int getStatus() {
-        return status;
+        return roleStatus;
     }
 
     public void setStatus(int status) {
-        this.status = status;
+        this.roleStatus = status;
     }
-
 }

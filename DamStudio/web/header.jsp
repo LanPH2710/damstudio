@@ -36,7 +36,7 @@
                         </c:choose>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="productlist">PRODUCT</a></li>
-                    <li class="dropdown">STORY
+<!--                    <li class="dropdown">STORY
                         <ul class="submenu">
                             <li><a href="hanoiInfo.html">Sự tích hồ Gươm</a></li>
                             <li><a href="#">Sơn tinh thủy tinh</a></li>
@@ -49,7 +49,7 @@
                             <li><a href="#">Mai An Tiêm</a></li>
                             <li><a href="#">Sọ Dừa</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li><a href="#">CONTACT</a></li>
                     <li><a href="#">FEEDBACK</a></li>
                 </ul>

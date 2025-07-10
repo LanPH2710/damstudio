@@ -12,12 +12,15 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-
+        <div id="toast-notify" class="toast-notify" style="display:none;">
+            <i id="toast-icon" class="fa fa-check-circle"></i>
+            <span id="toast-msg"></span>
+        </div>
         <div class="main-product-layout">
             <!-- Khối 1: Thông tin sản phẩm -->
             <div class="product-main-info shadow">
                 <div class="product-img-block">
-                    <img src="${pageContext.request.contextPath}/image/logo/logoIMG.png" alt="${product.name}" />
+                    <img src="image/logo/${product.images[0].imageUrl}" alt="${product.name}" />
                 </div>
                 <div class="product-info-block">
                     <h1 class="product-title">${product.name}</h1>
@@ -69,20 +72,27 @@
                         <input type="hidden" id="colorInput" name="colorId">
                         <input type="hidden" id="sizeInput" name="sizeId">
                         <input type="hidden" id="quantityInput" name="quantity" value="1">
+                        <input type="hidden" id="buynowInput" name="buynow" value="0">
                         <div class="action-buttons">
-                            <c:choose>
-                                <c:when test="${sessionScope.account != null}">
-                                    <button type="submit" class="btn primary">
-                                        <i class="fas fa-shopping-basket"></i> Thêm vào giỏ hàng
-                                    </button>
-                                    <button type="button" class="btn buy-now">Mua ngay</button>
-                                </c:when>
-                                <c:otherwise>
-                                    <p style="color:#d32f2f;font-weight:600;">Bạn cần <a href="login.jsp">đăng nhập</a> để mua sản phẩm.</p>
-                                </c:otherwise>
-                            </c:choose>
+                            <button type="submit" class="btn primary">
+                                <i class="fas fa-shopping-basket"></i> Thêm vào giỏ hàng
+                            </button>
+                            <button type="button" class="btn buy-now" id="btnBuyNow">Mua ngay</button>
                         </div>
                     </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            document.getElementById('btnBuyNow').addEventListener('click', function () {
+                                document.getElementById('buynowInput').value = 1;
+                                document.querySelector('.product-action-form').submit();
+                            });
+                            document.querySelector('.product-action-form').addEventListener('submit', function () {
+                                setTimeout(() => {
+                                    document.getElementById('buynowInput').value = 0;
+                                }, 200);
+                            });
+                        });
+                    </script>
                 </div>
             </div>
 
@@ -143,7 +153,8 @@
                 <div class="related-products-list">
                     <c:forEach items="${pro2}" var="pro2">
                         <div class="related-product-card">
-                            <img src="${pro2.images[0].imageUrl}" alt="Product Image" class="related-product-img"/>
+                            <img src="image/logo/${pro2.images[0].imageUrl}"
+                                 alt="Product Image" class="related-product-img"/>
                             <div class="related-product-info">
                                 <a href="productdetail?productId=${pro2.productId}" class="related-product-name">${pro2.name}</a>
                                 <div class="related-product-price">
@@ -179,6 +190,32 @@
                         const colorInput = document.getElementById('colorInput');
                         const sizeInput = document.getElementById('sizeInput');
                         const quantityInput = document.getElementById('quantityInput');
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const msg = urlParams.get('msg');
+                        if (msg) {
+                            let text = '';
+                            let type = '';
+                            if (msg === 'success') {
+                                text = 'Đã thêm vào giỏ hàng thành công!';
+                                type = 'success';
+                            } else if (msg === 'overstock') {
+                                text = 'Số lượng vượt quá tồn kho!';
+                                type = 'error';
+                            } else if (msg === 'exist') {
+                                text = 'Sản phẩm đã có trong giỏ!';
+                                type = 'info';
+                            } else if (msg === 'login') {
+                                text = 'Bạn cần đăng nhập để sử dụng chức năng này!';
+                                type = 'error';
+                            } else if (msg === 'fail') {
+                                text = 'Có lỗi xảy ra, vui lòng thử lại!';
+                                type = 'error';
+                            } else {
+                                text = msg;
+                                type = 'info';
+                            }
+                            showToast(text, type);
+                        }
 
                         function updateQuantityControls() {
                             const qty = parseInt(inputQuantity.value);
@@ -255,6 +292,27 @@
                             return false;
                         }
                         return true;
+                    }
+                    function showToast(msg, type) {
+                        const toast = document.getElementById('toast-notify');
+                        const icon = document.getElementById('toast-icon');
+                        const msgSpan = document.getElementById('toast-msg');
+                        msgSpan.textContent = msg;
+                        toast.className = 'toast-notify ' + type;
+                        if (type === 'success')
+                            icon.className = 'fa fa-check-circle';
+                        else if (type === 'error')
+                            icon.className = 'fa fa-times-circle';
+                        else
+                            icon.className = 'fa fa-info-circle';
+                        toast.style.display = 'flex';
+                        setTimeout(() => {
+                            toast.style.display = 'none';
+                            // Xóa param msg khỏi url
+                            const url = new URL(window.location);
+                            url.searchParams.delete('msg');
+                            window.history.replaceState({}, document.title, url);
+                        }, 2500);
                     }
         </script>
     </body>

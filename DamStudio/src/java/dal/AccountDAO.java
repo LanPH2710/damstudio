@@ -26,14 +26,13 @@ public class AccountDAO extends DBContext {
                         rs.getString(3), // password
                         rs.getString(4), // firstName
                         rs.getString(5), // lastName
-                        rs.getInt(6), // gender
-                        rs.getString(7), // email
-                        rs.getString(8), // mobile
-                        rs.getString(9), // address
-                        rs.getInt(10), // roleId
-                        rs.getString(11), // avatar
-                        rs.getInt(12), // status
-                        rs.getBigDecimal(13) // money
+                        rs.getString(6), // email
+                        rs.getString(7), // mobile
+                        rs.getInt(8), // gender
+                        rs.getInt(9), // roleId
+                        rs.getString(10),// avatar
+                        rs.getInt(11), // accountStatus
+                        rs.getBigDecimal(12) // money
                 );
             }
         } catch (SQLException e) {
@@ -47,7 +46,7 @@ public class AccountDAO extends DBContext {
         return mobile != null && mobile.matches("\\d{10}");
     }
 
-    public void editAccount(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, String address, int roleId, String avatar, int status, int userId) {
+    public void editAccount(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, int roleId, String avatar, int status, int userId) {
         String sql = "UPDATE Account SET "
                 + "userName = ?, "
                 + "password = ?, "
@@ -56,7 +55,6 @@ public class AccountDAO extends DBContext {
                 + "gender = ?, "
                 + "email = ?, "
                 + "mobile = ?, "
-                + "address = ?, "
                 + "roleId = ?, "
                 + "avatar = ?, "
                 + "accountStatus = ? "
@@ -70,12 +68,10 @@ public class AccountDAO extends DBContext {
             st.setInt(5, gender);
             st.setString(6, email);
             st.setString(7, mobile);
-            st.setString(8, address);
-            st.setInt(9, roleId);
-            st.setString(10, avatar);
-            st.setInt(11, status);
-            st.setInt(12, userId);
-
+            st.setInt(8, roleId);
+            st.setString(9, avatar);
+            st.setInt(10, status);
+            st.setInt(11, userId);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -91,19 +87,18 @@ public class AccountDAO extends DBContext {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return new Account(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getInt(10),
-                        rs.getString(11),
-                        rs.getInt(12),
-                        rs.getBigDecimal(13)
+                        rs.getInt("userId"), // 1
+                        rs.getString("userName"), // 2
+                        rs.getString("password"), // 3
+                        rs.getString("firstName"), // 4
+                        rs.getString("lastName"), // 5
+                        rs.getString("email"), // 6
+                        rs.getString("mobile"), // 7
+                        rs.getInt("gender"), // 8
+                        rs.getInt("roleId"), // 9
+                        rs.getString("avatar"), // 10
+                        rs.getInt("accountStatus"), // 11
+                        rs.getBigDecimal("money") // 12
                 );
             }
         } catch (SQLException e) {
@@ -120,19 +115,18 @@ public class AccountDAO extends DBContext {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return new Account(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getInt(10),
-                        rs.getString(11),
-                        rs.getInt(12),
-                        rs.getBigDecimal(13)
+                        rs.getInt("userId"), // 1
+                        rs.getString("userName"), // 2
+                        rs.getString("password"), // 3
+                        rs.getString("firstName"), // 4
+                        rs.getString("lastName"), // 5
+                        rs.getString("email"), // 6
+                        rs.getString("mobile"), // 7
+                        rs.getInt("gender"), // 8
+                        rs.getInt("roleId"), // 9
+                        rs.getString("avatar"), // 10
+                        rs.getInt("accountStatus"), // 11
+                        rs.getBigDecimal("money") // 12
                 );
             }
         } catch (SQLException e) {
@@ -149,19 +143,18 @@ public class AccountDAO extends DBContext {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return new Account(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getInt(10),
-                        rs.getString(11),
-                        rs.getInt(12),
-                        rs.getBigDecimal(13)
+                        rs.getInt("userId"), // 1
+                        rs.getString("userName"), // 2
+                        rs.getString("password"), // 3
+                        rs.getString("firstName"), // 4
+                        rs.getString("lastName"), // 5
+                        rs.getString("email"), // 6
+                        rs.getString("mobile"), // 7
+                        rs.getInt("gender"), // 8
+                        rs.getInt("roleId"), // 9
+                        rs.getString("avatar"), // 10
+                        rs.getInt("accountStatus"), // 11
+                        rs.getBigDecimal("money") // 12
                 );
             }
         } catch (SQLException e) {
@@ -172,22 +165,19 @@ public class AccountDAO extends DBContext {
 
     public void insertAccount(Account acc) {
         try {
-
             String sql = "INSERT INTO account "
-                    + "(userName, password, firstName, lastName, gender, email, mobile, address, roleId, avatar) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "(userName, password, firstName, lastName, gender, email, mobile, roleId, avatar) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, acc.getUserName());
-            //stm.setString(2, hashedPassword);
             stm.setString(2, acc.getPassword());
             stm.setString(3, acc.getFirstName());
             stm.setString(4, acc.getLastName());
             stm.setInt(5, acc.getGender());
             stm.setString(6, acc.getEmail());
             stm.setString(7, acc.getMobile());
-            stm.setString(8, acc.getAddress());
-            stm.setInt(9, 4); //role mac dinh - customer
-            stm.setString(10, "avatar-trang-4.jpg"); //ava mac dinh
+            stm.setInt(8, acc.getRoleId());
+            stm.setString(9, acc.getAvatar());
             stm.executeUpdate();
             System.out.println("Account đã được thêm thành công!");
         } catch (SQLException e) {
@@ -197,8 +187,7 @@ public class AccountDAO extends DBContext {
 
     public List<Account> getUserNameByProductId(String productId) {
         List<Account> list = new ArrayList<>();
-        String sql = "SELECT a.* FROM feedback f JOIN account a ON f.userId = a.userId WHERE f.productId like ?;";
-
+        String sql = "SELECT a.* FROM feedback f JOIN account a ON f.userId = a.userId WHERE f.productId = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, productId);
             try (ResultSet rs = st.executeQuery()) {
@@ -209,10 +198,9 @@ public class AccountDAO extends DBContext {
                             rs.getString("password"),
                             rs.getString("firstName"),
                             rs.getString("lastName"),
-                            rs.getInt("gender"),
                             rs.getString("email"),
                             rs.getString("mobile"),
-                            rs.getString("address"),
+                            rs.getInt("gender"),
                             rs.getInt("roleId"),
                             rs.getString("avatar"),
                             rs.getInt("accountStatus"),
@@ -226,7 +214,41 @@ public class AccountDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public double getMoneyByUserId(int userId) {
+        String sql = "SELECT money FROM account WHERE userId = ?";
+        double money = -1.0; // Default to -1.0 if no money is found
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    money = rs.getDouble("money");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // You could also log the exception instead of printing it
+        }
+
+        return money;
+    }
+
+    public boolean updateMoneyAfterPurchase(int userId, BigDecimal totalPrice) {
+        String sql = "UPDATE account SET money = money - ? WHERE userId = ? AND money >= ?";
+        boolean success = false;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setBigDecimal(1, totalPrice);
+            ps.setInt(2, userId);
+            ps.setBigDecimal(3, totalPrice); // Money luôn BigDecimal
+            int affectedRows = ps.executeUpdate();
+            success = affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
         List<Account> acc = dao.getUserNameByProductId("ST0001");

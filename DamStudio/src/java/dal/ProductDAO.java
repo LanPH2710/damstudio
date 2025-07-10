@@ -71,7 +71,7 @@ public class ProductDAO extends DBContext {
                     product.setVAT(rs.getDouble("VAT"));
                     product.setBrandId(rs.getInt("brandId"));
                     product.setStyleId(rs.getInt("styleId"));
-                    product.setStatus(rs.getInt("status"));
+                    product.setStatus(rs.getInt("productStatus"));
 
                     // Lấy danh sách hình ảnh
                     List<ProductImage> images = new ArrayList<>();
@@ -96,7 +96,7 @@ public class ProductDAO extends DBContext {
 
     public List<Product> searchProductsByKeyword(String keyword) {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM product WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%') AND status = 1";
+        String sql = "SELECT * FROM product WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%') AND productStatus = 1";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, "%" + keyword + "%");
@@ -145,7 +145,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductByBrandId(String braId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from damstudio.product where brandId = ? AND status = 1";
+            String sql = "select * from damstudio.product where brandId = ? AND productStatus = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, braId);
 
@@ -171,7 +171,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductByStyleId(String styleId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from product where styleId = ? AND status = 1";
+            String sql = "select * from product where styleId = ? AND productStatus = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, styleId);
 
@@ -197,7 +197,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductBySizeId(String sizeId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from damstudio.product where sizeId = ? AND status = 1";
+            String sql = "select * from damstudio.product where sizeId = ? AND productStatus = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, sizeId);
 
@@ -223,7 +223,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductsCommon() {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM product where status = 1"; // Thay đổi tên bảng cho đúng
+            String sql = "SELECT * FROM product where productStatus = 1"; // Thay đổi tên bảng cho đúng
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()) {

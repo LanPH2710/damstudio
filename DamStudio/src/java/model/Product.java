@@ -11,14 +11,14 @@ public class Product {
     private double VAT;
     private int brandId;
     private int styleId;
-    private int status;
+    private int productStatus;
     private List<DetailProduct> detailProduct;
     private List<ProductImage> images;
 
     public Product() {
     }
 
-    public Product(String productId, String name, double price, String description, double VAT, int brandId, int styleId, int status, List<DetailProduct> detailProduct) {
+    public Product(String productId, String name, double price, String description, double VAT, int brandId, int styleId, int productStatus, List<DetailProduct> detailProduct) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -26,11 +26,11 @@ public class Product {
         this.VAT = VAT;
         this.brandId = brandId;
         this.styleId = styleId;
-        this.status = status;
+        this.productStatus = productStatus;
         this.detailProduct = detailProduct;
     }
 
-    public Product(String productId, String name, double price, String description, double VAT, int brandId, int styleId, int status, List<DetailProduct> detailProduct, List<ProductImage> images) {
+    public Product(String productId, String name, double price, String description, double VAT, int brandId, int styleId, int productStatus, List<DetailProduct> detailProduct, List<ProductImage> images) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -38,7 +38,7 @@ public class Product {
         this.VAT = VAT;
         this.brandId = brandId;
         this.styleId = styleId;
-        this.status = status;
+        this.productStatus = productStatus;
         this.detailProduct = detailProduct;
         this.images = images;
     }
@@ -100,11 +100,11 @@ public class Product {
     }
 
     public int getStatus() {
-        return status;
+        return productStatus;
     }
 
     public void setStatus(int status) {
-        this.status = status;
+        this.productStatus = status;
     }
 
     public List<DetailProduct> getDetailProduct() {
