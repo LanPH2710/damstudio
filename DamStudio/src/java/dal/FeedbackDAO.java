@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
 
-public class FeedbackDAO extends DBContext{
+public class FeedbackDAO extends DBContext {
+
     public List<Feedback> getFeedbackByProductId(String productID) {
         List<Feedback> list = new ArrayList<>();
-        String sql = "SELECT * FROM feedback WHERE status =1 and productId LIKE ?"
-                + "order by feedbackTime desc";
+        String sql = "SELECT * FROM feedback WHERE status =1 and productId = ? order by feedbackTime desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             // Gán giá trị cho tham số productID
-            st.setString(1, "%" + productID + "%");
+            st.setString(1, productID);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int feedbackId = rs.getInt("feedbackId");
@@ -39,10 +39,10 @@ public class FeedbackDAO extends DBContext{
         }
         return list;
     }
-    
+
     public List<Feedback> getFeedbackByRate(String productID, int rate) {
         List<Feedback> list = new ArrayList<>();
-        String sql = "SELECT * FROM feedback WHERE status =1 and productId LIKE ? AND feedbackRate = ? ORDER BY feedbackTime DESC";
+        String sql = "SELECT * FROM feedback WHERE status =1 and productId = ? AND feedbackRate = ? ORDER BY feedbackTime DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productID);
@@ -70,7 +70,7 @@ public class FeedbackDAO extends DBContext{
         }
         return list;
     }
-    
+
     public int getRateProduct(String productId) {
         int rate = 0;
         String sql = "SELECT CEIL(AVG(feedbackRate)) AS avgRate "
@@ -88,7 +88,7 @@ public class FeedbackDAO extends DBContext{
         }
         return rate;
     }
-    
+
     public List<Feedback> getFeedbackListByPage(List<Feedback> feedbacks, int start, int end) {
         ArrayList<Feedback> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
@@ -96,7 +96,40 @@ public class FeedbackDAO extends DBContext{
         }
         return arr;
     }
-    
+
+    public int countFeedbackByProductIdAndRate(String productId, int rate) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM feedback WHERE productId = ? AND feedbackRate = ? AND status = 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, productId);
+            ps.setInt(2, rate);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
+    public int countFeedbackByProductId(String productId) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM feedback WHERE productId = ? AND status = 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, productId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         FeedbackDAO fdao = new FeedbackDAO();
         String productId = "ST0001"; // thay bằng productId thực tế trong CSDL

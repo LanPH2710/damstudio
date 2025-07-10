@@ -48,28 +48,48 @@ public class ProductDetailDAO extends DBContext {
         }
         return list;
     }
-    
+
     public DetailProduct getDetailProduct(String productId, int colorId, int sizeId) {
-    DetailProduct detail = null;
-    String sql = "SELECT * FROM detail_product WHERE productId = ? AND colorId = ? AND sizeId = ?";
-    try (PreparedStatement st = connection.prepareStatement(sql)) {
-        st.setString(1, productId);
-        st.setInt(2, colorId);
-        st.setInt(3, sizeId);
-        try (ResultSet rs =st.executeQuery()) {
-            if (rs.next()) {
-                detail = new DetailProduct();
-                detail.setProductId(rs.getString("productId"));
-                detail.setColorId(rs.getInt("colorId"));
-                detail.setSizeId(rs.getInt("sizeId"));
-                detail.setImageId(rs.getInt("imageId"));
-                detail.setQuantity(rs.getInt("quantity"));
+        DetailProduct detail = null;
+        String sql = "SELECT * FROM detail_product WHERE productId = ? AND colorId = ? AND sizeId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, productId);
+            st.setInt(2, colorId);
+            st.setInt(3, sizeId);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    detail = new DetailProduct();
+                    detail.setProductId(rs.getString("productId"));
+                    detail.setColorId(rs.getInt("colorId"));
+                    detail.setSizeId(rs.getInt("sizeId"));
+                    detail.setImageId(rs.getInt("imageId"));
+                    detail.setQuantity(rs.getInt("quantity"));
+                }
             }
+        } catch (SQLException e) {
         }
-    } catch (SQLException e) {
+        return detail;
     }
-    return detail;
-}
+
+    public boolean updateStock(String productId, int sizeId, int colorId, int quantityToSubtract) {
+        String sql = "UPDATE detail_product "
+                + "SET quantity = quantity - ? "
+                + "WHERE productId = ? AND sizeId = ? AND colorId = ? "
+                + "AND quantity >= ?"; // Đảm bảo không bị âm
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, quantityToSubtract);
+            st.setString(2, productId);
+            st.setInt(3, sizeId);
+            st.setInt(4, colorId);
+            st.setInt(5, quantityToSubtract);
+            int affected = st.executeUpdate();
+            return affected > 0; // true nếu update thành công
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
         ProductDetailDAO pddao = new ProductDetailDAO();

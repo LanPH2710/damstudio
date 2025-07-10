@@ -23,12 +23,15 @@
                 <!-- Sản phẩm 1 -->
             <c:forEach items="${sessionScope.activeCarts}" var="activeCart">
                 <div class="cart-item-row">
-                    <div class="cart-col-checkbox"><input type="checkbox" class="cart-checkbox-item"/></div>
+                    <div class="cart-col-checkbox"><input type="checkbox" class="cart-checkbox-item" value="${activeCart.cartId}"/></div>
                     <div class="cart-col-product">
                         <div class="product-info">
                             <img class="cart-img" src="image/logo/logoIMG.png" alt="${activeCart.productId}">
                             <div class="prod-details">
-                                <div class="prod-name">${productMap[activeCart.productId].name}</div>
+                                <div class="prod-name" onclick="window.location.href = 'productdetail?productId=${activeCart.productId}';">
+                                    ${productMap[activeCart.productId].name}
+                                </div>
+
                                 <div class="prod-type">
                                     <span class="prod-variant-label">Phân Loại Hàng:</span>
                                     <span class="prod-variant-value variantSelect" tabindex="0">
@@ -265,6 +268,18 @@
                             btn.classList.add('selected');
                         });
                     });
+                });
+
+                // ==== Khi bấm "Mua Hàng" -> Sang trang /checkout?cartIds=... ==== //
+                document.querySelector('.cart-checkout-btn').addEventListener('click', function () {
+                    let checkedCheckboxes = document.querySelectorAll('.cart-checkbox-item:checked');
+                    if (checkedCheckboxes.length === 0) {
+                        alert("Vui lòng chọn sản phẩm để thanh toán!");
+                        return;
+                    }
+                    let cartIds = Array.from(checkedCheckboxes).map(cb => cb.value);
+                    var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                    window.location.href = contextPath + '/checkout?cartIds=' + encodeURIComponent(cartIds.join(','));
                 });
 
                 // ==== CHỌN THAY DOI COLOR,SIZE ====

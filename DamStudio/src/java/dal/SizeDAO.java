@@ -81,6 +81,28 @@ public class SizeDAO extends DBContext {
         return null; // Trả về null nếu không có kết quả
     }
 
+    public Size getSizeOfProduct2(int sizeId) {
+        String sql = "SELECT * FROM size WHERE sizeId = ? AND sizeStatus = 1";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, sizeId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Size(
+                        rs.getInt("sizeId"),
+                        rs.getString("sizeName"),
+                        rs.getInt("heightMin"),
+                        rs.getInt("heightMax"),
+                        rs.getInt("weightMin"),
+                        rs.getInt("weightMax"),
+                        rs.getInt("sizeStatus")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SizeDAO dao = new SizeDAO();
         Size size = dao.getSizeOfProduct("ST0001");

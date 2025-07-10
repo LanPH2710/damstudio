@@ -1,74 +1,17 @@
 package controller.cart;
 
-import dal.AccountDAO;
-import dal.CartDAO;
+import dal.*;
+import model.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.*;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Account;
-import model.AddressUser;
-import model.Cart;
+import jakarta.servlet.http.*;
 
 public class CheckoutServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CheckoutServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CheckoutServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        AccountDAO adao = new AccountDAO();
-        CheckOutDAO checkout = new CheckOutDAO();
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("account");
-        if (acc != null) {
-            List<AddressUser> addressUsers = checkout.getAddressByUserId(acc.getUserId());
-            if (addressUsers != null && !addressUsers.isEmpty()) {
-                System.out.println("Address list size: " + addressUsers.size());
-                session.setAttribute("userAddress", addressUsers);
-            } else {
-                System.out.println("No addresses found.");
-            }
-
-        } else {
-            // Handle the case where the account is null (e.g., redirect to login)
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        CartDAO cartDAO = new CartDAO();
-        List<Cart> carts = cartDAO.getSelectedCarts(acc.getUserId());
-        if (carts == null || carts.isEmpty()) {
-            session.setAttribute("messUpdateCart", "Bạn chưa chọn sản phẩm");
-            response.sendRedirect("carts");
-            return;
-        }
-
-        // For testing, forward to the test JSP
-        request.getRequestDispatcher("checkout.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("account");
@@ -76,116 +19,270 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
+        // Lấy cartIds từ URL
+        String cartIdsStr = request.getParameter("cartIds");
+        List<Integer> selectedCartIds = new ArrayList<>();
+        if (cartIdsStr != null && !cartIdsStr.trim().isEmpty()) {
+            String[] arrCartIds = cartIdsStr.split(",");
+            for (String id : arrCartIds) {
+                try {
+                    selectedCartIds.add(Integer.parseInt(id.trim()));
+                } catch (Exception ignore) {
+                }
+            }
+        }
+        if (selectedCartIds.isEmpty()) {
+            request.setAttribute("error", "Vui lòng chọn sản phẩm để thanh toán!");
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
+            return;
+        }
+
+        // Lấy thông tin cart, product
         CartDAO cartDAO = new CartDAO();
-        List<Cart> cartList = cartDAO.getCartsSelectByUserId(acc.getUserId());
-        // Retrieve selected address ID from the form
-        String selectedAddressIdStr = request.getParameter("address");
-        int selectedAddressId = -1;
-        if (selectedAddressIdStr != null) {
+        ProductDAO productDAO = new ProductDAO();
+        ColorDAO colorDAO = new ColorDAO();
+        SizeDAO sizeDAO = new SizeDAO();
+        VoucherDAO voucherDAO = new VoucherDAO();
+
+        List<Cart> cartList = cartDAO.getCartsByCartIds(selectedCartIds);
+        Map<String, Product> productMap = new HashMap<>();
+        Map<Integer, Color> colorMap = new HashMap<>();
+        Map<Integer, Size> sizeMap = new HashMap<>();
+        for (Cart c : cartList) {
+            productMap.put(c.getProductId(), productDAO.getProductById(c.getProductId()));
+            colorMap.put(c.getColorId(), colorDAO.getColorByProductId(c.getColorId()));
+            sizeMap.put(c.getSizeId(), sizeDAO.getSizeOfProduct2(c.getSizeId()));
+        }
+        // Lấy tổng tiền
+        BigDecimal totalMoney = BigDecimal.ZERO;
+        for (Cart cart : cartList) {
+            Product prod = productMap.get(cart.getProductId());
+            if (prod != null) {
+                BigDecimal price = BigDecimal.valueOf(prod.getPrice());
+                totalMoney = totalMoney.add(price.multiply(BigDecimal.valueOf(cart.getCartQuantity())));
+            }
+        }
+
+        // Lấy địa chỉ giao hàng
+        AddressUserDAO addressDAO = new AddressUserDAO();
+        List<AddressUser> addressUsers = addressDAO.getAddressByUserId(acc.getUserId());
+        List<Voucher> voucherList = voucherDAO.getAvailableVouchersForUser(acc.getUserId(), totalMoney);
+        // Lấy số dư
+        AccountDAO accountDAO = new AccountDAO();
+        double balance = accountDAO.getMoneyByUserId(acc.getUserId());
+
+        // Đẩy dữ liệu sang checkout.jsp
+        request.setAttribute("cartList", cartList);
+        request.setAttribute("productMap", productMap);
+        request.setAttribute("colorMap", colorMap);
+        request.setAttribute("sizeMap", sizeMap);
+        request.setAttribute("addressUsers", addressUsers != null ? addressUsers : new ArrayList<>());
+        request.setAttribute("totalMoney", totalMoney);
+        request.setAttribute("voucherList", voucherList);
+        request.setAttribute("balance", balance);
+
+        // Đưa cartIds vào form để POST lại
+        request.setAttribute("cartIds", cartIdsStr);
+
+        request.getRequestDispatcher("checkout.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("account");
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+        // 1. Nhận voucherId
+        String voucherIdStr = request.getParameter("voucherId");
+        Integer voucherId = null;
+        if (voucherIdStr != null && !voucherIdStr.equals("0")) {
             try {
-                selectedAddressId = Integer.parseInt(selectedAddressIdStr);
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "Invalid address selected.");
-                request.getRequestDispatcher("checkout.jsp").forward(request, response);
-                return;
+                voucherId = Integer.parseInt(voucherIdStr);
+            } catch (Exception ignore) {
             }
-        } else {
-            // No address selected
-            request.setAttribute("error", "Please select a shipping address.");
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+        }
+        // 2. Nhận lại cartIds (từ form hidden input)
+        String cartIdsStr = request.getParameter("cartIds");
+        if (cartIdsStr == null || cartIdsStr.trim().isEmpty()) {
+            request.setAttribute("error", "Không nhận được danh sách sản phẩm cần mua.");
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
             return;
         }
-
-        // Retrieve selected payment method from the form
-        String payMethod = request.getParameter("pay-method");
-        if (payMethod == null) {
-            // No payment method selected
-            request.setAttribute("error", "Please select a payment method.");
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+        List<Integer> selectedCartIds = new ArrayList<>();
+        for (String id : cartIdsStr.split(",")) {
+            try {
+                selectedCartIds.add(Integer.parseInt(id.trim()));
+            } catch (Exception ignore) {
+            }
+        }
+        if (selectedCartIds.isEmpty()) {
+            request.setAttribute("error", "Không có sản phẩm hợp lệ được chọn!");
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
             return;
         }
+        // 3. Lấy lại danh sách cart và tính tổng tiền gốc
+        CartDAO cartDAO = new CartDAO();
+        ProductDAO productDAO = new ProductDAO();
+        List<Cart> cartList = cartDAO.getCartsByCartIds(selectedCartIds);
+        BigDecimal totalMoney = BigDecimal.ZERO;
+        for (Cart cart : cartList) {
+            Product prod = productDAO.getProductById(cart.getProductId());
+            if (prod != null) {
+                totalMoney = totalMoney.add(BigDecimal.valueOf(prod.getPrice())
+                        .multiply(BigDecimal.valueOf(cart.getCartQuantity())));
+            }
+        }
+        // 4. Áp dụng voucher nếu có
+        BigDecimal discount = BigDecimal.ZERO;
+        if (voucherId != null) {
+            VoucherDAO voucherDAO = new VoucherDAO();
+            Voucher voucher = voucherDAO.getVoucherById(voucherId);
+            // Kiểm tra điều kiện hợp lệ của voucher
+            boolean valid = false;
+            if (voucher != null && voucher.isIsActive()) {
+                // Kiểm tra thời gian hiệu lực
+                java.time.LocalDateTime now = java.time.LocalDateTime.now();
+                boolean inTime = !now.isBefore(voucher.getStartDate()) && !now.isAfter(voucher.getEndDate());
+                // Kiểm tra user sở hữu và chưa dùng voucher này
+                boolean userHasVoucher = voucherDAO.userHasUnusedVoucher(acc.getUserId(), voucherId);
+                // Kiểm tra minOrderValue
+                boolean enoughOrder = totalMoney.compareTo(voucher.getMinOrderValue()) >= 0;
+                // Kiểm tra số lượng còn lại
+                boolean hasQuantity = voucher.getTotalQuantity() == null || voucher.getUsedQuantity() < voucher.getTotalQuantity();
 
-        // Fetch the selected address details
-        CheckOutDAO checkoutDAO = new CheckOutDAO();
-        AddressUser selectedAddress = checkoutDAO.getAddressById(selectedAddressId);
+                valid = inTime && userHasVoucher && enoughOrder && hasQuantity;
+            }
+            if (valid) {
+                if ("percent".equals(voucher.getDiscountType())) {
+                    discount = totalMoney.multiply(voucher.getDiscountValue()).divide(BigDecimal.valueOf(100));
+                    if (voucher.getMaxDiscountValue() != null && discount.compareTo(voucher.getMaxDiscountValue()) > 0) {
+                        discount = voucher.getMaxDiscountValue();
+                    }
+                } else if ("amount".equals(voucher.getDiscountType())) {
+                    discount = voucher.getDiscountValue();
+                }
+                if (discount.compareTo(totalMoney) > 0) {
+                    discount = totalMoney;
+                }
+            } else {
+                // Không hợp lệ thì không áp dụng, reset voucherId về null để không lưu vào order
+                voucherId = null;
+            }
+        }
+        BigDecimal finalTotal = totalMoney.subtract(discount);
+        // 5. Lấy địa chỉ giao hàng
+        String addressIdStr = request.getParameter("addressId");
+        AddressUser selectedAddress = null;
+        if (addressIdStr != null && !addressIdStr.trim().isEmpty()) {
+            AddressUserDAO addressDAO = new AddressUserDAO();
+            try {
+                selectedAddress = addressDAO.getAddressById(Integer.parseInt(addressIdStr));
+            } catch (Exception ignore) {
+            }
+        }
         if (selectedAddress == null) {
-            request.setAttribute("error", "Selected address not found.");
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            request.setAttribute("error", "Vui lòng chọn địa chỉ giao hàng!");
+            request.setAttribute("cartIds", cartIdsStr);
+            doGet(request, response); // Render lại
             return;
         }
-
-        String name = selectedAddress.getName();
-        String phone = selectedAddress.getPhone();
-        String email = selectedAddress.getEmail();
-        String address = selectedAddress.getAddress();
-        // Store selected address and payment method in session or process accordingly
-        session.setAttribute("selectedAddress", selectedAddress);
-        session.setAttribute("payMethod", payMethod);
-
-        // Proceed based on the selected payment method
-        if (payMethod.equals("online")) {
-            session.setAttribute("name", name);
-            session.setAttribute("phone", phone);
-            session.setAttribute("email", email);
-            session.setAttribute("address", address);
-            session.setAttribute("ThanhHieu", "2");
-            // Redirect to online payment page
-            response.sendRedirect("vnpay_pay.jsp");
-        } else if (payMethod.equals("cod")) {
-            // Process COD order
-            double totalmoney = (double) session.getAttribute("totalFinal");// Ensure to implement a method to calculate total money if needed
-            int orderId = cartDAO.addOrder(acc.getUserId(), name, email, phone, totalmoney, address, 1,2);
-
-            for (Cart cart : cartList) {
-                // Add each cart's details to the order
-                cartDAO.addOrderDetail(orderId, cart.getProduct().getProductId(), cart.getQuantity(),  cart.getColorId(), 0);
-
-                // Update stock for the product associated with the cart item
-                cartDAO.updateStockByCartId(cart.getCartId());
-
-                // Remove the cart after processing
-                cartDAO.deleteCar(cart.getCartId());
-            }
-
-            // Redirect to order confirmation page after processing
-            response.sendRedirect("thanks.jsp");
-        } else if (payMethod.equals("balance")) {
-            // Process COD order
-            double totalmoney = (double) session.getAttribute("totalFinal");// Ensure to implement a method to calculate total money if needed
-
-            double balance = checkoutDAO.getMoneyByUserId(acc.getUserId());
-            if (totalmoney > balance) {
-                session.setAttribute("messCheckOut", "Số dư không đủ");
-                response.sendRedirect("checkout");
+        // 6. Lấy phương thức thanh toán
+        String payMethod = request.getParameter("payMethod");
+        if (payMethod == null || payMethod.trim().isEmpty()) {
+            request.setAttribute("error", "Vui lòng chọn phương thức thanh toán!");
+            request.setAttribute("cartIds", cartIdsStr);
+            doGet(request, response); // Render lại
+            return;
+        }
+        // 7. Xử lý đặt hàng theo phương thức thanh toán
+        AccountDAO accountDAO = new AccountDAO();
+        if (payMethod.equalsIgnoreCase("balance")) {
+            double balance = accountDAO.getMoneyByUserId(acc.getUserId());
+            if (BigDecimal.valueOf(balance).compareTo(finalTotal) < 0) {
+                request.setAttribute("error", "Số dư không đủ để thanh toán!");
+                request.setAttribute("cartIds", cartIdsStr);
+                doGet(request, response); // Render lại
                 return;
-            }else{
-            checkoutDAO.updateMoneyAfterPurchase(acc.getUserId(), totalmoney);
-            int orderId = cartDAO.addOrder(acc.getUserId(), name, email, phone, totalmoney, address, 1,3);
-            
-            for (Cart cart : cartList) {
-                // Add each cart's details to the order
-                             cartDAO.addOrderDetail(orderId, cart.getProduct().getProductId(), cart.getQuantity(),  cart.getColorId(), 0);
-
-
-                // Update stock for the product associated with the cart item
-                cartDAO.updateStockByCartId(cart.getCartId());
-
-                // Remove the cart after processing
-                cartDAO.deleteCar(cart.getCartId());
             }
-
-            // Redirect to order confirmation page after processing
-            response.sendRedirect("thanks.jsp");}
+            boolean minusOK = accountDAO.updateMoneyAfterPurchase(acc.getUserId(), finalTotal);
+            if (!minusOK) {
+                request.setAttribute("error", "Không thể trừ tiền từ ví. Vui lòng thử lại!");
+                request.setAttribute("cartIds", cartIdsStr);
+                doGet(request, response);
+                return;
+            }
+        } else if (payMethod.equalsIgnoreCase("online")) {
+            session.setAttribute("pendingCheckoutCartIds", cartIdsStr);
+            session.setAttribute("pendingCheckoutAddressId", selectedAddress.getAddressId());
+            session.setAttribute("pendingCheckoutTotal", finalTotal);
+            session.setAttribute("pendingCheckoutVoucherId", voucherId); // lưu voucherId nếu cần
+            response.sendRedirect("vnpay_pay.jsp");
+            return;
+        }
+        // 8. Tạo đơn hàng (ghi nhận voucherId và giá đã trừ giảm giá)
+        int orderStatus = 1; // Pending
+        int payMethodCode = payMethod.equalsIgnoreCase("cod") ? 2 : 3;
+        OrderDAO orderDAO = new OrderDAO();
+        int orderId = orderDAO.addOrder(
+                acc.getUserId(),
+                selectedAddress.getName(),
+                selectedAddress.getEmail(),
+                selectedAddress.getPhone(),
+                finalTotal, // <-- tổng tiền đã trừ giảm giá!
+                null,
+                orderStatus,
+                payMethodCode,
+                voucherId, // <-- ghi nhận voucher đã dùng
+                null,
+                selectedAddress.getAddress()
+        );
+        if (orderId <= 0) {
+            request.setAttribute("error", "Không thể tạo đơn hàng, vui lòng thử lại!");
+            request.setAttribute("cartIds", cartIdsStr);
+            doGet(request, response);
+            return;
+        }
+        // 9. Thêm orderDetail, update kho, xóa cart
+        ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+        boolean allSuccess = true;
+        for (Cart cart : cartList) {
+            boolean addDetailOK = orderDetailDAO.addOrderDetail(
+                    orderId, cart.getProductId(), cart.getSizeId(), cart.getColorId(), cart.getCartQuantity(), 0);
+            boolean updateStockOK = productDetailDAO.updateStock(
+                    cart.getProductId(), cart.getSizeId(), cart.getColorId(), cart.getCartQuantity());
+            boolean deleteCartOK = false;
+            try {
+                deleteCartOK = cartDAO.deleteCartItem(cart.getCartId());
+            } catch (Exception ignore) {
+            }
+            if (!addDetailOK || !updateStockOK || !deleteCartOK) {
+                allSuccess = false;
+            }
+        }
+        // 10. Đánh dấu đã dùng voucher nếu có
+        if (voucherId != null) {
+            VoucherDAO voucherDAO = new VoucherDAO();
+            voucherDAO.markVoucherAsUsed(acc.getUserId(), voucherId);
+            voucherDAO.increaseUsedQuantity(voucherId); // cập nhật số lần đã dùng
+        }
+        if (allSuccess) {
+            response.sendRedirect("thanks.jsp");
         } else {
-            // Handle other payment methods if any
-            request.setAttribute("error", "Invalid payment method selected.");
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            request.setAttribute("error", "Có lỗi khi xử lý đơn hàng, vui lòng kiểm tra lại.");
+            request.setAttribute("cartIds", cartIdsStr);
+            doGet(request, response);
         }
     }
-    
+
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "CheckoutServlet for DamStudio - chuẩn hóa business - Gen Z style!";
+    }
 }

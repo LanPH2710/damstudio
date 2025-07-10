@@ -13,7 +13,6 @@ public class Order {
     private String orderPhone;
     private BigDecimal totalPrice; // Sử dụng BigDecimal cho tiền tệ
     private String note;
-    private int saleId;
     private int shipperId;
     private Date createDate; // Sử dụng Date cho ngày tháng
     private String shippingAddress;
@@ -24,7 +23,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, String orderDeliverCode, Integer userId, String orderName, String orderEmail, String orderPhone, BigDecimal totalPrice, String note, int saleId, int shipperId, Date createDate, String shippingAddress, int orderStatus, int payMethod, int voucherId) {
+    public Order(int orderId, String orderDeliverCode, Integer userId, String orderName, String orderEmail, String orderPhone, BigDecimal totalPrice, String note, int shipperId, Date createDate, String shippingAddress, int orderStatus, int payMethod, int voucherId) {
         this.orderId = orderId;
         this.orderDeliverCode = orderDeliverCode;
         this.userId = userId;
@@ -33,7 +32,6 @@ public class Order {
         this.orderPhone = orderPhone;
         this.totalPrice = totalPrice;
         this.note = note;
-        this.saleId = saleId;
         this.shipperId = shipperId;
         this.createDate = createDate;
         this.shippingAddress = shippingAddress;
@@ -104,14 +102,6 @@ public class Order {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public int getSaleId() {
-        return saleId;
-    }
-
-    public void setSaleId(int saleId) {
-        this.saleId = saleId;
     }
 
     public int getShipperId() {

@@ -21,15 +21,6 @@ import model.Account;
 
 public class RegisterServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,14 +38,6 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -62,14 +45,6 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -133,7 +108,7 @@ public class RegisterServlet extends HttpServlet {
             String confirmationCode = java.util.UUID.randomUUID().toString();
 
             // Chèn thông tin vào database và thiết lập trạng thái là pending
-            Account newAccount = new Account(username, password, firstName, lastName, gender, email, mobile, address, 1); // 2 = pending
+            Account newAccount = new Account(username, password, firstName, lastName, email, mobile, gender, 4, "img_testing.jpg", 1);
             dao.insertAccount(newAccount);
 
             // Gửi email xác nhận
@@ -149,7 +124,7 @@ public class RegisterServlet extends HttpServlet {
             forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
         }
     }
-    
+
     private void sendConfirmationEmail(String toEmail, String confirmationCode) {
         // Cấu hình thuộc tính máy chủ gửi mail
         Properties props = new Properties();
@@ -173,18 +148,18 @@ public class RegisterServlet extends HttpServlet {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
 //            message.setSubject("Xác nhận đăng ký tài khoản");
-                message.setSubject(MimeUtility.encodeText("Xác nhận đăng ký tài khoản", "UTF-8", "B"));
+            message.setSubject(MimeUtility.encodeText("Xác nhận đăng ký tài khoản", "UTF-8", "B"));
             //String confirmationLink = "http://localhost:9999/Iter1_Test/confirm?email=" + toEmail; // Đảm bảo thay đổi 'yourapp' thành tên ứng dụng của bạn
 //            message.setText("Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn: " + confirmationLink);
-           // message.setContent("Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn: " + confirmationLink, "text/plain; charset=UTF-8");
+            // message.setContent("Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn: " + confirmationLink, "text/plain; charset=UTF-8");
             String confirmationLink = "http://localhost:9999/Iter1_Test/confirm?email=" + toEmail;
-        String emailContent = "Vui lòng click vào link: " + confirmationLink;
-        message.setContent(emailContent, "text/plain; charset=UTF-8");
+            String emailContent = "Vui lòng click vào link: " + confirmationLink;
+            message.setContent(emailContent, "text/plain; charset=UTF-8");
 
             // Gửi email
             Transport.send(message);
             System.out.println("Email xác nhận đã được gửi thành công.");
-        } catch (MessagingException| UnsupportedEncodingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
@@ -207,11 +182,6 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -3,53 +3,57 @@ package model;
 import java.math.BigDecimal;
 
 public class Account {
+
     private int userId;
     private String userName;
     private String password;
     private String firstName;
     private String lastName;
-    private int gender;
     private String email;
     private String mobile;
-    private String address;
+    private int gender;
     private int roleId;
     private String avatar;
-    private int accountStatus;  
+    private int accountStatus;
     private BigDecimal money;
 
+    // Constructor mặc định
     public Account() {
     }
 
-    public Account(int userId, String userName, String password, String firstName, String lastName, int gender, String email, String mobile, String address, int roleId, String avatar, int accountStatus, BigDecimal money) {
+    // Constructor full tham số đúng thứ tự như DB
+    public Account(int userId, String userName, String password, String firstName, String lastName,
+            String email, String mobile, int gender, int roleId, String avatar, int accountStatus, BigDecimal money) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
         this.email = email;
         this.mobile = mobile;
-        this.address = address;
+        this.gender = gender;
         this.roleId = roleId;
         this.avatar = avatar;
         this.accountStatus = accountStatus;
         this.money = money;
     }
 
-    public Account(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, String address, int accountStatus) {
+    // Constructor dùng cho insert nhanh (không có userId, money)
+    public Account(String userName, String password, String firstName, String lastName,
+            String email, String mobile, int gender, int roleId, String avatar, int accountStatus) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
         this.email = email;
         this.mobile = mobile;
-        this.address = address;
+        this.gender = gender;
+        this.roleId = roleId;
+        this.avatar = avatar;
         this.accountStatus = accountStatus;
     }
-    
-    
 
+    // Getters and setters (giữ nguyên)
     public int getUserId() {
         return userId;
     }
@@ -90,14 +94,6 @@ public class Account {
         this.lastName = lastName;
     }
 
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -114,12 +110,12 @@ public class Account {
         this.mobile = mobile;
     }
 
-    public String getAddress() {
-        return address;
+    public int getGender() {
+        return gender;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public int getRoleId() {
@@ -153,6 +149,4 @@ public class Account {
     public void setMoney(BigDecimal money) {
         this.money = money;
     }
-    
-    
 }
