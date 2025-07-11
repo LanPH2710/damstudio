@@ -158,12 +158,19 @@ public class CartDAO extends DBContext {
         }
     }
 
-    public boolean updateQuantityByCartId(int cartId, int quantity) throws SQLException {
-        String sql = "UPDATE cart SET cartQuantity = cartQuantity + ? WHERE cartId = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, quantity);
-            ps.setInt(2, cartId);
-            return ps.executeUpdate() > 0;
+    public void updateQuantityByCartId(int cartId, int quantity, boolean isSet) {
+        String sql;
+        if (isSet) {
+            sql = "UPDATE Cart SET cartQuantity = ? WHERE cartId = ?";
+        } else {
+            sql = "UPDATE Cart SET cartQuantity = cartQuantity + ? WHERE cartId = ?";
+        }
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, quantity);
+            st.setInt(2, cartId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -192,6 +199,60 @@ public class CartDAO extends DBContext {
             ps.setInt(3, cartId);
             return ps.executeUpdate() > 0;
         }
+    }
+
+    public List<Cart> getCartsByCartIds(List<Integer> cartIds) {
+        if (cartIds == null || cartIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        String inSql = cartIds.stream().map(id -> "?").collect(java.util.stream.Collectors.joining(","));
+        String sql = "SELECT * FROM cart WHERE cartId IN (" + inSql + ")";
+        List<Cart> carts = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            for (int i = 0; i < cartIds.size(); i++) {
+                ps.setInt(i + 1, cartIds.get(i));
+            }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Cart cart = new Cart(
+                        rs.getInt("cartId"),
+                        rs.getInt("userId"),
+                        rs.getString("productId"),
+                        rs.getInt("sizeId"),
+                        rs.getInt("colorId"),
+                        rs.getInt("cartQuantity") // Sửa lại tên field đúng với DB nếu khác!
+                );
+                carts.add(cart);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return carts;
+    }
+
+    public void updateQuantityToExact(int cartId, int quantity) throws SQLException {
+        String sql = "UPDATE Cart SET cartQuantity = ? WHERE cartId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, quantity);
+            st.setInt(2, cartId);
+            st.executeUpdate();
+        }
+    }
+
+    public int getQuantityByCartId(int cartId) {
+        int quantity = 0;
+        String sql = "SELECT cartQuantity FROM Cart WHERE cartId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, cartId);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    quantity = rs.getInt("cartQuantity");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quantity;
     }
 
     // Demo test các hàm DAO

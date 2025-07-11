@@ -32,6 +32,24 @@ public class ColorDAO extends DBContext {
         return colors;
     }
 
+    public Color getColorByProductId(int colorId) {
+        Color color = null;
+        String sql = "SELECT * FROM color WHERE colorId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, colorId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                color = new Color();
+                color.setColorId(rs.getInt("colorId"));
+                color.setColorName(rs.getString("colorName"));
+                color.setColorStatus(rs.getInt("colorStatus"));
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return color;
+    }
+
     public static void main(String[] args) {
         ColorDAO colorDAO = new ColorDAO();
         String productId = "ST0001"; // Thay bằng productId bạn muốn test

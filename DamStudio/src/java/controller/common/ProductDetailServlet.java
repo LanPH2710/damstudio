@@ -1,33 +1,19 @@
 package controller.common;
 
-import dal.AccountDAO;
-import dal.BrandDAO;
-import dal.ColorDAO;
-import dal.FeedbackDAO;
-import dal.ProductDAO;
-import dal.ProductDetailDAO;
-import dal.SizeDAO;
-import dal.StyleDAO;
+import dal.*;
+import model.*;
 import java.io.IOException;
+import java.util.*;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Account;
-import model.Color;
-import model.DetailProduct;
-import model.Feedback;
-import model.Product;
-import model.Size;
+import jakarta.servlet.http.*;
 
 public class ProductDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String productId = request.getParameter("productId");
+        String rateParam = request.getParameter("rate");
         if (productId == null || productId.trim().isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu productId");
             return;
@@ -51,9 +37,27 @@ public class ProductDetailServlet extends HttpServlet {
 
             List<Color> color = cdao.getColorOfProduct(productId);
             List<Size> sizeList = sizedao.getAllSizeOfProduct(productId);
-            List<Feedback> feedback = (request.getParameter("rate") == null)
-                    ? fdao.getFeedbackByProductId(productId)
-                    : fdao.getFeedbackByRate(productId, Integer.parseInt(request.getParameter("rate")));
+
+            // Lấy feedback theo rate nếu có, còn không thì lấy tất cả
+            List<Feedback> feedback;
+            Integer filterRate = null;
+            try {
+                if (rateParam != null && !rateParam.isEmpty()) {
+                    filterRate = Integer.parseInt(rateParam);
+                    feedback = fdao.getFeedbackByRate(productId, filterRate);
+                } else {
+                    feedback = fdao.getFeedbackByProductId(productId);
+                }
+            } catch (NumberFormatException e) {
+                feedback = fdao.getFeedbackByProductId(productId);
+            }
+
+            // Đếm số feedback theo từng rate (1-5 sao)
+            Map<Integer, Integer> feedbackCountByRate = new LinkedHashMap<>();
+            for (int i = 5; i >= 1; i--) {
+                feedbackCountByRate.put(i, fdao.countFeedbackByProductIdAndRate(productId, i));
+            }
+            int totalFeedbackCount = fdao.countFeedbackByProductId(productId);
 
             String brand = bdao.getBrandById(pro.getBrandId());
             String style = sdao.getStyleNameByStyleId(pro.getStyleId());
@@ -62,6 +66,10 @@ public class ProductDetailServlet extends HttpServlet {
             List<Product> pro2 = pdao.getProductByPrice(pro.getPrice());
             int rateProduct = fdao.getRateProduct(productId);
             List<DetailProduct> detailList = pddao.getListProductDetail(productId);
+            String selectedColorId = request.getParameter("colorId");
+            String selectedSizeId = request.getParameter("sizeId");
+            request.setAttribute("selectedColorId", selectedColorId);
+            request.setAttribute("selectedSizeId", selectedSizeId);
 
             request.setAttribute("product", pro);
             request.setAttribute("detailList", detailList);
@@ -74,17 +82,19 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("acc", listAcc);
             request.setAttribute("rateProduct", rateProduct);
             request.setAttribute("pro2", pro2);
-
+            request.setAttribute("feedbackCountByRate", feedbackCountByRate);
+            request.setAttribute("totalFeedbackCount", totalFeedbackCount);
+            request.setAttribute("feedbackCountByRate", feedbackCountByRate);
+            request.setAttribute("filterRate", filterRate);
             request.getRequestDispatcher("productDetail.jsp").forward(request, response);
         } catch (Exception ex) {
-            ex.printStackTrace(); // In ra log
+            ex.printStackTrace();
             throw new ServletException("Lỗi khi xử lý sản phẩm: " + ex.getMessage(), ex);
         }
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Product Detail with Feedback Filtering";
+    }
 }

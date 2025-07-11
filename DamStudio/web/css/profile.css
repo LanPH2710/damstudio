@@ -1,195 +1,214 @@
-/* General Reset */
-* {
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #f7f8fa;
+    color: #232323;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
-
-/* Wrapper căn giữa */
 .profile-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 20px;
-    background-color: #fffafc;
+    gap: 0;
+    max-width: 1000px;
+    margin: 54px auto 50px auto;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 8px 40px 0 rgba(200,30,30,0.13);
+    overflow: hidden;
+    min-height: 540px;
 }
-
-/* Profile Container */
-.container {
-    background-color: #fff0f0;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(183, 28, 28, 0.15);
-    max-width: 1100px;
-    width: 100%;
-}
-
-/* Avatar + Form row */
-.row {
+.profile-avatar-side {
+    background: #fff6f7;
+    width: 310px;
+    min-width: 230px;
     display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-right: 2.5px solid #fae4e7;
+    padding: 44px 0 30px 0;
 }
-
-.col-md-4 {
-    flex: 0 0 30%;
-    max-width: 30%;
-    text-align: center;
-}
-
-.col-md-8 {
-    flex: 0 0 65%;
-    max-width: 65%;
-}
-
-/* Avatar */
 .avatar {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+    border: 6px solid #e2b7b7;
+    background: #fff;
     border-radius: 50%;
-    border: 5px solid #b71c1c;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-    margin-top: 16px;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    box-shadow: 0 2px 20px #f9dada, 0 0 0 7px #ffe6e6;
+    margin-bottom: 15px;
+    transition: box-shadow 0.18s;
 }
-
 .avatar:hover {
-    transform: scale(1.05);
+    box-shadow: 0 7px 32px #f5bbbb, 0 0 0 12px #ffd7d7;
 }
-
-h3 {
+.profile-name {
+    font-size: 1.22rem;
     font-weight: 800;
-    font-size: 22px;
-    color: #b71c1c;
-    margin-top: 16px;
+    color: #d32f2f;
+    margin-bottom: 2px;
+    margin-top: 9px;
+    letter-spacing: 0.2px;
 }
-
-.text-black-50 {
-    color: #777;
-    font-size: 14px;
+.profile-email {
+    color: #888;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 3px;
+    margin-bottom: 2px;
 }
-
-/* Form input */
-.labels {
-    font-weight: 600;
-    color: #8b0000;
-    margin-bottom: 6px;
-    display: inline-block;
+.profile-form-side {
+    flex: 1 1 0;
+    background: #fff;
+    padding: 46px 40px 36px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
-
-.form-control {
-    border-radius: 12px;
-    border: 2px solid #f2c7c7;
-    padding: 10px 12px;
-    box-shadow: inset 0 1px 3px rgba(183, 28, 28, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-size: 16px;
-    margin-bottom: 16px;
-    width: 100%;
-}
-
-.form-control:focus {
-    border-color: #b71c1c;
-    box-shadow: 0 0 0 0.15rem rgba(183, 28, 28, 0.25);
-}
-
-/* Section Title */
 .header-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #8b0000;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-
-/* Button style */
-.profile-button {
-    margin-top: 12px;
-    padding: 10px 24px;
+    color: #b71c1c;
+    font-size: 1.19rem;
     font-weight: 700;
-    border-radius: 10px;
-    background-color: #b71c1c;
-    color: #fff;
-    border: none;
-    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.4);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
+    letter-spacing: 1px;
+    margin-bottom: 17px;
 }
-
-.profile-button:hover {
-    background-color: #8b0000;
-    box-shadow: 0 10px 30px rgba(183, 28, 28, 0.5);
+.profile-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 25px;
 }
-
-/* Success/Error */
-.error-message, .success-message {
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    text-align: center;
+@media (max-width: 950px) {
+    .profile-wrapper {
+        max-width: 99vw;
+    }
+    .profile-form-side {
+        padding: 30px 6vw 30px 6vw;
+    }
 }
-
-.error-message {
-    background-color: #ffcdd2;
-    color: #c62828;
-}
-
-.success-message {
-    background-color: #c8e6c9;
-    color: #2e7d32;
-}
-
-/* Tăng số dư */
-.mt-3 .form-control {
-    margin-top: 8px;
-}
-
-.btn-success {
-    background-color: #43a047;
-    border: none;
-    font-weight: 600;
-    border-radius: 10px;
-    box-shadow: 0 6px 16px rgba(67, 160, 71, 0.4);
-    transition: background-color 0.3s ease;
-}
-
-.btn-success:hover {
-    background-color: #2e7d32;
-}
-
-/* Nút quay lại */
-.btn-primary {
-    background-color: #b71c1c;
-    border: none;
-    font-weight: 700;
-    border-radius: 8px;
-}
-
-.btn-primary:hover {
-    background-color: #8b0000;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .row {
+@media (max-width: 700px) {
+    .profile-wrapper {
         flex-direction: column;
+        border-radius: 14px;
+        min-width: 0;
+        max-width: 99vw;
     }
-
-    .col-md-4, .col-md-8 {
-        flex: 0 0 100%;
-        max-width: 100%;
+    .profile-avatar-side {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2.5px solid #fae4e7;
+        padding: 28px 0 20px 0;
+        min-width: 0;
     }
-
-    .avatar {
-        width: 140px;
-        height: 140px;
+    .profile-form-side {
+        padding: 18px 2vw 22px 2vw;
     }
-
-    .header-title {
-        text-align: center;
+    .profile-form-grid {
+        grid-template-columns: 1fr;
     }
+}
+.labels {
+    font-size: 1.01rem;
+    font-weight: 600;
+    color: #c31e1e;
+    margin-bottom: 5px;
+    letter-spacing: 0.01em;
+}
+.form-control {
+    width: 83%;
+    padding: 10px 13px;
+    margin-top: 2px;
+    border: 1.4px solid #ffe3e3;
+    border-radius: 9px;
+    font-size: 1.06rem;
+    background: #fff;
+    transition: border-color 0.18s;
+    box-shadow: 0 2px 9px #ffeded06;
+}
+.form-control:focus {
+    border-color: #d32f2f;
+    outline: none;
+    box-shadow: 0 1px 8px #fae3e3;
+}
+select.form-control {
+    cursor: pointer;
+}
+input[readonly], .form-control[readonly] {
+    background: #f7f7fa;
+    color: #bcbcbc;
+    font-style: italic;
+}
+.profile-button, .profile-button.profile-button-outline {
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1.07rem;
+    margin-top: 10px;
+    margin-right: 11px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 18px #f7b9b9;
+    transition: background 0.17s, box-shadow 0.16s, transform 0.12s;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    background: linear-gradient(90deg, #d32f2f 80%, #f88640 100%);
+}
+.profile-button.profile-button-outline {
+    background: linear-gradient(90deg, #f88640 15%, #d32f2f 90%);
+    color: #fff;
+}
+.profile-button:hover, .profile-button.profile-button-outline:hover {
+    background: linear-gradient(90deg, #921b1b 85%, #f88640 100%);
+    box-shadow: 0 8px 26px #f7bbbb;
+    transform: translateY(-2px) scale(1.04);
+}
+.profile-actions {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+}
+.error-message, .success-message {
+    padding: 13px 22px;
+    margin-bottom: 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.09rem;
+    box-shadow: 0 2px 8px #f7eeee;
+    letter-spacing: 0.01em;
+}
+.error-message {
+    background: #fff2f2;
+    color: #b71c1c;
+    border: 1.5px solid #ffb0b0;
+}
+.success-message {
+    background: #eafbea;
+    color: #16986e;
+    border: 1.5px solid #17a675;
+}
+#preview-img {
+    display: block;
+    border: 2.2px dashed #eeb4b4;
+    margin-top: 10px;
+    background: #fff7f7;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px #ffe3e3;
+    transition: box-shadow 0.18s;
+}
+#preview-img:empty {
+    display: none;
+}
+.form-text.text-muted {
+    color: #9c9a9a;
+    font-size: 0.96rem;
+}
+::-webkit-input-placeholder {
+    color: #c7c5c5;
+}
+::-moz-placeholder {
+    color: #c7c5c5;
+}
+:-ms-input-placeholder {
+    color: #c7c5c5;
+}
+::placeholder {
+    color: #c7c5c5;
 }

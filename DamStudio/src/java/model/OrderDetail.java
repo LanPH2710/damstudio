@@ -1,28 +1,25 @@
 package model;
 
 public class OrderDetail {
+
     private int orderDetailId;
     private int orderId;
     private String productId;
     private int sizeId;
     private int colorId;
     private int quantity;
-    private double productPrice;
-    private String orderStatusDescription;
-    private int isFeedback;  
+    private int isFeedback;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderDetailId, int orderId, String productId, int sizeId, int colorId, int quantity, double productPrice, String orderStatusDescription, int isFeedback) {
+    public OrderDetail(int orderDetailId, int orderId, String productId, int sizeId, int colorId, int quantity, int isFeedback) {
         this.orderDetailId = orderDetailId;
         this.orderId = orderId;
         this.productId = productId;
         this.sizeId = sizeId;
         this.colorId = colorId;
         this.quantity = quantity;
-        this.productPrice = productPrice;
-        this.orderStatusDescription = orderStatusDescription;
         this.isFeedback = isFeedback;
     }
 
@@ -74,22 +71,6 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getOrderStatusDescription() {
-        return orderStatusDescription;
-    }
-
-    public void setOrderStatusDescription(String orderStatusDescription) {
-        this.orderStatusDescription = orderStatusDescription;
-    }
-
     public int getIsFeedback() {
         return isFeedback;
     }
@@ -97,5 +78,5 @@ public class OrderDetail {
     public void setIsFeedback(int isFeedback) {
         this.isFeedback = isFeedback;
     }
-    
+
 }

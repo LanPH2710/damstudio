@@ -1,0 +1,342 @@
+-- drop DATABASE  damstudio
+CREATE DATABASE IF NOT EXISTS damstudio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE damstudio;
+
+-- 1. Bảng role (Vai trò người dùng)
+CREATE TABLE role (
+    roleId INT PRIMARY KEY AUTO_INCREMENT,
+    roleName VARCHAR(255) NOT NULL,
+    roleStatus INT DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.role (roleId, roleName, roleStatus) VALUES
+(1, 'admin', 1),
+(2, 'marketing', 1),
+(3, 'sale', 1),
+(4, 'customer', 1),
+(5, 'shipper', 1);
+
+-- 2. Bảng account (Tài khoản)
+CREATE TABLE account (
+    userId INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255),
+    firstName VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    mobile VARCHAR(20),
+    gender INT,
+    roleId INT,
+    avatar VARCHAR(500),
+    accountStatus INT DEFAULT 1,
+    money DECIMAL(15,2) DEFAULT 0,
+    FOREIGN KEY (roleId) REFERENCES role(roleId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.account (userId, userName, password, firstName, lastName, gender, email, mobile, roleId, avatar, accountStatus, money) VALUES
+(1, 'admin_user', 'password123', 'Trịnh', 'Vũ', 0, 'admin@example.com', '0327066228', 1, 'img_testing.jpg', 1, 0.00),
+(2, 'marketing_user1', 'password123', 'Trịnh Văn', 'Vũ', 0, 'marketing1@example.com', '0327066225', 2, 'img_testing.jpg', 1, 0.00),
+(3, 'marketing_user2', 'password123', 'Marketing', 'Staff2', 0, 'marketing2@example.com', '0123456781', 2, 'img_testing.jpg', 1, 0.00),
+(4, 'sales_user1', 'password123', 'Sales', 'Staff1', 1, 'sales1@example.com', '0123456782', 3, 'img_testing.jpg', 1, 0.00),
+(5, 'sales_user2', 'password123', 'Sales', 'Staff2', 0, 'sales2@example.com', '0123456783', 3, 'img_testing.jpg', 1, 0.00),
+(6, 'customer_user1', 'password123', 'Customer', 'One', 1, 'customer1@example.com', '0123456784', 4, 'img_testing.jpg', 1, 0.00),
+(7, 'customer_user2', 'password123', 'Customer', 'Two', 0, 'customer2@example.com', '0123456785', 4, 'img_testing.jpg', 1, 0.00),
+(8, 'shipper_user1', 'password123', 'Shipper', 'One', 0, 'shipper5@example.com', '14254325234523', 5, 'img_testing.jpg', 1, 0.00);
+
+-- 3. Bảng color (Màu sắc)
+CREATE TABLE color (
+    colorId INT PRIMARY KEY AUTO_INCREMENT,
+    colorName VARCHAR(50) NOT NULL,
+    colorStatus INT DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.color (colorId, colorName, colorStatus) VALUES
+(1, 'Đen', 1),
+(2, 'Trắng', 0);
+
+-- 4. Bảng size (Kích thước)
+CREATE TABLE size (
+    sizeId INT PRIMARY KEY AUTO_INCREMENT,
+    sizeName VARCHAR(25) NOT NULL,
+    heightMin INT,
+    heightMax INT,
+    weightMin INT,
+    weightMax INT,
+    sizeStatus INT DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.size (sizeId, sizeName, heightMin, heightMax, weightMin, weightMax, sizeStatus) VALUES
+(1, 'Trẻ 6 tuổi', 114, 120, 19, 22, 1),
+(2, 'Trẻ 7-8 tuổi', 121, 130, 22, 27, 1),
+(3, 'Trẻ 9-10 tuổi', 131, 140, 27, 35, 1),
+(4, 'Trẻ 11-12 tuổi', 141, 150, 35, 45, 1),
+(5, 'Trẻ 13-14 tuổi', 151, 160, 45, 55, 1),
+(6, 'S', 158, 165, 48, 55, 1),
+(7, 'M', 160, 170, 60, 68, 1),
+(8, 'L', 165, 175, 65, 75, 1),
+(9, 'XL', 170, 180, 75, 85, 1),
+(10, 'XXL', 175, 185, 85, 95, 1),
+(11, 'XXXL', 180, 190, 85, 95, 1);
+
+-- 5. Bảng brand (Thương hiệu)
+CREATE TABLE brand (
+    brandId INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    brandStatus INT DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.brand (brandId, name, brandStatus) VALUES
+(1, 'Sự tích', 1),
+(2, 'Truyền thuyết', 1);
+
+-- 6. Bảng style (Kiểu dáng)
+CREATE TABLE style (
+    styleId INT PRIMARY KEY AUTO_INCREMENT,
+    styleName VARCHAR(255) NOT NULL,
+    styleStatus INT DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.style (styleId, styleName, styleStatus) VALUES
+(1, 'T-Shirt', 1),
+(2, 'Hat', 0),
+(3, 'Tote', 0),
+(4, 'Boomber', 0),
+(5, 'Scraff', 1);
+
+-- 7. Bảng product (Sản phẩm)
+CREATE TABLE product (
+    productId VARCHAR(6) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(15,2) NOT NULL,
+    description TEXT,
+    VAT DECIMAL(5,2) DEFAULT 0,
+    brandId INT,
+    styleId INT,
+    productStatus INT DEFAULT 1,
+    FOREIGN KEY (brandId) REFERENCES brand(brandId),
+    FOREIGN KEY (styleId) REFERENCES style(styleId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.product (productId, name, price, description, VAT, brandId, styleId, productStatus) VALUES
+('ST0001', 'Áo T-Shirt Truyền thuyết', 200000.00, 'Túi tote thời trang, dễ phối đồ, tiện lợi mang theo.', 0.00, 2, 1, 1),
+('ST0002', 'Áo T-Shirt Truyền thuyết', 200000.00, 'Áo khoác bomber giữ ấm tốt, thiết kế năng động.', 0.00, 2, 1, 1),
+('TT0001', 'Áo T-Shirt Sự tích Hồ Gươm', 200000.00, 'Áo thun trắng chất liệu cotton cao cấp, thấm hút tốt.', 0.00, 1, 1, 1),
+('TT0002', 'Áo T-Shirt Sự tích Bánh Chưng', 200000.00, 'Mũ lưỡi trai đen phong cách, phù hợp mọi trang phục.', 0.00, 1, 1, 1);
+
+-- 8. Bảng productimage (Ảnh sản phẩm)
+CREATE TABLE productimage (
+    imageId INT PRIMARY KEY AUTO_INCREMENT,
+    imageUrl VARCHAR(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.productimage (imageId, imageUrl) VALUES
+(1, 'avatar-trang-4.jpg');
+
+-- 9. Bảng detail_product (Chi tiết sản phẩm - tồn kho từng màu, size)
+CREATE TABLE detail_product (
+    productId VARCHAR(6),
+    sizeId INT,
+    colorId INT,
+    imageId INT,
+    quantity INT DEFAULT 0,
+    PRIMARY KEY (productId, sizeId, colorId),
+    FOREIGN KEY (productId) REFERENCES product(productId),
+    FOREIGN KEY (sizeId) REFERENCES size(sizeId),
+    FOREIGN KEY (colorId) REFERENCES color(colorId),
+    FOREIGN KEY (imageId) REFERENCES productimage(imageId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- ST0001
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
+('ST0001', 1, 1, 1, 10), ('ST0001', 1, 2, 1, 10),
+('ST0001', 2, 1, 1, 10), ('ST0001', 2, 2, 1, 10),
+('ST0001', 3, 1, 1, 10), ('ST0001', 3, 2, 1, 10),
+('ST0001', 4, 1, 1, 10), ('ST0001', 4, 2, 1, 10),
+('ST0001', 5, 1, 1, 10), ('ST0001', 5, 2, 1, 10),
+('ST0001', 6, 1, 1, 10), ('ST0001', 6, 2, 1, 10),
+('ST0001', 7, 1, 1, 10), ('ST0001', 7, 2, 1, 10),
+('ST0001', 8, 1, 1, 10), ('ST0001', 8, 2, 1, 10),
+('ST0001', 9, 1, 1, 10), ('ST0001', 9, 2, 1, 10),
+('ST0001', 10, 1, 1, 10), ('ST0001', 10, 2, 1, 10),
+('ST0001', 11, 1, 1, 10), ('ST0001', 11, 2, 1, 10);
+
+-- ST0002
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
+('ST0002', 1, 1, 1, 10), ('ST0002', 1, 2, 1, 10),
+('ST0002', 2, 1, 1, 10), ('ST0002', 2, 2, 1, 10),
+('ST0002', 3, 1, 1, 10), ('ST0002', 3, 2, 1, 10),
+('ST0002', 4, 1, 1, 10), ('ST0002', 4, 2, 1, 10),
+('ST0002', 5, 1, 1, 10), ('ST0002', 5, 2, 1, 10),
+('ST0002', 6, 1, 1, 10), ('ST0002', 6, 2, 1, 10),
+('ST0002', 7, 1, 1, 10), ('ST0002', 7, 2, 1, 10),
+('ST0002', 8, 1, 1, 10), ('ST0002', 8, 2, 1, 10),
+('ST0002', 9, 1, 1, 10), ('ST0002', 9, 2, 1, 10),
+('ST0002', 10, 1, 1, 10), ('ST0002', 10, 2, 1, 10),
+('ST0002', 11, 1, 1, 10), ('ST0002', 11, 2, 1, 10);
+
+-- TT0001
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
+('TT0001', 1, 1, 1, 10), ('TT0001', 1, 2, 1, 10),
+('TT0001', 2, 1, 1, 10), ('TT0001', 2, 2, 1, 10),
+('TT0001', 3, 1, 1, 10), ('TT0001', 3, 2, 1, 10),
+('TT0001', 4, 1, 1, 10), ('TT0001', 4, 2, 1, 10),
+('TT0001', 5, 1, 1, 10), ('TT0001', 5, 2, 1, 10),
+('TT0001', 6, 1, 1, 10), ('TT0001', 6, 2, 1, 10),
+('TT0001', 7, 1, 1, 10), ('TT0001', 7, 2, 1, 10),
+('TT0001', 8, 1, 1, 10), ('TT0001', 8, 2, 1, 10),
+('TT0001', 9, 1, 1, 10), ('TT0001', 9, 2, 1, 10),
+('TT0001', 10, 1, 1, 10), ('TT0001', 10, 2, 1, 10),
+('TT0001', 11, 1, 1, 10), ('TT0001', 11, 2, 1, 10);
+
+-- TT0002
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
+('TT0002', 1, 1, 1, 10), ('TT0002', 1, 2, 1, 10),
+('TT0002', 2, 1, 1, 10), ('TT0002', 2, 2, 1, 10),
+('TT0002', 3, 1, 1, 10), ('TT0002', 3, 2, 1, 10),
+('TT0002', 4, 1, 1, 10), ('TT0002', 4, 2, 1, 10),
+('TT0002', 5, 1, 1, 10), ('TT0002', 5, 2, 1, 10),
+('TT0002', 6, 1, 1, 10), ('TT0002', 6, 2, 1, 10),
+('TT0002', 7, 1, 1, 10), ('TT0002', 7, 2, 1, 10),
+('TT0002', 8, 1, 1, 10), ('TT0002', 8, 2, 1, 10),
+('TT0002', 9, 1, 1, 10), ('TT0002', 9, 2, 1, 10),
+('TT0002', 10, 1, 1, 10), ('TT0002', 10, 2, 1, 10),
+('TT0002', 11, 1, 1, 10), ('TT0002', 11, 2, 1, 10);
+
+-- 10. Bảng cart (Giỏ hàng)
+CREATE TABLE cart (
+    cartId INT PRIMARY KEY AUTO_INCREMENT,
+    userId INT,
+    productId VARCHAR(6),
+    sizeId INT,
+    colorId INT,
+    cartQuantity INT DEFAULT 1,
+    FOREIGN KEY (userId) REFERENCES account(userId),
+    FOREIGN KEY (productId) REFERENCES product(productId),
+    FOREIGN KEY (sizeId) REFERENCES size(sizeId),
+    FOREIGN KEY (colorId) REFERENCES color(colorId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 11. Bảng favorite_product (Sản phẩm yêu thích)
+CREATE TABLE favorite_product (
+    userId INT,
+    productId VARCHAR(6),
+    PRIMARY KEY (userId, productId),
+    FOREIGN KEY (userId) REFERENCES account(userId),
+    FOREIGN KEY (productId) REFERENCES product(productId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 12. Bảng addressuser (Địa chỉ giao hàng của user)
+CREATE TABLE addressuser (
+    userId INT,
+    addressId INT PRIMARY KEY AUTO_INCREMENT,
+    address VARCHAR(500),
+    name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    FOREIGN KEY (userId) REFERENCES account(userId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.addressuser (userId, address, name, email, phone) VALUES
+(1, '390', 'Trịnh Vũ', 'admin@example.com', '0327066228'),
+(2, 'dfasdfasdfads', 'Trịnh Văn Vũ', 'marketing1@example.com', '0327066225'),
+(3, 'Marketing Address 2', 'Marketing Staff2', 'marketing2@example.com', '0123456781'),
+(4, 'Sales Address 1', 'Sales Staff1', 'sales1@example.com', '0123456782'),
+(5, 'Sales Address 2', 'Sales Staff2', 'sales2@example.com', '0123456783'),
+(6, 'Customer Address 1', 'Customer One', 'customer1@example.com', '0123456784'),
+(7, 'Customer Address 2', 'Customer Two', 'customer2@example.com', '0123456785'),
+(8, 'Shipper Address 1', 'Shipper One', 'shipper5@example.com', '14254325234523');
+
+-- 13. Bảng voucher (Mã giảm giá)
+CREATE TABLE voucher (
+    voucherId INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    discountType ENUM('percent', 'amount') DEFAULT 'percent',
+    discountValue DECIMAL(10,2),
+    minOrderValue DECIMAL(10,2),
+    maxDiscountValue DECIMAL(10,2),
+    totalQuantity INT,
+    usedQuantity INT DEFAULT 0,
+    isActive TINYINT(1) DEFAULT 1,
+    startDate DATETIME,
+    endDate DATETIME
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.voucher (
+    voucherId, code, description, discountType, discountValue, minOrderValue, maxDiscountValue, totalQuantity, usedQuantity, startDate, endDate, isActive
+) VALUES
+(1, 'HEHEHE10', 'Giảm 10% cho đơn từ 200k', 'percent', 10.00, 200000.00, 50000.00, 100, 0, '2025-06-01 00:00:00', '2025-06-30 00:00:00', 1),
+(2, 'FREESHIP50', 'Giảm 50k cho đơn từ 300k', 'amount', 50000.00, 300000.00, 50000.00, 200, 0, '2025-06-01 00:00:00', '2025-06-20 00:00:00', 1);
+
+-- 14. Bảng user_voucher (User đã nhận voucher nào)
+CREATE TABLE user_voucher (
+    userId INT,
+    voucherId INT,
+    isUsed TINYINT(1) DEFAULT 0,
+    PRIMARY KEY (userId, voucherId),
+    FOREIGN KEY (userId) REFERENCES account(userId),
+    FOREIGN KEY (voucherId) REFERENCES voucher(voucherId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 15. Bảng orderstatus (Trạng thái đơn hàng)
+CREATE TABLE orderstatus (
+    statusId INT PRIMARY KEY AUTO_INCREMENT,
+    statusName VARCHAR(50) NOT NULL,
+    description VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.orderstatus (statusId, statusName, description) VALUES
+(1, 'Pending', 'Đơn hàng đang chờ xử lý'),
+(2, 'Confirmed', 'Đơn hàng đã được xác nhận'),
+(3, 'Shipped', 'Đơn hàng đã được giao đi'),
+(4, 'Delivered', 'Đơn hàng đã được giao đến tay khách hàng'),
+(5, 'Cancelled', 'Đơn hàng đã bị huỷ'),
+(6, 'On Hold', 'Đơn hàng đang bị tạm hoãn');
+
+
+-- 16. Bảng order (Đơn hàng)
+CREATE TABLE `order` (
+    orderId INT PRIMARY KEY AUTO_INCREMENT,
+    orderDeliverCode VARCHAR(10),
+    userId INT,
+    orderName VARCHAR(255),
+    orderEmail VARCHAR(255),
+    orderPhone VARCHAR(20),
+    totalPrice DECIMAL(15,2),
+    note VARCHAR(255),
+    orderStatus INT,
+    payMethod INT,
+    voucherId INT,
+    shipId INT,
+    createDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    shippingAddress VARCHAR(200),
+    FOREIGN KEY (userId) REFERENCES account(userId),
+    FOREIGN KEY (orderStatus) REFERENCES orderstatus(statusId),
+    FOREIGN KEY (voucherId) REFERENCES voucher(voucherId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 17. Bảng orderdetail (Chi tiết đơn hàng)
+CREATE TABLE orderdetail (
+    orderDetailId INT PRIMARY KEY AUTO_INCREMENT,
+    orderId INT,
+    productId VARCHAR(6),
+    sizeId INT,
+    colorId INT,
+    quantity INT DEFAULT 1,
+    isFeedback INT,
+    FOREIGN KEY (orderId) REFERENCES `order`(orderId),
+    FOREIGN KEY (productId) REFERENCES product(productId),
+    FOREIGN KEY (sizeId) REFERENCES size(sizeId),
+    FOREIGN KEY (colorId) REFERENCES color(colorId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 18. Bảng feedback (Đánh giá sản phẩm)
+CREATE TABLE feedback (
+    feedbackId INT PRIMARY KEY AUTO_INCREMENT,
+    userId INT,
+    productId VARCHAR(6),
+    feedbackInfo TEXT,
+    feedbackTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    feedbackImg VARCHAR(500),
+    feedbackRate INT,
+    status INT DEFAULT 1,
+    FOREIGN KEY (userId) REFERENCES account(userId),
+    FOREIGN KEY (productId) REFERENCES product(productId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO damstudio.feedback (feedbackId, userId, productId, feedbackInfo, feedbackTime, feedbackImg, feedbackRate, status) VALUES
+(1, 2, 'ST0001', 'Sản phẩm tốt, chất lượng vượt mong đợi.', '2025-06-10 10:30:00', 'img_testing.jpg', 5, 1),
+(2, 3, 'ST0002', 'Màu sắc đẹp, mặc vừa vặn.', '2025-06-11 12:00:00', NULL, 4, 1),
+(3, 5, 'TT0001', 'Chất vải mềm mịn, giá hợp lý.', '2025-06-12 09:45:00', NULL, 5, 1),
+(4, 6, 'TT0002', 'Không giống ảnh, hơi thất vọng.', '2025-06-12 14:15:00', NULL, 2, 1),
+(5, 4, 'ST0001', 'Giao hàng nhanh, đóng gói cẩn thận.', '2025-06-13 08:20:00', NULL, 4, 1),
+(6, 5, 'ST0002', 'Form áo đẹp, nhưng chất vải mỏng.', '2025-06-13 13:00:00', NULL, 3, 1),
+(7, 7, 'TT0001', 'Thiết kế sáng tạo, đáng tiền.', '2025-06-14 11:30:00', NULL, 5, 1),
+(8, 7, 'TT0002', 'Chất lượng ổn, sẽ ủng hộ tiếp.', '2025-06-14 15:00:00', NULL, 4, 1);
