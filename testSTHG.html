@@ -11,7 +11,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 10000px;
+      height: 17000px;
       overflow-x: hidden;
       font-family: sans-serif;
     }
@@ -45,12 +45,6 @@
       transform-origin: bottom center;
     }
 
-    .layer-floor   { z-index: 6; }
-    .layer-house1  { z-index: 5; }
-    .layer-enemy1  { z-index: 4; }
-    .layer-house2  { z-index: 3; }
-    .layer-enemy2  { z-index: 2; }
-    .layer-fire    { z-index: 1; }
 
     #floorText {
       position: absolute;
@@ -67,20 +61,20 @@
 
     #s2Text1, #s2Text2a, #s2Text2b, #s2Text3,
     #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b,
-    #s4Tex1, #s4Text2,
+    #s4Text1, #s4Text2,
     #s5Text,
     #s6Text,
     #s7Text1, #s7Text2a, #s7Text2b, #s7Text3 {
       position: absolute;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       opacity: 0;
       z-index: 9;
     }
 
     #s2Text1, #s2Text2a {
-      bottom: 5%;
-      left: 5%;
+      bottom: 10%;
+      right: 5%;
       width: 40vw;
     }
 
@@ -90,7 +84,7 @@
     }
 
     #s2Text3 {
-      top: 50%;
+      bottom: 10%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 50vw;
@@ -98,24 +92,24 @@
     }
 
     #s3Text1 {
-      top: 5%;
+      top: 10%;
       left: 5%;
     }
 
     #s3Text2a {
-      bottom: 5%;
+      bottom: 10%;
       right: 5%;
       text-align: right;
       width: 40vw;
     }
 
     #s3Text2b {
-      top: 5%;
+      top: 10%;
       left: 5%;
     }
 
     #s3Text3a {
-      top: 5%;
+      top: 10%;
       left: 5%;
     }
 
@@ -129,7 +123,7 @@
 
 
     #s4Text1 {
-      top: 5%;
+      bottom: 5%;
       right: 5%;
     }
 
@@ -176,48 +170,92 @@
       width: 40vw;
     }
 
+/* ========================== SCENE 1 ========================== */
+#floor       { z-index: 106; }
+#house1      { z-index: 105; }
+#enemy1      { z-index: 104; }
+#house2      { z-index: 103; }
+#enemy2      { z-index: 102; }
+#fire        { z-index: 101; }
+#floorText   { z-index: 110; }
 
-    #s2fisherman { z-index: 5; }
-    #s2mountain1 { z-index: 4; }
-    #s2mountain2 { z-index: 3; }
-    #s2mountain1sd { z-index: 2; }
-    #s2mountain2sd { z-index: 1; }
-    #s2cloud { z-index: 0; }
+/* ========================== SCENE 2 ========================== */
+#s2cloud         { z-index: 201; }
+#s2mountain2sd   { z-index: 202; }
+#s2mountain1sd   { z-index: 203; }
+#s2mountain2     { z-index: 204; }
+#s2mountain1     { z-index: 205; }
+#s2boatsd        { z-index: 206; }
+#s2fisherman     { z-index: 207; }
+#s2Text1,
+#s2Text2a,
+#s2Text2b,
+#s2Text3         { z-index: 210; }
 
-    #s3hero { z-index: 5; }
-    #s3handstiff { z-index: 4; }
-    #s3tree1 { z-index: 3; }
-    #s3enemy { z-index: 2; }
-    #s3tree2 { z-index: 1; }
+/* ========================== SCENE 3 ========================== */
+#s3tree2     { z-index: 301; }
+#s3enemy     { z-index: 302; }
+#s3tree1     { z-index: 303; }
+#s3hero      { z-index: 304; }
+#s3handstiff { z-index: 305; }
+#s3Text1,
+#s3Text2a,
+#s3Text2b,
+#s3Text3a,
+#s3Text3b     { z-index: 310; }
 
+/* ========================== SCENE 4 ========================== */
+#s4sword     { z-index: 404; }
+#s4hero      { z-index: 403; }
+#s4men1      { z-index: 402; }
+#s4men2      { z-index: 401; }
+#s4Text1,
+#s4Text2     { z-index: 410; }
 
-    #s4men2 { z-index: 4; }
-    #s4men1 { z-index: 3; }
-    #s4hero { z-index: 2; }
-    #s4sword { z-index: 1; }
+/* ========================== SCENE 5 ========================== */
+#s5floor1    { z-index: 506; }
+#s5hero      { z-index: 505; }
+#s5floor2    { z-index: 504; }
+#s5men1      { z-index: 503; }
+#s5men2      { z-index: 502; }
+#s5men3      { z-index: 501; }
+#s5Text      { z-index: 510; }
 
-    #s5men3 { z-index: 6; }
-    #s5men2 { z-index: 5; }
-    #s5men1 { z-index: 4; }
-    #s5floor2 { z-index: 3; }
-    #s5hero { z-index: 2; }
-    #s5floor1 { z-index: 1; }
+/* ========================== SCENE 6 ========================== */
+#s6people1   { z-index: 605; }
+#s6people2   { z-index: 604; }
+#s6hero      { z-index: 603; }
+#s6sword     { z-index: 602; }
+#s6people3   { z-index: 601; }
+#s6Text      { z-index: 610; }
 
-    #s6people3 { z-index: 5; }
-    #s6sword { z-index: 4; }
-    #s6hero { z-index: 3; }
-    #s6people2 { z-index: 2; }
-    #s6people1 { z-index: 1; }
+/* ========================== SCENE 7 ========================== */
+#s7light     { z-index: 705; }
+#s7turtle    { z-index: 704; }
+#s7turtlesd  { z-index: 703; }
+#s7boat      { z-index: 702; }
+#s7boatsd    { z-index: 701; }
+#s7Text1,
+#s7Text2a,
+#s7Text2b,
+#s7Text3     { z-index: 710; }
 
-    #s7boatsd { z-index: 5; }
-    #s7boat { z-index: 4; }
-    #s7turtlesd { z-index: 3; }
-    #s7turtle { z-index: 2; }
-    #s7light { z-index: 1; }
 
   </style>
 </head>
 <body>
+  <button id="startButton" style="
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  font-size: 16px;
+  z-index: 9999;
+">
+  Bắt đầu trải nghiệm
+</button>
+
   <section id="scene">
     <h1 class="title">Sự Tích Hồ Gươm</h1>
 
@@ -228,7 +266,9 @@
     <img id="enemy2" src="images/enemy2.png" class="scene-element layer-enemy2" />
     <img id="fire" src="images/fire.png" class="scene-element layer-fire" />
 
-    <div id="floorText">Vào thời giặc Minh xâm lược nước ta...</div>
+    <div id="floorText">Vào thời giặc Minh xâm lược nước ta, đi đến đâu chúng cũng tàn sát người dân vô tội, cướp bóc
+      của cải của
+      nhân dân. <br>Cuộc sống của người dân vô cùng cực khổ, và lầm than.</div>
 
     <!-- Elements scene 2 -->
     <img id="s2cloud" src="SuTichHoGuom/Sence 2/1x/cloud.png" class="scene2-element" />
@@ -287,7 +327,7 @@
     <img id="s4hero" src="SuTichHoGuom/scene 4/1x/LeLoi_1.png" class="scene4-element" />
     <img id="s4sword" src="SuTichHoGuom/scene 4/1x/sword.png" class="scene4-element" />
     <!-- Đoạn text scene4 -->
-    <div id="s4Text1">sau khi cho lưỡi gươm vào trong chuôi gươm thì lại vừa in như một cặp, lưỡi gươm trở lên sáng chói
+    <div id="s4Text1">sau khi ghép lưỡi gươm với chuôi gươm thì lại vừa in như một cặp, lưỡi gươm trở lên sáng chói
       và sắc nhọn vô cùng
     </div>
 
@@ -341,12 +381,105 @@
 
     </div>
   </section>
+  <!-- AUDIO -->
+   <!-- audio intro -->
+   <audio id="audio-intro" src="audio/voice_STHG/intro.mp3"></audio>
+
+   <!-- audio sence1 -->
+   <audio id="audio-scene1" src="audio/voice_STHG/s1.mp3"></audio>
+
+   <!-- Scene 2 -->
+<audio id="audio-scene2p1" src="audio/voice_STHG/s2p1.mp3"></audio>
+<audio id="audio-scene2p2" src="audio/voice_STHG/s2p2.mp3"></audio>
+<audio id="audio-scene2p3" src="audio/voice_STHG/s2p3.mp3"></audio>
+
+<!-- Scene 3 -->
+<audio id="audio-scene3p1" src="audio/voice_STHG/s3p1.mp3"></audio>
+<audio id="audio-scene3p2" src="audio/voice_STHG/s3p2.mp3"></audio>
+<audio id="audio-scene3p3" src="audio/voice_STHG/s3p3.mp3"></audio>
+
+
+
+   <!-- audio scene4 -->
+   <audio id="audio-scene4" src="audio/voice_STHG/s4p1.mp3"></audio>
+
+   <!-- audio scene5 -->
+<audio id="audio-scene5" src="audio/voice_STHG/s5.mp3"></audio>
+
+<!-- audio scene6 -->
+<audio id="audio-scene6" src="audio/voice_STHG/s6.mp3"></audio>
+
+<!-- Scene 7 -->
+ <audio id="audio-scene7p1" src="audio/voice_STHG/s7p1.mp3"></audio>
+<audio id="audio-scene7p2" src="audio/voice_STHG/s7p2.mp3"></audio>
+<audio id="audio-scene7p2b" src="audio/voice_STHG/s7p2b.mp3"></audio>
+<audio id="audio-scene7p3" src="audio/voice_STHG/s7p3.mp3"></audio>
+
+<button id="autoScrollBtn" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #ffffffcc;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 9999;
+">Auto Scroll</button>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollTrigger);
+    //gsap.registerPlugin(ScrollTrigger);
+    
+//     function playSequentialAudios(ids) {
+//   if (!Array.isArray(ids)) return;
 
-    const elements = [
+//   let index = 0;
+
+//   function playNext() {
+//     if (index >= ids.length) return;
+//     const audio = document.getElementById(ids[index]);
+//     if (!audio) return;
+
+//     audio.currentTime = 0;
+//     audio.play().catch(err => {
+//       console.warn(`Không thể phát audio ${ids[index]}:`, err);
+//     });
+//     index++;
+
+//     audio.onended = playNext;
+//   }
+
+//   playNext();
+// }
+
+//intro
+    gsap.to(".title", {
+      opacity: 0,
+      y: -100,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top top",
+        end: "top+=500",
+        scrub: true
+      }
+    });
+
+    //screen1 fade in
+    gsap.to(["#fire", "#enemy2", "#house2", "#enemy1", "#house1", "#floor"], {
+      opacity: 0,
+      y: 100,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=1600",
+        end: "top+=2000",
+        scrub: true
+      }
+    });
+
+    //screen1 zoom
+     const elements = [
       { id: "floor", scale: 1.56 },
       { id: "house1", scale: 1.52 },
       { id: "enemy1", scale: 1.28 },
@@ -354,18 +487,6 @@
       { id: "enemy2", scale: 1.4 },
       { id: "fire", scale: 1.16 }
     ];
-
-    gsap.to(".title", {
-      opacity: 0,
-      y: -100,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top top",
-        end: "top+=300",
-        scrub: true
-      }
-    });
-
     elements.forEach((el, i) => {
       gsap.fromTo(`#${el.id}`,
         { y: 100, opacity: 0 },
@@ -390,12 +511,12 @@
           scrollTrigger: {
             trigger: "#scene",
             start: "top+=1400",
-            end: "top+=1600",
+            end: "top+=2500",
             scrub: true
           }
         });
     });
-
+    //screen1 text
     gsap.fromTo("#floorText", { y: 100, opacity: 0 }, {
       y: 0,
       opacity: 1,
@@ -413,474 +534,462 @@
       scrollTrigger: {
         trigger: "#scene",
         start: "top+=1800",
-        end: "top+=2000",
+        end: "top+=2500",
         scrub: true
       }
     });
-
-    gsap.to(["#fire", "#enemy2", "#house2", "#enemy1", "#house1", "#floor"], {
-      opacity: 0,
-      y: 100,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1600",
-        end: "top+=1800",
-        scrub: true
-      }
-    });
-
-   gsap.fromTo("#s2fisherman", { x: -500, opacity: 0 }, {
-      x: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1800",
-        end: "top+=2600",
-        scrub: true
-      }
-    });
-    gsap.fromTo("#s2boatsd", { x: -500, opacity: 0 }, {
-      x: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1800",
-        end: "top+=2600",
-        scrub: true
-      }
-    });
-
-gsap.to("#s2fisherman", {
+    //  fade out scene 1 
+gsap.to(["#fire", "#enemy2", "#house2", "#enemy1", "#house1", "#floor"], {
   opacity: 0,
+  y: 100,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=2600",
-    end: "top+=2800",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+//-----------------------------------------------------------SCENE 2----------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //screen2 fade in part1
+  // Hiệu ứng xuất hiện người đánh cá và thuyền (bước đầu tiên)
+gsap.fromTo("#s2fisherman", { x: -500, opacity: 0 }, {
+  x: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2boatsd", { x: -500, opacity: 0 }, {
+  x: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
     scrub: true
   }
 });
 
+// Núi & mây
+gsap.fromTo("#s2mountain1", { y: 50, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2mountain2", { y: 50, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2mountain1sd", { y: -50, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2mountain2sd", { y: -50, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2cloud", { opacity: 0 }, {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2000",
+    end: "top+=2500",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s2boatsd", { x: -500, opacity: 0 }, {
-      x: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1820",
-        end: "top+=2020",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2mountain1", { y: 50, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1850",
-        end: "top+=2050",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2mountain2", { y: 50, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1870",
-        end: "top+=2070",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2mountain1sd", { y: -50, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1890",
-        end: "top+=2090",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2mountain2sd", { y: -50, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1910",
-        end: "top+=2110",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2cloud", { opacity: 0 }, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1950",
-        end: "top+=2150",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2Text1", { y: 100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1980",
-        end: "top+=2200",
-        scrub: true
-      }
-    });
-
-    // SCENE 2 CONTINUES
+// Text 1
+gsap.fromTo("#s2Text1", { y: 100, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=2500",
+    end: "top+=3000",
+    scrub: true
+  }
+});
+// SCENE 2 CONTINUES
     gsap.fromTo("#s2Text1",{ y: 0, opacity: 0 }, {
       y: 200,
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
-        start: "top+=2200",
-        end: "top+=2400",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2Text2a", { y: 100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2300",
-        end: "top+=2500",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2Text2b", { opacity: 0 }, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2400",
-        end: "top+=2600",
-        scrub: true
-      }
-    });
-
-
-
-    gsap.to("#s2Text2a", {
-      y: 200,
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2600",
-        end: "top+=2800",
-        scrub: true
-      }
-    });
-
-    gsap.to("#s2Text2b", {
-      y: -200,
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2600",
-        end: "top+=2800",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2fisherman", { x: 0, opacity: 0 }, {
-      x: -700,
-      opacity: 1,
-      // ease: "none",
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2600",
-        end: "top+=2900",
-        scrub: true
-      }
-    });
-    gsap.fromTo("#s2boatsd", { x: 0, opacity: 0 }, {
-      x: -700,
-      opacity: 1,
-      // ease: "none",
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2600",
-        end: "top+=2900",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2Text3",
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: "#scene",
-          start: "top+=2700",
-          end: "top+=2900",
-          scrub: true
-        }
-      });
-      // Scene 2 to Scene 3 transition
-    gsap.to(".scene2-element", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2900",
-        end: "top+=3100",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s3tree2", { y: 100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2950",
-        end: "top+=3150",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s3tree1", { y: 100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
         start: "top+=3000",
-        end: "top+=3200",
+        end: "top+=3500",
         scrub: true
       }
     });
 
-    gsap.fromTo("#s3handstiff", { y: 100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3050",
-        end: "top+=3250",
-        scrub: true
-      }
-    });
+// Text 2a
+gsap.fromTo("#s2Text2a", { y: 100, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=3000",
+    end: "top+=3500",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s3hero", { x: "-100%", scale: 0.5, opacity: 0 }, {
-      x: "0%",
-      scale: 0.85,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3100",
-        end: "top+=3300",
-        scrub: true
-      }
-    });
+// Text 2b
+gsap.fromTo("#s2Text2b", { opacity: 0 }, {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=3500",
+    end: "top+=4000",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s3enemy", { y: "100%", x: "20%", scale: 0.4, opacity: 0 }, {
-      y: "0%",
-      x: "0%",
-      scale: 0.66,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3150",
-        end: "top+=3350",
-        scrub: true
-      }
-    });
-    // Scene 2 fade out and scene 3 text1 appear top-left
-    gsap.to("#s2Text3", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=2900",
-        end: "top+=3100",
-        scrub: true
-      }
-    });
+// Ẩn text 2a và 2b
+gsap.to("#s2Text2a", {
+  y: 200,
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=4000",
+    end: "top+=4500",
+    scrub: true
+  }
+});
+gsap.to("#s2Text2b", {
+  y: -200,
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=4000",
+    end: "top+=4500",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s3Text1", { y: -100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3100",
-        end: "top+=3300",
-        scrub: true
-      }
-    });
+// Fisherman & boat ra khỏi màn hình
+gsap.fromTo("#s2fisherman", { x: 0, opacity: 0 }, {
+  x: -700,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=4000",
+    end: "top+=4500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s2boatsd", { x: 0, opacity: 0 }, {
+  x: -700,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=4000",
+    end: "top+=4500",
+    scrub: true
+  }
+});
 
-    // Hero/enemy scale to 1 and move center, s3Text1 move up, s3Text2a up right, s3Text2b down left
-    gsap.to("#s3hero", {
-      scale: 1,
+// Text 3
+gsap.fromTo("#s2Text3", { y: 100, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=4500",
+    end: "top+=5000",
+    scrub: true
+  }
+});
+
+// Fade out toàn bộ Scene 2
+gsap.to(".scene2-element, #s2Text1, #s2Text2a, #s2Text2b, #s2Text3", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5000",
+    end: "top+=5500",
+    scrub: true
+  }
+});
+
+//------------------------------------------------------------------------SCENE 3------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+    // === SCENE 3 - PART 1: Cây, hero, enemy, text1 (5500 → 6500) ===
+gsap.fromTo("#s3tree2", { y: 100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5500",
+    end: "top+=5750",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3tree1", { y: 100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5500",
+    end: "top+=5750",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3handstiff", { y: 100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5500",
+    end: "top+=5750",
+    scrub: true
+  }
+});
+// gsap.fromTo("#s3hero", { x: "-100%", scale: 0.5, opacity: 0 }, {
+//   x: "0%", scale: 0.85, opacity: 1,
+//   scrollTrigger: {
+//     trigger: "#scene",
+//     start: "top+=5750",
+//     end: "top+=6000",
+//     scrub: true
+//   }
+// });
+gsap.fromTo("#s3hero", { x: -500,scale: 0.5, opacity: 0 }, {
       x: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3300",
-        end: "top+=3500",
-        scrub: true
-      }
-    });
-
-    gsap.to("#s3enemy", {
-      scale: 1,
-      x: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3300",
-        end: "top+=3500",
-        scrub: true
-      }
-    });
-
-    gsap.to("#s3Text1", {
-      y: -50,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3300",
-        end: "top+=3500",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s3Text2a", { y: 100, opacity: 0 }, {
-      y: 0,
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
-        start: "top+=3350",
-        end: "top+=3550",
+      start: "top+=5500",
+      end: "top+=5750",
         scrub: true
       }
     });
+// gsap.fromTo("#s3hero", 
+//   { x: "-100%", scale: 0.5, opacity: 0 }, 
+//   { x: "0%", scale: 0.85, opacity: 1,
+//     scrollTrigger: {
+//       trigger: "#scene",
+//       start: "top+=5500",
+//       end: "top+=5750",
+//       scrub: true
+//     }
+//   });
 
-    gsap.fromTo("#s3Text2b", { y: -100, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3350",
-        end: "top+=3550",
-        scrub: true
-      }
-    });
+gsap.fromTo("#s3enemy", { y: "100%", x: "20%", scale: 0.4, opacity: 0 }, {
+  y: "0%", x: "0%", scale: 0.66, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5750",
+    end: "top+=6000",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3Text1", { y: -100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=5800",
+    end: "top+=6000",
+    scrub: true
+  }
+});
 
-    // Transition to Text3a/b, hero move right, handstiff rotate + move
-    gsap.to("#s3Text2a", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3650",
-        scrub: true
-      }
-    });
+// === SCENE 3 - PART 2: Text2a + 2b, phóng to hero/enemy (6500 → 7500) ===
+// HERO tiếp tục từ trạng thái Part 1 → zoom và dịch sang phải
+// gsap.to("#s3hero", {
+//   scale: 1,
+//   x: 100,
+//   scrollTrigger: {
+//     trigger: "#scene",
+//     start: "top+=6500",
+//     end: "top+=6750",
+//     scrub: true
+//   }
+// });
+// gsap.to("#s3hero", {
+//   scale: 1,
+//   x: 100, 
+//   scrollTrigger: {
+//     trigger: "#scene",
+//     start: "top+=6500",
+//     end: "top+=6750",
+//     scrub: true
+//   }
+// });
 
-    gsap.to("#s3Text2b", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3650",
-        scrub: true
-      }
-    });
+gsap.to("#s3hero", {
+  opacity: 1,
+  x: 100,
+  scale: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=6500",
+    end: "top+=6750",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s3Text3b", { opacity: 0 }, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3750",
-        scrub: true
-      }
-    });
+gsap.to("#s3enemy", {
+  scale: 1, x: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=6500",
+    end: "top+=6750",
+    scrub: true
+  }
+});
+gsap.to("#s3Text1", {
+  y: -300,
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=6500",
+    end: "top+=6750",
+    scrub: true
+  }
+});
 
-    gsap.fromTo("#s3Text3a", { opacity: 0 }, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3750",
-        scrub: true
-      }
-    });
+gsap.fromTo("#s3Text2a", { y: 100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=6700",
+    end: "top+=7000",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3Text2b", { y: -100, opacity: 0 }, {
+  y: 0, opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=6700",
+    end: "top+=7000",
+    scrub: true
+  }
+});
+gsap.to("#s3Text2a", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7000",
+    end: "top+=7250",
+    scrub: true
+  }
+});
+gsap.to("#s3Text2b", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7000",
+    end: "top+=7250",
+    scrub: true
+  }
+});
 
-    gsap.to("#s3hero", {
-      x: 100,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3750",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s3handstiff",{ y: 0, opacity: 0 }, {
-      rotation: -31,
-      x: 100,
-      y: 10,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3550",
-        end: "top+=3750",
-        scrub: true
-      }
-    });
-
-
-      // Fade out scene 3 elements as scene 4 appears
-    gsap.to(".scene3-element, #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=3750",
-        end: "top+=3950",
-        scrub: true
-      }
-    });
-    
-    // ===== Scene 4: Các element scale về 1, text hiện trái/phải vào =====
+// === SCENE 3 - PART 3: Text3a + 3b, hand xoay, fade out (7500 → 8500) ===
+gsap.fromTo("#s3Text3b", { opacity: 0 }, {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7500",
+    end: "top+=7750",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3Text3a", { opacity: 0 }, {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7500",
+    end: "top+=7750",
+    scrub: true
+  }
+});
+gsap.to("#s3hero", {
+  x: 100,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7500",
+    end: "top+=7750",
+    scrub: true
+  }
+});
+gsap.fromTo("#s3handstiff", { y: 0, opacity: 0 }, {
+  rotation: -31, x: 100, y: 10,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=7500",
+    end: "top+=7750",
+    scrub: true
+  }
+});
+gsap.to(".scene3-element, #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=8000",
+    end: "top+=8500",
+    scrub: true
+  }
+});
+//--------------------------------------------------------------------SCENE 4-------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ===== Scene 4: Các element scale về 1, text hiện trái/phải vào =====
 ["#s4men1", "#s4men2", "#s4hero", "#s4sword"].forEach(id => {
   gsap.fromTo(id, { scale: 1.6, opacity: 0 }, {
     scale: 1,
     opacity: 1,
     scrollTrigger: {
       trigger: "#scene",
-      start: "top+=3750",
-      end: "top+=3950",
+      start: "top+=8500",
+      end: "top+=9500",
       scrub: true
     }
   });
 });
 
-gsap.fromTo("#s4Text1", { x: -200, opacity: 0 }, {
+gsap.fromTo("#s4Text1", { x: 200, opacity: 0 }, {
   x: 0,
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=3800",
-    end: "top+=4000",
+    start: "top+=9500",
+    end: "top+=10200",
     scrub: true
   }
 });
 
-gsap.fromTo("#s4Text2", { x: 200, opacity: 0 }, {
+gsap.fromTo("#s4Text2", { x: -200, opacity: 0 }, {
   x: 0,
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=3800",
-    end: "top+=4000",
+    start: "top+=9800",
+    end: "top+=10500",
     scrub: true
   }
 });
@@ -889,13 +998,13 @@ gsap.to(["#s4men1", "#s4men2", "#s4hero", "#s4sword", "#s4Text1", "#s4Text2"], {
   opacity: 0,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=4000",
-    end: "top+=4200",
+    start: "top+=10500",
+    end: "top+=11500",
     scrub: true
   }
 });
 
-
+//--------------------------------------SCENE 5--------------------------------------------------------------------------------
 // ===== Scene 5: Element từ trái vào giữa, text từ phải vào =====
 ["#s5floor1", "#s5hero", "#s5floor2", "#s5men1", "#s5men2", "#s5men3"].forEach((id, i) => {
   gsap.fromTo(id, { x: -200, opacity: 0 }, {
@@ -903,8 +1012,8 @@ gsap.to(["#s4men1", "#s4men2", "#s4hero", "#s4sword", "#s4Text1", "#s4Text2"], {
     opacity: 1,
     scrollTrigger: {
       trigger: "#scene",
-      start: `top+=4100`,
-      end: `top+=4300`,
+      start: `top+=10500`,
+      end: `top+=11500`,
       scrub: true
     }
   });
@@ -915,24 +1024,24 @@ gsap.fromTo("#s5Text", { x: 200, opacity: 0 }, {
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=4200",
-    end: "top+=4400",
+    start: "top+=10500",
+    end: "top+=11500",
     scrub: true
   }
 });
 
 
- gsap.to(".scene5-element, #s5Text, #s5hero, #s5men1, #s5men2, #s5men3, #s5floor1, #s5floor2", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=4600",
-        end: "top+=4800",
-        scrub: true
-      }
-    });
+gsap.to(".scene5-element, #s5Text, #s5hero, #s5men1, #s5men2, #s5men3, #s5floor1, #s5floor2", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=11500",
+    end: "top+=12500",
+    scrub: true
+  }
+});
 
-
+//--------------------------------------SCENE 6--------------------------------------------------------------------------------
 // ===== Scene 6: Text từ trên xuống =====
 ["#s6people1", "#s6people2", "#s6people3", "#s6hero", "#s6sword"].forEach(id => {
   gsap.fromTo(id, { y: 100, opacity: 0 }, {
@@ -940,8 +1049,8 @@ gsap.fromTo("#s5Text", { x: 200, opacity: 0 }, {
     opacity: 1,
     scrollTrigger: {
       trigger: "#scene",
-      start: "top+=4500",
-      end: "top+=4700",
+      start: "top+=11500",
+      end: "top+=12500",
       scrub: true
     }
   });
@@ -952,33 +1061,75 @@ gsap.fromTo("#s6Text", { y: -100, opacity: 0 }, {
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=4600",
-    end: "top+=4800",
+    start: "top+=11500",
+    end: "top+=12500",
     scrub: true
   }
 });
 
- gsap.to(".scene6-element, #s6people1, #s6people2, #s6hero, #s6sword", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=4900",
-        end: "top+=5100",
-        scrub: true
-      }
-    });
-// ===== Scene 7: Element scene 7 hiện lên, text hiện dần =====
-["#s7light", "#s7turtle", "#s7turtlesd", "#s7boat", "#s7boatsd"].forEach(id => {
-  gsap.fromTo(id, { y: 200, opacity: 0 }, {
-    y: 0,
-    opacity: 1,
-    scrollTrigger: {
-      trigger: "#scene",
-      start: "top+=4900",
-      end: "top+=5100",
-      scrub: true
-    }
-  });
+gsap.to(".scene6-element, #s6people1, #s6people2, #s6hero, #s6sword", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13500",
+    scrub: true
+  }
+});
+
+gsap.fromTo("#s6Text", { x: 0, opacity: 0 }, {
+  x: -2000,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13500",
+    scrub: true
+  }
+});
+//--------------------------------------SCENE 7--------------------------------------------------------------------------------
+// ===== Scene 7: Part 1 - boat + turtle xuất hiện, text1 =====
+gsap.fromTo("#s7boat", { x: 2000, opacity: 0 }, {
+  x: 1200,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13000",
+    scrub: true
+  }
+});
+
+gsap.fromTo("#s7boatsd", { x: 2000, opacity: 0 }, {
+  x: 1200,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13000",
+    scrub: true
+  }
+});
+
+gsap.fromTo("#s7turtle", { y: 200, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13000",
+    scrub: true
+  }
+});
+gsap.fromTo("#s7turtlesd", { y: -50, opacity: 0 }, {
+  y: 0,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=12500",
+    end: "top+=13000",
+    scrub: true
+  }
 });
 
 gsap.fromTo("#s7Text1", { x: -200, opacity: 0 }, {
@@ -986,54 +1137,203 @@ gsap.fromTo("#s7Text1", { x: -200, opacity: 0 }, {
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=5000",
-    end: "top+=5200",
+    start: "top+=13000",
+    end: "top+=13500",
     scrub: true
   }
 });
-
 gsap.fromTo("#s7Text2a", { x: 200, opacity: 0 }, {
   x: 0,
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=5100",
-    end: "top+=5300",
+    start: "top+=13500",
+    end: "top+=14000",
     scrub: true
   }
 });
+// text1, 2a hide
+gsap.fromTo("#s7Text1", { x: 0, opacity: 0 }, {
+  x: -2000,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=14000",
+    end: "top+=14500",
+    scrub: true
+  }
+});
+gsap.fromTo("#s7Text2a", { x: 0, opacity: 0 }, {
+  x: 2000,
+  opacity: 1,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=14000",
+    end: "top+=14500",
+    scrub: true
+  }
+});
+// ===== Scene 7: Part 2 - boat tiến vào giữa, text2a/b xuất hiện =====
+gsap.to("#s7boat", {
+  x: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=14000",
+    end: "top+=14500",
+    scrub: true
+  }
+});
+
+gsap.to("#s7boatsd", {
+  x: 0,
+  scrollTrigger: {
+    trigger: "#scene",
+    start: "top+=14000",
+    end: "top+=14500",
+    scrub: true
+  }
+});
+
+
 
 gsap.fromTo("#s7Text2b", { y: -100, opacity: 0 }, {
   y: 0,
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=5200",
-    end: "top+=5400",
+    start: "top+=14000",
+    end: "top+=14500",
     scrub: true
   }
 });
 
-gsap.fromTo("#s7Text3", { y: 100, opacity: 0 }, {
-  y: 0,
+
+gsap.fromTo("#s7Text3", { x: 200, opacity: 0 }, {
+  x: 0,
   opacity: 1,
   scrollTrigger: {
     trigger: "#scene",
-    start: "top+=5300",
-    end: "top+=5500",
+    start: "top+=14500",
+    end: "top+=15000",
     scrub: true
   }
 });
-
 
 
     ScrollTrigger.create({
       trigger: "#scene",
       start: "top top",
-      end: "+=6000",
+      end: "+=16000",
       pin: true,
       scrub: true
     });
+
+    window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
+});
+
+
+// ========================== AUDIO PLAY LOGIC ==========================
+function setupAudioTriggers() {
+  const audioMap = [
+    { id: "audio-intro", start: 0 },
+    { id: "audio-scene1", start: 400 },
+
+    // Scene 2
+    { id: "audio-scene2p1", start: 2500 },
+    { id: "audio-scene2p2", start: 3000 },
+    { id: "audio-scene2p3", start: 4500 },
+
+    // Scene 3
+    { id: "audio-scene3p1", start: 5500 },
+    { id: "audio-scene3p2", start: 6700 },
+    { id: "audio-scene3p3", start: 7500 },
+
+    // Scene 4
+    { id: "audio-scene4", start: 9500 },
+
+    // Scene 5
+    { id: "audio-scene5", start: 10500 },
+
+    // Scene 6
+    { id: "audio-scene6", start: 11500 },
+
+    // Scene 7
+    { id: "audio-scene7p2", start: 13000 },
+    { id: "audio-scene7p2b", start: 13500 },
+    { id: "audio-scene7p3", start: 14500 },
+  ];
+
+  const played = new Set();
+
+  audioMap.forEach(({ id, start }) => {
+    ScrollTrigger.create({
+      trigger: "#scene",
+      start: `top+=${start}`,
+      end: `top+=${start + 100}`, // chỉ cần khoảng ngắn để trigger
+      onEnter: () => {
+        if (!played.has(id)) {
+          const audio = document.getElementById(id);
+          if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch(err => console.warn("Lỗi phát audio", err));
+            played.add(id);
+          }
+        }
+      }
+    });
+  });
+}
+
+
+document.getElementById("startButton").addEventListener("click", () => {
+  document.getElementById("startButton").style.display = "none";
+
+  // Duyệt qua từng audio và gọi play() để kích hoạt quyền
+  const audios = document.querySelectorAll("audio");
+  audios.forEach(audio => {
+    audio.muted = false;
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+    }).catch(err => {
+      console.warn(`Không thể khởi tạo audio ${audio.id}:`, err);
+    });
+  });
+
+  // Gọi setup trigger sau khi đã kích hoạt interaction
+  setupAudioTriggers();
+});
+
+
+   
+
+
+
+let scrolling = false;
+let scrollInterval = null;
+
+document.getElementById("autoScrollBtn").addEventListener("click", () => {
+  scrolling = !scrolling;
+
+  const btn = document.getElementById("autoScrollBtn");
+  btn.textContent = scrolling ? "Dừng Cuộn" : "Auto Scroll";
+
+  if (scrolling) {
+    scrollInterval = setInterval(() => {
+      window.scrollBy(0, 4); // cuộn 2px mỗi 16ms (~120px/s)
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        clearInterval(scrollInterval);
+        btn.textContent = "Auto Scroll";
+        scrolling = false;
+      }
+    }, 16);
+  } else {
+    clearInterval(scrollInterval);
+  }
+});
+
   </script>
+
 </body>
 </html>
