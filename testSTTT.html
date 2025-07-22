@@ -13,7 +13,7 @@
     body {
       margin: 0;
       padding: 0;
-      height: 10000px;
+      height: 15000px;
       overflow-x: hidden;
       font-family: sans-serif;
     }
@@ -31,9 +31,13 @@
       top: 50%;
       left: 50%;
       translate: -50% -50%;
-      font-size: 4rem;
       color: white;
       z-index: 10;
+    }
+    .title1 {
+      font-size: 2rem;
+    }.title2 {
+      font-size: 3rem;
     }
 
     .scene-element,
@@ -53,45 +57,12 @@
       transform-origin: bottom center;
     }
 
-    .layer-floor {
-      z-index: 6;
-    }
 
-    .layer-house1 {
-      z-index: 5;
-    }
-
-    .layer-enemy1 {
-      z-index: 4;
-    }
-
-    .layer-house2 {
-      z-index: 3;
-    }
-
-    .layer-enemy2 {
-      z-index: 2;
-    }
-
-    .layer-fire {
-      z-index: 1;
-    }
-
-    #floorText {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90vw;
-      text-align: center;
-      color: white;
-      font-size: 1.5rem;
-      opacity: 0;
-      z-index: 10;
-    }
-
+    #s1Text1,
+    #s1Text2,
+    #s1Text3,
     #s2Text1,
-    #s2Text2a,
+    #s2Text2,
     #s2Text2b,
     #s2Text3,
     #s3Text1,
@@ -111,58 +82,69 @@
       color: white;
       font-size: 1.2rem;
       opacity: 0;
-      z-index: 9;
+      z-index: 10;
     }
 
-    #s2Text1,
-    #s2Text2a {
-      bottom: 5%;
+    #s1Text1 {
+      top: 5%;
       left: 5%;
       width: 40vw;
     }
 
-    #s2Text2b {
-      top: 2%;
-      left: 2%;
+    #s1Text2 {
+      top: 20%;
+      left: 30%;
+      width: 40vw;
     }
 
-    #s2Text3 {
+    #s1Text3 {
+      top: 10%;
+      left: 7%;
+      width: 40vw;
+    }
+
+    #s2Text1 {
+      top: 5%;
+      right: 5%;
+      width: 40vw;
+    }
+
+    #s2Text2 {
+      top: 5%;
+      left: 5%;
+      width: 40vw;
+    }
+
+    /* #s2Text3 {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 50vw;
       text-align: center;
-    }
+    } */
 
     #s3Text1 {
-      top: 5%;
-      left: 5%;
+      bottom: 5%;
+      left: 50%;
+      text-align: center;
+      width: 70vw;
     }
 
-    #s3Text2a {
-      bottom: 5%;
-      right: 5%;
-      text-align: right;
+    #s3Text2 {
+      top: 5%;
+      left: 35%;
+      /* text-align: right; */
       width: 40vw;
     }
 
-    #s3Text2b {
+    #s3Text3 {
       top: 5%;
-      left: 5%;
-    }
-
-    #s3Text3a {
-      top: 5%;
-      left: 5%;
-    }
-
-    #s3Text3b {
-      bottom: 5%;
-      right: 5%;
-      text-align: right;
+      left: 35%;
+      /* text-align: right; */
       width: 40vw;
     }
 
+    /* ////////////////////////////////////////////////done upp */
 
 
     #s4Text1 {
@@ -215,240 +197,351 @@
     }
 
 
-    #s2fisherman {
-      z-index: 5;
+    /* ========================== SCENE 1 ========================== */
+    #s1wave1 {
+      z-index: 108;
     }
 
-    #s2mountain1 {
-      z-index: 4;
+    #s1man {
+      z-index: 107;
     }
 
-    #s2mountain2 {
-      z-index: 3;
+    #s1floor {
+      z-index: 106;
     }
 
-    #s2mountain1sd {
-      z-index: 2;
+    #s1wave2 {
+      z-index: 105;
     }
 
-    #s2mountain2sd {
-      z-index: 1;
+    #s1mountain1 {
+      z-index: 104;
     }
 
-    #s2cloud {
-      z-index: 0;
+    #s1mountain2 {
+      z-index: 103;
     }
 
-    #s3hero {
-      z-index: 5;
+    #s1mountain3 {
+      z-index: 102;
     }
 
-    #s3handstiff {
-      z-index: 4;
+    #s1BG {
+      z-index: 101;
     }
 
-    #s3tree1 {
-      z-index: 3;
-    }
-
-    #s3enemy {
-      z-index: 2;
-    }
-
-    #s3tree2 {
-      z-index: 1;
+    #s1Text1,
+    #s1Text2,
+    #s1Text3 {
+      z-index: 110;
     }
 
 
-    #s4men2 {
-      z-index: 4;
+    /* ========================== SCENE 2 ========================== */
+    #s2BG {
+      z-index: 201;
     }
 
-    #s4men1 {
-      z-index: 3;
+    #s2wave2 {
+      z-index: 202;
     }
 
-    #s4hero {
-      z-index: 2;
+    #s2TT {
+      z-index: 203;
     }
 
-    #s4sword {
-      z-index: 1;
+    #s2wave1 {
+      z-index: 204;
     }
 
-    #s5men3 {
-      z-index: 6;
+    #s2tree {
+      z-index: 205;
     }
 
-    #s5men2 {
-      z-index: 5;
+    #s2ST {
+      z-index: 206;
     }
 
-    #s5men1 {
-      z-index: 4;
+    #s2floor {
+      z-index: 207;
     }
 
-    #s5floor2 {
-      z-index: 3;
+    #s2Text1,
+    #s2Text2 {
+      z-index: 210;
     }
 
-    #s5hero {
-      z-index: 2;
+
+    /* ========================== SCENE 3 ========================== */
+    #s3BG2 {
+      z-index: 301;
     }
 
-    #s5floor1 {
-      z-index: 1;
+    #s3BG1 {
+      z-index: 302;
     }
 
-    #s6people3 {
-      z-index: 5;
+    #s3palace2 {
+      z-index: 303;
     }
 
-    #s6sword {
-      z-index: 4;
+    #s3palace1 {
+      z-index: 304;
     }
 
-    #s6hero {
-      z-index: 3;
+    #s3MN {
+      z-index: 305;
     }
 
-    #s6people2 {
-      z-index: 2;
+    #s3VH {
+      z-index: 306;
     }
 
-    #s6people1 {
-      z-index: 1;
+    #s3TT {
+      z-index: 307;
     }
 
-    #s7boatsd {
-      z-index: 5;
+    #s3ST {
+      z-index: 308;
     }
 
-    #s7boat {
-      z-index: 4;
+    #s3Text1,
+    #s3Text2,
+    #s3Text3 {
+      z-index: 310;
     }
 
-    #s7turtlesd {
-      z-index: 3;
+
+    /* ========================== SCENE 4 ========================== */
+    #s4BG {
+      z-index: 408;
     }
 
-    #s7turtle {
-      z-index: 2;
+    #s4mountain3 {
+      z-index: 407;
     }
 
-    #s7light {
-      z-index: 1;
+    #s4mountain2 {
+      z-index: 406;
     }
+
+    #s4mountain1 {
+      z-index: 405;
+    }
+
+    #s4tree {
+      z-index: 404;
+    }
+
+    #s4floor {
+      z-index: 403;
+    }
+
+    #s4ST {
+      z-index: 402;
+    }
+
+    #s4elephent {
+      z-index: 401;
+    }
+
+    #s4Text1,
+    #s4Text2 {
+      z-index: 410;
+    }
+
+
+    /* ========================== SCENE 5 ========================== */
+    #s5people1 {
+      z-index: 507;
+    }
+
+    #s5ST {
+      z-index: 506;
+    }
+
+    #s5MN {
+      z-index: 505;
+    }
+
+    #s5people2 {
+      z-index: 504;
+    }
+
+    #s5floor {
+      z-index: 503;
+    }
+
+    #s5mountain {
+      z-index: 502;
+    }
+
+    #s5BG {
+      z-index: 501;
+    }
+
+    #s5Text {
+      z-index: 510;
+    }
+
+
+    /* ========================== SCENE 6 ========================== */
+    #s6wave1 {
+      z-index: 609;
+    }
+
+    #s6TT {
+      z-index: 608;
+    }
+
+    #s6wave2 {
+      z-index: 607;
+    }
+
+    #s6turtle1 {
+      z-index: 606;
+    }
+
+    #s6wave3 {
+      z-index: 605;
+    }
+
+    #s6turtle2 {
+      z-index: 604;
+    }
+
+    #s6cloud {
+      z-index: 603;
+    }
+
+    #s6rain {
+      z-index: 602;
+    }
+
+    #s6BG {
+      z-index: 601;
+    }
+
+
+    #s6Text1,
+    #s6Text1 {
+      z-index: 610;
+    }
+
+    /* ========================== SCENE 7 ========================== */
   </style>
 </head>
 
 <body>
   <section id="scene">
-    <h1 class="title">Sơn Tinh Thủy Tinh</h1>
+    <div class="title">
+      <h1 class="title1">Truyen Dan Gian</h1>
+      <h1 class="title2">Sơn Tinh Thủy Tinh</h1>
+    </div>
 
-    <img id="floor" src="SonTinhThuyTinh/Screen 1/01_screen1.png" class="scene-element layer-floor" />
-    <img id="house1" src="SonTinhThuyTinh/Screen 1/02_screen1.png" class="scene-element layer-house1" />
-    <img id="enemy1" src="SonTinhThuyTinh/Screen 1/03_screen1.png" class="scene-element layer-enemy1" />
-    <img id="house2" src="SonTinhThuyTinh/Screen 1/04_screen1.png" class="scene-element layer-house2" />
-    <img id="enemy2" src="SonTinhThuyTinh/Screen 1/05_screen1.png" class="scene-element layer-enemy2" />
-    <img id="fire" src="SonTinhThuyTinh/Screen 1/06_screen1.png" class="scene-element layer-fire" />
-    <img id="fire" src="SonTinhThuyTinh/Screen 1/07_screen1.png" class="scene-element layer-fire" />
-    <img id="fire" src="SonTinhThuyTinh/Screen 1/08_screen1.png" class="scene-element layer-fire" />
 
-    <div id="floorText">Vào thời giặc Minh xâm lược nước ta...Đời Hùng Vương thứ 18, trong nước thường xảy ra lụt bão
+    <img id="s1BG" src="SonTinhThuyTinh/Screen 1/01_screen1.png" class="scene-element layer-floor" />
+    <img id="s1mountain3" src="SonTinhThuyTinh/Screen 1/02_screen1.png" class="scene-element layer-house1" />
+    <img id="s1mountain2" src="SonTinhThuyTinh/Screen 1/03_screen1.png" class="scene-element layer-enemy1" />
+    <img id="s1mountain1" src="SonTinhThuyTinh/Screen 1/04_screen1.png" class="scene-element layer-house2" />
+    <img id="s1wave2" src="SonTinhThuyTinh/Screen 1/05_screen1.png" class="scene-element layer-enemy2" />
+    <img id="s1floor" src="SonTinhThuyTinh/Screen 1/06_screen1.png" class="scene-element layer-fire" />
+    <img id="s1man" src="SonTinhThuyTinh/Screen 1/07_screen1.png" class="scene-element layer-fire" />
+    <img id="s1wave1" src="SonTinhThuyTinh/Screen 1/08_screen1.png" class="scene-element layer-fire" />
+
+    <div id="s1Text1">Đời Hùng Vương thứ 18, trong nước thường xảy ra lụt bão
       gây nhiều tai họa cho dân chúng. Nhà Vua muốn chọn người tài để lo cứu dân giữ nước. Một hôm Vua sai sứ giả đi
       khắp các nơi rao truyền tin lạ.</div>
-    <div id="floorText">Nhà vua tuyển chồng cho con gái - Mỵ Nương. Loa loa loa ....</div>
-    <div id="floorText">Tin lạ vừa loan đi, ngay lập tức trước cung điện có hai chàng trai đến cùng một lúc.</div>
+    <div id="s1Text2">Nhà vua tuyển chồng cho con gái - Mỵ Nương. Loa loa loa ....</div>
+    <div id="s1Text3">Tin lạ vừa loan đi, ngay lập tức trước cung điện có hai chàng trai đến cùng một lúc.</div>
 
     <!-- Elements scene 2 -->
-    <img id="s2cloud" src="SonTinhThuyTinh/Screen 2/01_screen2.png" class="scene2-element" />
-    <img id="s2mountain2sd" src="SonTinhThuyTinh/Screen 2/02_screen2.png" class="scene2-element" />
-    <img id="s2mountain2" src="SonTinhThuyTinh/Screen 2/03_screen2.png" class="scene2-element" />
-    <img id="s2mountain1sd" src="SonTinhThuyTinh/Screen 2/04__screen2.png" class="scene2-element" />
-    <img id="s2boatsd" src="SonTinhThuyTinh/Screen 2/05_screen2.png" class="scene2-element" />
-    <img id="s2fisherman" src="SonTinhThuyTinh/Screen 2/06__screen2.png" class="scene2-element" />
-    <img id="s2mountain1sd" src="SonTinhThuyTinh/Screen 2/07__screen2.png" class="scene2-element" />
+    <!-- <img id="s2BG" src="SonTinhThuyTinh/Screen 2/01_screen2.png" class="scene2-element" />
+    <img id="s2wave2" src="SonTinhThuyTinh/Screen 2/02_screen2.png" class="scene2-element" />
+    <img id="s2TT" src="SonTinhThuyTinh/Screen 2/03_screen2.png" class="scene2-element" />
+    <img id="s2wave1" src="SonTinhThuyTinh/Screen 2/04__screen2.png" class="scene2-element" />
+    <img id="s2tree" src="SonTinhThuyTinh/Screen 2/05_screen2.png" class="scene2-element" />
+    <img id="s2ST" src="SonTinhThuyTinh/Screen 2/06__screen2.png" class="scene2-element" />
+    <img id="s2floor" src="SonTinhThuyTinh/Screen 2/07__screen2.png" class="scene2-element" /> -->
     <!-- Đoạn text scene2 -->
-    <div id="s2Text1">Một người đến từ miền sông nước, thiên nghệ dùng lũ lụt và thủy quân, nên có tên là Thủy Tai,
+    <!-- <div id="s2Text1">Một người đến từ miền sông nước, thiên nghệ dùng lũ lụt và thủy quân, nên có tên là Thủy Tai,
       nhưng người đời sợ hãi gọi là Thủy Tinh
     </div>
 
-    <div id="s2Text2a">Một người đến từ vùng núi Tản Viên tên là Sơn Tinh, chàng có tài khiến đất đã khô cằn mà cũng
+    <div id="s2Text2">Một người đến từ vùng núi Tản Viên tên là Sơn Tinh, chàng có tài khiến đất đã khô cằn mà cũng
       thành cây lá xum xuê, bốn mùa trổ bông kết trái, nên ai cũng mến phục, suốt ngày khẩn cầu giúp đỡ.
-    </div>
+    </div> -->
 
     <!-- Elements scene 3 -->
-    <img id="s3tree2" src="SonTinhThuyTinh/Screen 3/01_screen3.png" class="scene3-element" />
-    <img id="s3enemy" src="SonTinhThuyTinh/Screen 3/02_screen3.png" class="scene3-element" />
-    <img id="s3tree1" src="SonTinhThuyTinh/Screen 3/03_screen3.png" class="scene3-element" />
-    <img id="s3hero" src="SonTinhThuyTinh/Screen 3/04_screen3.png" class="scene3-element" />
-    <img id="s3handstiff" src="SonTinhThuyTinh/Screen 3/05_screen3.png" class="scene3-element" />
-    <img id="s3handstiff" src="SonTinhThuyTinh/Screen 3/06_screen3.png" class="scene3-element" />
-    <img id="s3handstiff" src="SonTinhThuyTinh/Screen 3/07_screen3.png" class="scene3-element" />
-    <img id="s3handstiff" src="SonTinhThuyTinh/Screen 3/08_screen3.png" class="scene3-element" />
+    <!-- <img id="s3BG2" src="SonTinhThuyTinh/Screen 3/01_screen3.png" class="scene3-element" />
+    <img id="s3BG1" src="SonTinhThuyTinh/Screen 3/02_screen3.png" class="scene3-element" />
+    <img id="s3palace2" src="SonTinhThuyTinh/Screen 3/03_screen3.png" class="scene3-element" />
+    <img id="s3palace1" src="SonTinhThuyTinh/Screen 3/04_screen3.png" class="scene3-element" />
+    <img id="s3MN" src="SonTinhThuyTinh/Screen 3/05_screen3.png" class="scene3-element" />
+    <img id="s3VH" src="SonTinhThuyTinh/Screen 3/06_screen3.png" class="scene3-element" />
+    <img id="s3TT" src="SonTinhThuyTinh/Screen 3/07_screen3.png" class="scene3-element" />
+    <img id="s3ST" src="SonTinhThuyTinh/Screen 3/08_screen3.png" class="scene3-element" /> -->
 
     <!-- Đoạn text scene3 -->
-    <div id="s3Text1">Vua Hùng và nàng Mỵ Nương thấy hai thần nhân cùng đến cầu hôn thì nửa mừng nửa lo, phân vân cân
+    <!-- <div id="s3Text1">Vua Hùng và nàng Mỵ Nương thấy hai thần nhân cùng đến cầu hôn thì nửa mừng nửa lo, phân vân cân
       nhắc.
     </div>
 
-    <div id="s3Text2a">Hai người đều vừa ý ta cả, nhưng ta chỉ có một người con gái, không biết gả cho người nào?
+    <div id="s3Text2">Hai người đều vừa ý ta cả, nhưng ta chỉ có một người con gái, không biết gả cho người nào?
     </div>
 
-    <div id="s3Text2b">Ngày mai, nếu ai đem đồ sính lễ đến đây trước: một trăm ván cơm nếp, hai trăm nệp bánh chưng, voi
+    <div id="s3Text3">Ngày mai, nếu ai đem đồ sính lễ đến đây trước: một trăm ván cơm nếp, hai trăm nệp bánh chưng, voi
       chín ngà, gà chín cựa, ngựa chín hồng mao, thì sẽ được rước dâu về.
-    </div>
+    </div> -->
 
     <!-- Elements scene 4 -->
-    <img id="s4men2" src="SonTinhThuyTinh/Screen 4/01_screen4.png" class="scene4-element" />
-    <img id="s4men1" src="SonTinhThuyTinh/Screen 4/02_screen4.png" class="scene4-element" />
-    <img id="s4hero" src="SonTinhThuyTinh/Screen 4/03_screen4.png" class="scene4-element" />
-    <img id="s4sword" src="SonTinhThuyTinh/Screen 4/04_screen4.png" class="scene4-element" />
-    <img id="s4sword" src="SonTinhThuyTinh/Screen 4/05_screen4.png" class="scene4-element" />
-    <img id="s4sword" src="SonTinhThuyTinh/Screen 4/06_screen4.png" class="scene4-element" />
-    <img id="s4sword" src="SonTinhThuyTinh/Screen 4/07_screen4.png" class="scene4-element" />
-    <img id="s4sword" src="SonTinhThuyTinh/Screen 4/08_screen4.png" class="scene4-element" />
+    <!-- <img id="s4BG" src="SonTinhThuyTinh/Screen 4/01_screen4.png" class="scene4-element" />
+    <img id="s4mountain3" src="SonTinhThuyTinh/Screen 4/02_screen4.png" class="scene4-element" />
+    <img id="s4mountain2" src="SonTinhThuyTinh/Screen 4/03_screen4.png" class="scene4-element" />
+    <img id="s4mountain1" src="SonTinhThuyTinh/Screen 4/04_screen4.png" class="scene4-element" />
+    <img id="s4tree" src="SonTinhThuyTinh/Screen 4/05_screen4.png" class="scene4-element" />
+    <img id="s4floor" src="SonTinhThuyTinh/Screen 4/06_screen4.png" class="scene4-element" />
+    <img id="s4ST" src="SonTinhThuyTinh/Screen 4/07_screen4.png" class="scene4-element" />
+    <img id="s4elephent" src="SonTinhThuyTinh/Screen 4/08_screen4.png" class="scene4-element" /> -->
 
     <!-- Đoạn text scene4 -->
-    <div id="s4Text1">Tờ mờ sáng hôm sau, Sơn Tình đã xuất hiện trước công thành Văn Lang. Đoàn tùy tùng dải dác, hò hơi
+    <!-- <div id="s4Text1">Tờ mờ sáng hôm sau, Sơn Tình đã xuất hiện trước công thành Văn Lang. Đoàn tùy tùng dải dác, hò hơi
       mang theo lớp lớp lễ
     </div>
 
     <div id="s4Text2">Vua Hùng vui mừng thấy chàng rể tương lai tài trí hơn người. Rồi Sơn Tinh xin Vua cha được đưa Mỵ
       Nương về vùng núi phía tây kinh đô đề mở mang và giữ gìn bờ cõi ở hướng ấy.
-    </div>
+    </div> -->
 
 
     <!-- Elements scene 5 -->
-    <img id="s5men3" src="SonTinhThuyTinh/Screen 5/01_screen5.png" class="scene5-element" />
-    <img id="s5men2" src="SonTinhThuyTinh/Screen 5/02_screen5.png" class="scene5-element" />
-    <img id="s5men1" src="SonTinhThuyTinh/Screen 5/03_screen5.png" class="scene5-element" />
-    <img id="s5floor2" src="SonTinhThuyTinh/Screen 5/04_screen5.png" class="scene5-element" />
-    <img id="s5hero" src="SonTinhThuyTinh/Screen 5/04_screen5.png" class="scene5-element" />
-    <img id="s5floor1" src="SonTinhThuyTinh/Screen 5/05_screen5.png" class="scene5-element" />
-    <img id="s5floor1" src="SonTinhThuyTinh/Screen 5/06_screen5.png" class="scene5-element" />
-    <img id="s5floor1" src="SonTinhThuyTinh/Screen 5/07_screen5.png" class="scene5-element" />
+    <!-- <img id="s5BG" src="SonTinhThuyTinh/Screen 5/01_screen5.png" class="scene5-element" />
+    <img id="s5mountain" src="SonTinhThuyTinh/Screen 5/02_screen5.png" class="scene5-element" />
+    <img id="s5floor" src="SonTinhThuyTinh/Screen 5/03_screen5.png" class="scene5-element" />
+    <img id="s5people2" src="SonTinhThuyTinh/Screen 5/04_screen5.png" class="scene5-element" />
+    <img id="s5MN" src="SonTinhThuyTinh/Screen 5/05_screen5.png" class="scene5-element" />
+    <img id="s5ST" src="SonTinhThuyTinh/Screen 5/06_screen5.png" class="scene5-element" />
+    <img id="s5people1" src="SonTinhThuyTinh/Screen 5/07_screen5.png" class="scene5-element" /> -->
     <!-- Đoạn text scene5 -->
-    <div id="s5Text">Dân nước Văn Lang tưng bừng mở hội lớn, mừng vợ chồng Sơn Tinh - Mỵ nương.
-    </div>
+    <!-- <div id="s5Text">Dân nước Văn Lang tưng bừng mở hội lớn, mừng vợ chồng Sơn Tinh - Mỵ nương.
+    </div> -->
 
     <!-- Elements scene 6 -->
-    <img id="s6people3" src="SonTinhThuyTinh/Screen 6/01_screen6.png" class="scene6-element" />
-    <img id="s6sword" src="SonTinhThuyTinh/Screen 6/02__screen6.png" class="scene6-element" />
-    <img id="s6hero" src="SonTinhThuyTinh/Screen 6/03_screen6.png" class="scene6-element" />
-    <img id="s6people2" src="SonTinhThuyTinh/Screen 6/04__screen6.png" class="scene6-element" />
-    <img id="s6people1" src="SonTinhThuyTinh/Screen 6/05_screen6.png" class="scene6-element" />
-    <img id="s6people1" src="SonTinhThuyTinh/Screen 6/06_screen6.png" class="scene6-element" />
-    <img id="s6people1" src="SonTinhThuyTinh/Screen 6/07_screen6.png" class="scene6-element" />
-    <img id="s6people1" src="SonTinhThuyTinh/Screen 6/08_screen6.png" class="scene6-element" />
-    <img id="s6people1" src="SonTinhThuyTinh/Screen 6/09_screen6.png" class="scene6-element" />
+    <!-- <img id="s6BG" src="SonTinhThuyTinh/Screen 6/01_screen6.png" class="scene6-element" />
+    <img id="s6rain" src="SonTinhThuyTinh/Screen 6/02__screen6.png" class="scene6-element" />
+    <img id="s6cloud" src="SonTinhThuyTinh/Screen 6/03_screen6.png" class="scene6-element" />
+    <img id="s6turtle2" src="SonTinhThuyTinh/Screen 6/04__screen6.png" class="scene6-element" />
+    <img id="s6wave3" src="SonTinhThuyTinh/Screen 6/05_screen6.png" class="scene6-element" />
+    <img id="s6turtle1" src="SonTinhThuyTinh/Screen 6/06_screen6.png" class="scene6-element" />
+    <img id="s6wave2" src="SonTinhThuyTinh/Screen 6/07_screen6.png" class="scene6-element" />
+    <img id="s6TT" src="SonTinhThuyTinh/Screen 6/08_screen6.png" class="scene6-element" />
+    <img id="s6wave1" src="SonTinhThuyTinh/Screen 6/09_screen6.png" class="scene6-element" /> -->
     <!-- Đoạn text scene6 -->
-    <div id="s6Text">Thủy Tinh đến sau, không lấy được vợ đùng đùng nổi giận, đốc thúc lũ quân thuồng luồng, bạch tuộc,
+    <!-- <div id="s6Text1">Thủy Tinh đến sau, không lấy được vợ đùng đùng nổi giận, đốc thúc lũ quân thuồng luồng, bạch tuộc,
       ba ba, cá sấu... ầm ầm đuổi theo Sơn Tinh - Mỵ Nương.
     </div>
-    <div id="s6Text">Thủy Tinh hô mưa gọi gió, bão bùng, nước dâng và lũ quét tàn phá ruộng nương, nhà cửa.
-    </div>
+    <div id="s6Text2">Thủy Tinh hô mưa gọi gió, bão bùng, nước dâng và lũ quét tàn phá ruộng nương, nhà cửa.
+    </div> -->
 
     <!-- Elements scene 7
     <img id="s7boatsd" src="SuTichHoGuom/scene 7/1x/boatshadow_1.png" class="scene7-element" />
@@ -476,16 +569,7 @@
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollTrigger);
-
-    const elements = [
-      { id: "floor", scale: 1.56 },
-      { id: "house1", scale: 1.52 },
-      { id: "enemy1", scale: 1.28 },
-      { id: "house2", scale: 1.1 },
-      { id: "enemy2", scale: 1.4 },
-      { id: "fire", scale: 1.16 }
-    ];
+    
 
     gsap.to(".title", {
       opacity: 0,
@@ -493,95 +577,71 @@
       scrollTrigger: {
         trigger: "#scene",
         start: "top top",
-        end: "top+=300",
+        end: "top+=500",
         scrub: true
       }
     });
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
-    elements.forEach((el, i) => {
-      gsap.fromTo(`#${el.id}`,
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: "#scene",
-            start: `top+=${400 + i * 150}`,
-            end: `top+=${500 + i * 150}`,
-            scrub: true
-          }
-        });
-    });
-
-    elements.forEach((el) => {
-      gsap.fromTo(`#${el.id}`,
-        { scale: 1, y: 0 },
-        {
-          scale: el.scale,
-          y: 0,
-          scrollTrigger: {
-            trigger: "#scene",
-            start: "top+=1400",
-            end: "top+=1600",
-            scrub: true
-          }
-        });
-    });
-
-    gsap.fromTo("#floorText", { y: 100, opacity: 0 }, {
-      y: 0,
+    // --------------------------SCENE 1------------------------------------------
+    // -----------------------------SCENE 1 PART 1---------------------------------------------------
+    gsap.fromTo("#s1BG", {opacity: 0 }, {
+     
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
-        start: "top+=1400",
-        end: "top+=1600",
+        start: "top+=750",
+        end: "top+=2500",
         scrub: true
       }
     });
-
-    gsap.to("#floorText", {
-      y: 200,
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1800",
-        end: "top+=2000",
-        scrub: true
-      }
+    ["#s1wave1", "#s1floor", "#s1wave2", "#s1mountain1", "#s1mountain2", "#s1mountain3"].forEach((id, i) => {
+      gsap.fromTo(id, { y: 500, opacity: 0 }, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: `top+=750`,
+          end: `top+=2500`,
+          scrub: true
+        }
+      });
     });
 
-    gsap.to(["#fire", "#enemy2", "#house2", "#enemy1", "#house1", "#floor"], {
-      opacity: 0,
-      y: 100,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1600",
-        end: "top+=1800",
-        scrub: true
-      }
-    });
-
-    gsap.fromTo("#s2fisherman", { x: -500, opacity: 0 }, {
+    gsap.fromTo("#s1man", { x:500,y: 500, opacity: 0 }, {
       x: 0,
+      y:0,
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
-        start: "top+=1800",
-        end: "top+=2600",
-        scrub: true
-      }
-    });
-    gsap.fromTo("#s2boatsd", { x: -500, opacity: 0 }, {
-      x: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#scene",
-        start: "top+=1800",
-        end: "top+=2600",
+        start: "top+=750",
+        end: "top+=2500",
         scrub: true
       }
     });
 
+    gsap.fromTo("#s1Text1", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=750",
+        end: "top+=2500",
+        scrub: true
+      }
+    });
+// -------------------------SCENE 1 PART 2-----------------------------------------
+   
+    gsap.to("#s1wave1", { y: 0, opacity: 0 }, {
+      y: 500,
+      opacity: 1,
+      // ease: "none",
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2500",
+        end: "top+=3000",
+        scrub: true
+      }
+    });
     gsap.to("#s2fisherman", {
       opacity: 0,
       scrollTrigger: {
@@ -1162,7 +1222,7 @@
     ScrollTrigger.create({
       trigger: "#scene",
       start: "top top",
-      end: "+=6000",
+      end: "+=20000",
       pin: true,
       scrub: true
     });
