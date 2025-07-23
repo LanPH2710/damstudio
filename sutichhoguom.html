@@ -393,19 +393,74 @@
       z-index: 710;
     }
 
-    #startExperience {
+    #unlock-btn {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 20px;
+      right: 20px;
       z-index: 9999;
-      font-size: 20px;
-      padding: 10px 30px;
       background: #222;
       color: white;
+      padding: 8px 16px;
       border: none;
       border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
+    }
+
+
+
+    @media (max-width: 1000px) {
+      .title {
+        font-size: 2rem;
+      }
+
+      #floorText,
+      #s2Text1,
+      #s2Text2a,
+      #s2Text2b,
+      #s2Text3,
+      #s3Text1,
+      #s3Text2a,
+      #s3Text2b,
+      #s3Text3a,
+      #s3Text3b,
+      #s4Text1,
+      #s4Text2,
+      #s5Text,
+      #s6Text,
+      #s7Text1,
+      #s7Text2a,
+      #s7Text2b,
+      #s7Text3 {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.5rem;
+      }
+
+      #floorText,
+      #s2Text1,
+      #s2Text2a,
+      #s2Text2b,
+      #s2Text3,
+      #s3Text1,
+      #s3Text2a,
+      #s3Text2b,
+      #s3Text3a,
+      #s3Text3b,
+      #s4Text1,
+      #s4Text2,
+      #s5Text,
+      #s6Text,
+      #s7Text1,
+      #s7Text2a,
+      #s7Text2b,
+      #s7Text3 {
+        font-size: 0.4rem;
+      }
     }
   </style>
 </head>
@@ -434,11 +489,13 @@
 
 
 
+  <button id="unlock-btn">🔇 Âm thanh: TẮT</button>
 
- 
-<button id="unlock-btn" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;padding:1em 2em;">
+
+
+  <!-- <button id="unlock-btn" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;padding:1em 2em;">
   🔊 Chạm để bật âm thanh
-</button>
+</button> -->
 
 
 
@@ -573,26 +630,32 @@
 
 
   <!-- AUDIO -->
-<audio id="audio-intro" type="audio/mpeg" src="audio/voice_STHG/intro.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene1" type="audio/mpeg" src="audio/voice_STHG/s1.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-intro" type="audio/mpeg" src="audio/voice_STHG/intro.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene1" type="audio/mpeg" src="audio/voice_STHG/s1.mp3" preload="auto" playsinline></audio>
 
-<!-- Scene 2 -->
-<audio id="audio-scene2p1" type="audio/mpeg" src="audio/voice_STHG/s2p1.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene2p2" type="audio/mpeg" src="audio/voice_STHG/s2p2.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene2p3" type="audio/mpeg" src="audio/voice_STHG/s2p3.mp3" preload="auto" playsinline></audio>
+  <!-- Scene 2 -->
+  <audio id="audio-scene2p1" type="audio/mpeg" src="audio/voice_STHG/s2p1.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene2p2" type="audio/mpeg" src="audio/voice_STHG/s2p2.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene2p3" type="audio/mpeg" src="audio/voice_STHG/s2p3.mp3" preload="auto" playsinline></audio>
 
-<!-- Scene 3 -->
-<audio id="audio-scene3p1" type="audio/mpeg" src="audio/voice_STHG/s3p1.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene3p2" type="audio/mpeg" src="audio/voice_STHG/s3p2.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene3p3" type="audio/mpeg" src="audio/voice_STHG/s3p3.mp3" preload="auto" playsinline></audio>
+  <!-- Scene 3 -->
+  <audio id="audio-scene3p1" type="audio/mpeg" src="audio/voice_STHG/s3p1.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene3p2" type="audio/mpeg" src="audio/voice_STHG/s3p2.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene3p3" type="audio/mpeg" src="audio/voice_STHG/s3p3.mp3" preload="auto" playsinline></audio>
 
-<!-- Scene 4–7 -->
-<audio id="audio-scene4" type="audio/mpeg" src="audio/voice_STHG/s4p1.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene5" type="audio/mpeg" src="audio/voice_STHG/s5.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene6" type="audio/mpeg" src="audio/voice_STHG/s6.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene7p1" type="audio/mpeg" src="audio/voice_STHG/s7p1.mp3" preload="auto" playsinline></audio>
-<audio id="audio-scene7p2" type="audio/mpeg" src="audio/voice_STHG/s7p2.mp3" preload="auto" playsinline></audio>
-<audio id="audio-ending" type="audio/mpeg" src="audio/voice_STHG/ending.mp3" preload="auto" playsinline></audio>
+  <!-- Scene 4–7 -->
+  <audio id="audio-scene4" type="audio/mpeg" src="audio/voice_STHG/s4p1.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene5" type="audio/mpeg" src="audio/voice_STHG/s5.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene6" type="audio/mpeg" src="audio/voice_STHG/s6.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene7p1" type="audio/mpeg" src="audio/voice_STHG/s7p1.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-scene7p2" type="audio/mpeg" src="audio/voice_STHG/s7p2.mp3" preload="auto" playsinline></audio>
+  <audio id="audio-ending" type="audio/mpeg" src="audio/voice_STHG/ending.mp3" preload="auto" playsinline></audio>
+
+  <!-- <audio id="bg-music" src="audio/voice_STHG/bg-music.mp3" loop preload="auto" playsinline></audio> -->
+  <audio id="bg-music" type="audio/mpeg" src="audio/voice_STHG/bg-music.mp3" preload="auto" loop></audio>
+
+  <!-- <button id="bg-music-toggle">🎵 Nhạc nền: TẮT</button> -->
+
 
   <button id="autoScrollBtn" style="
   position: fixed;
@@ -806,14 +869,14 @@
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
-        start: "top+=2500",
+        start: "top+=2000",
         end: "top+=3000",
         scrub: true
       }
     });
     // SCENE 2 CONTINUES
     gsap.fromTo("#s2Text1", { y: 0, opacity: 0 }, {
-      y: 200,
+      y: 2000,
       opacity: 1,
       scrollTrigger: {
         trigger: "#scene",
@@ -1094,10 +1157,25 @@
     });
 
 
+    // gsap.fromTo("#s3hero",
+    //   { x: 100, scale: 1, opacity: 1 },
+    //   {
+    //     x: 200,
+    //     scale: 1,
+    //     opacity: 1,
+    //     immediateRender: false,
+    //     scrollTrigger: {
+    //       trigger: "#scene",
+    //       start: "top+=7500",
+    //       end: "top+=7750",
+    //       scrub: true
+    //     }
+    //   });
+
     gsap.fromTo("#s3hero",
-      { x: 100, scale: 1, opacity: 1 },
+      { x: "10vw", scale: 1, opacity: 1 },
       {
-        x: 200,
+        x: "30vw",
         scale: 1,
         opacity: 1,
         immediateRender: false,
@@ -1110,11 +1188,28 @@
       });
 
 
+    // gsap.fromTo("#s3handstiff",
+    //   { x: 100, y: 10, rotation: 0, opacity: 1 },
+    //   {
+    //     x: 450,
+    //     y: 100,
+    //     rotation: -31,
+    //     opacity: 1,
+    //     immediateRender: false,
+    //     scrollTrigger: {
+    //       trigger: "#scene",
+    //       start: "top+=7500",
+    //       end: "top+=7750",
+    //       scrub: true
+    //     }
+    //   });
+
     gsap.fromTo("#s3handstiff",
-      { x: 100, y: 10, rotation: 0, opacity: 1 },
+      { x: "10vw", y: "2vh", rotation: 0, opacity: 1 },
       {
-        x: 450,
-        y: 100,
+        x: "45vw",
+        y: "10vh",
+
         rotation: -31,
         opacity: 1,
         immediateRender: false,
@@ -1140,16 +1235,6 @@
     );
 
 
-
-    // gsap.to(".scene3-element, #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b", {
-    //   opacity: 0,
-    //   scrollTrigger: {
-    //     trigger: "#scene",
-    //     start: "top+=8000",
-    //     end: "top+=8500",
-    //     scrub: true
-    //   }
-    // });
     //--------------------------------------------------------------------SCENE 4-------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     // ===== Scene 4: Các element scale về 1, text hiện trái/phải vào =====
@@ -1447,7 +1532,7 @@
 
       if (scrolling) {
         scrollInterval = setInterval(() => {
-          window.scrollBy(0, 2); 
+          window.scrollBy(0, 1);
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             clearInterval(scrollInterval);
             btn.textContent = "Auto Scroll";
@@ -1492,17 +1577,17 @@
 
 
 
-
-    
-const btn = document.getElementById("unlock-btn");
-  let audioUnlocked = false;
+      const btn = document.getElementById("unlock-btn");
+  const bgMusic = document.getElementById("bg-music");
+  let audioEnabled = false;
+  let currentPlaying = null;
 
   const audios = [
     { id: "audio-intro", start: 0, end: 300 },
-    { id: "audio-scene1", start: 400, end: 2500 },
-    { id: "audio-scene2p1", start: 2500, end: 3000 },
-    { id: "audio-scene2p2", start: 3000, end: 4500 },
-    { id: "audio-scene2p3", start: 4500, end: 5000 },
+    { id: "audio-scene1", start: 400, end: 2000 },
+    { id: "audio-scene2p1", start: 2000, end: 3500 },
+    { id: "audio-scene2p2", start: 3500, end: 4500 },
+    { id: "audio-scene2p3", start: 4500, end: 5500 },
     { id: "audio-scene3p1", start: 5500, end: 6700 },
     { id: "audio-scene3p2", start: 6700, end: 7500 },
     { id: "audio-scene3p3", start: 7500, end: 8500 },
@@ -1514,99 +1599,218 @@ const btn = document.getElementById("unlock-btn");
     { id: "audio-ending", start: 15500, end: 16500 }
   ];
 
-  // Unlock tất cả audio
-  async function unlockAudio() {
-    for (let { id } of audios) {
-      const a = document.getElementById(id);
-      try {
-        await a.play();
-        a.pause();
-        a.currentTime = 0;
-      } catch (e) {
-        console.warn("Không unlock được:", id, e);
-      }
-    }
-    audioUnlocked = true;
-    btn.style.display = "none";
+  // 👉 Tắt tiếng tất cả audio (nhưng vẫn đang chạy)
+  function muteAllAudios() {
+    document.querySelectorAll("audio").forEach(a => a.muted = true);
   }
 
-  btn.addEventListener("click", async () => {
-    await unlockAudio();
-  });
+  // 👉 Bật tiếng tất cả audio (khôi phục)
+  function unmuteAllAudios() {
+    document.querySelectorAll("audio").forEach(a => a.muted = false);
+  }
 
-  // Track audio đang phát
-  let currentPlaying = null;
+  // 🔁 Unlock toàn bộ audio 1 lần duy nhất (play-pause để vượt chặn autoplay)
+  async function unlockAllAudioOnce() {
+    for (let { id } of audios) {
+      const a = document.getElementById(id);
+      if (a) {
+        try {
+          await a.play();
+          a.pause(); // không reset thời gian
+        } catch (e) {
+          console.warn("Không unlock được:", id, e);
+        }
+      }
+    }
+  }
 
+  // 🔊 Toggle ON / OFF âm thanh
+  async function toggleAudio() {
+    audioEnabled = !audioEnabled;
+    btn.textContent = audioEnabled ? "🔊 Âm thanh: BẬT" : "🔇 Âm thanh: TẮT";
+
+    if (audioEnabled) {
+      await unlockAllAudioOnce(); // unlock voice
+      unmuteAllAudios(); // bật tiếng
+
+      // Phát nhạc nền nếu chưa chạy
+      if (bgMusic && bgMusic.paused) {
+        try {
+          bgMusic.volume = 0.3;
+          await bgMusic.play();
+        } catch (e) {
+          console.warn("Không phát được nhạc nền:", e);
+        }
+      }
+
+    } else {
+      muteAllAudios(); // chỉ tắt tiếng thôi
+    }
+  }
+
+  btn.addEventListener("click", toggleAudio);
+
+  // 🔁 Theo dõi scroll để chọn audio phù hợp
   function handleScroll() {
-    if (!audioUnlocked) return;
-
     const scrollTop = window.scrollY;
 
     for (let { id, start, end } of audios) {
       const audio = document.getElementById(id);
       if (scrollTop >= start && scrollTop < end) {
         if (currentPlaying !== id) {
-          // Dừng tất cả audio khác
-          document.querySelectorAll("audio").forEach(a => {
-            a.pause();
-            a.currentTime = 0;
-          });
+          // Dừng audio cũ nếu khác
+          if (currentPlaying) {
+            const prev = document.getElementById(currentPlaying);
+            if (prev && !prev.loop) prev.pause();
+          }
 
-          // Phát đoạn hiện tại
-          audio.currentTime = 0;
-          audio.play().catch(e => console.warn("play fail", e));
-          currentPlaying = id;
+          // Phát đoạn mới
+          if (audio) {
+            audio.play().catch(e => console.warn("Không play:", e));
+            audio.muted = !audioEnabled;
+            currentPlaying = id;
+          }
         }
         return;
       }
     }
 
-    // Nếu không khớp đoạn nào → stop all
+    // Không khớp đoạn nào → dừng voice hiện tại (không ảnh hưởng bgMusic)
     if (currentPlaying) {
-      const audio = document.getElementById(currentPlaying);
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
+      const prev = document.getElementById(currentPlaying);
+      if (prev && !prev.loop) prev.pause();
       currentPlaying = null;
     }
   }
 
-  // Kiểm tra mỗi 200ms
+  // Gọi định kỳ
   setInterval(handleScroll, 200);
+
+
+      // const btn = document.getElementById("unlock-btn");
+      // let audioEnabled = false; // mặc định tắt âm
+
+      // const audios = [
+      //   { id: "audio-intro", start: 0, end: 300 },
+      //   { id: "audio-scene1", start: 400, end: 2000 },
+      //   { id: "audio-scene2p1", start: 2000, end: 3500 },
+      //   { id: "audio-scene2p2", start: 3500, end: 4500 },
+      //   { id: "audio-scene2p3", start: 4500, end: 5500 },
+      //   { id: "audio-scene3p1", start: 5500, end: 6700 },
+      //   { id: "audio-scene3p2", start: 6700, end: 7500 },
+      //   { id: "audio-scene3p3", start: 7500, end: 8500 },
+      //   { id: "audio-scene4", start: 9500, end: 10500 },
+      //   { id: "audio-scene5", start: 10500, end: 11500 },
+      //   { id: "audio-scene6", start: 11500, end: 12500 },
+      //   { id: "audio-scene7p1", start: 13000, end: 14500 },
+      //   { id: "audio-scene7p2", start: 14500, end: 15500 },
+      //   { id: "audio-ending", start: 15500, end: 16500 }
+      // ];
+
+      // // 🔁 Hàm dừng toàn bộ audio
+      // function stopAllAudios() {
+      //   document.querySelectorAll("audio").forEach(a => {
+      //     a.pause();
+      //     a.currentTime = 0;
+      //   });
+      // }
+
+      // // 🔊 Toggle ON / OFF âm thanh
+      // async function toggleAudio() {
+      //   audioEnabled = !audioEnabled;
+      //   btn.textContent = audioEnabled ? "🔊 Âm thanh: BẬT" : "🔇 Âm thanh: TẮT";
+
+
+
+      //   if (audioEnabled) {
+      //     // Unlock autoplay bằng 1 lần play-pause
+      //     for (let { id } of audios) {
+      //       const a = document.getElementById(id);
+      //       try {
+      //         await a.play();
+      //         a.pause();
+      //         a.currentTime = 0;
+      //       } catch (e) {
+      //         console.warn("Không unlock được:", id, e);
+      //       }
+      //     }
+      //   } else {
+      //     stopAllAudios();
+      //     currentPlaying = null;
+      //   }
+      // }
+
+
+
+
+
+
+      // btn.addEventListener("click", toggleAudio);
+
+      // // 🔁 Kiểm tra scroll liên tục để phát audio
+      // let currentPlaying = null;
+      // function handleScroll() {
+      //   if (!audioEnabled) return;
+
+      //   const scrollTop = window.scrollY;
+
+      //   for (let { id, start, end } of audios) {
+      //     const audio = document.getElementById(id);
+      //     if (scrollTop >= start && scrollTop < end) {
+      //       if (currentPlaying !== id) {
+      //         stopAllAudios();
+      //         audio.currentTime = 0;
+      //         audio.play().catch(e => console.warn("play fail", e));
+      //         currentPlaying = id;
+      //       }
+      //       return;
+      //     }
+      //   }
+
+      //   // Nếu không khớp đoạn nào
+      //   if (currentPlaying) {
+      //     stopAllAudios();
+      //     currentPlaying = null;
+      //   }
+      // }
+
+      // setInterval(handleScroll, 200);
+
+
+
 
     });
 
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      /////////////////////////////////////////////////////////check xoay ngang doc voi dien thoai////////////////////////////////////////////////////////////////
-      function checkOrientation() {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        const warning = document.getElementById('rotate-warning');
-        if (isPortrait && window.innerWidth < 768) {
-          warning.style.display = 'flex'; // Hiện cảnh báo nếu là mobile và đang xoay dọc
-        } else {
-          warning.style.display = 'none'; // Ẩn cảnh báo nếu đã xoay ngang
-        }
+    /////////////////////////////////////////////////////////check xoay ngang doc voi dien thoai////////////////////////////////////////////////////////////////
+    function checkOrientation() {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const warning = document.getElementById('rotate-warning');
+      if (isPortrait && window.innerWidth < 768) {
+        warning.style.display = 'flex'; // Hiện cảnh báo nếu là mobile và đang xoay dọc
+      } else {
+        warning.style.display = 'none'; // Ẩn cảnh báo nếu đã xoay ngang
       }
+    }
 
-      window.addEventListener("load", checkOrientation);
-      window.addEventListener("resize", checkOrientation);
-      window.addEventListener("orientationchange", checkOrientation);
+    window.addEventListener("load", checkOrientation);
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
 
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////// scroll len dau trang////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////// scroll len dau trang////////////////////////////////////////////////////////////////
 
-      history.scrollRestoration = "manual";
-      window.scrollTo(0, 0);
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
 
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          ScrollTrigger.refresh(true); // bắt buộc!
-        }, 50);
-      });
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        ScrollTrigger.refresh(true); // bắt buộc!
+      }, 50);
+    });
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
