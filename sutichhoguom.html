@@ -13,7 +13,7 @@
     body {
       margin: 0;
       padding: 0;
-      height: 17000px;
+      height: 17500px;
       overflow-x: hidden;
       font-family: sans-serif;
     }
@@ -37,6 +37,7 @@
       font-size: 4rem;
       color: white;
       z-index: 10;
+      text-align: center;
     }
 
     .scene1-element,
@@ -462,11 +463,51 @@
         font-size: 0.4rem;
       }
     }
+
+    #language-btn {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      z-index: 9999;
+      background: #222;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #language-popup {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+    }
+
+    .lang-option {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .lang-option:hover {
+      background-color: #f0f0f0;
+    }
   </style>
 </head>
 
 <body>
-
 
   <div id="rotate-warning" style="
   position: fixed;
@@ -486,23 +527,24 @@
     Vui lòng xoay ngang màn hình<br>(Rotate your phone for best experience)
   </div>
 
+  <button id="unlock-btn">🔇 </button>
 
 
+  <!-- Nút mở lựa chọn ngôn ngữ -->
+  <button id="language-btn">🌐 </button>
 
-  <button id="unlock-btn">🔇 Âm thanh: TẮT</button>
-
-
-
-  <!-- <button id="unlock-btn" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;padding:1em 2em;">
-  🔊 Chạm để bật âm thanh
-</button> -->
-
-
-
+  <!-- Cửa sổ chọn ngôn ngữ -->
+  <div id="language-popup" style="display: none;">
+    <button class="lang-option" data-lang="vi">VN Tiếng Việt</button>
+    <button class="lang-option" data-lang="en">EN English</button>
+    <button class="lang-option" data-lang="fr">FR Français</button>
+    <a href="http://">add-translations</a>
+  </div>
 
 
   <section id="scene">
-    <h1 class="title">Sự Tích Hồ Gươm</h1>
+
+    <h1 class="title" id="title">Sự Tích Hồ Gươm</h1>
 
     <img id="floor" src="images/floor.png" class="scene-element layer-floor" />
     <img id="house1" src="images/house1.png" class="scene-element layer-house1" />
@@ -540,8 +582,6 @@
     </div>
 
 
-
-
     <!-- Elements scene 3 -->
     <img id="s3tree2" src="SuTichHoGuom/sence 3/1x/tree2.png" class="scene3-element" />
     <img id="s3enemy" src="SuTichHoGuom/sence 3/1x/enemy.png" class="scene3-element" />
@@ -563,7 +603,6 @@
     </div>
     <div id="s3Text3b">Lại nhớ tới hôm ở nhà Lê Thận có lưỡi gươm phát sáng Lê Lợi liền cầm chuôi gươm về.
     </div>
-
 
 
     <!-- Elements scene 4 -->
@@ -628,7 +667,6 @@
   </section>
 
 
-
   <!-- AUDIO -->
   <audio id="audio-intro" type="audio/mpeg" src="audio/voice_STHG/intro.mp3" preload="auto" playsinline></audio>
   <audio id="audio-scene1" type="audio/mpeg" src="audio/voice_STHG/s1.mp3" preload="auto" playsinline></audio>
@@ -654,8 +692,6 @@
   <!-- <audio id="bg-music" src="audio/voice_STHG/bg-music.mp3" loop preload="auto" playsinline></audio> -->
   <audio id="bg-music" type="audio/mpeg" src="audio/voice_STHG/bg-music.mp3" preload="auto" loop></audio>
 
-  <!-- <button id="bg-music-toggle">🎵 Nhạc nền: TẮT</button> -->
-
 
   <button id="autoScrollBtn" style="
   position: fixed;
@@ -668,7 +704,8 @@
   border-radius: 8px;
   cursor: pointer;
   z-index: 9999;
-">Auto Scroll</button>
+">Auto</button>
+
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
@@ -1023,7 +1060,6 @@
     });
 
 
-
     gsap.fromTo("#s3hero", { x: -500, scale: 0.5, opacity: 0 }, {
       x: 0,
       opacity: 1,
@@ -1084,8 +1120,6 @@
           scrub: true
         }
       });
-
-
 
 
     gsap.to("#s3Text1", {
@@ -1156,21 +1190,6 @@
       }
     });
 
-
-    // gsap.fromTo("#s3hero",
-    //   { x: 100, scale: 1, opacity: 1 },
-    //   {
-    //     x: 200,
-    //     scale: 1,
-    //     opacity: 1,
-    //     immediateRender: false,
-    //     scrollTrigger: {
-    //       trigger: "#scene",
-    //       start: "top+=7500",
-    //       end: "top+=7750",
-    //       scrub: true
-    //     }
-    //   });
 
     gsap.fromTo("#s3hero",
       { x: "10vw", scale: 1, opacity: 1 },
@@ -1517,6 +1536,59 @@
 
 
 
+    const translations = {
+      vi: {
+        title: "Sự tích Hồ Gươm",
+        floorText: "Vào thời giặc Minh xâm lược nước ta, đi đến đâu chúng cũng tàn sát người dân vô tội, cướp bóc của cải của nhân dân. Cuộc sống của người dân vô cùng cực khổ, và lầm than.",
+        s2Text1: "Hồi ấy ở Thanh Hóa, có một người đi đánh cá dưới sông tên là Lê Thận, khi kéo lên thấy lưới rất nặng. Tuy nhiên khi lưới được kéo lên thì không có một con cá nào mà chỉ là một lưỡi gươm cũ.",
+        s2Text2a: "Anh bèn quăng lưỡi gươm đi xa hơn rồi kéo lưới lại nhưng lần 2, lần 3 vẫn chỉ có lưỡi gươm này mắc vào lưới.",
+        s2Text2b: "Sao vẫn là lưỡi gươm này vậy??",
+        s2Text3: "Không bắt được cá. anh đành cầm lưỡi gươm cũ mang về để trong góc nhà. Sau đó không lâu Lê Thận gia nhập nghĩa quân. được Lê Lợi vô cùng tin tưởng.",
+        s3Text1: "Thời gian sau, Lê Lợi bị quân giặc đuổi theo vào trong rừng sâu.",
+        s3Text2a: "Khi đang chạy trốn, ông nhìn thấy có một vật sáng chói trên cành cây.Nhìn kĩ thì thấy một cái chuôi gươm nạm ngọc sáng lấp lánh.",
+        s3Text2b: "Là chuôi gươm sao?",
+        s3Text3a: "Ghép với lưỡi gươm kia thật giống 1 bộ.",
+        s3Text3b: "Lại nhớ tới hôm ở nhà Lê Thận có lưỡi gươm phát sáng Lê Lợi liền cầm chuôi gươm về.",
+        s4Text1: "sau khi ghép lưỡi gươm với chuôi gươm thì lại vừa in như một cặp, lưỡi gươm trở lên sáng chói và sắc nhọn vô cùng",
+        s4Text2: "Có lẽ đây là gươm báu trời ban, giúp nghĩa quân đánh giặc xâm lược",
+        s5Text: "Kể từ đó, nghĩa quân đánh đâu thắng đó, trăm trận trăm thắng. Chẳng bao lâu sau, dưới sự lãnh đạo của Lê Lợi và nhờ gươm thần mà nghĩa quân đã đánh bại quân Minh.",
+        s6Text: "Giặc sợ hãi bỏ tháo chạy về phương Bắc, muôn dân lại được thái bình, Lê Lợi lên ngôi vua để trị vì và thống nhất đất nước",
+        s7Text1: "Một năm sau, khi nhà vua cùng các bề tôi thân tín ngồi thuyền đi dạo trên hồ Tả Vọng trước kinh thành.Khi thuyền ra tới giữa hồ thì bất ngờ từ dưới làn nước trong xanh, có một con rùa vàng ngoi đầu lên, cất tiếng:",
+        s7Text2a: "Thưa nhà vua, lúc trước Đức Long Quân có cho nhà vua mượn thanh gươm thần để đánh giặc",
+        s7Text2b: " Nay nghiệp lớn đã hoàn thành, xin nhà vua hãy trả lại gươm thần!",
+        s7Text3: "Lê Lợi nghe xong, liền cởi thanh gươm bên mình ra, cầm hai tay và dâng lên trước mặt rùa vàng."
+
+
+      },
+      en: {
+        title: "The Legend of Hoan Kiem Lake",
+        floorText: "In the era when the Ming invaders ravaged our country, wherever they went, they massacred innocent people and plundered their property. The lives of the people were utterly miserable and full of suffering.",
+        s2Text1: "Back then in Thanh Hoa, there was a fisherman named Le Than. When he pulled up his net, it felt very heavy. However, when the net was fully pulled up, there were no fish, only an old sword blade.",
+        s2Text2a: "He threw the sword blade far away and cast his net again, but the second and third times, only this same sword blade got caught in his net.",
+        s2Text2b: "Why is it still this sword blade??",
+        s2Text3: "Unable to catch any fish, he reluctantly took the old sword blade home and placed it in a corner. Not long after, Le Than joined the resistance army and was greatly trusted by Le Loi.",
+        s3Text1: "Some time later, Le Loi was pursued by enemy troops deep into the forest.",
+        s3Text2a: "While escaping, he saw a shining object on a tree branch. Looking closely, he saw a sword hilt inlaid with glittering gems.",
+        s3Text2b: "Is that a sword hilt?",
+        s3Text3a: "It fits perfectly with that sword blade, like a set.",
+        s3Text3b: "Remembering the glowing sword blade at Le Than's house, Le Loi immediately took the sword hilt with him.",
+        s4Text1: "After combining the sword blade with the hilt, they fit together perfectly as a single piece. The sword blade became dazzlingly bright and incredibly sharp.",
+        s4Text2: "Perhaps this is a precious sword granted by heaven, to help our army defeat the invaders.",
+        s5Text: "From then on, the resistance army was victorious wherever they went, winning every battle. Before long, under the leadership of Le Loi and thanks to the magic sword, the army defeated the Ming invaders.",
+        s6Text: "The invaders, terrified, fled back to the North, and the people enjoyed peace once more. Le Loi ascended the throne to rule and unify the country.",
+        s7Text1: "A year later, as the King and his trusted mandarins were boating on Ho Ta Vong (West Lake) in front of the capital city. As the boat reached the middle of the lake, suddenly, from the clear blue water, a golden turtle emerged, speaking:",
+        s7Text2a: "Your Majesty, previously, the Dragon King lent Your Majesty this divine sword to defeat the invaders.",
+        s7Text2b: "Now that the great task is complete, please return the divine sword!",
+        s7Text3: "Upon hearing this, Le Loi immediately took off the sword from his side, held it with both hands, and presented it to the golden turtle."
+
+
+      },
+      fr: {
+        title: "La Légende du Lac de l’Épée",
+        floorText: "Il était une fois un roi...",
+      }
+    };
+
 
 
     /////////////////////////////auto scroll///////////////////////////////////////////////////
@@ -1528,7 +1600,7 @@
       scrolling = !scrolling;
 
       const btn = document.getElementById("autoScrollBtn");
-      btn.textContent = scrolling ? "Dừng Cuộn" : "Auto Scroll";
+      btn.textContent = scrolling ? "Stop" : "Auto";
 
       if (scrolling) {
         scrollInterval = setInterval(() => {
@@ -1578,206 +1650,148 @@
 
 
       const btn = document.getElementById("unlock-btn");
-  const bgMusic = document.getElementById("bg-music");
-  let audioEnabled = false;
-  let currentPlaying = null;
+      const bgMusic = document.getElementById("bg-music");
+      let audioEnabled = false;
+      let currentPlaying = null;
 
-  const audios = [
-    { id: "audio-intro", start: 0, end: 300 },
-    { id: "audio-scene1", start: 400, end: 2000 },
-    { id: "audio-scene2p1", start: 2000, end: 3500 },
-    { id: "audio-scene2p2", start: 3500, end: 4500 },
-    { id: "audio-scene2p3", start: 4500, end: 5500 },
-    { id: "audio-scene3p1", start: 5500, end: 6700 },
-    { id: "audio-scene3p2", start: 6700, end: 7500 },
-    { id: "audio-scene3p3", start: 7500, end: 8500 },
-    { id: "audio-scene4", start: 9500, end: 10500 },
-    { id: "audio-scene5", start: 10500, end: 11500 },
-    { id: "audio-scene6", start: 11500, end: 12500 },
-    { id: "audio-scene7p1", start: 13000, end: 14500 },
-    { id: "audio-scene7p2", start: 14500, end: 15500 },
-    { id: "audio-ending", start: 15500, end: 16500 }
-  ];
+      const audios = [
+        { id: "audio-intro", start: 0, end: 300 },
+        { id: "audio-scene1", start: 400, end: 2000 },
+        { id: "audio-scene2p1", start: 2000, end: 3500 },
+        { id: "audio-scene2p2", start: 3500, end: 4500 },
+        { id: "audio-scene2p3", start: 4500, end: 5500 },
+        { id: "audio-scene3p1", start: 5500, end: 6700 },
+        { id: "audio-scene3p2", start: 6700, end: 7500 },
+        { id: "audio-scene3p3", start: 7500, end: 8500 },
+        { id: "audio-scene4", start: 9500, end: 10500 },
+        { id: "audio-scene5", start: 10500, end: 11500 },
+        { id: "audio-scene6", start: 11500, end: 12500 },
+        { id: "audio-scene7p1", start: 13000, end: 14500 },
+        { id: "audio-scene7p2", start: 14500, end: 15500 },
+        { id: "audio-ending", start: 15500, end: 16500 }
+      ];
 
-  // 👉 Tắt tiếng tất cả audio (nhưng vẫn đang chạy)
-  function muteAllAudios() {
-    document.querySelectorAll("audio").forEach(a => a.muted = true);
-  }
-
-  // 👉 Bật tiếng tất cả audio (khôi phục)
-  function unmuteAllAudios() {
-    document.querySelectorAll("audio").forEach(a => a.muted = false);
-  }
-
-  // 🔁 Unlock toàn bộ audio 1 lần duy nhất (play-pause để vượt chặn autoplay)
-  async function unlockAllAudioOnce() {
-    for (let { id } of audios) {
-      const a = document.getElementById(id);
-      if (a) {
-        try {
-          await a.play();
-          a.pause(); // không reset thời gian
-        } catch (e) {
-          console.warn("Không unlock được:", id, e);
-        }
-      }
-    }
-  }
-
-  // 🔊 Toggle ON / OFF âm thanh
-  async function toggleAudio() {
-    audioEnabled = !audioEnabled;
-    btn.textContent = audioEnabled ? "🔊 Âm thanh: BẬT" : "🔇 Âm thanh: TẮT";
-
-    if (audioEnabled) {
-      await unlockAllAudioOnce(); // unlock voice
-      unmuteAllAudios(); // bật tiếng
-
-      // Phát nhạc nền nếu chưa chạy
-      if (bgMusic && bgMusic.paused) {
-        try {
-          bgMusic.volume = 0.3;
-          await bgMusic.play();
-        } catch (e) {
-          console.warn("Không phát được nhạc nền:", e);
-        }
+      // 👉 Tắt tiếng tất cả audio (nhưng vẫn đang chạy)
+      function muteAllAudios() {
+        document.querySelectorAll("audio").forEach(a => a.muted = true);
       }
 
-    } else {
-      muteAllAudios(); // chỉ tắt tiếng thôi
-    }
-  }
+      // 👉 Bật tiếng tất cả audio (khôi phục)
+      function unmuteAllAudios() {
+        document.querySelectorAll("audio").forEach(a => a.muted = false);
+      }
 
-  btn.addEventListener("click", toggleAudio);
-
-  // 🔁 Theo dõi scroll để chọn audio phù hợp
-  function handleScroll() {
-    const scrollTop = window.scrollY;
-
-    for (let { id, start, end } of audios) {
-      const audio = document.getElementById(id);
-      if (scrollTop >= start && scrollTop < end) {
-        if (currentPlaying !== id) {
-          // Dừng audio cũ nếu khác
-          if (currentPlaying) {
-            const prev = document.getElementById(currentPlaying);
-            if (prev && !prev.loop) prev.pause();
-          }
-
-          // Phát đoạn mới
-          if (audio) {
-            audio.play().catch(e => console.warn("Không play:", e));
-            audio.muted = !audioEnabled;
-            currentPlaying = id;
+      // 🔁 Unlock toàn bộ audio 1 lần duy nhất (play-pause để vượt chặn autoplay)
+      async function unlockAllAudioOnce() {
+        for (let { id } of audios) {
+          const a = document.getElementById(id);
+          if (a) {
+            try {
+              await a.play();
+              a.pause(); // không reset thời gian
+            } catch (e) {
+              console.warn("Không unlock được:", id, e);
+            }
           }
         }
-        return;
       }
+
+      // 🔊 Toggle ON / OFF âm thanh
+      async function toggleAudio() {
+        audioEnabled = !audioEnabled;
+        btn.textContent = audioEnabled ? "🔊 " : "🔇 ";
+
+        if (audioEnabled) {
+          await unlockAllAudioOnce(); // unlock voice
+          unmuteAllAudios(); // bật tiếng
+
+          // Phát nhạc nền nếu chưa chạy
+          if (bgMusic && bgMusic.paused) {
+            try {
+              bgMusic.volume = 0.3;
+              await bgMusic.play();
+            } catch (e) {
+              console.warn("Không phát được nhạc nền:", e);
+            }
+          }
+
+        } else {
+          muteAllAudios(); // chỉ tắt tiếng thôi
+        }
+      }
+
+      btn.addEventListener("click", toggleAudio);
+
+      // 🔁 Theo dõi scroll để chọn audio phù hợp
+      function handleScroll() {
+        const scrollTop = window.scrollY;
+
+        for (let { id, start, end } of audios) {
+          const audio = document.getElementById(id);
+          if (scrollTop >= start && scrollTop < end) {
+            if (currentPlaying !== id) {
+              // Dừng audio cũ nếu khác
+              if (currentPlaying) {
+                const prev = document.getElementById(currentPlaying);
+                if (prev && !prev.loop) prev.pause();
+              }
+
+              // Phát đoạn mới
+              if (audio) {
+                audio.play().catch(e => console.warn("Không play:", e));
+                audio.muted = !audioEnabled;
+                currentPlaying = id;
+              }
+            }
+            return;
+          }
+        }
+
+        // Không khớp đoạn nào → dừng voice hiện tại (không ảnh hưởng bgMusic)
+        if (currentPlaying) {
+          const prev = document.getElementById(currentPlaying);
+          if (prev && !prev.loop) prev.pause();
+          currentPlaying = null;
+        }
+      }
+
+      // Gọi định kỳ
+      setInterval(handleScroll, 200);
+
+
+
+
+
+
+
+
+
+
+      
+    const langBtn = document.getElementById("language-btn");
+    const langPopup = document.getElementById("language-popup");
+
+    langBtn.addEventListener("click", () => {
+      langPopup.style.display = (langPopup.style.display === "none") ? "block" : "none";
+    });
+
+    document.querySelectorAll(".lang-option").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const selectedLang = e.target.dataset.lang;
+        applyTranslation(selectedLang);
+        langPopup.style.display = "none";
+      });
+    });
+
+    function applyTranslation(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      Object.keys(t).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id];
+      });
     }
-
-    // Không khớp đoạn nào → dừng voice hiện tại (không ảnh hưởng bgMusic)
-    if (currentPlaying) {
-      const prev = document.getElementById(currentPlaying);
-      if (prev && !prev.loop) prev.pause();
-      currentPlaying = null;
-    }
-  }
-
-  // Gọi định kỳ
-  setInterval(handleScroll, 200);
-
-
-      // const btn = document.getElementById("unlock-btn");
-      // let audioEnabled = false; // mặc định tắt âm
-
-      // const audios = [
-      //   { id: "audio-intro", start: 0, end: 300 },
-      //   { id: "audio-scene1", start: 400, end: 2000 },
-      //   { id: "audio-scene2p1", start: 2000, end: 3500 },
-      //   { id: "audio-scene2p2", start: 3500, end: 4500 },
-      //   { id: "audio-scene2p3", start: 4500, end: 5500 },
-      //   { id: "audio-scene3p1", start: 5500, end: 6700 },
-      //   { id: "audio-scene3p2", start: 6700, end: 7500 },
-      //   { id: "audio-scene3p3", start: 7500, end: 8500 },
-      //   { id: "audio-scene4", start: 9500, end: 10500 },
-      //   { id: "audio-scene5", start: 10500, end: 11500 },
-      //   { id: "audio-scene6", start: 11500, end: 12500 },
-      //   { id: "audio-scene7p1", start: 13000, end: 14500 },
-      //   { id: "audio-scene7p2", start: 14500, end: 15500 },
-      //   { id: "audio-ending", start: 15500, end: 16500 }
-      // ];
-
-      // // 🔁 Hàm dừng toàn bộ audio
-      // function stopAllAudios() {
-      //   document.querySelectorAll("audio").forEach(a => {
-      //     a.pause();
-      //     a.currentTime = 0;
-      //   });
-      // }
-
-      // // 🔊 Toggle ON / OFF âm thanh
-      // async function toggleAudio() {
-      //   audioEnabled = !audioEnabled;
-      //   btn.textContent = audioEnabled ? "🔊 Âm thanh: BẬT" : "🔇 Âm thanh: TẮT";
-
-
-
-      //   if (audioEnabled) {
-      //     // Unlock autoplay bằng 1 lần play-pause
-      //     for (let { id } of audios) {
-      //       const a = document.getElementById(id);
-      //       try {
-      //         await a.play();
-      //         a.pause();
-      //         a.currentTime = 0;
-      //       } catch (e) {
-      //         console.warn("Không unlock được:", id, e);
-      //       }
-      //     }
-      //   } else {
-      //     stopAllAudios();
-      //     currentPlaying = null;
-      //   }
-      // }
-
-
-
-
-
-
-      // btn.addEventListener("click", toggleAudio);
-
-      // // 🔁 Kiểm tra scroll liên tục để phát audio
-      // let currentPlaying = null;
-      // function handleScroll() {
-      //   if (!audioEnabled) return;
-
-      //   const scrollTop = window.scrollY;
-
-      //   for (let { id, start, end } of audios) {
-      //     const audio = document.getElementById(id);
-      //     if (scrollTop >= start && scrollTop < end) {
-      //       if (currentPlaying !== id) {
-      //         stopAllAudios();
-      //         audio.currentTime = 0;
-      //         audio.play().catch(e => console.warn("play fail", e));
-      //         currentPlaying = id;
-      //       }
-      //       return;
-      //     }
-      //   }
-
-      //   // Nếu không khớp đoạn nào
-      //   if (currentPlaying) {
-      //     stopAllAudios();
-      //     currentPlaying = null;
-      //   }
-      // }
-
-      // setInterval(handleScroll, 200);
-
-
-
 
     });
 
