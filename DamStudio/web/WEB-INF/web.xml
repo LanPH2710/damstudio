@@ -101,6 +101,10 @@
         <servlet-name>EditCartAddressServlet</servlet-name>
         <servlet-class>controller.cart.EditCartAddressServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginByGoogleServlet</servlet-name>
+        <servlet-class>controller.common.LoginByGoogleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginByAccountServlet</servlet-name>
         <url-pattern>/loginbyaccount</url-pattern>
@@ -168,6 +172,10 @@
     <servlet-mapping>
         <servlet-name>EditCartAddressServlet</servlet-name>
         <url-pattern>/editcartaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginByGoogleServlet</servlet-name>
+        <url-pattern>/loginbygoogle</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>

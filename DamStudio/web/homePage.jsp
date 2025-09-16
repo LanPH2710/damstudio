@@ -24,7 +24,7 @@
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Son tinh thuy tinh.png')"></div>
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/Su tich ho guom.png')"></div>
                     <div class="slides" style="--img: url('${pageContext.request.contextPath}/image/homeSlider/con rong chau tien.png')"></div>
-                    
+
                 </div>
                 <div class="buttons">
                     <span class="prev"></span>
@@ -218,6 +218,25 @@
                     slider.appendChild(slides[0]);
                 }, 15000);
             });
+        </script>
+
+        <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
+        <script>
+                    new CozeWebSDK.WebChatClient({
+                        config: {
+                            bot_id: '7527700457444409362',
+                        },
+                        componentProps: {
+                            title: 'Coze',
+                        },
+                        auth: {
+                            type: 'token',
+                            token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
+                            onRefreshToken: function () {
+                                return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1'
+                            }
+                        }
+                    });
         </script>
     </body>
 </html>

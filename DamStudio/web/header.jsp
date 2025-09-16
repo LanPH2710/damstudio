@@ -38,7 +38,7 @@
                     <li><a href="productlist">PRODUCT</a></li>
                     <li class="dropdown">STORY
                         <ul class="submenu">
-                            <li><a href="https://lanph2710.github.io/damstudio/testSTHG.html">Sự tích hồ Gươm</a></li>
+                            <li><a href="https://lanph2710.github.io/damstudio/sutichhoguom.html">Sự tích hồ Gươm</a></li>
 <!--                            <li><a href="#">Sơn tinh thủy tinh</a></li>
                             <li><a href="#">Con rồng cháu tiên</a></li>
                             <li><a href="#">Thánh Gióng</a></li>
