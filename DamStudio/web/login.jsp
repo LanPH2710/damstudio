@@ -29,7 +29,8 @@
 
                 <form action="loginbyaccount" method="post" class="login-form">
                     <div class="social-login">
-                        <a href="login-google" class="google-btn">
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20email%20profile&redirect_uri=http://localhost:9999/DamStudio/loginbygoogle&response_type=code&client_id=39567511414-g806rgl6qc53stht3sr3sseav6oicv1m.apps.googleusercontent.com&access_type=offline&prompt=consent" 
+                           class="google-btn">
                             <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon">
                             Đăng nhập bằng Google
                         </a>
