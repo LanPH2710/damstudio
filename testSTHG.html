@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sự Tích Hồ Gươm</title>
+  <!-- <link rel="stylesheet" href="demo1.css" /> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 17000px;
+      overflow-x: hidden;
+      font-family: sans-serif;
+    }
+
+    #scene {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      background: #4D4D4D;
+    }
+
+
+
+
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      font-size: 4rem;
+      color: white;
+      z-index: 10;
+    }
+
+    .scene1-element,
+    .scene-element,
+    .scene2-element,
+    .scene3-element,
+    .scene4-element,
+    .scene5-element,
+    .scene6-element,
+    .scene7-element {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      opacity: 0;
+      width: 100vw;
+      height: 100vh;
+      transform-origin: bottom center;
+    }
+
+
+    #floorText {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90vw;
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      z-index: 10;
+    }
+
+    #s2Text1,
+    #s2Text2a,
+    #s2Text2b,
+    #s2Text3,
+    #s3Text1,
+    #s3Text2a,
+    #s3Text2b,
+    #s3Text3a,
+    #s3Text3b,
+    #s4Text1,
+    #s4Text2,
+    #s5Text,
+    #s6Text,
+    #s7Text1,
+    #s7Text2a,
+    #s7Text2b,
+    #s7Text3 {
+      position: absolute;
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      z-index: 9;
+    }
+
+    #s2Text1,
+    #s2Text2a {
+      bottom: 10%;
+      right: 5%;
+      width: 40vw;
+    }
+
+    #s2Text2b {
+      top: 2%;
+      left: 2%;
+    }
+
+    #s2Text3 {
+      bottom: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw;
+      text-align: center;
+    }
+
+    #s3Text1 {
+      top: 10%;
+      left: 5%;
+    }
+
+    #s3Text2a {
+      bottom: 10%;
+      right: 5%;
+      text-align: right;
+      width: 40vw;
+    }
+
+    #s3Text2b {
+      top: 10%;
+      left: 5%;
+    }
+
+    #s3Text3a {
+      top: 10%;
+      left: 5%;
+    }
+
+    #s3Text3b {
+      bottom: 5%;
+      right: 5%;
+      text-align: right;
+      width: 40vw;
+    }
+
+
+
+    #s4Text1 {
+      bottom: 5%;
+      right: 5%;
+    }
+
+    #s4Text2 {
+      top: 5%;
+      left: 5%;
+    }
+
+
+    #s5Text {
+      bottom: 5%;
+      right: 5%;
+      text-align: right;
+      width: 40vw;
+    }
+
+    #s6Text {
+      top: 5%;
+
+    }
+
+    #s7Text1 {
+      top: 5%;
+      left: 5%;
+    }
+
+
+
+    #s7Text2a {
+      bottom: 5%;
+      right: 5%;
+      text-align: right;
+      width: 40vw;
+    }
+
+    #s7Text2b {
+      top: 5%;
+      left: 5%;
+    }
+
+    #s7Text3 {
+      bottom: 5%;
+      right: 5%;
+      text-align: right;
+      width: 40vw;
+    }
+
+    /* ========================== SCENE 1 ========================== */
+    #floor {
+      z-index: 106;
+    }
+
+    #house1 {
+      z-index: 105;
+    }
+
+    #enemy1 {
+      z-index: 104;
+    }
+
+    #house2 {
+      z-index: 103;
+    }
+
+    #enemy2 {
+      z-index: 102;
+    }
+
+    #fire {
+      z-index: 101;
+    }
+
+    #floorText {
+      z-index: 110;
+    }
+
+    /* ========================== SCENE 2 ========================== */
+    #s2cloud {
+      z-index: 201;
+    }
+
+    #s2mountain2sd {
+      z-index: 202;
+    }
+
+    #s2mountain1sd {
+      z-index: 203;
+    }
+
+    #s2mountain2 {
+      z-index: 204;
+    }
+
+    #s2mountain1 {
+      z-index: 205;
+    }
+
+    #s2boatsd {
+      z-index: 206;
+    }
+
+    #s2fisherman {
+      z-index: 207;
+    }
+
+    #s2Text1,
+    #s2Text2a,
+    #s2Text2b,
+    #s2Text3 {
+      z-index: 210;
+    }
+
+    /* ========================== SCENE 3 ========================== */
+    #s3tree2 {
+      z-index: 301;
+    }
+
+    #s3enemy {
+      z-index: 302;
+    }
+
+    #s3tree1 {
+      z-index: 303;
+    }
+
+    #s3hero {
+      z-index: 305;
+    }
+
+    #s3handstiff {
+      z-index: 304;
+    }
+
+    #s3Text1,
+    #s3Text2a,
+    #s3Text2b,
+    #s3Text3a,
+    #s3Text3b {
+      z-index: 310;
+    }
+
+    /* ========================== SCENE 4 ========================== */
+    #s4sword {
+      z-index: 404;
+    }
+
+    #s4hero {
+      z-index: 403;
+    }
+
+    #s4men1 {
+      z-index: 402;
+    }
+
+    #s4men2 {
+      z-index: 401;
+    }
+
+    #s4Text1,
+    #s4Text2 {
+      z-index: 410;
+    }
+
+    /* ========================== SCENE 5 ========================== */
+    #s5floor1 {
+      z-index: 506;
+    }
+
+    #s5hero {
+      z-index: 505;
+    }
+
+    #s5floor2 {
+      z-index: 504;
+    }
+
+    #s5men1 {
+      z-index: 503;
+    }
+
+    #s5men2 {
+      z-index: 502;
+    }
+
+    #s5men3 {
+      z-index: 501;
+    }
+
+    #s5Text {
+      z-index: 510;
+    }
+
+    /* ========================== SCENE 6 ========================== */
+    #s6people1 {
+      z-index: 605;
+    }
+
+    #s6people2 {
+      z-index: 604;
+    }
+
+    #s6hero {
+      z-index: 603;
+    }
+
+    #s6sword {
+      z-index: 602;
+    }
+
+    #s6people3 {
+      z-index: 601;
+    }
+
+    #s6Text {
+      z-index: 610;
+    }
+
+    /* ========================== SCENE 7 ========================== */
+    #s7light {
+      z-index: 705;
+    }
+
+    #s7turtle {
+      z-index: 704;
+    }
+
+    #s7turtlesd {
+      z-index: 703;
+    }
+
+    #s7boat {
+      z-index: 702;
+    }
+
+    #s7boatsd {
+      z-index: 701;
+    }
+
+    #s7Text1,
+    #s7Text2a,
+    #s7Text2b,
+    #s7Text3 {
+      z-index: 710;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="rotate-warning" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  color: white;
+  font-size: 1.5rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 99999;
+">
+  Vui lòng xoay ngang màn hình<br>(Rotate your phone for best experience)
+</div>
+
+
+
+
+  <button id="startButton" style="
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  font-size: 16px;
+  z-index: 9999;
+">
+    Bắt đầu trải nghiệm
+  </button>
+
+  <section id="scene">
+    <h1 class="title">Sự Tích Hồ Gươm</h1>
+
+    <img id="floor" src="images/floor.png" class="scene-element layer-floor" />
+    <img id="house1" src="images/house1.png" class="scene-element layer-house1" />
+    <img id="enemy1" src="images/enemy1.png" class="scene-element layer-enemy1" />
+    <img id="house2" src="images/house2.png" class="scene-element layer-house2" />
+    <img id="enemy2" src="images/enemy2.png" class="scene-element layer-enemy2" />
+    <img id="fire" src="images/fire.png" class="scene-element layer-fire" />
+
+    <div id="floorText">Vào thời giặc Minh xâm lược nước ta, đi đến đâu chúng cũng tàn sát người dân vô tội, cướp bóc
+      của cải của
+      nhân dân. <br>Cuộc sống của người dân vô cùng cực khổ, và lầm than.</div>
+
+    <!-- Elements scene 2 -->
+    <img id="s2cloud" src="SuTichHoGuom/Sence 2/1x/cloud.png" class="scene2-element" />
+    <img id="s2mountain2sd" src="SuTichHoGuom/Sence 2/1x/mountain2shadow.png" class="scene2-element" />
+    <img id="s2mountain2" src="SuTichHoGuom/Sence 2/1x/mountain2.png" class="scene2-element" />
+    <img id="s2mountain1sd" src="SuTichHoGuom/Sence 2/1x/mountain1shadow.png" class="scene2-element" />
+    <img id="s2mountain1" src="SuTichHoGuom/Sence 2/1x/mountain1.png" class="scene2-element" />
+    <img id="s2boatsd" src="SuTichHoGuom/Sence 2/1x/boatshadow.png" class="scene2-element" />
+    <img id="s2fisherman" src="SuTichHoGuom/Sence 2/1x/fisherman.png" class="scene2-element" />
+    <!-- Đoạn text scene2 -->
+    <div id="s2Text1">Hồi ấy ở Thanh Hóa, có một người đi đánh cá dưới sông tên là Lê Thận, khi kéo lên thấy lưới rất
+      nặng. Tuy nhiên khi lưới được kéo lên thì không có một con cá nào mà chỉ là một lưỡi gươm cũ.
+    </div>
+
+    <div id="s2Text2a">Anh bèn quăng lưỡi gươm đi xa hơn rồi kéo lưới lại nhưng lần 2, lần 3 vẫn chỉ có lưỡi gươm này
+      mắc vào lưới.
+    </div>
+
+    <div id="s2Text2b">Sao vẫn là lưỡi gươm này vậy??
+    </div>
+
+    <div id="s2Text3">Không bắt được cá. anh đành cầm lưỡi gươm cũ mang về để trong góc nhà. Sau đó không lâu Lê Thận
+      gia nhập nghĩa quân. được Lê Lợi vô cùng tin tưởng.
+    </div>
+
+
+
+
+    <!-- Elements scene 3 -->
+    <img id="s3tree2" src="SuTichHoGuom/sence 3/1x/tree2.png" class="scene3-element" />
+    <img id="s3enemy" src="SuTichHoGuom/sence 3/1x/enemy.png" class="scene3-element" />
+    <img id="s3tree1" src="SuTichHoGuom/sence 3/1x/tree1.png" class="scene3-element" />
+    <img id="s3hero" src="SuTichHoGuom/sence 3/1x/LeLoi.png" class="scene3-element" />
+    <img id="s3handstiff" src="SuTichHoGuom/sence 3/1x/handstiff.png" class="scene3-element" />
+    <!-- Đoạn text scene3 -->
+    <div id="s3Text1">Thời gian sau, Lê Lợi bị quân giặc đuổi theo vào trong rừng sâu.
+    </div>
+
+    <div id="s3Text2a">Khi đang chạy trốn, ông nhìn thấy có một vật sáng chói trên cành cây.Nhìn kĩ thì thấy một cái
+      chuôi gươm nạm ngọc sáng lấp lánh.
+    </div>
+
+    <div id="s3Text2b">Là chuôi gươm sao?
+    </div>
+
+    <div id="s3Text3a">Ghép với lưỡi gươm kia thật giống 1 bộ.
+    </div>
+    <div id="s3Text3b">Lại nhớ tới hôm ở nhà Lê Thận có lưỡi gươm phát sáng Lê Lợi liền cầm chuôi gươm về.
+    </div>
+
+
+
+    <!-- Elements scene 4 -->
+    <img id="s4men2" src="SuTichHoGuom/scene 4/1x/men2.png" class="scene4-element" />
+    <img id="s4men1" src="SuTichHoGuom/scene 4/1x/men1.png" class="scene4-element" />
+    <img id="s4hero" src="SuTichHoGuom/scene 4/1x/LeLoi_1.png" class="scene4-element" />
+    <img id="s4sword" src="SuTichHoGuom/scene 4/1x/sword.png" class="scene4-element" />
+    <!-- Đoạn text scene4 -->
+    <div id="s4Text1">sau khi ghép lưỡi gươm với chuôi gươm thì lại vừa in như một cặp, lưỡi gươm trở lên sáng chói
+      và sắc nhọn vô cùng
+    </div>
+
+    <div id="s4Text2">Có lẽ đây là gươm báu trời ban, giúp nghĩa quân đánh giặc xâm lược
+    </div>
+
+
+    <!-- Elements scene 5 -->
+    <img id="s5men3" src="SuTichHoGuom/scene 5/1x/men3.png" class="scene5-element" />
+    <img id="s5men2" src="SuTichHoGuom/scene 5/1x/men2_1.png" class="scene5-element" />
+    <img id="s5men1" src="SuTichHoGuom/scene 5/1x/men1_1.png" class="scene5-element" />
+    <img id="s5floor2" src="SuTichHoGuom/scene 5/1x/floor2.png" class="scene5-element" />
+    <img id="s5hero" src="SuTichHoGuom/scene 5/1x/LeLoi_2.png" class="scene5-element" />
+    <img id="s5floor1" src="SuTichHoGuom/scene 5/1x/floor1.png" class="scene5-element" />
+    <!-- Đoạn text scene5 -->
+    <div id="s5Text">Kể từ đó, nghĩa quân đánh đâu thắng đó, trăm trận trăm thắng. Chẳng bao lâu sau, dưới sự lãnh đạo
+      của Lê Lợi và nhờ gươm thần mà nghĩa quân đã đánh bại quân Minh.
+    </div>
+
+    <!-- Elements scene 6 -->
+    <img id="s6people3" src="SuTichHoGuom/scene 6/1x/people3.png" class="scene6-element" />
+    <img id="s6sword" src="SuTichHoGuom/scene 6/1x/sword_1.png" class="scene6-element" />
+    <img id="s6hero" src="SuTichHoGuom/scene 6/1x/LeLoi_3.png" class="scene6-element" />
+    <img id="s6people2" src="SuTichHoGuom/scene 6/1x/people2.png" class="scene6-element" />
+    <img id="s6people1" src="SuTichHoGuom/scene 6/1x/people1.png" class="scene6-element" />
+    <!-- Đoạn text scene6 -->
+    <div id="s6Text">Giặc sợ hãi bỏ tháo chạy về phương Bắc, muôn dân lại được thái bình, Lê Lợi lên ngôi vua để trị vì
+      và thống nhất đất nước
+    </div>
+
+    <!-- Elements scene 7 -->
+    <img id="s7boatsd" src="SuTichHoGuom/scene 7/1x/boatshadow_1.png" class="scene7-element" />
+    <img id="s7boat" src="SuTichHoGuom/scene 7/1x/boat.png" class="scene7-element" />
+    <img id="s7turtlesd" src="SuTichHoGuom/scene 7/1x/turtleshadow.png" class="scene7-element" />
+    <img id="s7turtle" src="SuTichHoGuom/scene 7/1x/turtle.png" class="scene7-element" />
+    <img id="s7light" src="SuTichHoGuom/scene 7/1x/light.png" class="scene7-element" />
+    <!-- Đoạn text scene7 -->
+    <div id="s7Text1">Một năm sau, khi nhà vua cùng các bề tôi thân tín ngồi thuyền đi dạo trên hồ Tả Vọng trước kinh
+      thành.Khi thuyền ra tới giữa hồ thì bất ngờ từ dưới làn nước trong xanh, có một con rùa vàng ngoi đầu lên, cất
+      tiếng:
+    </div>
+
+    <div id="s7Text2a">Thưa nhà vua, lúc trước Đức Long Quân có cho nhà vua mượn thanh gươm thần để đánh giặc
+    </div>
+
+    <div id="s7Text2b"> Nay nghiệp lớn đã hoàn thành, xin nhà vua hãy trả lại gươm thần!
+
+    </div>
+
+    <div id="s7Text3">Lê Lợi nghe xong, liền cởi thanh gươm bên mình ra, cầm hai tay và dâng lên trước mặt rùa vàng.
+
+    </div>
+  </section>
+  <!-- AUDIO -->
+  <!-- audio intro -->
+  <audio id="audio-intro" src="audio/voice_STHG/intro.mp3"></audio>
+
+  <!-- audio sence1 -->
+  <audio id="audio-scene1" src="audio/voice_STHG/s1.mp3"></audio>
+
+  <!-- Scene 2 -->
+  <audio id="audio-scene2p1" src="audio/voice_STHG/s2p1.mp3"></audio>
+  <audio id="audio-scene2p2" src="audio/voice_STHG/s2p2.mp3"></audio>
+  <audio id="audio-scene2p3" src="audio/voice_STHG/s2p3.mp3"></audio>
+
+  <!-- Scene 3 -->
+  <audio id="audio-scene3p1" src="audio/voice_STHG/s3p1.mp3"></audio>
+  <audio id="audio-scene3p2" src="audio/voice_STHG/s3p2.mp3"></audio>
+  <audio id="audio-scene3p3" src="audio/voice_STHG/s3p3.mp3"></audio>
+
+
+
+  <!-- audio scene4 -->
+  <audio id="audio-scene4" src="audio/voice_STHG/s4p1.mp3"></audio>
+
+  <!-- audio scene5 -->
+  <audio id="audio-scene5" src="audio/voice_STHG/s5.mp3"></audio>
+
+  <!-- audio scene6 -->
+  <audio id="audio-scene6" src="audio/voice_STHG/s6.mp3"></audio>
+
+  <!-- Scene 7 -->
+  <audio id="audio-scene7p1" src="audio/voice_STHG/s7p1.mp3"></audio>
+  <audio id="audio-scene7p2" src="audio/voice_STHG/s7p2.mp3"></audio>
+  <audio id="audio-scene7p2b" src="audio/voice_STHG/s7p2b.mp3"></audio>
+  <audio id="audio-scene7p3" src="audio/voice_STHG/s7p3.mp3"></audio>
+
+  <button id="autoScrollBtn" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #ffffffcc;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 9999;
+">Auto Scroll</button>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+
+    //intro
+    gsap.to(".title", {
+      opacity: 0,
+      y: -100,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top top",
+        end: "top+=500",
+        scrub: true
+      }
+    });
+
+    //screen1 fade in
+    gsap.to(["#fire", "#enemy2", "#house2", "#enemy1", "#house1", "#floor"], {
+      opacity: 0,
+      y: 100,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=1600",
+        end: "top+=2500",
+        scrub: true
+      }
+    });
+
+
+    const elements = [
+      { id: "floor", scale: 1.56 },
+      { id: "house1", scale: 1.52 },
+      { id: "enemy1", scale: 1.28 },
+      { id: "house2", scale: 1.1 },
+      { id: "enemy2", scale: 1.4 },
+      { id: "fire", scale: 1.16 }
+    ];
+
+    // Step 1: Fade-in
+    elements.forEach((el, i) => {
+      gsap.fromTo(`#${el.id}`,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: "#scene",
+            start: `top+=${400 + i * 150}`,
+            end: `top+=${500 + i * 150}`,
+            scrub: true
+          }
+        });
+    });
+
+    // Step 2: Zoom
+    elements.forEach((el) => {
+      gsap.fromTo(`#${el.id}`,
+        { scale: 1, opacity: 1 },
+        {
+          scale: el.scale,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: "#scene",
+            start: "top+=1400",
+            end: "top+=2000",
+            scrub: true
+          }
+        });
+    });
+
+    // Step 3: Fade out
+    elements.forEach((el) => {
+      gsap.to(`#${el.id}`, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=2000",
+          end: "top+=2500",
+          scrub: true
+        }
+      });
+    });
+
+
+    //screen1 text
+    gsap.fromTo("#floorText", { y: 100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=1400",
+        end: "top+=2000",
+        scrub: true
+      }
+    });
+
+    gsap.to("#floorText", {
+      y: 200,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2500",
+        scrub: true
+      }
+    });
+
+    gsap.to(".scene1-element", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2500",
+        scrub: true
+      }
+    });
+    //-----------------------------------------------------------SCENE 2----------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //screen2 fade in part1
+    // Hiệu ứng xuất hiện người đánh cá và thuyền (bước đầu tiên)
+    gsap.fromTo("#s2fisherman", { x: -500, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2boatsd", { x: -500, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+
+    // Núi & mây
+    gsap.fromTo("#s2mountain1", { y: 50, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2mountain2", { y: 50, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2mountain1sd", { y: -50, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2mountain2sd", { y: -50, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2cloud", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2000",
+        end: "top+=2750",
+        scrub: true
+      }
+    });
+
+    // Text 1
+    gsap.fromTo("#s2Text1", { y: 100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=2500",
+        end: "top+=3000",
+        scrub: true
+      }
+    });
+    // SCENE 2 CONTINUES
+    gsap.fromTo("#s2Text1", { y: 0, opacity: 0 }, {
+      y: 200,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=3000",
+        end: "top+=3500",
+        scrub: true
+      }
+    });
+
+    // Text 2a
+    gsap.fromTo("#s2Text2a", { y: 100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=3000",
+        end: "top+=3500",
+        scrub: true
+      }
+    });
+
+    // Text 2b
+    gsap.fromTo("#s2Text2b", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=3500",
+        end: "top+=4000",
+        scrub: true
+      }
+    });
+
+    // Ẩn text 2a và 2b
+    gsap.to("#s2Text2a", {
+      y: 200,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=4000",
+        end: "top+=4500",
+        scrub: true
+      }
+    });
+    gsap.to("#s2Text2b", {
+      y: -200,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=4000",
+        end: "top+=4500",
+        scrub: true
+      }
+    });
+
+    // Fisherman & boat ra khỏi màn hình
+    gsap.fromTo("#s2fisherman", { x: 0, opacity: 0 }, {
+      x: -700,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=4000",
+        end: "top+=4500",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s2boatsd", { x: 0, opacity: 0 }, {
+      x: -700,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=4000",
+        end: "top+=4500",
+        scrub: true
+      }
+    });
+
+    // Text 3
+    gsap.fromTo("#s2Text3", { y: 100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=4500",
+        end: "top+=5000",
+        scrub: true
+      }
+    });
+
+    // Fade out toàn bộ Scene 2
+    gsap.to(".scene2-element, #s2Text1, #s2Text2a, #s2Text2b, #s2Text3", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5000",
+        end: "top+=5500",
+        scrub: true
+      }
+    });
+
+    //------------------------------------------------------------------------SCENE 3------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    // === SCENE 3 - PART 1: Cây, hero, enemy, text1 (5500 → 6500) ===
+    gsap.fromTo("#s3tree2", { y: 100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5000",
+        end: "top+=5750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s3tree1", { y: 100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5000",
+        end: "top+=5750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s3handstiff", { y: 100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5000",
+        end: "top+=5750",
+        scrub: true
+      }
+    });
+
+
+    ["#s3tree1", "#s3tree2", "#s3handstiff"].forEach(id => {
+      gsap.to(id, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=5751", // ngay sau khi fade-in xong
+          end: "top+=8000",   // đến lúc bắt đầu fade-out
+          scrub: false,
+          immediateRender: false
+        }
+      });
+    });
+
+
+
+    gsap.fromTo("#s3hero", { x: -500, scale: 0.5, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5000",
+        end: "top+=5750",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s3enemy", { y: "100%", x: "20%", scale: 0.4, opacity: 0 }, {
+      y: "0%", x: "0%", scale: 0.66, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5750",
+        end: "top+=6000",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s3Text1", { y: -100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=5800",
+        end: "top+=6000",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s3hero",
+      { x: 0, scale: 1, opacity: 1 }, // trạng thái kết thúc Part 1
+      {
+        x: 100, // đi tiếp
+        scale: 1,
+        opacity: 1,
+        // immediateRender: false, // 🔥 quan trọng
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=6500",
+          end: "top+=6750",
+          scrub: true
+        }
+      });
+
+
+    gsap.fromTo("#s3enemy",
+      { x: 0, scale: 0.66, opacity: 1 }, // trạng thái cuối Part 1
+      {
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        // immediateRender: false,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=6500",
+          end: "top+=6750",
+          scrub: true
+        }
+      });
+
+
+
+
+    gsap.to("#s3Text1", {
+      y: -300,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=6500",
+        end: "top+=6750",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s3Text2a", { y: 100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=6700",
+        end: "top+=7000",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s3Text2b", { y: -100, opacity: 0 }, {
+      y: 0, opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=6700",
+        end: "top+=7000",
+        scrub: true
+      }
+    });
+    gsap.to("#s3Text2a", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=7000",
+        end: "top+=7250",
+        scrub: true
+      }
+    });
+    gsap.to("#s3Text2b", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=7000",
+        end: "top+=7250",
+        scrub: true
+      }
+    });
+
+    // === SCENE 3 - PART 3: Text3a + 3b, hand xoay, fade out (7500 → 8500) ===
+    gsap.fromTo("#s3Text3b", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=7500",
+        end: "top+=7750",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s3Text3a", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=7500",
+        end: "top+=7750",
+        scrub: true
+      }
+    });
+
+
+    gsap.fromTo("#s3hero",
+      { x: 100, scale: 1, opacity: 1 },
+      {
+        x: 200,
+        scale: 1,
+        opacity: 1,
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=7500",
+          end: "top+=7750",
+          scrub: true
+        }
+      });
+
+
+    gsap.fromTo("#s3handstiff",
+      { x: 100, y: 10, rotation: 0, opacity: 1 },
+      {
+        x: 450,
+        y: 100,
+        rotation: -31,
+        opacity: 1,
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=7500",
+          end: "top+=7750",
+          scrub: true
+        }
+      });
+
+    gsap.to(
+      ".scene3-element, #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b, #s3tree1, #s3tree2, #s3handstiff, #s3hero, #s3enemy",
+      {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=8000",
+          end: "top+=8500",
+          scrub: true
+        }
+      }
+    );
+
+
+
+    // gsap.to(".scene3-element, #s3Text1, #s3Text2a, #s3Text2b, #s3Text3a, #s3Text3b", {
+    //   opacity: 0,
+    //   scrollTrigger: {
+    //     trigger: "#scene",
+    //     start: "top+=8000",
+    //     end: "top+=8500",
+    //     scrub: true
+    //   }
+    // });
+    //--------------------------------------------------------------------SCENE 4-------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ===== Scene 4: Các element scale về 1, text hiện trái/phải vào =====
+    ["#s4men1", "#s4men2", "#s4hero", "#s4sword"].forEach(id => {
+      gsap.fromTo(id, { scale: 1.6, opacity: 0 }, {
+        scale: 1,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=8300",
+          end: "top+=9500",
+          scrub: true
+        }
+      });
+    });
+
+    gsap.fromTo("#s4Text1", { x: 200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=9500",
+        end: "top+=10200",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s4Text2", { x: -200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=9800",
+        end: "top+=10500",
+        scrub: true
+      }
+    });
+
+    gsap.to(["#s4men1", "#s4men2", "#s4hero", "#s4sword", "#s4Text1", "#s4Text2"], {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=10500",
+        end: "top+=11500",
+        scrub: true
+      }
+    });
+
+    //--------------------------------------SCENE 5--------------------------------------------------------------------------------
+    // ===== Scene 5: Element từ trái vào giữa, text từ phải vào =====
+    ["#s5floor1", "#s5hero", "#s5floor2", "#s5men1", "#s5men2", "#s5men3"].forEach((id, i) => {
+      gsap.fromTo(id, { x: -200, opacity: 0 }, {
+        x: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: `top+=10500`,
+          end: `top+=11500`,
+          scrub: true
+        }
+      });
+    });
+
+    gsap.fromTo("#s5Text", { x: 200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=10500",
+        end: "top+=11500",
+        scrub: true
+      }
+    });
+
+
+    gsap.to(".scene5-element, #s5Text, #s5hero, #s5men1, #s5men2, #s5men3, #s5floor1, #s5floor2", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=11500",
+        end: "top+=12500",
+        scrub: true
+      }
+    });
+
+    //--------------------------------------SCENE 6--------------------------------------------------------------------------------
+    // ===== Scene 6: Text từ trên xuống =====
+    ["#s6people1", "#s6people2", "#s6people3", "#s6hero", "#s6sword"].forEach(id => {
+      gsap.fromTo(id, { y: 100 }, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#scene",
+          start: "top+=11500",
+          end: "top+=12500",
+          scrub: true
+        }
+      });
+    });
+
+    gsap.fromTo("#s6Text", { y: -100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=11500",
+        end: "top+=12500",
+        scrub: true
+      }
+    });
+
+    gsap.to(".scene6-element, #s6people1, #s6people2, #s6hero, #s6sword", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13500",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s6Text", { x: 0, opacity: 0 }, {
+      x: -2000,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13500",
+        scrub: true
+      }
+    });
+    //--------------------------------------SCENE 7--------------------------------------------------------------------------------
+    // ===== Scene 7: Part 1 - boat + turtle xuất hiện, text1 =====
+    gsap.fromTo("#s7boat", { x: 2000, opacity: 0 }, {
+      x: 1200,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13000",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s7boatsd", { x: 2000, opacity: 0 }, {
+      x: 1200,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13000",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s7turtle", { y: 200, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13000",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s7turtlesd", { y: -50, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=12500",
+        end: "top+=13000",
+        scrub: true
+      }
+    });
+
+    gsap.fromTo("#s7Text1", { x: -200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=13000",
+        end: "top+=13500",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s7Text2a", { x: 200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=13500",
+        end: "top+=14000",
+        scrub: true
+      }
+    });
+    // text1, 2a hide
+    gsap.fromTo("#s7Text1", { x: 0, opacity: 0 }, {
+      x: -2000,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14000",
+        end: "top+=14500",
+        scrub: true
+      }
+    });
+    gsap.fromTo("#s7Text2a", { x: 0, opacity: 0 }, {
+      x: 2000,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14000",
+        end: "top+=14500",
+        scrub: true
+      }
+    });
+    // ===== Scene 7: Part 2 - boat tiến vào giữa, text2a/b xuất hiện =====
+    gsap.to("#s7boat", {
+      x: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14000",
+        end: "top+=14500",
+        scrub: true
+      }
+    });
+
+    gsap.to("#s7boatsd", {
+      x: 0,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14000",
+        end: "top+=14500",
+        scrub: true
+      }
+    });
+
+
+
+    gsap.fromTo("#s7Text2b", { y: -100, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14000",
+        end: "top+=14500",
+        scrub: true
+      }
+    });
+
+
+    gsap.fromTo("#s7Text3", { x: 200, opacity: 0 }, {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#scene",
+        start: "top+=14500",
+        end: "top+=15000",
+        scrub: true
+      }
+    });
+
+
+    ScrollTrigger.create({
+      trigger: "#scene",
+      start: "top top",
+      end: "+=16000",
+      pin: true,
+      scrub: true
+    });
+
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
+
+
+    // ========================== AUDIO PLAY LOGIC ==========================
+    function setupAudioTriggers() {
+      const audioMap = [
+        { id: "audio-intro", start: 0 },
+        { id: "audio-scene1", start: 400 },
+
+        // Scene 2
+        { id: "audio-scene2p1", start: 2500 },
+        { id: "audio-scene2p2", start: 3000 },
+        { id: "audio-scene2p3", start: 4500 },
+
+        // Scene 3
+        { id: "audio-scene3p1", start: 5500 },
+        { id: "audio-scene3p2", start: 6700 },
+        { id: "audio-scene3p3", start: 7500 },
+
+        // Scene 4
+        { id: "audio-scene4", start: 9500 },
+
+        // Scene 5
+        { id: "audio-scene5", start: 10500 },
+
+        // Scene 6
+        { id: "audio-scene6", start: 11500 },
+
+        // Scene 7
+        { id: "audio-scene7p2", start: 13000 },
+        { id: "audio-scene7p2b", start: 13500 },
+        { id: "audio-scene7p3", start: 14500 },
+      ];
+
+      const played = new Set();
+
+      audioMap.forEach(({ id, start }) => {
+        ScrollTrigger.create({
+          trigger: "#scene",
+          start: `top+=${start}`,
+          end: `top+=${start + 100}`, // chỉ cần khoảng ngắn để trigger
+          onEnter: () => {
+            if (!played.has(id)) {
+              const audio = document.getElementById(id);
+              if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(err => console.warn("Lỗi phát audio", err));
+                played.add(id);
+              }
+            }
+          }
+        });
+      });
+    }
+
+
+    document.getElementById("startButton").addEventListener("click", () => {
+      document.getElementById("startButton").style.display = "none";
+
+      // Duyệt qua từng audio và gọi play() để kích hoạt quyền
+      const audios = document.querySelectorAll("audio");
+      audios.forEach(audio => {
+        audio.muted = false;
+        audio.play().then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+        }).catch(err => {
+          console.warn(`Không thể khởi tạo audio ${audio.id}:`, err);
+        });
+      });
+
+      // Gọi setup trigger sau khi đã kích hoạt interaction
+      setupAudioTriggers();
+    });
+
+
+
+
+
+
+    let scrolling = false;
+    let scrollInterval = null;
+
+    document.getElementById("autoScrollBtn").addEventListener("click", () => {
+      scrolling = !scrolling;
+
+      const btn = document.getElementById("autoScrollBtn");
+      btn.textContent = scrolling ? "Dừng Cuộn" : "Auto Scroll";
+
+      if (scrolling) {
+        scrollInterval = setInterval(() => {
+          window.scrollBy(0, 4); // cuộn 2px mỗi 16ms (~120px/s)
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            clearInterval(scrollInterval);
+            btn.textContent = "Auto Scroll";
+            scrolling = false;
+          }
+        }, 16);
+      } else {
+        clearInterval(scrollInterval);
+      }
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      // Nếu đang ở đầu trang
+      if (scrollTop === 0) {
+        const idsToHideTemporarily = [
+          '#s3tree1', '#s3tree2', '#s3hero', '#s3enemy',
+          '#s3handstiff', '#s3Text1', '#s3Text2a', '#s3Text2b', '#s3Text3a', '#s3Text3b', '#house1', '#house2', '#enemy1', '#enemy2', '#fire', '#floor'
+        ];
+
+        idsToHideTemporarily.forEach(selector => {
+          const el = document.querySelector(selector);
+          if (el) el.style.opacity = '0';
+        });
+
+        // Kick GSAP refresh ngay sau đó
+        setTimeout(() => {
+          idsToHideTemporarily.forEach(selector => {
+            const el = document.querySelector(selector);
+            if (el) el.style.opacity = ''; // Trả về trạng thái bình thường để GSAP xử lý lại
+          });
+          ScrollTrigger.refresh(); // 💥 Đẩy lại toàn bộ trạng thái
+        }, 50);
+      }
+    });
+
+
+
+
+    function checkOrientation() {
+  const isPortrait = window.innerHeight > window.innerWidth;
+  const warning = document.getElementById('rotate-warning');
+  if (isPortrait && window.innerWidth < 768) {
+    warning.style.display = 'flex'; // Hiện cảnh báo nếu là mobile và đang xoay dọc
+  } else {
+    warning.style.display = 'none'; // Ẩn cảnh báo nếu đã xoay ngang
+  }
+}
+
+window.addEventListener("load", checkOrientation);
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("orientationchange", checkOrientation);
+
+
+
+
+
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        ScrollTrigger.refresh(true); // bắt buộc!
+      }, 50);
+    });
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
