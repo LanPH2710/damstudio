@@ -4,7 +4,6 @@ import dal.AccountDAO;
 import dal.AddressUserDAO;
 import dal.RoleDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -67,8 +66,11 @@ public class ProfileServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         int gender = Integer.parseInt(request.getParameter("gender"));
         String mobile = request.getParameter("mobile");
-        String address = request.getParameter("address");
         int addressId = Integer.parseInt(request.getParameter("addressId"));
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
+        String addressDetail = request.getParameter("addressDetail");
 
         // Xử lý upload avatar nếu có file mới
         Part file = request.getPart("avatar");
@@ -97,7 +99,7 @@ public class ProfileServlet extends HttpServlet {
 
         // Cập nhật account
         adao.editAccount(userName, password, firstName, lastName, gender, email, mobile, roleId, avatar, status, userId);
-        addressDAO.editAddress(userId, addressId, address);
+        addressDAO.editAddress(userId, addressId, province, district, ward, addressDetail);
         response.sendRedirect("profile");
     }
 

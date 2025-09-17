@@ -1,9 +1,13 @@
 package model;
 
 public class AddressUser {
+
     private int userId;
     private int addressId;
-    private String address;
+    private String province;
+    private String district;
+    private String ward;
+    private String addressDetail;
     private String name;
     private String email;
     private String phone;
@@ -11,10 +15,13 @@ public class AddressUser {
     public AddressUser() {
     }
 
-    public AddressUser(int userId, int addressId, String address, String name, String email, String phone) {
+    public AddressUser(int userId, int addressId, String province, String district, String ward, String addressDetail, String name, String email, String phone) {
         this.userId = userId;
         this.addressId = addressId;
-        this.address = address;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.addressDetail = addressDetail;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -36,12 +43,36 @@ public class AddressUser {
         this.addressId = addressId;
     }
 
-    public String getAddress() {
-        return address;
+    public String getProvince() {
+        return province;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getAddressDetail() {
+        return addressDetail;
+    }
+
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail;
     }
 
     public String getName() {
@@ -67,5 +98,5 @@ public class AddressUser {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
 }

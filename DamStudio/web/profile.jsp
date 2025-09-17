@@ -55,21 +55,39 @@
                                        value="${sessionScope.user1.mobile}" required>
                         </div>
                         <div style="grid-column: span 2;">
-                            <label class="labels">Địa chỉ</label>
+                            <label class="labels">Tỉnh/Thành phố</label>
                             <input type="hidden" name="addressId" value="${sessionScope.address[0].addressId}">
-                            <input name="address" type="text" class="form-control"
-                                   value="${sessionScope.address[0].address}" required>
+                            <input name="province" type="text" class="form-control"
+                                   value="${sessionScope.address[0].province}" required>
                         </div>
-<!--                        <div>
-                            <label class="labels">Vai trò</label>
-                            <input name="role" type="text" class="form-control"
-                                   value="${sessionScope.role}" readonly>
-                        </div>-->
-<!--                        <div>
-                            <label class="labels">Email</label>
-                            <input name="email" type="text" class="form-control"
-                                   value="${sessionScope.user1.email}" readonly>
-                        </div>-->
+
+                        <div style="grid-column: span 2;">
+                            <label class="labels">Quận/Huyện</label>
+                            <input name="district" type="text" class="form-control"
+                                   value="${sessionScope.address[0].district}" required>
+                        </div>
+
+                        <div style="grid-column: span 2;">
+                            <label class="labels">Xã/Phường</label>
+                            <input name="ward" type="text" class="form-control"
+                                   value="${sessionScope.address[0].ward}" required>
+                        </div>
+
+                        <div style="grid-column: span 2;">
+                            <label class="labels">Địa chỉ chi tiết</label>
+                            <input name="addressDetail" type="text" class="form-control"
+                                   value="${sessionScope.address[0].addressDetail}" required>
+                        </div>
+                        <!--                        <div>
+                                                    <label class="labels">Vai trò</label>
+                                                    <input name="role" type="text" class="form-control"
+                                                           value="${sessionScope.role}" readonly>
+                                                </div>-->
+                        <!--                        <div>
+                                                    <label class="labels">Email</label>
+                                                    <input name="email" type="text" class="form-control"
+                                                           value="${sessionScope.user1.email}" readonly>
+                                                </div>-->
                         <div style="grid-column: span 2;">
                             <label class="labels">Thay đổi ảnh đại diện</label>
                             <input name="avatar" type="file" class="form-control" accept="image/*" onchange="previewAvatar(event)"><br/>

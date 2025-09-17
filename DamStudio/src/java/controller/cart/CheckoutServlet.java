@@ -229,6 +229,10 @@ public class CheckoutServlet extends HttpServlet {
         int orderStatus = 1; // Pending
         int payMethodCode = payMethod.equalsIgnoreCase("cod") ? 2 : 3;
         OrderDAO orderDAO = new OrderDAO();
+        String fullAddress = selectedAddress.getAddressDetail() + ", " 
+                   + selectedAddress.getWard() + ", " 
+                   + selectedAddress.getDistrict() + ", " 
+                   + selectedAddress.getProvince();
         int orderId = orderDAO.addOrder(
                 acc.getUserId(),
                 selectedAddress.getName(),
@@ -240,7 +244,7 @@ public class CheckoutServlet extends HttpServlet {
                 payMethodCode,
                 voucherId, // <-- ghi nhận voucher đã dùng
                 null,
-                selectedAddress.getAddress()
+                fullAddress
         );
         if (orderId <= 0) {
             request.setAttribute("error", "Không thể tạo đơn hàng, vui lòng thử lại!");
