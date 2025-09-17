@@ -35,7 +35,9 @@
                                                     <i class="fa fa-pen"></i>
                                                 </a>
                                             </div>
-                                            <div class="address-detail">${address.address}</div>
+                                            <div class="address-detail">
+                                                ${address.addressDetail}, ${address.ward}, ${address.district}, ${address.province}
+                                            </div>
                                             <div class="address-contact">
                                                 <span class="email"><i class="fa fa-envelope"></i> ${address.email}</span>
                                                 <span class="phone"><i class="fa fa-phone"></i> ${address.phone}</span>
@@ -43,7 +45,7 @@
                                         </div>
                                     </label>
                                 </c:forEach>
-                                <a href="addAddressUser" class="btn-link add-address-btn"><i class="fa fa-plus"></i> Thêm địa chỉ mới</a>
+                                <a href="adddaddressuser" class="btn-link add-address-btn"><i class="fa fa-plus"></i> Thêm địa chỉ mới</a>
                             </div>
                         </div>
 
@@ -211,7 +213,7 @@
                         voucherDesc.textContent = "Giảm " + value + "% (tối đa " + formatCurrency(max) + ")";
                     } else if (type === 'amount') {
                         discount = value;
-                        voucherDesc.textContent = "Giảm trực tiếp" +formatCurrency(discount);
+                        voucherDesc.textContent = "Giảm trực tiếp" + formatCurrency(discount);
                     } else {
                         voucherDesc.textContent = '';
                     }

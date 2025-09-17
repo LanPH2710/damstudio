@@ -105,6 +105,10 @@
         <servlet-name>LoginByGoogleServlet</servlet-name>
         <servlet-class>controller.common.LoginByGoogleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAddressUserServlet</servlet-name>
+        <servlet-class>controller.cart.AddAddressUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginByAccountServlet</servlet-name>
         <url-pattern>/loginbyaccount</url-pattern>
@@ -176,6 +180,10 @@
     <servlet-mapping>
         <servlet-name>LoginByGoogleServlet</servlet-name>
         <url-pattern>/loginbygoogle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAddressUserServlet</servlet-name>
+        <url-pattern>/adddaddressuser</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>

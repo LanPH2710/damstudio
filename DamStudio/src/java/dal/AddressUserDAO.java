@@ -20,7 +20,10 @@ public class AddressUserDAO extends DBContext {
                 AddressUser addressUser = new AddressUser();
                 addressUser.setAddressId(rs.getInt("addressId"));
                 addressUser.setUserId(rs.getInt("userId"));
-                addressUser.setAddress(rs.getString("address"));
+                addressUser.setProvince(rs.getString("province"));
+                addressUser.setDistrict(rs.getString("district"));
+                addressUser.setWard(rs.getString("ward"));
+                addressUser.setAddressDetail(rs.getString("addressDetail"));
                 addressUser.setName(rs.getString("name"));
                 addressUser.setEmail(rs.getString("email"));
                 addressUser.setPhone(rs.getString("phone"));
@@ -43,7 +46,10 @@ public class AddressUserDAO extends DBContext {
                     addressUser = new AddressUser();
                     addressUser.setUserId(rs.getInt("userId"));
                     addressUser.setAddressId(rs.getInt("addressId"));
-                    addressUser.setAddress(rs.getString("address"));
+                    addressUser.setProvince(rs.getString("province"));
+                    addressUser.setDistrict(rs.getString("district"));
+                    addressUser.setWard(rs.getString("ward"));
+                    addressUser.setAddressDetail(rs.getString("addressDetail"));
                     addressUser.setName(rs.getString("name"));
                     addressUser.setEmail(rs.getString("email"));
                     addressUser.setPhone(rs.getString("phone"));
@@ -56,16 +62,46 @@ public class AddressUserDAO extends DBContext {
         return addressUser;
     }
 
-    public void editAddress(int userId, int addressId, String address) {
-        String sql = "UPDATE address SET address = ? where userId = ? and addressId = ?";
+    public void editAddress(int userId, int addressId, String province, String district, String ward,
+            String addressDetail) {
+        String sql = "UPDATE addressuser "
+                + "SET province = ?, district = ?, ward = ?, addressDetail = ?, "
+                + "WHERE userId = ? AND addressId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, address);
-            st.setInt(2, userId);
-            st.setInt(3, addressId);
+            st.setString(1, province);
+            st.setString(2, district);
+            st.setString(3, ward);
+            st.setString(4, addressDetail);
+            st.setInt(5, userId);
+            st.setInt(6, addressId);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    public void editCartAddress(int userId, int addressId, String province, String district, String ward,
+            String addressDetail, String name, String email, String phone) {
+        String sql = "UPDATE addressuser "
+                + "SET province = ?, district = ?, ward = ?, addressDetail = ?, "
+                + "name = ?, email = ?, phone = ? "
+                + "WHERE userId = ? AND addressId = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, province);
+            st.setString(2, district);
+            st.setString(3, ward);
+            st.setString(4, addressDetail);
+            st.setString(5, name);
+            st.setString(6, email);
+            st.setString(7, phone);
+            st.setInt(8, userId);
+            st.setInt(9, addressId);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating address: " + e.getMessage());
         }
     }
 }

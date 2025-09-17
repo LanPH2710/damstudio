@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/src/java/model/Inconstant.java</file>
-            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/src/java/controller/common/LoginByGoogleServlet.java</file>
-            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/src/java/dal/LoginDAO.java</file>
-            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/src/java/model/GoogleAccount.java</file>
+            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/src/java/controller/cart/AddAddressUserServlet.java</file>
+            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/web/WEB-INF/web.xml</file>
+            <file>file:/D:/SU25/EXE101/damstudio/DamStudio/web/checkout.jsp</file>
         </group>
     </open-files>
 </project-private>

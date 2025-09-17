@@ -68,7 +68,22 @@ public class EditCartAddressServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AddressUserDAO addressDAO = new AddressUserDAO();
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("account");
+        String cartIds = request.getParameter("cartIds");
+        
+        int addressId = Integer.parseInt(request.getParameter("addressId"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
+        String detail = request.getParameter("addressDetail");
 
+        addressDAO.editCartAddress(acc.getUserId(), addressId, province, district, ward, detail, name, email, phone);
+
+        response.sendRedirect("checkout?cartIds=" + cartIds);
     }
 
     @Override
