@@ -13,17 +13,17 @@ public class Order {
     private String orderPhone;
     private BigDecimal totalPrice; // Sử dụng BigDecimal cho tiền tệ
     private String note;
-    private int shipperId;
-    private Date createDate; // Sử dụng Date cho ngày tháng
-    private String shippingAddress;
     private int orderStatus;
     private int payMethod;
     private int voucherId;
+    private int shipperId;
+    private Date createDate; // Sử dụng Date cho ngày tháng
+    private String shippingAddress;
 
     public Order() {
     }
 
-    public Order(int orderId, String orderDeliverCode, Integer userId, String orderName, String orderEmail, String orderPhone, BigDecimal totalPrice, String note, int shipperId, Date createDate, String shippingAddress, int orderStatus, int payMethod, int voucherId) {
+    public Order(int orderId, String orderDeliverCode, Integer userId, String orderName, String orderEmail, String orderPhone, BigDecimal totalPrice, String note, int orderStatus, int payMethod, int voucherId, int shipperId, Date createDate, String shippingAddress) {
         this.orderId = orderId;
         this.orderDeliverCode = orderDeliverCode;
         this.userId = userId;
@@ -32,12 +32,12 @@ public class Order {
         this.orderPhone = orderPhone;
         this.totalPrice = totalPrice;
         this.note = note;
-        this.shipperId = shipperId;
-        this.createDate = createDate;
-        this.shippingAddress = shippingAddress;
         this.orderStatus = orderStatus;
         this.payMethod = payMethod;
         this.voucherId = voucherId;
+        this.shipperId = shipperId;
+        this.createDate = createDate;
+        this.shippingAddress = shippingAddress;
     }
 
     public int getOrderId() {
@@ -104,30 +104,6 @@ public class Order {
         this.note = note;
     }
 
-    public int getShipperId() {
-        return shipperId;
-    }
-
-    public void setShipperId(int shipperId) {
-        this.shipperId = shipperId;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
     public int getOrderStatus() {
         return orderStatus;
     }
@@ -150,6 +126,30 @@ public class Order {
 
     public void setVoucherId(int voucherId) {
         this.voucherId = voucherId;
+    }
+
+    public int getShipperId() {
+        return shipperId;
+    }
+
+    public void setShipperId(int shipperId) {
+        this.shipperId = shipperId;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
 }

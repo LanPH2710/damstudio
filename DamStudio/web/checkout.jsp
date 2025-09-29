@@ -98,13 +98,13 @@
                                         <i class="fa fa-university"></i> Thanh toán online
                                     </div>
                                 </label>
-                                <label class="checkout-payment-card">
-                                    <input type="radio" name="payMethod" value="balance">
-                                    <div class="payment-info">
-                                        <i class="fa fa-wallet"></i> Ví Carpipi<br>
-                                        <span class="payment-balance">Số dư: <fmt:formatNumber value="${balance}" type="number"/> đ</span>
-                                    </div>
-                                </label>
+                                <!--                                <label class="checkout-payment-card">-->
+<!--                                    <input type="radio" name="payMethod" value="balance">-->
+                                    <!--                                    <div class="payment-info">
+                                                                            <i class="fa fa-wallet"></i> Ví Carpipi<br>
+                                                                            <span class="payment-balance">Số dư: <fmt:formatNumber value="${balance}" type="number"/> đ</span>
+                                                                        </div>-->
+<!--                                </label>-->
                                 <label class="checkout-payment-card">
                                     <input type="radio" name="payMethod" value="cod">
                                     <div class="payment-info">
@@ -164,6 +164,17 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                            </div>
+                        </div>
+
+                        <!-- Khối QR Thanh toán Online (ẩn mặc định) -->
+                        <div id="qrPaymentBox" class="checkout-step" style="display:none; margin-top:15px; text-align:center;">
+                            <div class="checkout-step-header"><i class="fa fa-qrcode"></i> Quét mã để thanh toán</div>
+                            <div>
+                                <img src="${pageContext.request.contextPath}/image/logo/payment.png" alt="QR thanh toán" style="max-width:250px;">
+                                <p><b>Ngân hàng:</b> TP Bank</p>
+                                <p><b>Số tài khoản:</b> 5682446888</p>
+                                <p><b>Chủ tài khoản:</b> Trinh Van Tuan</p>
                             </div>
                         </div>
                     </div>
@@ -240,6 +251,25 @@
                     // Tự động tính toán khi load trang
                     voucherSelect.dispatchEvent(new Event('change'));
                 }
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const payMethodRadios = document.querySelectorAll('input[name="payMethod"]');
+                const qrBox = document.getElementById("qrPaymentBox");
+
+                function toggleQR() {
+                    let selected = document.querySelector('input[name="payMethod"]:checked');
+                    if (selected && selected.value === "online") {
+                        qrBox.style.display = "block";
+                    } else {
+                        qrBox.style.display = "none";
+                    }
+                }
+
+                payMethodRadios.forEach(r => r.addEventListener("change", toggleQR));
+
+                // chạy lần đầu để đồng bộ khi load trang
+                toggleQR();
             });
         </script>
     </body>

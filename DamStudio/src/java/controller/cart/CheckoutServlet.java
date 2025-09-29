@@ -207,7 +207,7 @@ public class CheckoutServlet extends HttpServlet {
             if (BigDecimal.valueOf(balance).compareTo(finalTotal) < 0) {
                 request.setAttribute("error", "Số dư không đủ để thanh toán!");
                 request.setAttribute("cartIds", cartIdsStr);
-                doGet(request, response); // Render lại
+                doGet(request, response);
                 return;
             }
             boolean minusOK = accountDAO.updateMoneyAfterPurchase(acc.getUserId(), finalTotal);
@@ -217,35 +217,43 @@ public class CheckoutServlet extends HttpServlet {
                 doGet(request, response);
                 return;
             }
-        } else if (payMethod.equalsIgnoreCase("online")) {
-            session.setAttribute("pendingCheckoutCartIds", cartIdsStr);
-            session.setAttribute("pendingCheckoutAddressId", selectedAddress.getAddressId());
-            session.setAttribute("pendingCheckoutTotal", finalTotal);
-            session.setAttribute("pendingCheckoutVoucherId", voucherId); // lưu voucherId nếu cần
-            response.sendRedirect("vnpay_pay.jsp");
-            return;
         }
-        // 8. Tạo đơn hàng (ghi nhận voucherId và giá đã trừ giảm giá)
-        int orderStatus = 1; // Pending
-        int payMethodCode = payMethod.equalsIgnoreCase("cod") ? 2 : 3;
+
+// 8. Tạo đơn hàng
+        int orderStatus;
+        int payMethodCode;
+
+        if (payMethod.equalsIgnoreCase("cod")) {
+            orderStatus = 1; // chờ xác nhận từ shop
+            payMethodCode = 2;
+        } else if (payMethod.equalsIgnoreCase("online")) {
+            orderStatus = 1; // chờ xác nhận thanh toán online
+            payMethodCode = 3;
+        } else {
+            orderStatus = 2; // đã thanh toán ngay (balance)
+            payMethodCode = 1;
+        }
+
         OrderDAO orderDAO = new OrderDAO();
-        String fullAddress = selectedAddress.getAddressDetail() + ", " 
-                   + selectedAddress.getWard() + ", " 
-                   + selectedAddress.getDistrict() + ", " 
-                   + selectedAddress.getProvince();
+        String fullAddress = selectedAddress.getAddressDetail() + ", "
+                + selectedAddress.getWard() + ", "
+                + selectedAddress.getDistrict() + ", "
+                + selectedAddress.getProvince();
+
         int orderId = orderDAO.addOrder(
                 acc.getUserId(),
                 selectedAddress.getName(),
                 selectedAddress.getEmail(),
                 selectedAddress.getPhone(),
-                finalTotal, // <-- tổng tiền đã trừ giảm giá!
+                finalTotal,
                 null,
                 orderStatus,
                 payMethodCode,
-                voucherId, // <-- ghi nhận voucher đã dùng
+                voucherId,
                 null,
                 fullAddress
         );
+
         if (orderId <= 0) {
             request.setAttribute("error", "Không thể tạo đơn hàng, vui lòng thử lại!");
             request.setAttribute("cartIds", cartIdsStr);
@@ -285,8 +293,11 @@ public class CheckoutServlet extends HttpServlet {
         }
     }
 
-    @Override
-    public String getServletInfo() {
+
+@Override
+public String getServletInfo
+        
+            () {
         return "CheckoutServlet for DamStudio - chuẩn hóa business - Gen Z style!";
+        }
     }
-}

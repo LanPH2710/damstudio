@@ -26,7 +26,7 @@
                 <ul class="menu">
                     <c:choose>
                         <c:when test="${sessionScope.account.roleId == 1}">
-                            <li><a href="#">ADMIN</a></li>
+                            <li><a href="changeorder">ADMIN</a></li>
                             </c:when>
                         </c:choose>
                         <c:choose>
@@ -34,9 +34,9 @@
                             <li><a href="#">MARKETING</a></li>
                             </c:when>
                         </c:choose>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="productlist">PRODUCT</a></li>
-                    <li class="dropdown">STORY
+                    <li><a href="#">Dám Studio</a></li>
+                    <li><a href="productlist">Sản Phẩm</a></li>
+                    <li class="dropdown">Câu Chuyện
                         <ul class="submenu">
                             <li><a href="https://lanph2710.github.io/damstudio/sutichhoguom.html">Sự tích hồ Gươm</a></li>
 <!--                            <li><a href="#">Sơn tinh thủy tinh</a></li>
@@ -50,8 +50,8 @@
                             <li><a href="#">Sọ Dừa</a></li>-->
                         </ul>
                     </li>
-                    <li><a href="#">CONTACT</a></li>
-                    <li><a href="#">FEEDBACK</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                    <li><a href="#">Đánh giá</a></li>
                 </ul>
             </nav>
             <div class="header-right">
