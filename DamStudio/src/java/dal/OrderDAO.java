@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import model.Order;
 
 public class OrderDAO extends DBContext {
 
@@ -77,5 +80,250 @@ public class OrderDAO extends DBContext {
             e.printStackTrace();
         }
         return orderId;
+    }
+
+    public List<Order> getOrderByStatus(int userId, int status) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `order` "
+                + "WHERE userId = ? AND orderStatus = ? "
+                + "ORDER BY createDate DESC";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, status);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = new Order(
+                            resultSet.getInt("orderId"),
+                            resultSet.getString("orderDeliverCode"),
+                            resultSet.getInt("userId"),
+                            resultSet.getString("orderName"),
+                            resultSet.getString("orderEmail"),
+                            resultSet.getString("orderPhone"),
+                            resultSet.getBigDecimal("totalPrice"),
+                            resultSet.getString("note"),
+                            resultSet.getInt("orderStatus"),
+                            resultSet.getInt("payMethod"),
+                            resultSet.getInt("voucherId"),
+                            resultSet.getInt("shipId"),
+                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
+                            resultSet.getString("shippingAddress")
+                    );
+                    orders.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+    
+    public List<Order> getAllOrderByStatus(int status) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `order` "
+                + "WHERE orderStatus = ? "
+                + "ORDER BY createDate DESC";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, status);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = new Order(
+                            resultSet.getInt("orderId"),
+                            resultSet.getString("orderDeliverCode"),
+                            resultSet.getInt("userId"),
+                            resultSet.getString("orderName"),
+                            resultSet.getString("orderEmail"),
+                            resultSet.getString("orderPhone"),
+                            resultSet.getBigDecimal("totalPrice"),
+                            resultSet.getString("note"),
+                            resultSet.getInt("orderStatus"),
+                            resultSet.getInt("payMethod"),
+                            resultSet.getInt("voucherId"),
+                            resultSet.getInt("shipId"),
+                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
+                            resultSet.getString("shippingAddress")
+                    );
+                    orders.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    public Order getOrderById(int userId, int orderId) {
+        String query = "SELECT * FROM `order` "
+                + "WHERE userId = ? AND orderId = ? "
+                + "ORDER BY createDate DESC";
+
+        Order order = null; // khai báo trước vòng lặp
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, orderId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) { // vì chỉ có 1 orderId duy nhất
+                    order = new Order(
+                            resultSet.getInt("orderId"),
+                            resultSet.getString("orderDeliverCode"),
+                            resultSet.getInt("userId"),
+                            resultSet.getString("orderName"),
+                            resultSet.getString("orderEmail"),
+                            resultSet.getString("orderPhone"),
+                            resultSet.getBigDecimal("totalPrice"),
+                            resultSet.getString("note"),
+                            resultSet.getInt("orderStatus"),
+                            resultSet.getInt("payMethod"),
+                            resultSet.getInt("voucherId"),
+                            resultSet.getInt("shipId"),
+                            resultSet.getTimestamp("createDate"),
+                            resultSet.getString("shippingAddress")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return order;
+    }
+    
+
+    public List<Order> getOrderByUserId(int userId) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * "
+                + "FROM `order` "
+                + "WHERE userId = ? "
+                + "ORDER BY createDate desc, orderStatus ASC ";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = new Order(
+                            resultSet.getInt("orderId"),
+                            resultSet.getString("orderDeliverCode"),
+                            resultSet.getInt("userId"),
+                            resultSet.getString("orderName"),
+                            resultSet.getString("orderEmail"),
+                            resultSet.getString("orderPhone"),
+                            resultSet.getBigDecimal("totalPrice"),
+                            resultSet.getString("note"),
+                            resultSet.getInt("orderStatus"),
+                            resultSet.getInt("payMethod"),
+                            resultSet.getInt("voucherId"),
+                            resultSet.getInt("shipId"),
+                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
+                            resultSet.getString("shippingAddress")
+                    );
+                    orders.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+    
+    public List<Order> getAllOrder() {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * "
+                + "FROM `order` "
+                + "ORDER BY createDate desc, orderStatus ASC ";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = new Order(
+                            resultSet.getInt("orderId"),
+                            resultSet.getString("orderDeliverCode"),
+                            resultSet.getInt("userId"),
+                            resultSet.getString("orderName"),
+                            resultSet.getString("orderEmail"),
+                            resultSet.getString("orderPhone"),
+                            resultSet.getBigDecimal("totalPrice"),
+                            resultSet.getString("note"),
+                            resultSet.getInt("orderStatus"),
+                            resultSet.getInt("payMethod"),
+                            resultSet.getInt("voucherId"),
+                            resultSet.getInt("shipId"),
+                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
+                            resultSet.getString("shippingAddress")
+                    );
+                    orders.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    public List<Order> getMyOrderListByPage(List<Order> order, int start, int end) {
+        ArrayList<Order> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(order.get(i));
+        }
+        return arr;
+    }
+
+    public void cancelOrder(int orderId) {
+        String sql = "UPDATE `order` SET orderStatus = 5 WHERE orderId = ?;";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, orderId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateOrderStatus(int orderId, int orderStatus) {
+        String query = "UPDATE `order` SET orderStatus = ? WHERE orderId = ?;";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setInt(1, orderStatus);
+            st.setInt(2, orderId);
+            st.executeUpdate(); // Gọi phương thức này để thực hiện cập nhật
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        OrderDAO dao = new OrderDAO();
+
+        int userId = 1;   // thay bằng userId thực tế có trong DB
+        int statusId = 1; // ví dụ: 1 = chờ xác nhận, 2 = đã giao... tùy DB của bạn
+
+        System.out.println("===== Test getOrderByUserId =====");
+        List<Order> ordersByUser = dao.getOrderByUserId(userId);
+        for (Order o : ordersByUser) {
+            System.out.println(o);
+        }
+
+        System.out.println("\n===== Test getOrderByStatus =====");
+        List<Order> ordersByStatus = dao.getOrderByStatus(userId, statusId);
+        for (Order o : ordersByStatus) {
+            System.out.println(o);
+        }
+
+        System.out.println("\n===== Test getMyOrderListByPage =====");
+        if (!ordersByUser.isEmpty()) {
+            int page = 1;
+            int numPerPage = 3; // test hiển thị 3 đơn/1 trang
+            int start = (page - 1) * numPerPage;
+            int end = Math.min(page * numPerPage, ordersByUser.size());
+
+            List<Order> paginatedOrders = dao.getMyOrderListByPage(ordersByUser, start, end);
+            for (Order o : paginatedOrders) {
+                System.out.println(o);
+            }
+        } else {
+            System.out.println("Không có đơn hàng để test phân trang!");
+        }
     }
 }

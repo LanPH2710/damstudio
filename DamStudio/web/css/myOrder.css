@@ -1,0 +1,173 @@
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.tabs li a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #666;
+    transition: all 0.3s ease;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.tabs li.active a {
+    background: #b71c1c;
+    color: #fff;
+    border-color: #b71c1c;
+}
+
+.tabs li a:hover {
+    background: #fce4e4;
+    color: #b71c1c;
+}
+
+/* Order list */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.order-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.order-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* Header trạng thái */
+.delivery-status {
+    font-weight: 600;
+    color: #b71c1c;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Product info */
+.order-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.product-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-description h4 {
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: #222;
+}
+
+.product-description p {
+    font-size: 14px;
+    color: #555;
+    margin: 3px 0;
+}
+
+.feedback-message {
+    font-size: 16px;
+    color: #888;
+}
+
+/* Tổng tiền */
+.order-actions {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.order-actions .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #d32f2f;
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.return-btn, .buy-again-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #b71c1c;
+    background: #fff;
+    color: #b71c1c;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.return-btn:hover, .buy-again-btn:hover {
+    background: #b71c1c;
+    color: #fff;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 20px 0;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination .page-link {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #666;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-link:hover {
+    background: #b71c1c;
+    color: #fff;
+    border-color: #b71c1c;
+}

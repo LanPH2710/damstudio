@@ -20,6 +20,7 @@
                 <div class="profile-email">
                     ${sessionScope.user1.email}
                 </div>
+                <a href="order" class="profile-order-btn">Đơn mua</a>
             </div>
             <div class="profile-form-side">
                 <div class="header-title">Thông tin cá nhân</div>

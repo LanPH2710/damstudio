@@ -122,6 +122,27 @@ body {
     transition: border-color 0.18s;
     box-shadow: 0 2px 9px #ffeded06;
 }
+.profile-order-btn {
+    margin-top: 25px;
+    display: inline-block;
+    text-align: center;
+    padding: 13px 32px;
+    border-radius: 10px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(90deg, #d32f2f 75%, #f88640 100%);
+    box-shadow: 0 5px 18px rgba(250, 140, 140, 0.35);
+    transition: all 0.22s ease-in-out;
+    letter-spacing: 0.03em;
+}
+
+.profile-order-btn:hover {
+    background: linear-gradient(90deg, #921b1b 80%, #f88640 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 26px rgba(240, 120, 120, 0.45);
+}
 .form-control:focus {
     border-color: #d32f2f;
     outline: none;
