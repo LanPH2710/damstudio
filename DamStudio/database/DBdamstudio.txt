@@ -18,7 +18,7 @@ INSERT INTO damstudio.role (roleId, roleName, roleStatus) VALUES
 -- 2. Bảng account (Tài khoản)rolesize
 CREATE TABLE account (
     userId INT PRIMARY KEY AUTO_INCREMENT,
-    userName VARCHAR(255) NOT NULL UNIQUE,
+    userName VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     lastName VARCHAR(255),
     firstName VARCHAR(255),
@@ -102,48 +102,63 @@ CREATE TABLE product (
     FOREIGN KEY (styleId) REFERENCES style(styleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 INSERT INTO damstudio.product (productId, name, price, description, VAT, brandId, styleId, productStatus) VALUES
-('ST0001', 'Áo Sự tích Hồ Gươm', 200000.00, 'Nổi bật với hình in lấy cảm hứng từ truyền thuyết Hồ Gươm, chiếc áo được làm từ chất liệu cotton 100% mềm mại, thoáng mát, giúp người mặc cảm thấy dễ chịu trong mọi hoạt động. Thiết kế đơn giản, dễ phối với nhiều phong cách khác nhau, phù hợp để mặc hằng ngày hoặc đi chơi.', 0.00, 2, 1, 1),
-('TT0001', 'Áo Sơn Tinh Thủy Tinh', 200000.00, 'Áo thun in họa tiết Sơn Tinh – Thủy Tinh độc đáo, mang đậm màu sắc văn hóa Việt Nam. Chất liệu cotton cao cấp 100%, thấm hút mồ hôi tốt và giữ form áo bền đẹp sau nhiều lần giặt. Phù hợp cho cả nam và nữ, dễ dàng phối cùng quần jeans hoặc chân váy cho phong cách năng động, hiện đại.', 0.00, 1, 1, 1);
+('ST0001', 'Áo Sự tích Hồ Gươm', 169000.00, 'Nổi bật với hình in lấy cảm hứng từ truyền thuyết Hồ Gươm, chiếc áo được làm từ chất liệu cotton 100% mềm mại, thoáng mát, giúp người mặc cảm thấy dễ chịu trong mọi hoạt động. Thiết kế đơn giản, dễ phối với nhiều phong cách khác nhau, phù hợp để mặc hằng ngày hoặc đi chơi.', 0.00, 2, 1, 1),
+('TT0001', 'Áo Sơn Tinh Thủy Tinh', 169000.00, 'Áo thun in họa tiết Sơn Tinh – Thủy Tinh độc đáo, mang đậm màu sắc văn hóa Việt Nam. Chất liệu cotton cao cấp 100%, thấm hút mồ hôi tốt và giữ form áo bền đẹp sau nhiều lần giặt. Phù hợp cho cả nam và nữ, dễ dàng phối cùng quần jeans hoặc chân váy cho phong cách năng động, hiện đại.', 0.00, 1, 1, 1);
 
 -- 8. Bảng productimage (Ảnh sản phẩm)
 CREATE TABLE productimage (
     imageId INT PRIMARY KEY AUTO_INCREMENT,
-    imageUrl VARCHAR(1000) NOT NULL
+    productId VARCHAR(6) NOT NULL,
+    imageUrl VARCHAR(1000) NOT NULL,
+    isMain BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (productId) REFERENCES product(productId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-INSERT INTO damstudio.productimage (imageId, imageUrl) VALUES
-(1, 'avatar-trang-4.jpg');
+
+INSERT INTO damstudio.productimage (productId, imageUrl, isMain) VALUES
+-- Ảnh cho sản phẩm ST0001
+('ST0001', 'STHGBlackBack.png', TRUE),
+('ST0001', 'STHGWhiteBack.png', FALSE),
+('ST0001', 'STHG_black.jpg', FALSE),
+('ST0001', 'STHG_black_3.jpg', FALSE),
+('ST0001', 'STHG_White_2.jpg', FALSE),
+('ST0001', 'STHG_White_3.jpg', FALSE),
+
+-- Ảnh cho sản phẩm TT0001
+('TT0001', 'STTTBlackBack.png', TRUE),
+('TT0001', 'STTTWhiteBack.png', FALSE),
+('TT0001', 'STTT_White.jpg', FALSE),
+('TT0001', 'STTT_Black.jpg', FALSE);
 
 -- 9. Bảng detail_product (Chi tiết sản phẩm - tồn kho từng màu, size)
 CREATE TABLE detail_product (
     productId VARCHAR(6),
     sizeId INT,
     colorId INT,
-    imageId INT,
     quantity INT DEFAULT 0,
     PRIMARY KEY (productId, sizeId, colorId),
     FOREIGN KEY (productId) REFERENCES product(productId),
     FOREIGN KEY (sizeId) REFERENCES size(sizeId),
-    FOREIGN KEY (colorId) REFERENCES color(colorId),
-    FOREIGN KEY (imageId) REFERENCES productimage(imageId)
+    FOREIGN KEY (colorId) REFERENCES color(colorId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
--- ST0001
-INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
-('ST0001', 1, 1, 1, 10), ('ST0001', 1, 2, 1, 10),
-('ST0001', 2, 1, 1, 10), ('ST0001', 2, 2, 1, 10),
-('ST0001', 3, 1, 1, 10), ('ST0001', 3, 2, 1, 10),
-('ST0001', 4, 1, 1, 10), ('ST0001', 4, 2, 1, 10),
-('ST0001', 5, 1, 1, 10), ('ST0001', 5, 2, 1, 10),
-('ST0001', 6, 1, 1, 10), ('ST0001', 6, 2, 1, 10);
 
+-- Dữ liệu chi tiết sản phẩm
+-- ST0001
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, quantity) VALUES
+('ST0001', 1, 1, 10), ('ST0001', 1, 2, 10),
+('ST0001', 2, 1, 10), ('ST0001', 2, 2, 10),
+('ST0001', 3, 1, 10), ('ST0001', 3, 2, 10),
+('ST0001', 4, 1, 10), ('ST0001', 4, 2, 10),
+('ST0001', 5, 1, 10), ('ST0001', 5, 2, 10),
+('ST0001', 6, 1, 10), ('ST0001', 6, 2, 10);
 
 -- TT0001
-INSERT INTO damstudio.detail_product (productId, sizeId, colorId, imageId, quantity) VALUES
-('TT0001', 1, 1, 1, 10), ('TT0001', 1, 2, 1, 10),
-('TT0001', 2, 1, 1, 10), ('TT0001', 2, 2, 1, 10),
-('TT0001', 3, 1, 1, 10), ('TT0001', 3, 2, 1, 10),
-('TT0001', 4, 1, 1, 10), ('TT0001', 4, 2, 1, 10),
-('TT0001', 5, 1, 1, 10), ('TT0001', 5, 2, 1, 10),
-('TT0001', 6, 1, 1, 10), ('TT0001', 6, 2, 1, 10);
+INSERT INTO damstudio.detail_product (productId, sizeId, colorId, quantity) VALUES
+('TT0001', 1, 1, 10), ('TT0001', 1, 2, 10),
+('TT0001', 2, 1, 10), ('TT0001', 2, 2, 10),
+('TT0001', 3, 1, 10), ('TT0001', 3, 2, 10),
+('TT0001', 4, 1, 10), ('TT0001', 4, 2, 10),
+('TT0001', 5, 1, 10), ('TT0001', 5, 2, 10),
+('TT0001', 6, 1, 10), ('TT0001', 6, 2, 10);
 
 -- 10. Bảng cart (Giỏ hàng)
 CREATE TABLE cart (
