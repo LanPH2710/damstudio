@@ -5,17 +5,15 @@ public class DetailProduct {
     private String productId;
     private int sizeId;
     private int colorId;
-    private int imageId;
     private int quantity;
 
     public DetailProduct() {
     }
 
-    public DetailProduct(String productId, int sizeId, int colorId, int imageId, int quantity) {
+    public DetailProduct(String productId, int sizeId, int colorId, int quantity) {
         this.productId = productId;
         this.sizeId = sizeId;
         this.colorId = colorId;
-        this.imageId = imageId;
         this.quantity = quantity;
     }
 
@@ -41,14 +39,6 @@ public class DetailProduct {
 
     public void setColorId(int colorId) {
         this.colorId = colorId;
-    }
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
     }
 
     public int getQuantity() {

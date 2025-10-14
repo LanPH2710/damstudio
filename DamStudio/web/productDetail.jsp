@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetail.css?v=${System.currentTimeMillis()}"/>
         <!--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homePage.css?v=${System.currentTimeMillis()}"/>-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-            <link rel="stylesheet" href="css/homePage.css">
+        <link rel="stylesheet" href="css/homePage.css">
 
     </head>
     <body>
@@ -23,7 +23,11 @@
             <!-- Khối 1: Thông tin sản phẩm -->
             <div class="product-main-info shadow">
                 <div class="product-img-block">
-                    <img src="image/logo/${product.images[0].imageUrl}" alt="${product.name}" />
+                    <c:forEach var="img" items="${product.images}">
+                        <c:if test="${img.isMain}">
+                            <img src="image/ao/${img.imageUrl}" alt="${product.name}">
+                        </c:if>
+                    </c:forEach>
                 </div>
                 <div class="product-info-block">
                     <h1 class="product-title">${product.name}</h1>
@@ -156,7 +160,7 @@
                 <div class="related-products-list">
                     <c:forEach items="${pro2}" var="pro2">
                         <div class="related-product-card">
-                            <img src="image/logo/${pro2.images[0].imageUrl}"
+                            <img src="image/ao/${pro2.images[0].imageUrl}"
                                  alt="Product Image" class="related-product-img"/>
                             <div class="related-product-info">
                                 <a href="productdetail?productId=${pro2.productId}" class="related-product-name">${pro2.name}</a>

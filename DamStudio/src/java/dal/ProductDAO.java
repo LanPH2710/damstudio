@@ -96,11 +96,16 @@ public class ProductDAO extends DBContext {
 
     public List<Product> searchProductsByKeyword(String keyword) {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM product WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%') AND productStatus = 1";
+        String sql = "SELECT * FROM product "
+                + "WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%') "
+                + "AND productStatus = 1";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, "%" + keyword + "%");
+            statement.setString(1, keyword); // Không cần thêm % ở đây, đã có trong CONCAT
             ResultSet resultSet = statement.executeQuery();
+
+            ProductImageDAO imageDAO = new ProductImageDAO(); // Dùng để lấy ảnh main
+
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductId(resultSet.getString("productId"));
@@ -110,7 +115,15 @@ public class ProductDAO extends DBContext {
                 product.setVAT(resultSet.getDouble("VAT"));
                 product.setBrandId(resultSet.getInt("brandId"));
                 product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+
+                // ✅ Lấy ảnh đại diện
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
+
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -150,6 +163,7 @@ public class ProductDAO extends DBContext {
             st.setString(1, braId);
 
             ResultSet resultSet = st.executeQuery();
+            ProductImageDAO imageDAO = new ProductImageDAO();
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductId(resultSet.getString("productId"));
@@ -159,7 +173,12 @@ public class ProductDAO extends DBContext {
                 product.setVAT(resultSet.getDouble("VAT"));
                 product.setBrandId(resultSet.getInt("brandId"));
                 product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -167,7 +186,7 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
-    
+
     public List<Product> getAllProductByStyleId(String styleId) {
         List<Product> products = new ArrayList<>();
         try {
@@ -176,6 +195,7 @@ public class ProductDAO extends DBContext {
             st.setString(1, styleId);
 
             ResultSet resultSet = st.executeQuery();
+            ProductImageDAO imageDAO = new ProductImageDAO();
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductId(resultSet.getString("productId"));
@@ -185,7 +205,12 @@ public class ProductDAO extends DBContext {
                 product.setVAT(resultSet.getDouble("VAT"));
                 product.setBrandId(resultSet.getInt("brandId"));
                 product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -193,7 +218,7 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
-    
+
     public List<Product> getAllProductBySizeId(String sizeId) {
         List<Product> products = new ArrayList<>();
         try {
@@ -219,13 +244,14 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
-    
+
     public List<Product> getAllProductsCommon() {
         List<Product> products = new ArrayList<>();
         try {
             String sql = "SELECT * FROM product where productStatus = 1"; // Thay đổi tên bảng cho đúng
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet resultSet = st.executeQuery();
+            ProductImageDAO imageDAO = new ProductImageDAO();
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductId(resultSet.getString("productId"));
@@ -235,7 +261,12 @@ public class ProductDAO extends DBContext {
                 product.setVAT(resultSet.getDouble("VAT"));
                 product.setBrandId(resultSet.getInt("brandId"));
                 product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId())); // Thêm hình ảnh vào sản phẩm
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -243,34 +274,34 @@ public class ProductDAO extends DBContext {
         }
         return products;
     }
-    
-    public Product getProductById(String productId) { // Thay đổi kiểu tham số về String
+
+    public Product getProductById(String productId) {
         Product product = null;
         try {
-            // Câu truy vấn lấy thông tin sản phẩm dựa trên productId
             String sql = "SELECT * FROM product WHERE productId = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, productId); // Sửa đổi để phù hợp với kiểu dữ liệu
-            ResultSet resultSet = st.executeQuery();
+            st.setString(1, productId);
+            ResultSet rs = st.executeQuery();
 
-            if (resultSet.next()) {
-                // Tạo đối tượng Product với các thông tin lấy từ ResultSet
+            if (rs.next()) {
                 product = new Product();
-                product.setProductId(resultSet.getString("productId"));
-                product.setName(resultSet.getString("name"));
-                product.setPrice(resultSet.getDouble("price"));
-                product.setDescription(resultSet.getString("description"));
-                product.setVAT(resultSet.getDouble("VAT"));
-                product.setBrandId(resultSet.getInt("brandId"));
-                product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId()));
+                product.setProductId(rs.getString("productId"));
+                product.setName(rs.getString("name"));
+                product.setPrice(rs.getDouble("price"));
+                product.setDescription(rs.getString("description"));
+                product.setVAT(rs.getDouble("VAT"));
+                product.setBrandId(rs.getInt("brandId"));
+                product.setStyleId(rs.getInt("styleId"));
+
+                ProductImageDAO imageDao = new ProductImageDAO();
+                product.setImages(imageDao.getImagesByProductId(productId));
             }
         } catch (SQLException e) {
             System.out.println("Lỗi khi lấy sản phẩm theo ID: " + e.getMessage());
         }
         return product;
     }
-    
+
     public List<Product> getProductByPrice(double price) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE price BETWEEN ? AND ? LIMIT 8;";
@@ -279,6 +310,7 @@ public class ProductDAO extends DBContext {
             st.setDouble(1, price - 20000);
             st.setDouble(2, price + 20000);
             ResultSet resultSet = st.executeQuery();
+            ProductImageDAO imageDAO = new ProductImageDAO();
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductId(resultSet.getString("productId"));
@@ -288,7 +320,13 @@ public class ProductDAO extends DBContext {
                 product.setVAT(resultSet.getDouble("VAT"));
                 product.setBrandId(resultSet.getInt("brandId"));
                 product.setStyleId(resultSet.getInt("styleId"));
-                product.setImages(getImagesByProductId(product.getProductId()));
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
+
                 list.add(product);
             }
         } catch (SQLException e) {
