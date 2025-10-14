@@ -37,6 +37,23 @@ public class ProfileServlet extends HttpServlet {
             return;
         }
         List<AddressUser> address = addressDAO.getAddressByUserId(acc.getUserId());
+        if (address == null || address.isEmpty()) {
+            // Nếu chưa có địa chỉ, tạo mới một địa chỉ trống
+            AddressUser newAddress = new AddressUser();
+            newAddress.setUserId(acc.getUserId());
+            newAddress.setProvince("");
+            newAddress.setDistrict("");
+            newAddress.setWard("");
+            newAddress.setAddressDetail("");
+            newAddress.setName(acc.getFirstName() + " " + acc.getLastName());
+            newAddress.setEmail(acc.getEmail());
+            newAddress.setPhone(acc.getMobile() != null ? acc.getMobile() : "");
+
+            // Thêm vào DB
+            addressDAO.insertAddress(newAddress);
+            address = addressDAO.getAddressByUserId(acc.getUserId());
+        }
+        session.setAttribute("address", address);
         Account user = adao.getAccountById(acc.getUserId());
         session.setAttribute("user1", user);
         session.setAttribute("address", address);

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import context.DBContext;
 import java.io.IOException;
+import java.math.BigDecimal;
 import model.GoogleAccount;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
@@ -49,28 +50,30 @@ public class LoginDAO extends DBContext {
         }
         return null;
     }
-    
+
     public void inserUserByEmail(String username, String password, String firstName,
             String lastName, String gender, String email, String phone, String avatar) {
-        String sql = "INSERT INTO account (userName, password, firstName, lastName, gender, email, mobile, roleId, avatar, accountStatus) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        String sql = "INSERT INTO account "
+                + "(userName, password, lastName, firstName, email, mobile, gender, roleId, avatar, accountStatus, money) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, password);
-            ps.setString(3, firstName);
-            ps.setString(4, lastName);
-            ps.setInt(5, Integer.parseInt(gender));
-            ps.setString(6, email);
-            ps.setString(7, "");
+            ps.setString(3, lastName);
+            ps.setString(4, firstName);
+            ps.setString(5, email);
+            ps.setString(6, phone);
+            ps.setInt(7, Integer.parseInt(gender));
             ps.setInt(8, 4);
             ps.setString(9, avatar);
             ps.setInt(10, 1);
+            ps.setBigDecimal(11, new BigDecimal("0.00"));
 
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

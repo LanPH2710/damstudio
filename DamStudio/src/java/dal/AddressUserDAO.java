@@ -65,7 +65,7 @@ public class AddressUserDAO extends DBContext {
     public void editAddress(int userId, int addressId, String province, String district, String ward,
             String addressDetail) {
         String sql = "UPDATE addressuser "
-                + "SET province = ?, district = ?, ward = ?, addressDetail = ?, "
+                + "SET province = ?, district = ?, ward = ?, addressDetail = ?"
                 + "WHERE userId = ? AND addressId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -126,4 +126,21 @@ public class AddressUserDAO extends DBContext {
         }
     }
 
+    public void insertAddress(AddressUser address) {
+        String sql = "INSERT INTO addressuser (userId, province, district, ward, addressDetail, name, email, phone) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, address.getUserId());
+            st.setString(2, address.getProvince());
+            st.setString(3, address.getDistrict());
+            st.setString(4, address.getWard());
+            st.setString(5, address.getAddressDetail());
+            st.setString(6, address.getName());
+            st.setString(7, address.getEmail());
+            st.setString(8, address.getPhone());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
