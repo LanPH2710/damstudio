@@ -24,9 +24,7 @@
             <div class="product-main-info shadow">
                 <div class="product-img-block">
                     <c:forEach var="img" items="${product.images}">
-                        <c:if test="${img.isMain}">
                             <img src="image/ao/${img.imageUrl}" alt="${product.name}">
-                        </c:if>
                     </c:forEach>
                 </div>
                 <div class="product-info-block">
