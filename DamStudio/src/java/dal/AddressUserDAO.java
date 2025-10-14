@@ -104,4 +104,26 @@ public class AddressUserDAO extends DBContext {
             System.out.println("Error updating address: " + e.getMessage());
         }
     }
+
+    public void insertCartAddress(int userId, String province, String district, String ward,
+            String addressDetail, String name, String email, String phone) {
+        String sql = "INSERT INTO addressuser (userId, province, district, ward, addressDetail, name, email, phone) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, userId);
+            st.setString(2, province);
+            st.setString(3, district);
+            st.setString(4, ward);
+            st.setString(5, addressDetail);
+            st.setString(6, name);
+            st.setString(7, email);
+            st.setString(8, phone);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error inserting address: " + e.getMessage());
+        }
+    }
+
 }

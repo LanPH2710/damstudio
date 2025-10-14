@@ -65,9 +65,9 @@ public class LoginDAO extends DBContext {
             ps.setInt(5, Integer.parseInt(gender));
             ps.setString(6, email);
             ps.setString(7, "");
-            ps.setString(8, "4");
+            ps.setInt(8, 4);
             ps.setString(9, avatar);
-            ps.setString(10, "1");
+            ps.setInt(10, 1);
 
             ps.executeUpdate();
         } catch (Exception e) {

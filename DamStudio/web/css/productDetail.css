@@ -11,7 +11,9 @@ body {
     flex-direction: column;
     gap: 32px;
 }
-
+.mid{
+    color: #4D403D;
+}
 /* Khối thông tin chính */
 .product-main-info {
     display: flex;

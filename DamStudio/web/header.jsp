@@ -11,170 +11,168 @@
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
               rel="stylesheet">   
+                <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+HU:wght@100..400&family=Roboto+Condensed:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     </head>
     <body>
-        <header class="header">
-            <div class="header-top">
-                <div class="header-left">
-                    <a href="homepage"><img src="image/logo/logoIMG.png" alt="Logo" class="logo" /></a>
-                </div>
-                <button class="menu-toggle" id="menuToggle">
+        <header>
+            <nav class="custom-navbar">
+                <button class="menu-toggle-btn">
                     <i class="fas fa-bars"></i>
                 </button>
-            </div>
-            <nav class="header-center">
-                <ul class="menu">
+
+                <div class="leftnavbar">
+                    <a href="homepage"><img src="image/logo/logoLONGpng.PNG" alt="Logo" class="mobile-logo"></a>
+                </div>
+
+                <div class="centernavbar">
                     <c:choose>
                         <c:when test="${sessionScope.account.roleId == 1}">
-                            <li><a href="changeorder">ADMIN</a></li>
-                            </c:when>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${sessionScope.account.roleId == 2}">
-                            <li><a href="#">MARKETING</a></li>
-                            </c:when>
-                        </c:choose>
-                    <li><a href="#">Dám Studio</a></li>
-                    <li><a href="productlist">Sản Phẩm</a></li>
-                    <li class="dropdown">Câu Chuyện
+                            <a href="changeorder">ADMIN</a>
+                        </c:when>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${sessionScope.account.roleId == 2}">
+                            <a href="#">MARKETING</a>
+                        </c:when>
+                    </c:choose>
+                    <!--<a href="#">MAKETING</a>-->
+                    <a href="about.jsp">DÁM STUDIO</a>
+                    <a href="productlist">SẢN PHẨM</a>
+                    <li class="dropdown"><a href="story.jsp">CÂU CHUYỆN</a>
                         <ul class="submenu">
                             <li><a href="https://lanph2710.github.io/damstudio/sutichhoguom.html">Sự tích hồ Gươm</a></li>
-<!--                            <li><a href="#">Sơn tinh thủy tinh</a></li>
-                            <li><a href="#">Con rồng cháu tiên</a></li>
-                            <li><a href="#">Thánh Gióng</a></li>
-                            <li><a href="#">Chử Đồng Tử</a></li>
-                            <li><a href="#">Tấm Cám</a></li>
-                            <li><a href="#">Cây tre trăm đốt</a></li>
-                            <li><a href="#">Ăn khế trả vàng</a></li>
-                            <li><a href="#">Mai An Tiêm</a></li>
-                            <li><a href="#">Sọ Dừa</a></li>-->
+                            <li><a href="#">Sơn tinh thủy tinh</a></li>
+                            <!--                            <li><a href="#">Con rồng cháu tiên</a></li>
+                                                        <li><a href="#">Thánh Gióng</a></li>
+                                                        <li><a href="#">Chử Đồng Tử</a></li>
+                                                        <li><a href="#">Tấm Cám</a></li>
+                                                        <li><a href="#">Cây tre trăm đốt</a></li>
+                                                        <li><a href="#">Ăn khế trả vàng</a></li>
+                                                        <li><a href="#">Mai An Tiêm</a></li>
+                                                        <li><a href="#">Sọ Dừa</a></li>-->
                         </ul>
                     </li>
-                    <li><a href="#">Liên Hệ</a></li>
-                    <li><a href="#">Đánh giá</a></li>
-                </ul>
+                    <a href="#contact-info">LIÊN HỆ</a>
+                    <a href="#">ĐÁNH GIÁ</a>
+                </div>
+
+                <div class="rightnavbar">
+                    <a href="profile"><i class="fas fa-user"></i></a>
+                    <a href="cart" class="cart-icon-wrapper">
+                        <i class="fas fa-shopping-cart"></i>
+                        <c:if test="${sessionScope.sizeCart > 0}">
+                            <span class="cart-amount">${sessionScope.sizeCart}</span>
+                        </c:if>
+                    </a>
+                    <c:choose>
+                        <c:when test="${sessionScope.account == null}">
+                            <a href="login.jsp"><i class="fas fa-sign-in-alt"></i></a>
+                            </c:when>
+                            <c:otherwise>
+                            <a href="logout"><i class="fas fa-sign-out-alt"></i></a>
+                            </c:otherwise>
+                        </c:choose>
+                    <!--                    <button><i class="fab fa-facebook-f"></i></button>
+                                        <button><i class="fab fa-facebook-f"></i></button>-->
+                </div>
             </nav>
-            <div class="header-right">
-                <a href="profile"><i class="fas fa-user"></i></a>
-                <a href="cart" class="cart-icon-wrapper">
-                    <i class="fas fa-shopping-cart"></i>
-                    <c:if test="${sessionScope.sizeCart > 0}">
-                        <span class="cart-amount">${sessionScope.sizeCart}</span>
-                    </c:if>
-                </a>
-                <c:choose>
-                    <c:when test="${sessionScope.account == null}">
-                        <a href="login.jsp"><i class="fas fa-sign-in-alt"></i></a>
-                        </c:when>
-                        <c:otherwise>
-                        <a href="logout"><i class="fas fa-sign-out-alt"></i></a>
-                        </c:otherwise>
-                    </c:choose>
-            </div>
         </header>
+
+      
         <div id="addToCartAlert" class="cart-alert" style="display:none;">Đã thêm sản phẩm vào giỏ hàng!</div>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            // --- Menu Toggle and Dropdown for Mobile ---
-            const menuToggle = document.getElementById('menuToggle');
-                    const headerMenu = document.querySelector('.header-center .menu');
-                    const dropdown = document.querySelector('.menu .dropdown'); // The 'STORY' li element
-                    const header = document.querySelector('.header'); // Lấy phần tử header
+            document.addEventListener("DOMContentLoaded", function () {
+                // Lấy đường dẫn của trang hiện tại, ví dụ: "/ProjectName/productlist"
+                const currentPath = window.location.pathname;
 
-                    // Function to handle mobile dropdown click
-                            function dropdownClickHandler(event) {
-                            // Only toggle if click is not on a link within the submenu
-                            if (window.innerWidth <= 600) { // Ensure this only runs on mobile
-                            if (event.target.tagName !== 'A') {
-                            event.preventDefault(); // Prevent default li behavior
-                                    dropdown.classList.toggle('active');
-                            }
-                            }
-                            }
+                // Lấy tất cả các thẻ a trong navbar
+                const navLinks = document.querySelectorAll('.centernavbar a');
 
-                    // Setup/Remove mobile dropdown listener based on screen size
-                    function setupMobileDropdownListener() {
-                    if (window.innerWidth <= 600) {
-                    dropdown.addEventListener('click', dropdownClickHandler);
-                    } else {
-                    dropdown.removeEventListener('click', dropdownClickHandler);
-                            dropdown.classList.remove('active');
+                // Duyệt qua từng link
+                navLinks.forEach(link => {
+                    // Lấy thuộc tính href của link, ví dụ: "productlist"
+                    const linkPath = link.getAttribute('href');
+
+                    // Nếu đường dẫn hiện tại chứa đường dẫn của link
+                    if (currentPath.includes(linkPath)) {
+                        // Thêm class 'active' vào link đó
+                        link.classList.add('active');
                     }
-                    }
+                });
+            });
 
-                    // Toggle main menu on mobile
-                    menuToggle.addEventListener('click', function () {
-                    const headerHeight = header.offsetHeight; // Lấy chiều cao hiện tại của header
-
-                            if (!headerMenu.classList.contains('show')) {
-                    // Nếu menu sắp mở
-                    headerMenu.style.paddingTop = headerHeight + 'px'; // Đặt padding để đẩy nội dung xuống dưới header
-                            headerMenu.style.display = 'flex'; // Hiển thị menu trước khi trượt
-                            // Đợi một chút để CSS transform có thể áp dụng mượt mà
-                            setTimeout(() => {
-                            headerMenu.classList.add('show');
-                            }, 10); // Khoảng thời gian nhỏ
-                    } else {
-                    // Nếu menu sắp đóng
-                    headerMenu.classList.remove('show');
-                            // Đợi transition hoàn tất rồi mới ẩn display
-                            setTimeout(() => {
-                            headerMenu.style.display = 'none';
-                                    headerMenu.style.paddingTop = '0'; // Reset padding
-                            }, 500); // Phù hợp với thời gian transition (0.5s)
-                    }
-
-                    // Nếu menu chính đang đóng, đảm bảo submenu cũng đóng
-                    if (!headerMenu.classList.contains('show')) {
-                    dropdown.classList.remove('active');
-                    }
-                    });
-                            // Close menu when clicking outside (only for mobile)
-                            document.addEventListener('click', function (event) {
-                            if (window.innerWidth <= 600) {
-                            const isClickInsideMenu = headerMenu.contains(event.target) || menuToggle.contains(event.target);
-                                    if (!isClickInsideMenu && headerMenu.classList.contains('show')) {
-                            headerMenu.classList.remove('show');
-                                    setTimeout(() => {
-                                    headerMenu.style.display = 'none';
-                                            headerMenu.style.paddingTop = '0';
-                                    }, 500);
-                                    dropdown.classList.remove('active');
-                            }
-                            }
-                            });
-                            // Handle window resize events
-                            window.addEventListener('resize', function () {
-                            if (window.innerWidth > 600) {
-                            // On desktop, ensure mobile menu classes are removed and display is reset
-                            headerMenu.classList.remove('show');
-                                    headerMenu.style.paddingTop = ''; // Xóa padding động
-                                    headerMenu.style.transform = ''; // Xóa transform
-                                    headerMenu.style.display = ''; // Reset display để header-center trở lại mặc định (flex)
-                                    dropdown.classList.remove('active'); // Đảm bảo submenu ẩn
-                            } else {
-                            // On mobile, if menu is shown, re-adjust padding (in case header height changed)
-                            if (headerMenu.classList.contains('show')) {
-                            const headerHeight = header.offsetHeight;
-                                    headerMenu.style.paddingTop = headerHeight + 'px';
-                            }
-                            // Luôn gọi lại để thiết lập/xóa listener mobile dropdown
-                            setupMobileDropdownListener();
-                            }
-                            });
-                            // Initial setup for mobile dropdown on page load
-                            setupMobileDropdownListener();
-                            document.addEventListener('DOMContentLoaded', function() {
-                            const addToCartForm = document.querySelector('form[action="addtocart"]');
-                                    const cartAlert = document.getElementById('addToCartAlert');
-                                    if (addToCartForm && cartAlert) {
-                            addToCartForm.addEventListener('submit', function(e) {
-                            e.preventDefault(); // Chặn submit đi đâu
-                                    cartAlert.classList.add('show');
-                                    setTimeout(() => cartAlert.classList.remove('show'), 1800);
-                            });
-                            }
-                            });
         </script>
+        <script>  window.addEventListener('scroll', function () {
+                const header = document.querySelector('header');
+                if (window.scrollY > 10) {
+                    header.classList.add('sticky');
+                } else {
+                    header.classList.remove('sticky');
+                }
+            });
+
+
+
+            window.addEventListener('scroll', function () {
+                const header = document.querySelector('header');
+                if (window.scrollY > 10) {
+                    header.classList.add('sticky');
+                } else {
+                    header.classList.remove('sticky');
+                }
+
+                // Animation for hello-frame text
+                const helloContent = document.querySelector('.hello-animated-content');
+                if (helloContent) {
+                    const rect = helloContent.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        helloContent.classList.add('visible');
+                    }
+                }
+            });
+            // Also trigger on page load
+            window.dispatchEvent(new Event('scroll'));
+
+
+            window.addEventListener('scroll', function () {
+                // Sticky header logic
+                const header = document.querySelector('header');
+                if (window.scrollY > 10) {
+                    header.classList.add('sticky');
+                } else {
+                    header.classList.remove('sticky');
+                }
+
+                // Animate each section's text when in view
+                document.querySelectorAll('.section-animated-content').forEach(function (content) {
+                    const rect = content.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        content.classList.add('visible');
+                    }
+                });
+            });
+// Trigger on page load
+            window.dispatchEvent(new Event('scroll'));
+
+
+// File: app.js hoặc trong thẻ <script>
+
+// File: app.js (hoặc trong thẻ <script>)
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                const menuToggleBtn = document.querySelector('.menu-toggle-btn');
+                const customNavbar = document.querySelector('.custom-navbar');
+
+                if (menuToggleBtn && customNavbar) {
+                    // Khi bấm nút hamburger, nó sẽ tự động BẬT hoặc TẮT menu
+                    menuToggleBtn.onclick = function () {
+                        customNavbar.classList.toggle('mobile-menu-open');
+                    }
+                }
+
+            });
+    </script>
     </body>
 </html>

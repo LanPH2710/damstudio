@@ -1,0 +1,173 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 13, 2025, 11:55:37 PM
+    Author     : ADMIN
+*/
+
+/* File: css/story.css */
+
+/* --- CÀI ĐẶT CHUNG CHO TRANG --- */
+:root {
+    --mau-do-ruou: #9A3F3F;
+    --mau-nau-dam: #4D403D;
+    --mau-nen: #FFFBF5;
+}
+
+body {
+    background-color: var(--mau-nen);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.story-page-section {
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h1 {
+    font-size: 2.8rem;
+    color: var(--mau-do-ruou);
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+
+/* --- GRID HIỂN THỊ CÁC THẺ BÀI --- */
+.story-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap; /* Cho phép tự xuống dòng trên màn hình nhỏ */
+}
+
+
+/* File: css/story.css */
+
+/* --- STYLE CHO MỘT THẺ BÀI (CARD) --- */
+.story-card {
+    position: relative;
+    flex: 1 1 400px;
+    max-width: 450px;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden; /* Bắt buộc phải có để hiệu ứng trượt hoạt động đúng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* --- CÁC LỚP BÊN TRONG THẺ BÀI --- */
+
+/* Ảnh nền */
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.card-content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* === THAY ĐỔI ĐỂ TẠO HIỆU ỨNG KÍNH MỜ === */
+    
+    /* 1. Đổi nền thành màu be trong suốt */
+    /* Số cuối cùng (0.7) là độ trong suốt, bạn có thể chỉnh từ 0.1 đến 1.0 */
+    background-color: rgba(251, 219, 147, 0.7); 
+
+    /* 2. Thêm hiệu ứng blur cho lớp nền phía sau */
+    /* 10px là độ mờ, bạn có thể tăng/giảm để có hiệu ứng mong muốn */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Hỗ trợ cho một số trình duyệt cũ hơn */
+
+    /* ========================================= */
+
+    color: var(--mau-nau-dam);
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    transform: translateY(calc(100% - 100px));
+    transition: transform 0.5s ease-in-out;
+}
+
+/* KHI DI CHUỘT, KÉO PANEL NỘI DUNG LÊN TRÊN */
+.story-card:hover .card-content {
+    transform: translateY(0); /* Kéo về vị trí ban đầu (che hết ảnh) */
+}
+
+/* Tiêu đề */
+.card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 25px;
+    color: var(--mau-nau-dam); /* Luôn là màu đỏ rượu */
+    /* Khi chưa hover, chữ tiêu đề sẽ có màu trắng để nổi trên ảnh */
+    .story-card & { 
+        color: white; 
+        transition: color 0.5s ease;
+    }
+}
+.story-card:hover .card-title {
+    color: var(--mau-nau-dam); /* Khi hover, đổi lại màu đỏ rượu */
+}
+
+
+/* Mô tả (không cần ẩn nữa, nó chỉ bị che đi) */
+.card-description {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* HIỆN MÔ TẢ KHI DI CHUỘT VÀO THẺ */
+/* HIỆN MÔ TẢ KHI DI CHUỘT VÀO THẺ */
+.story-card:hover .card-description {
+    opacity: 1;
+    visibility: visible;    
+    transform: translateY(0); /* Dịch chuyển về vị trí ban đầu */
+}
+
+/* --- RESPONSIVE CHO MOBILE --- */
+@media (max-width: 768px) {
+    .section-header h1 {
+        font-size: 2rem;
+    }
+    .story-page-section {
+        padding: 40px 0;
+    }
+}

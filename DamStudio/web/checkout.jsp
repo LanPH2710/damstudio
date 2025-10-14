@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css?v=${System.currentTimeMillis()}"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600;400&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="css/homePage.css">
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -45,7 +47,7 @@
                                         </div>
                                     </label>
                                 </c:forEach>
-                                <a href="adddaddressuser" class="btn-link add-address-btn"><i class="fa fa-plus"></i> Thêm địa chỉ mới</a>
+                                <a href="adddaddressuser?cartIds=${cartIds}" class="btn-link add-address-btn"><i class="fa fa-plus"></i> Thêm địa chỉ mới</a>
                             </div>
                         </div>
 
