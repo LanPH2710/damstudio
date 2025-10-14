@@ -39,7 +39,6 @@ public class ProductDetailDAO extends DBContext {
                     detail.setProductId(rs.getString("productId"));
                     detail.setSizeId(rs.getInt("sizeId"));
                     detail.setColorId(rs.getInt("colorId"));
-                    detail.setImageId(rs.getInt("imageId"));
                     detail.setQuantity(rs.getInt("quantity"));
                     list.add(detail);
                 }
@@ -62,7 +61,6 @@ public class ProductDetailDAO extends DBContext {
                     detail.setProductId(rs.getString("productId"));
                     detail.setColorId(rs.getInt("colorId"));
                     detail.setSizeId(rs.getInt("sizeId"));
-                    detail.setImageId(rs.getInt("imageId"));
                     detail.setQuantity(rs.getInt("quantity"));
                 }
             }

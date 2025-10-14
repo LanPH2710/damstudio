@@ -8,7 +8,7 @@
         <title>Danh sách sản phẩm</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product.css?v=${System.currentTimeMillis()}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-                <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+HU:wght@100..400&family=Roboto+Condensed:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+HU:wght@100..400&family=Roboto+Condensed:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="css/homePage.css">
     </head>
@@ -48,7 +48,9 @@
                 <div class="product-grid">
                     <c:forEach var = "product" items="${productList}">
                         <div class="product-card">
-                            <img src="image/logo/logoIMG.png" alt="Sản phẩm 1"/>
+                            <c:if test="${not empty product.images}">
+                                <img src="image/ao/${product.images[0].imageUrl}" alt="${product.name}" />
+                            </c:if>
                             <h3>${product.name}</h3>
                             <p class="price"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ</p>
                             <a href="productdetail?productId=${product.productId}" class="btn">Xem chi tiết</a>

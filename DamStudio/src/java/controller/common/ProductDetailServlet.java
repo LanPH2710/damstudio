@@ -28,6 +28,7 @@ public class ProductDetailServlet extends HttpServlet {
             FeedbackDAO fdao = new FeedbackDAO();
             AccountDAO adao = new AccountDAO();
             ProductDetailDAO pddao = new ProductDetailDAO();
+            ProductImageDAO image = new ProductImageDAO();
 
             Product pro = pdao.getProductById(productId);
             if (pro == null) {
