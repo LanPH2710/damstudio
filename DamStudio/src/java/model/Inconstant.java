@@ -10,6 +10,7 @@ public class Inconstant {
 
     public static final String GOOGLE_REDIRECT_URI = "http://www.damstudio.store/loginbygoogle";
 
+
     public static final String GOOGLE_GRANT_TYPE = "authorization_code";
 
     public static final String GOOGLE_LINK_GET_TOKEN = "https://oauth2.googleapis.com/token";

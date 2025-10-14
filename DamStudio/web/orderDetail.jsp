@@ -8,6 +8,8 @@
         <title>Chi tiết đơn hàng</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderDetail.css?v=${System.currentTimeMillis()}"/>
         <link href="assets1/css/bootstrap.min.css" rel="stylesheet"/>
+                <link rel="stylesheet" href="css/homePage.css">
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>

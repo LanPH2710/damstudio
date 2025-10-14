@@ -41,7 +41,7 @@ public class ProfileServlet extends HttpServlet {
         session.setAttribute("user1", user);
         session.setAttribute("address", address);
         RoleDAO rdao = new RoleDAO();
-        String role = rdao.getRoleNameById(user.getRoleId());
+        String role = rdao.getRoleNameById(acc.getRoleId());
         session.setAttribute("role", role);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }

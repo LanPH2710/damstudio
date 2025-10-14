@@ -3,9 +3,14 @@ body {
     background: #fafafa;
     color: #333;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 }
-
+.mid{
+    height: 100vh;
+}
+.no-order-message{
+    color: #4D403D;
+}
 /* Tabs */
 .tabs {
     display: flex;
@@ -186,6 +191,10 @@ body {
 }
 
 /* Pagination */
+.pagination-section {
+    color: #4D403D;
+    }
+
 .pagination {
     display: flex;
     justify-content: center;

@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html>
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,21 +9,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
-            rel="stylesheet">
+              rel="stylesheet">
     </head>
 
     <body>
-        <footer>
+
+        <footer class="main-footer" id="contact-info">
             <div class="footer-top">
                 <div class="footer-logo">
-                    <h2>DÁM<br><span>STUDIO</span></h2>
+                    <img src="image/logo/logoLONG.png" alt="Dám Studio Logo">
                 </div>
                 <div class="footer-contact">
                     <h3>Contact info</h3>
                     <ul>
-                        <li>• 3541 Fort Meade Road, Laurel, MD 20724</li>
-                        <li>• Phone number: (301) 490-5050</li>
-                        <li>• Open 24 hours, 7 days a week</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 3541 Fort Meade Road, Laurel, MD 20724</li>
+                        <li><i class="fas fa-phone"></i> (301) 490-5050</li>
+                        <li><i class="fas fa-clock"></i> Open 24 hours, 7 days a week</li>
                     </ul>
                 </div>
                 <div class="footer-subscribe">
@@ -37,10 +38,9 @@
                         company.</small>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <div class="footer-links">
-                    <a href="#">Copyright © 2025</a>
+                    <a href="#">Bản Quyền © 2025</a>
                     <a href="#">Terms of Service</a>
                     <a href="#">Privacy Policy</a>
                     <a href="#">Accessibility Statement</a>
@@ -56,6 +56,8 @@
                 </div>
             </div>
         </footer>
+        <script src="javascript/homePage.js"></script>
+
     </body>
 
-    </html>
+</html>

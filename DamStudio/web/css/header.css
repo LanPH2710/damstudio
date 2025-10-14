@@ -1,3 +1,69 @@
+
+.custom-navbar {
+    width: 1140px;
+    max-width: 80%;
+    margin: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    font-size: 15px;
+}
+.custom-navbar > div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.leftnavbar {
+    flex: 2;
+}
+.centernavbar {
+    flex: 8;
+    justify-content: center;
+}
+.rightnavbar {
+    flex: 2;
+    justify-content: flex-end;
+}
+.custom-navbar a {
+    color: #eee;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold; 
+}
+.custom-navbar a:last-child {
+    margin-right: 0;
+}
+/* ...existing code... */
+
+/* ...existing code... */
+/* File: style.css */
+header {
+    position: sticky;
+    top: 0;
+    background: transparent;
+    transition: background 0.3s;
+    z-index: 1000;
+    font-style: Mulish;
+    /* XÓA DÒNG margin-bottom: -50px; NẾU CÒN */
+}
+/* File: style.css */
+
+/* THAY THẾ CODE CŨ BẰNG CODE NÀY */
+
+header.sticky {
+    background: #FFFBF5; /* Đổi nền trắng thành màu be cho đồng bộ */
+    /* Thêm bóng mờ tinh tế màu đỏ rượu thay vì màu đen */
+    box-shadow: 0 4px 12px rgba(154, 63, 63, 0.15); 
+}
+
+header.sticky .custom-navbar a {
+    color: #9A3F3F; /* Đổi màu chữ thành màu đỏ rượu */
+}
+
+
 .header {
     padding: 0 30px;
     position: sticky;
@@ -29,7 +95,57 @@
     align-items: center;
     flex-shrink: 0;
 }
+/* === CSS CHO DROPDOWN SUBMENU === */
 
+/* 1. Thiết lập cho mục cha "CÂU CHUYỆN" */
+.centernavbar .dropdown {
+    position: relative; /* Rất quan trọng: làm "mỏ neo" cho submenu */
+    display: inline-block; /* Giúp phần tử hoạt động tốt hơn */
+}
+
+/* 2. Style và ẨN submenu ở trạng thái mặc định */
+.dropdown .submenu {
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    padding: 15px 0;  /* Khoảng đệm bên trong */
+    margin: 0;
+
+    position: absolute;   /* Giúp submenu "nổi" lên trên trang */
+    top: 100%;            /* Nằm ngay dưới mục cha */
+    left: 50%;            /* Căn giữa so với mục cha */
+    transform: translateX(-50%); /* Tinh chỉnh lại để nằm chính giữa */
+    
+    background: #FBDB93;  /* Nền màu be đồng bộ */
+    border-radius: 8px;   /* Bo góc cho mềm mại */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    width: 200px;         /* Đặt chiều rộng cố định cho submenu */
+
+    /* Hiệu ứng ẩn/hiện */
+    opacity: 0;           /* Mặc định làm mờ submenu */
+    visibility: hidden;   /* Ẩn hoàn toàn, không thể click */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+/* 3. HIỆN submenu khi di chuột vào mục cha */
+.dropdown:hover .submenu {
+    opacity: 1;           /* Hiện rõ lại */
+    visibility: visible;  /* Cho phép nhìn thấy và tương tác */
+}
+
+/* 4. Style cho các mục con bên trong submenu */
+.submenu li a {
+    display: block; /* Biến thẻ a thành khối để chiếm toàn bộ chiều rộng */
+    padding: 10px 20px;
+    color: #9A3F3F; /* Chữ màu đỏ rượu */
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    text-align: left; /* Căn chữ về bên trái */
+    white-space: nowrap; /* Ngăn chữ bị xuống dòng */
+}
+
+/* 5. Thêm hiệu ứng khi di chuột vào từng mục con */
+.submenu li a:hover {
+    background-color: #fbf0d3; /* Đổi màu nền khi di chuột vào */
+}
 .menu-toggle {
     display: none;
     background: none;
@@ -69,7 +185,7 @@
 .header-center .menu {
     list-style: none;
     display: flex;
-    gap: 36px;
+    gap: 56px;
     font-weight: 700;
     font-size: 18px;
     letter-spacing: 0.04em;
@@ -274,4 +390,126 @@
         min-width: 16px;
         height: 16px;
     }
+}
+
+
+
+/* === HIỆU ỨNG GẠCH CHÂN CHO NAVBAR === */
+
+/* 1. Chuẩn bị cho thẻ a (rất quan trọng) */
+.centernavbar a {
+    position: relative;     /* Tạo khung tham chiếu cho gạch chân */
+    padding-bottom: 8px;    /* Tạo chút không gian ở dưới cho gạch chân */
+    text-decoration: none;  /* Bỏ gạch chân mặc định */
+    /* Giữ lại màu chữ và transition mặc định của bạn */
+}
+
+/* 2. Tạo ra gạch chân "ảo" và ẩn nó đi */
+.centernavbar a::after {
+    content: ''; /* Bắt buộc phải có để pseudo-element hiện ra */
+    position: absolute;
+    bottom: 0; /* Nằm ở dưới cùng của thẻ a */
+    left: 0;   /* Bắt đầu từ bên trái */
+    
+    width: 0;  /* Mặc định, gạch chân có chiều rộng bằng 0 (ẩn) */
+    height: 2px; /* Độ dày của gạch chân */
+    background-color: #58A4B0; /* Màu xanh dương bạn muốn */
+
+    /* Hiệu ứng chiều rộng chạy mượt mà trong 0.3 giây */
+    transition: width 0.3s ease-in-out; 
+}
+
+/* 3. HIỆN gạch chân khi di chuột (hover) VÀ cho link đang active */
+.centernavbar a:hover::after,
+.centernavbar a.active::after {
+    width: 100%; /* Cho chiều rộng chạy hết 100% để hiện ra */
+}
+
+/* 4. (Tùy chọn) Đổi màu chữ khi di chuột cho đồng bộ */
+/* Lưu ý: Áp dụng cho cả navbar thường và navbar khi cuộn (sticky) */
+.custom-navbar a:hover,
+.custom-navbar a.active {
+    color: #58A4B0 !important; /* Dùng !important để ghi đè màu cũ nếu cần */
+}
+
+/* Khi navbar sticky, ta cũng muốn chữ có màu xanh khi active/hover */
+header.sticky .custom-navbar a:hover,
+header.sticky .custom-navbar a.active {
+    color: #58A4B0 !important; 
+}
+
+
+
+
+
+
+/* === CSS SỬA LỖI HEADER TRÊN TRANG CHỦ === */
+/* Xóa code header cũ và thay bằng toàn bộ khối này */
+
+/* 1. Header MẶC ĐỊNH (cho các trang con) */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FFFBF5;
+    box-shadow: 0 4px 12px rgba(154, 63, 63, 0.15);
+}
+header .custom-navbar a {
+    color: #4D403D;
+}
+
+/* 2. Style ĐẶC BIỆT cho header ở Top Trang chủ */
+body.homepage header {
+    background-color: transparent;
+    box-shadow: none;
+}
+body.homepage header .custom-navbar a {
+    color: #eee;
+}
+
+/* 3. Style khi cuộn chuột (STICKY) - ĐÃ SỬA LỖI */
+/*
+ * SỬA LỖI: Thêm "body" vào trước để tăng độ ưu tiên,
+ * giúp nó ghi đè được style trong suốt của trang chủ.
+*/
+body header.sticky {
+    background-color: #FFFBF5;
+    box-shadow: 0 4px 12px rgba(154, 63, 63, 0.15);
+}
+body header.sticky .custom-navbar a {
+    color: #4D403D;
+}
+
+/* === Hiệu ứng gạch chân và active/hover (giữ nguyên) === */
+.centernavbar a {
+    position: relative;
+    padding-bottom: 8px;
+    text-decoration: none;
+}
+.centernavbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #58A4B0;
+    transition: width 0.3s ease-in-out;
+}
+.centernavbar a:hover::after,
+.centernavbar a.active::after {
+    width: 100%;
+}
+
+/* Active/Hover state cho chữ màu sáng trên trang chủ (khi chưa cuộn) */
+body.homepage header:not(.sticky) .custom-navbar a:hover,
+body.homepage header:not(.sticky) .custom-navbar a.active {
+    color: #58A4B0 !important;
+}
+
+/* Sửa lỗi lệch dòng cho mục dropdown */
+.centernavbar .dropdown {
+    display: flex;
+    align-items: center;
 }

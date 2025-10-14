@@ -1,0 +1,996 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 12, 2025, 8:21:39 PM
+    Author     : ADMIN
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{
+    margin: 0;
+    background-color: #ffffff;
+    color: #eee;
+    font-family: Mulish;
+    font-size: 12px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+
+
+
+/* ...existing code... */
+.custom-navbar {
+    width: 1140px;
+    max-width: 80%;
+    margin: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    font-size: 16px;
+}
+.custom-navbar > div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.leftnavbar {
+    flex: 2;
+}
+.centernavbar {
+    flex: 8;
+    justify-content: center;
+}
+.rightnavbar {
+    flex: 2;
+    justify-content: flex-end;
+}
+.custom-navbar a {
+    color: #eee;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold; 
+}
+.custom-navbar a:last-child {
+    margin-right: 0;
+}
+/* ...existing code... */
+
+/* ...existing code... */
+/* File: style.css */
+header {
+    position: sticky;
+    top: 0;
+    background: transparent;
+    transition: background 0.3s;
+    z-index: 1000;
+    /* XÓA DÒNG margin-bottom: -50px; NẾU CÒN */
+}
+/* File: style.css */
+
+/* THAY THẾ CODE CŨ BẰNG CODE NÀY */
+
+header.sticky {
+    background: #FFFBF5; /* Đổi nền trắng thành màu be cho đồng bộ */
+    /* Thêm bóng mờ tinh tế màu đỏ rượu thay vì màu đen */
+    box-shadow: 0 4px 12px rgba(154, 63, 63, 0.15); 
+}
+
+header.sticky .custom-navbar a {
+    color: #9A3F3F; /* Đổi màu chữ thành màu đỏ rượu */
+}
+
+
+
+
+
+.carousel{
+    height: 100vh;
+    margin-top: -50px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.carousel .list .item{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 0;
+}
+.carousel .list .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.carousel .list .item .content{
+    position: absolute;
+    top: 20%;
+    width: 1140px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-right: 30%;
+    box-sizing: border-box;
+    color: #FBDB93;
+    text-shadow: 0 5px 10px #0004;
+}
+.carousel .list .item .author{
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+.carousel .list .item .title,
+.carousel .list .item .topic{
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+.carousel .list .item .topic{
+    color: #9A3F3F;
+}
+.carousel .list .item .buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: 40px;
+    gap: 5px;
+    margin-top: 20px;
+}
+.carousel .list .item .buttons button{
+    border: none;
+    background-color: #9A3F3F;
+    letter-spacing: 3px;
+    font-family: Poppins;
+    font-weight: 500;
+}
+.carousel .list .item .buttons button:nth-child(2){
+    background-color: transparent;
+    border: 1px solid #9A3F3F;
+    color: #9A3F3F;
+}
+/* thumbail */
+.thumbnail{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+}
+.thumbnail .item{
+    width: 150px;
+    height: 220px;
+    flex-shrink: 0;
+    position: relative;
+}
+.thumbnail .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.thumbnail .item .content{
+    color: #FBDB93;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+.thumbnail .item .content .title{
+    font-weight: 500;
+}
+.thumbnail .item .content .description{
+    font-weight: 300;
+}
+/* arrows */
+.arrows{
+    position: absolute;
+    top: 80%;
+    right: 42%;
+    z-index: 100;
+    width: 300px;
+    max-width: 30%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.arrows button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #9A3F3F;
+    border: none;
+    color: #FBDB93;
+    font-family: monospace;
+    font-weight: bold;
+    transition: .5s;
+}
+.arrows button:hover{
+    background-color: #9A3F3F;
+    color: #FBDB93;
+}
+
+/* animation */
+.carousel .list .item:nth-child(1){
+    z-index: 1;
+}
+
+/* animation text in first item */
+
+.carousel .list .item:nth-child(1) .content .author,
+.carousel .list .item:nth-child(1) .content .title,
+.carousel .list .item:nth-child(1) .content .topic,
+.carousel .list .item:nth-child(1) .content .des,
+.carousel .list .item:nth-child(1) .content .buttons
+{
+    transform: translateY(50px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s 1s linear 1 forwards;
+}
+@keyframes showContent{
+    to{
+        transform: translateY(0px);
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+.carousel .list .item:nth-child(1) .content .title{
+    animation-delay: 1.2s!important;
+}
+.carousel .list .item:nth-child(1) .content .topic{
+    animation-delay: 1.4s!important;
+}
+.carousel .list .item:nth-child(1) .content .des{
+    animation-delay: 1.6s!important;
+}
+.carousel .list .item:nth-child(1) .content .buttons{
+    animation-delay: 1.8s!important;
+}
+/* create animation when next click */
+.carousel.next .list .item:nth-child(1) img{
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 30px;
+    animation: showImage .5s linear 1 forwards;
+}
+@keyframes showImage{
+    to{
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
+.carousel.next .thumbnail .item:nth-last-child(1){
+    overflow: hidden;
+    animation: showThumbnail .5s linear 1 forwards;
+}
+.carousel.prev .list .item img{
+    z-index: 100;
+}
+@keyframes showThumbnail{
+    from{
+        width: 0;
+        opacity: 0;
+    }
+}
+.carousel.next .thumbnail{
+    animation: effectNext .5s linear 1 forwards;
+}
+
+@keyframes effectNext{
+    from{
+        transform: translateX(150px);
+    }
+}
+
+/* running time */
+
+.carousel .time{
+    position: absolute;
+    z-index: 1000;
+    width: 0%;
+    height: 3px;
+    background-color: #9A3F3F;
+    left: 0;
+    top: 0;
+}
+
+.carousel.next .time,
+.carousel.prev .time{
+    animation: runningTime 3s linear 1 forwards;
+}
+@keyframes runningTime{
+    from{ width: 100%}
+    to{width: 0}
+}
+
+
+/* prev click */
+
+.carousel.prev .list .item:nth-child(2){
+    z-index: 2;
+}
+
+.carousel.prev .list .item:nth-child(2) img{
+    animation: outFrame 0.5s linear 1 forwards;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+@keyframes outFrame{
+    to{
+        width: 150px;
+        height: 220px;
+        bottom: 50px;
+        left: 50%;
+        border-radius: 20px;
+    }
+}
+
+.carousel.prev .thumbnail .item:nth-child(1){
+    overflow: hidden;
+    opacity: 0;
+    animation: showThumbnail .5s linear 1 forwards;
+}
+.carousel.next .arrows button,
+.carousel.prev .arrows button{
+    pointer-events: none;
+}
+.carousel.prev .list .item:nth-child(2) .content .author,
+.carousel.prev .list .item:nth-child(2) .content .title,
+.carousel.prev .list .item:nth-child(2) .content .topic,
+.carousel.prev .list .item:nth-child(2) .content .des,
+.carousel.prev .list .item:nth-child(2) .content .buttons
+{
+    animation: contentOut 1.5s linear 1 forwards!important;
+}
+
+@keyframes contentOut{
+    to{
+        transform: translateY(-150px);
+        filter: blur(20px);
+        opacity: 0;
+    }
+}
+
+
+
+
+.frame {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #9A3F3F;
+}
+
+.hello-frame {
+    background: #FFFBF5;
+}
+.hello-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    height: 100%;
+}
+.hello-img {
+    flex: 4 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hello-text {
+    flex: 6 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+}
+.hello-text h2 {
+    font-size: 2em;
+    color: #4D403D;
+    margin-bottom: 16px;
+}
+.hello-text p {
+    font-size: 1.1em;
+    color: #4D403D;
+    margin-bottom: 8px;
+}
+.hello-text .learnmore {
+    margin-top: 24px;
+}
+
+.hello-img img {
+    width: 100%; /* Giúp ảnh co giãn theo chiều rộng của thẻ div chứa nó */
+    height: auto; /* Tự động điều chỉnh chiều cao để giữ đúng tỷ lệ ảnh */
+    max-width: 400px; /* QUAN TRỌNG: Đặt chiều rộng tối đa cho ảnh */
+    object-fit: contain; /* Đảm bảo toàn bộ ảnh luôn hiển thị, không bị cắt xén */
+}
+
+
+
+/* Frame3 below carousel */
+
+.frame-content {
+    width: 1140px;
+    max-width: 80%;
+    margin: auto;
+    text-align: center;
+    color: #FBDB93;
+}
+/* ...existing code... */
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    margin-top: 32px;
+}
+.product {
+    background: #FFFBF5;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0002;
+    padding: 16px;
+    width: 220px;
+    text-align: center;
+}
+.product img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.product .price {
+    color: #9A3F3F;
+    font-weight: bold;
+    margin: 8px 0;
+}
+.learn-more-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    background: #FA6166;
+    color: #FFFBF5;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.learn-more-btn:hover {
+    background: #9A3F3F;
+}
+.learnmore {
+    margin-top: 32px;
+}
+
+
+
+@keyframes showHelloContent {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hello-animated-content > * {
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.hello-animated-content.visible > * {
+    animation: showHelloContent 0.8s forwards;
+}
+
+.hello-animated-content.visible h2 { animation-delay: 0.1s; }
+.hello-animated-content.visible p:nth-of-type(1) { animation-delay: 0.2s; }
+.hello-animated-content.visible p:nth-of-type(2) { animation-delay: 0.3s; }
+.hello-animated-content.visible p:nth-of-type(3) { animation-delay: 0.4s; }
+.hello-animated-content.visible .learnmore { animation-delay: 0.5s; }
+
+
+
+
+
+.frame-fourth {
+    background: #4D403D;
+}
+.frame-fourth-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    height: 100%;
+}
+.frame-fourth-text {
+    flex: 6 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+.frame-fourth-text h2 {
+    font-size: 2em;
+    color: #FFFBF5;
+    margin-bottom: 16px;
+}
+.frame-fourth-text p {
+    font-size: 1.1em;
+    color: #FFFBF5;
+    margin-bottom: 8px;
+}
+.frame-fourth-text .learn-more-btn {
+    margin-top: 24px;
+}
+.frame-fourth-slider {
+    flex: 4 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slider-images img {
+    max-width: 320px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px #0002;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+@keyframes showSectionContent {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-animated-content > * {
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.section-animated-content.visible > * {
+    animation: showSectionContent 0.8s forwards;
+}
+
+.section-animated-content.visible h2 { animation-delay: 0.1s; }
+.section-animated-content.visible p:nth-of-type(1) { animation-delay: 0.2s; }
+.section-animated-content.visible p:nth-of-type(2) { animation-delay: 0.3s; }
+.section-animated-content.visible p:nth-of-type(3) { animation-delay: 0.4s; }
+.section-animated-content.visible .learnmore,
+.section-animated-content.visible a.learn-more-btn { animation-delay: 0.5s; }
+
+
+/* === CSS HOÀN CHỈNH CHO FOOTER === */
+
+.main-footer {
+    background: #9A3F3F; /* Thay nền đen bằng màu đỏ rượu */
+    color: #FBDB93;      /* Đổi màu chữ mặc định thành màu be */
+    padding: 60px 0 30px 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    border-top: 4px solid #FBDB93; /* Đổi màu đường viền trên cùng */
+}
+
+.footer-top {
+    width: 1140px;
+    max-width: 90%; /* Tăng một chút cho cân đối */
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.footer-logo img {
+    max-width: 150px; /* Cho logo to hơn một chút */
+    border-radius: 12px;
+}
+
+.footer-contact h3,
+.footer-subscribe h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #FFFFFF; /* Dùng màu trắng cho tiêu đề để nổi bật hơn */
+    font-weight: 600;
+}
+
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.footer-contact ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Icon cũng đổi thành màu be */
+.footer-contact ul i {
+    color: #FBDB93;
+    font-size: 16px;
+}
+
+.footer-subscribe p {
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+    color: rgba(251, 219, 147, 0.85); /* Cho chữ mô tả mờ hơn một chút */
+}
+
+.footer-subscribe form {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.footer-subscribe input[type="email"] {
+    padding: 10px;
+    font-size: 14px;
+    flex: 1;
+    border: 1px solid #FBDB93;
+    border-radius: 4px 0 0 4px; /* Bo góc cho đẹp */
+    background: rgba(0, 0, 0, 0.2); /* Nền tối mờ */
+    color: #FBDB93;
+}
+
+.footer-subscribe input[type="email"]::placeholder {
+    color: rgba(251, 219, 147, 0.6);
+}
+
+.footer-subscribe button {
+    padding: 10px 20px;
+    background-color: #FBDB93; /* Nền be */
+    color: #9A3F3F; /* Chữ đỏ rượu */
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.footer-subscribe button:hover {
+    background: #fff; /* Hover ra màu trắng */
+}
+
+.footer-subscribe small {
+    font-size: 11px;
+    color: rgba(251, 219, 147, 0.7);
+}
+
+.footer-bottom {
+    width: 1140px;
+    max-width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(251, 219, 147, 0.3); /* Đường kẻ mờ */
+    padding-top: 25px;
+    font-size: 14px;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer-links a,
+.footer-social a {
+    text-decoration: none;
+    color: #FBDB93;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+    color: #FFFFFF; /* Hover ra màu trắng sáng */
+}
+
+.footer-social a {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+/* Giữ lại media query cho footer trên mobile */
+@media (max-width: 900px) {
+    .footer-top, .footer-bottom {
+        flex-direction: column;
+        align-items: center; /* Căn giữa trên mobile */
+        text-align: center;
+        gap: 40px;
+    }
+    .footer-bottom {
+        gap: 20px;
+    }
+    .footer-social {
+        margin-top: 12px;
+    }
+    .footer-contact ul li {
+        justify-content: center;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 678px) {
+
+    .carousel .list .item .content {
+        padding-right: 0;
+    }
+    .carousel .list .item .content .title {
+        font-size: 30px;
+    }
+    
+}
+/* === KHỐI CODE HOÀN CHỈNH CHO HEADER & NAVBAR === */
+/* Xóa code cũ và thay bằng toàn bộ code này */
+
+/* --- 1. STYLE CHO DESKTOP (MÀN HÌNH LỚN) --- */
+
+header {
+    position: sticky;
+    top: 0;
+    background: transparent;
+    transition: background 0.3s;
+    z-index: 1000;
+}
+
+/* File: style.css */
+
+/* THAY THẾ CODE CŨ BẰNG CODE NÀY */
+
+header.sticky {
+    background: #FFFBF5; /* Đổi nền trắng thành màu be cho đồng bộ */
+    /* Thêm bóng mờ tinh tế màu đỏ rượu thay vì màu đen */
+    box-shadow: 0 4px 12px rgba(154, 63, 63, 0.15); 
+}
+
+header.sticky .custom-navbar a {
+    color: #4D403D; /* Đổi màu chữ thành màu đỏ rượu */
+}
+
+.custom-navbar {
+    width: 1140px;
+    max-width: 80%;
+    margin: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Căn đều các mục */
+    position: relative;
+    z-index: 100;
+    font-size: 15px;
+}
+
+.custom-navbar > div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.leftnavbar {
+    flex: 1; /* Chia đều không gian */
+    justify-content: flex-start; /* Căn trái */
+}
+
+/* QUAN TRỌNG: Quy định kích thước cho logo trên DESKTOP */
+.leftnavbar img {
+    height: 40px; /* Chiều cao logo, bạn có thể chỉnh lại */
+    width: auto;
+    object-fit: contain;
+}
+
+.centernavbar {
+    flex: 3; /* Cho nhiều không gian hơn */
+    justify-content: center;
+}
+
+.rightnavbar {
+    flex: 1; /* Chia đều không gian */
+    justify-content: flex-end; /* Căn phải */
+}
+
+.custom-navbar a {
+    color: #eee;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold; 
+}
+
+/* Mặc định ẩn các nút dành cho mobile trên desktop */
+.menu-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- 2. STYLE CHO MOBILE (MÀN HÌNH NHỎ) --- */
+
+@media screen and (max-width: 678px) {
+
+    /* Ẩn các thành phần của desktop đi */
+    .custom-navbar > .leftnavbar,
+    .custom-navbar > .centernavbar,
+    .custom-navbar > .rightnavbar {
+        display: none !important;
+    }
+
+    /* Hiện nút hamburger menu */
+    .menu-toggle-btn {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        z-index: 10001;
+        font-size: 24px;
+        color: #222;
+    }
+
+    /* Khi cuộn trên mobile, header phải trong suốt */
+    header.sticky {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    
+    /* Biến nav thành overlay khi mở */
+    .custom-navbar.mobile-menu-open {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        
+        background-color: rgba(251, 219, 147, 0.98);
+        z-index: 10000;
+        backdrop-filter: blur(5px);
+    }
+
+    /* Hiện lại và style các thành phần BÊN TRONG overlay */
+    .custom-navbar.mobile-menu-open > .leftnavbar,
+    .custom-navbar.mobile-menu-open > .centernavbar,
+    .custom-navbar.mobile-menu-open > .rightnavbar {
+        display: flex !important;
+    }
+
+    /* Style cho logo trong menu mobile */
+    .custom-navbar.mobile-menu-open .leftnavbar img {
+        height: auto; /* Để chiều rộng quyết định */
+        max-width: 120px;
+    }
+
+    /* Style cho menu links */
+    .custom-navbar.mobile-menu-open .centernavbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .custom-navbar.mobile-menu-open .centernavbar a {
+        color: #9A3F3F;
+        font-size: 28px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    /* Style cho social icons */
+    .custom-navbar.mobile-menu-open .rightnavbar {
+        flex-direction: row;
+        gap: 30px;
+    }
+    .custom-navbar.mobile-menu-open .rightnavbar button {
+        background: none;
+        border: none;
+        color: #9A3F3F;
+        font-size: 24px;
+    }
+
+
+
+
+     /* === RESPONSIVE CHO "HELLO SECTION" === */
+
+    /* 1. Chuyển layout 2 cột thành 1 cột (ảnh trên, chữ dưới) */
+    .hello-row {
+        flex-direction: column; /* Đổi hướng xếp từ hàng ngang sang dọc */
+        text-align: center;     /* Căn giữa toàn bộ chữ cho đẹp */
+        gap: 20px;              /* Chỉnh lại khoảng cách giữa ảnh và chữ */
+    }
+
+    /* 2. Đảm bảo khối text cũng được căn giữa */
+    .hello-text {
+        align-items: center; /* Căn nút "TÌM HIỂU THÊM" vào giữa */
+    }
+    
+    /* 3. Chỉnh lại kích thước chữ cho dễ đọc hơn trên mobile */
+    .hello-text h2 {
+        font-size: 1.6em; /* Giảm cỡ chữ tiêu đề (bạn có thể chỉnh lại) */
+    }
+
+    .hello-text p {
+        font-size: 1em; /* Giảm cỡ chữ các đoạn văn */
+    }
+
+    /* 4. (Tùy chọn) Chỉnh lại kích thước ảnh nếu cần */
+    .hello-img img {
+        max-width: 150px; /* Giới hạn độ rộng của logo/ảnh */
+        margin: 0 auto 20px auto; /* Căn ảnh vào giữa và tạo khoảng cách dưới */
+    }
+
+
+
+
+
+
+    /* === RESPONSIVE CHO FRAME THỨ TƯ === */
+
+    /* 1. Chuyển layout 2 cột thành 1 cột (chữ trên, ảnh dưới) */
+    .frame-fourth-row {
+        flex-direction: column; /* Đổi hướng từ hàng ngang sang dọc */
+        text-align: center;     /* Căn giữa chữ */
+    }
+
+    /* 2. Đảm bảo khối text cũng được căn giữa */
+    .frame-fourth-text {
+        align-items: center; /* Căn nút "Xem thêm" vào giữa */
+    }
+
+    /* 3. Chỉnh lại kích thước chữ cho cân đối */
+    .frame-fourth-text h2 {
+        font-size: 1.6em;
+    }
+
+    .frame-fourth-text p {
+        font-size: 1em;
+    }
+    
+    /* 4. Giới hạn kích thước của ảnh/slider */
+    .frame-fourth-slider img {
+        max-width: 100%; /* Đảm bảo ảnh không bị tràn ra ngoài */
+        height: auto;
+    }
+}

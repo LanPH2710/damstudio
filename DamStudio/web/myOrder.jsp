@@ -8,10 +8,12 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myOrder.css?v=${System.currentTimeMillis()}"/>
         <title>Đơn hàng của tôi</title>
+                <link rel="stylesheet" href="css/homePage.css">
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <div class="page-wrapper doctris-theme toggled">
+        <div class="page-wrapper doctris-theme toggled mid">
             <!-- Page Content -->
             <main class="page-content bg-light">
                 <div class="container-fluid">
@@ -137,7 +139,7 @@
                         </div>
 
                         <!-- Pagination -->
-                        <div class="row text-center">
+                        <div class="row text-center pagination-section">
                             <div class="col-12 mt-4">
                                 <div class="d-md-flex align-items-center justify-content-between">
                                     <span class="text-muted me-3">

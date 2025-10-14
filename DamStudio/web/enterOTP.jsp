@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Nhập OTP</title>
     <link rel="stylesheet" href="css/otp.css">
+            <link rel="stylesheet" href="css/homePage.css">
+
     <style>
         .otp-container {
             max-width: 500px;

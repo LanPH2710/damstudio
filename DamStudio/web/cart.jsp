@@ -7,6 +7,8 @@
         <title>Giỏ hàng</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css?v=${System.currentTimeMillis()}" />
+                <link rel="stylesheet" href="css/homePage.css">
+
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>

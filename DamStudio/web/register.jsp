@@ -5,6 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/register.css" />
         <title>Đăng Ký Tài Khoản</title>
+                <link rel="stylesheet" href="css/homePage.css">
+                
     </head>
     <body>
         <jsp:include page="header.jsp"/>
