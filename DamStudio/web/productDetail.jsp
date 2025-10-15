@@ -23,9 +23,18 @@
             <!-- Khối 1: Thông tin sản phẩm -->
             <div class="product-main-info shadow">
                 <div class="product-img-block">
-                    <c:forEach var="img" items="${product.images}">
-                            <img src="image/ao/${img.imageUrl}" alt="${product.name}">
-                    </c:forEach>
+                    <div class="product-slider">
+                        <c:forEach var="img" items="${product.images}" varStatus="loop">
+                            <img src="image/ao/${img.imageUrl}" 
+                                 alt="${product.name}" 
+                                 class="slide ${loop.first ? 'active' : ''}">
+                        </c:forEach>
+                        <div class="slider-dots">
+                            <c:forEach var="img" items="${product.images}" varStatus="loop">
+                                <span class="dot ${loop.first ? 'active' : ''}" data-index="${loop.index}"></span>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-info-block">
                     <h1 class="product-title">${product.name}</h1>
@@ -320,5 +329,51 @@
                         }, 2500);
                     }
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const slides = document.querySelectorAll('.product-slider .slide');
+                const dots = document.querySelectorAll('.product-slider .dot');
+                let currentIndex = 0;
+                let slideInterval;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                        dots[i].classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                }
+
+                function nextSlide() {
+                    const nextIndex = (currentIndex + 1) % slides.length;
+                    showSlide(nextIndex);
+                }
+
+                // Chuyển tự động sau 7 giây
+                function startAutoSlide() {
+                    slideInterval = setInterval(nextSlide, 7000);
+                }
+
+                function stopAutoSlide() {
+                    clearInterval(slideInterval);
+                }
+
+                // Sự kiện click vào dot
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        stopAutoSlide();
+                        const index = parseInt(dot.getAttribute('data-index'));
+                        showSlide(index);
+                        startAutoSlide();
+                    });
+                });
+
+                // Khởi động
+                if (slides.length > 1) {
+                    startAutoSlide();
+                }
+            });
+        </script>
+
     </body>
 </html>
