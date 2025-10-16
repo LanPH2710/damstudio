@@ -1,0 +1,723 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s;
+}
+
+#start-button {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    cursor: pointer;
+    border: 2px solid white;
+    background: none;
+    color: white;
+}
+
+/* Container chính sẽ được ghim lại */
+#pin-container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    /* Bắt buộc để các element con định vị theo */
+}
+
+/* Style chung cho cả 2 scene */
+.scene {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* Xếp chồng các scene lên nhau */
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Scene Intro nằm trên cùng ban đầu */
+#scene-intro {
+    background-color: #fff;
+    /* Màu nền cho scene intro */
+    z-index: 10;
+}
+
+.title-text {
+    font-size: 4rem;
+    color: #333;
+}
+
+/* Đảm bảo #scene-1 là parent cho tất cả element */
+#scene-1 {
+    position: relative;
+    /* Quan trọng: z-index chỉ hoạt động với position: relative/absolute/fixed */
+    width: 100%;
+    height: 100%;
+}
+
+/* Các element con cần có position: absolute để xếp layer */
+.scene1-element {
+    position: absolute;
+    /* BẮT BUỘC để xếp layer và di chuyển */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Căn giữa */
+    opacity: 0;
+    /* BẮT BUỘC: Ẩn tất cả element ảnh ban đầu */
+    max-width: 100%;
+    max-height: 100%;
+    transition: none;
+    /* Quan trọng: Ngăn CSS transition xung đột với GSAP */
+}
+
+#el-1-intro {
+    z-index: 1;
+    /* Layer thấp nhất */
+    /* Không cần translate(-50%, -50%) nếu bạn muốn nó chiếm toàn màn hình */
+    width: 100%;
+    height: 100%;
+}
+
+/* Sắp xếp layer theo yêu cầu: 1 (thấp nhất) đến 8 (cao nhất) */
+#el-1-1 {
+    z-index: 10;
+}
+
+/* Thấp nhất */
+#el-1-2 {
+    z-index: 20;
+}
+
+#el-1-3 {
+    z-index: 30;
+}
+
+#el-1-4 {
+    z-index: 40;
+}
+
+#el-1-5 {
+    z-index: 50;
+}
+
+#el-1-6 {
+    z-index: 60;
+}
+
+#el-1-7 {
+    z-index: 70;
+}
+
+#el-1-8 {
+    z-index: 80;
+}
+
+/* Cao nhất */
+
+/* Đảm bảo text luôn nằm trên các ảnh */
+.scene1-text {
+    position: absolute;
+    z-index: 100;
+    /* Luôn cao hơn ảnh */
+    /* ... */
+}
+
+.scene1-subtitle {
+    /* Dùng class này cho tất cả các thẻ <p> subtitle */
+    position: absolute;
+    /* BẮT BUỘC */
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    /* Luôn nằm trên tất cả ảnh */
+    opacity: 0;
+    /* BẮT BUỘC: Ẩn tất cả text ban đầu */
+    transform: translateY(50px);
+    /* Vị trí ban đầu (dưới) để animation đi lên */
+    left: 50%;
+    /* Căn giữa */
+    transform: translateX(-50%) translateY(50px);
+    /* Kết hợp căn giữa và vị trí đi lên */
+}
+
+/* Vị trí cụ thể cho Text 1 (Tùy chỉnh) */
+#text-1-1 {
+    bottom: 10%;
+}
+
+#text-1-2 {
+    top: 10%;
+}
+
+#text-1-3 {
+    bottom: 20%;
+}
+
+/* Style cho Scene 2 (Đặt layer dưới Scene 1 ban đầu) */
+#scene-2 {
+    z-index: 4;
+    /* Đặt layer dưới Scene 1 (z-index: 5) */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Có thể thêm màu nền hoặc ảnh nền cho Scene 2 */
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 2 */
+.scene2-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* ✅ Chiều rộng 100% */
+    height: 100%;
+    /* ✅ Chiều cao 100% */
+    opacity: 0;
+    transition: none;
+
+    /* Căn giữa và phủ đầy hình ảnh */
+    object-fit: cover;
+    /* ✅ QUAN TRỌNG: Căn giữa và cắt ảnh để phủ đầy */
+}
+
+/* Vẫn giữ Z-index đã thiết lập trước đó */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 2 */
+.scene2-subtitle {
+    /* Dùng class này cho tất cả các thẻ <p> subtitle */
+    position: absolute;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    /* Chọn màu khác cho dễ phân biệt */
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    /* Luôn nằm trên tất cả ảnh */
+    opacity: 0;
+    /* BẮT BUỘC: Ẩn tất cả text ban đầu */
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50px);
+    /* Dịch lên trên (vị trí ẩn) */
+}
+
+/* Style cho Scene 3 */
+#scene-3 {
+    z-index: 3;
+    /* Đặt layer dưới Scene 1 và Scene 2 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 3 */
+.scene3-element {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 3 theo yêu cầu (1 thấp nhất, 5 cao nhất) */
+#el-3-1 {
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+/* Thấp nhất */
+#el-3-2 {
+    z-index: 20;
+    top: 0;
+    left: 0;
+}
+
+#el-3-3 {
+    z-index: 30;
+    top: 0;
+    left: 0;
+}
+
+#el-3-4 {
+    z-index: 40;
+    top: 0;
+    left: -25%;
+}
+
+
+
+/* Cao nhất */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 3 */
+.scene3-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    /* Chọn màu nổi bật */
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50px);
+    /* Dịch lên trên (vị trí ẩn) */
+}
+
+/* Vị trí cụ thể cho Text 3-1 */
+#text-3-1 {
+    top: 15%;
+}
+
+#el-3-5 {
+    z-index: 50;
+    /* Giữ nguyên z-index */
+    transform: scaleX(-1);
+    /* ✅ QUAN TRỌNG: Lật ngang element theo trục X */
+    top: 5%;
+    left: 10%;
+}
+
+/* Style cho Scene 4 */
+#scene-4 {
+    z-index: 2;
+    /* Đặt layer dưới Scene 1, 2, 3 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 4 (Full screen) */
+.scene4-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 4 theo yêu cầu (1 thấp nhất, 9 cao nhất) */
+#el-4-1 {
+    z-index: 10;
+}
+
+#el-4-2 {
+    z-index: 20;
+}
+
+#el-4-3 {
+    z-index: 30;
+}
+
+#el-4-4 {
+    z-index: 40;
+}
+
+#el-4-5 {
+    z-index: 50;
+}
+
+#el-4-6 {
+    z-index: 60;
+}
+
+#el-4-7 {
+    z-index: 70;
+}
+
+#el-4-8 {
+    z-index: 80;
+}
+
+#el-4-9 {
+    z-index: 90;
+}
+
+/* Cao nhất */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 4 */
+.scene4-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 40%;
+    transform: translateX(-50%) translateY(-50px);
+    /* Dịch lên trên (vị trí ẩn) */
+}
+
+/* Style cho Scene 5 */
+#scene-5 {
+    z-index: 1;
+    /* Đặt layer thấp hơn Scene 1, 2, 3, 4 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 5 (Full screen) */
+.scene5-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 5 (1 thấp nhất, 4 cao nhất) */
+#el-5-1 {
+    z-index: 10;
+}
+
+#el-5-2 {
+    z-index: 20;
+}
+
+#el-5-3 {
+    z-index: 30;
+}
+
+#el-5-4 {
+    z-index: 40;
+}
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 5 */
+.scene5-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 40%;
+    transform: translateX(-50%) translateY(-50px);
+}
+
+/* Style cho Scene 6 */
+#scene-6 {
+    z-index: 0;
+    /* Đặt layer thấp nhất */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 6 (Full screen) */
+.scene6-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 6 (1 thấp nhất, 7 cao nhất) */
+#el-6-1 {
+    z-index: 10;
+}
+
+#el-6-2 {
+    z-index: 20;
+}
+
+#el-6-3 {
+    z-index: 30;
+}
+
+#el-6-4 {
+    z-index: 40;
+}
+
+#el-6-5 {
+    z-index: 50;
+}
+
+#el-6-6 {
+    z-index: 60;
+}
+
+#el-6-7 {
+    z-index: 70;
+}
+
+/* Cao nhất */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 6 */
+.scene6-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 40%;
+    transform: translateX(-50%) translateY(-50px);
+}
+
+/* Style cho Scene 7 */
+#scene-7 {
+    z-index: -1;
+    /* Đặt layer thấp hơn Scene 1-6 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 7 (Full screen) */
+.scene7-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 7 (1 thấp nhất, 5 cao nhất) */
+#el-7-1 {
+    z-index: 10;
+}
+
+/* Nền/Thấp nhất */
+#el-7-2 {
+    z-index: 20;
+}
+
+#el-7-3 {
+    z-index: 30;
+}
+
+#el-7-4 {
+    z-index: 40;
+}
+
+#el-7-5 {
+    z-index: 50;
+}
+
+/* Cao nhất */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 7 */
+.scene7-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 75%;
+    transform: translateX(-50%) translateY(-50px);
+}
+
+/* Style cho Scene 8 */
+#scene-8 {
+    z-index: -2;
+    /* Đặt layer thấp hơn Scene 1-7 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Style chung cho TẤT CẢ element ảnh trong Scene 8 (Full screen) */
+.scene8-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Z-index cho các Element Ảnh Scene 8 (1 thấp nhất, 6 cao nhất) */
+#el-8-1 {
+    z-index: 10;
+}
+
+#el-8-2 {
+    z-index: 20;
+}
+
+#el-8-3 {
+    z-index: 30;
+}
+
+#el-8-4 {
+    z-index: 40;
+}
+
+#el-8-5 {
+    z-index: 50;
+}
+
+#el-8-6 {
+    z-index: 60;
+}
+
+/* Cao nhất */
+
+/* Style chung cho TẤT CẢ các dòng Text trong Scene 8 */
+.scene8-subtitle {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: 0;
+    /* Vị trí ban đầu cho hiệu ứng 'đi từ trên xuống' */
+    top: 0;
+    left: 70%;
+    transform: translateX(-50%) translateY(-50px);
+}
+
+/* Vị trí hiển thị của element 2 Scene 8 (do GSAP set top: 10%) */
+#el-8-2 {
+    left: 50%;
+    transform: translateX(-50%);
+    /* Căn giữa ngang */
+    /* Để GSAP điều khiển top/yPercent */
+}
+
+
+/* Điều chỉnh kích thước chữ cho màn hình nhỏ (ví dụ: dưới 768px - điện thoại/tablet) */
+@media (max-width: 768px) {
+
+    .scene1-subtitle,
+    .scene2-subtitle,
+    .scene3-subtitle,
+    .scene4-subtitle,
+    .scene5-subtitle,
+    .scene6-subtitle,
+    .scene7-subtitle,
+    .scene8-subtitle {
+        font-size: 1.1rem;
+        /* Giảm cỡ chữ trên điện thoại */
+    }
+
+    .title-text {
+        font-size: 3rem;
+    }
+}
+
+/* Điều chỉnh kích thước chữ cho màn hình rất nhỏ (ví dụ: dưới 480px) */
+@media (max-width: 480px) {
+
+    .scene1-subtitle,
+    .scene2-subtitle,
+    .scene3-subtitle,
+    .scene4-subtitle,
+    .scene5-subtitle,
+    .scene6-subtitle,
+    .scene7-subtitle,
+    .scene8-subtitle {
+        font-size: 0.9rem;
+        /* Giảm cỡ chữ hơn nữa */
+        padding: 8px 15px;
+    }
+}
+
+/* --- YÊU CẦU XOAY NGANG (Landscape Mode) --- */
+/* Buộc người dùng xoay ngang khi dùng điện thoại */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    body {
+        /* Ẩn nội dung chính khi ở chế độ dọc */
+        visibility: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Tạo lớp phủ yêu cầu xoay ngang */
+    body::after {
+        visibility: visible;
+        content: "Vui lòng xoay ngang màn hình để tiếp tục xem câu chuyện.";
+        color: black;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 20px;
+        z-index: 10000;
+    }
+}

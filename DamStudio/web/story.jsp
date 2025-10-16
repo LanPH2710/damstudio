@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="story-grid">
-                    <a href="https://lanph2710.github.io/damstudio/sutichhoguom.html" class="story-card">
+                    <a href="sutichhoguom.html" class="story-card">
                         <img src="image/homeSlider/STHG.png" alt="Sự Tích Hồ Gươm" class="card-background">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -48,7 +48,7 @@
                         </div>
                     </a>
 
-                    <a href="sontinhthuytinh.jsp" class="story-card">
+                    <a href="sontinhthuytinh.html" class="story-card">
                         <img src="image/homeSlider/STTT.png" alt="Sơn Tinh - Thủy Tinh" class="card-background">
                         <div class="card-overlay"></div>
                         <div class="card-content">

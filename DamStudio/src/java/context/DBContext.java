@@ -16,12 +16,12 @@ public class DBContext {
 
     public DBContext() {
         try {
-          String user = "root"; // Your MySQL username - local
+//          String user = "root"; // Your MySQL username - local
 //          String pass = "123456"; // Your MySQL password - local
-          String pass = "sa123"; // Your MySQL password - local
+//          String pass = "sa123"; // Your MySQL password - local
 
-//            String user = "damstudio"; // Your MySQL username
-//            String pass = "minhlan2312710"; // Your MySQL password
+            String user = "damstudio"; // Your MySQL username
+            String pass = "minhlan2312710"; // Your MySQL password
 
             String url = "jdbc:mysql://localhost:3306/damstudio"; // MySQL URL format - your schema name
             Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL driver class
