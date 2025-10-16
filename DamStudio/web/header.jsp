@@ -41,8 +41,8 @@
                     <a href="productlist">SẢN PHẨM</a>
                     <li class="dropdown"><a href="story.jsp">CÂU CHUYỆN</a>
                         <ul class="submenu">
-                            <li><a href="https://lanph2710.github.io/damstudio/sutichhoguom.html">Sự tích hồ Gươm</a></li>
-                            <li><a href="#">Sơn tinh thủy tinh</a></li>
+                            <li><a href="sutichhoguom.html">Sự tích hồ Gươm</a></li>
+                            <li><a href="sontinhthuytinh.html">Sơn tinh thủy tinh</a></li>
                             <!--                            <li><a href="#">Con rồng cháu tiên</a></li>
                                                         <li><a href="#">Thánh Gióng</a></li>
                                                         <li><a href="#">Chử Đồng Tử</a></li>

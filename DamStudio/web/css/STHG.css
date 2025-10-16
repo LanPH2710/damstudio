@@ -1,0 +1,833 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 16, 2025, 3:02:28 AM
+    Author     : ADMIN
+*/
+
+/* --- Cài đặt chung --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    overflow-x: hidden;/* Chặn cuộn ngang */
+    /* overflow: hidden; Chặn cuộn doc */
+}
+
+body {
+    background-color: #0a192f;
+    /* Màu nền tối cho câu chuyện */
+    color: #e6f1ff;
+    font-family: Arial, sans-serif;
+    /* overflow: hidden; */
+    /* Tạm thời ẩn thanh cuộn */
+}
+
+/* --- Màn hình chờ --- */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #020c1b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+/*#startButton {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #0a192f;
+    background-color: #64ffda;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 250px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+}
+
+.ripple-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#turtle {
+    bottom: 50%;
+    width: 80px;
+    position: absolute;
+    z-index: 10;
+    animation: bobbing 2.5s ease-in-out infinite;
+}*/
+
+
+/* Sửa: Dùng position: absolute để căn giữa, không bị nút bấm ảnh hưởng */
+.ripple-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+}
+
+/* Sửa: Đặt nút bấm ở dưới cùng cho gọn */
+#startButton {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #0a192f;
+    background-color: #64ffda;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#turtle {
+    width: 80px;
+    position: absolute;
+    z-index: 10;
+    
+    /* Sửa: Dùng bộ thuộc tính căn giữa chuẩn */
+    top: 50%;
+    left: 50%;
+    /* Đặt transform căn giữa ban đầu, animation sẽ ghi đè lên translateY */
+    transform: translate(-50%, -50%);
+
+    animation: bobbing 2.5s ease-in-out infinite;
+}
+
+@keyframes bobbing {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+.circle {
+    position: absolute;
+    border: 2px solid rgba(100, 255, 218, 0.7);
+    border-radius: 50%;
+    animation: ripple 3s linear infinite;
+}
+
+/*@keyframes ripple {
+    0% {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}*/
+
+@keyframes bobbing {
+    0%, 100% {
+        /* Giữ nguyên transform căn giữa ngang */
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        /* Chỉ thay đổi translateY */
+        transform: translate(-50%, -50%) translateY(-25px);
+    }
+}
+
+.circle {
+    position: absolute;
+    /* Căn giữa các vòng tròn so với container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(100, 255, 218, 0.7);
+    border-radius: 50%;
+    animation: ripple 3s linear infinite;
+}
+
+@keyframes ripple {
+    0% {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.circle:nth-child(2) {
+    animation-delay: 0.75s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: 1.5s;
+}
+
+.circle:nth-child(4) {
+    animation-delay: 2.25s;
+}
+/* Dán vào file style.css */
+.controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+}
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+/* --- Cấu trúc Storytelling chính --- */
+#story-content {
+    visibility: hidden;
+}
+
+#pin-container {
+    height: 100vh;
+    /* Điều chỉnh độ dài scroll ở đây */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style chung cho các scene BÊN TRONG container */
+#pin-container .scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+/* ---- SCENE 1 ---- */
+#scene-1 {
+    /* z-index: 3; */
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: circle(0% at 50% 50%);
+}
+
+.title-text {
+    font-size: 5vw;
+    opacity: 0;
+}
+
+/* ---- SCENE 2 ---- */
+#scene-2 {
+    /* z-index: 2; */
+    z-index: 9;
+    opacity: 0;
+}
+
+.scene2-bg,
+.scene2-element,
+.scene2-subtitle {
+    position: absolute;
+}
+
+
+.scene2-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+
+/* #s2-el1, #s2-el2, #s2-el3, #s2-el4, #s2-el5 {
+    width: 100%;
+} */
+
+.scene2-element {
+    /* width: 100%; */
+    left: 50%;
+    bottom: -50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.scene2-subtitle {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    font-size: 1.5em;
+    z-index: 10;
+    opacity: 0;
+}
+
+
+#el-2-1 {
+    z-index: 2;
+    width: 100%;
+}
+
+#el-2-2 {
+    z-index: 3;
+    width: 100%;
+    
+}
+
+#el-2-3 {
+    z-index: 4;
+    width: 100%;
+   
+}
+
+#el-2-4 {
+    z-index: 5;
+    width: 100%;
+   
+}
+
+#el-2-5 {
+    z-index: 6;
+    width: 100%;
+}
+
+/* ---- SCENE 3 ---- */
+#scene-3 {
+    z-index: 8;
+    /* z-index: 1;  */
+    background-color: #ffffff;
+    opacity: 0;
+}
+
+.s3-element,
+.s3-text {
+    position: absolute;
+}
+
+.s3-element {
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#s3-el1,
+#s3-el2 {
+    opacity: 0;
+}
+
+#s3-text1 {
+    top: 15%;
+    left: 15%;
+    width: 30%;
+    color: #000;
+    opacity: 0;
+}
+
+#s3-text2 {
+    top: auto;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    text-align: center;
+    color: #000;
+    opacity: 0;
+}
+
+
+
+/* ---- SCENE 4 ---- */
+#scene-4 {
+    z-index: 7;
+    /* z-index: 0; */
+    opacity: 0;
+    overflow: hidden;
+}
+
+.scene4-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 1;
+}
+
+.s4-element {
+    position: absolute;
+    opacity: 0;
+    transform-origin: center center;
+}
+
+/* --- Element Cặp 1 --- */
+#s4-1L {
+    /* Vị trí & Trạng thái ban đầu */
+    bottom: -30%;
+    left: -30%;
+    transform: scale(1.5);
+    /* transform: scale(1.5) rotate(45deg);  */
+    /* Kích thước & Layer */
+    /* width: 30%;  */
+    height: 100vh;
+    width: auto;
+    z-index: 2;
+}
+
+#s4-1R {
+    /* Vị trí & Trạng thái ban đầu */
+    bottom: -30%;
+    right: -30%;
+    transform: scale(1.5);
+    /* Kích thước & Layer */
+    /* width: 30%;  */
+    height: 100vh;
+    width: auto;
+    z-index: 2;
+}
+
+/* --- Element 3 --- */
+#s4-3 {
+    /* Vị trí & Trạng thái ban đầu */
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Kích thước & Layer */
+    width: 50%;
+    z-index: 3;
+}
+
+/* --- Element Cặp 2 --- */
+#s4-2L {
+    /* Vị trí & Trạng thái ban đầu */
+    bottom: -30%;
+    left: -30%;
+    transform: scale(1.5);
+    /* Kích thước & Layer */
+    /* width: 35%;  */
+    height: 100vh;
+    width: auto;
+    z-index: 4;
+}
+
+#s4-2R {
+    /* Vị trí & Trạng thái ban đầu */
+    bottom: -30%;
+    right: -30%;
+    transform: scale(1.5);
+    /* Kích thước & Layer */
+    /* width: 35%;  */
+    height: 100vh;
+    width: auto;
+    z-index: 4;
+}
+
+/* Trong file style.css */
+
+/* THÊM STYLE MỚI CHO TEXT CỦA SCENE 4 */
+#s4-text {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 900px;
+    /* Thêm max-width cho đẹp trên màn hình lớn */
+    text-align: center;
+    font-size: 1.2em;
+    color: #ffffff;
+    z-index: 10;
+    opacity: 0;
+    /* Trạng thái ban đầu: ẩn */
+}
+
+
+/* Trong file style.css */
+
+/* ---- SCENE 5 ---- */
+#scene-5 {
+    z-index: 6;
+    opacity: 0;
+}
+
+.scene5-bg,
+.s5-element,
+#s5-text {
+    position: absolute;
+}
+
+.scene5-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* --- Element 1 (Đi từ trên xuống) --- */
+#s5-el1 {
+    width: 2.5%;
+    max-width: 600px;
+    left: 50%;
+    /* Trạng thái ban đầu */
+    top: 13%;
+    transform: translateX(-50%);
+    /* Chỉ cần căn giữa ngang */
+    opacity: 0;
+    z-index: 2;
+}
+
+/* --- Element 2 (Đi từ dưới lên) --- */
+#s5-el2 {
+    width: 8%;
+    max-width: 600px;
+    left: 50%;
+    /* Trạng thái ban đầu */
+    top: 150%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 3;
+}
+
+/* --- Element 3 (Hiện ra ở giữa) --- */
+#s5-el3 {
+    height: 100vh;
+    max-width: 600px;
+    left: 50%;
+    top: 50%;
+    /* Trạng thái ban đầu */
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    z-index: 4;
+}
+
+/* --- Text Scene 5 --- */
+#s5-text {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    font-size: 1.8em;
+    color: white;
+    opacity: 0;
+    z-index: 5;
+}
+
+
+/* Trong file style.css */
+
+/* ---- SCENE 6 ---- */
+#scene-6 {
+    /* z-index: -1; */
+    z-index: 5;
+    opacity: 0;
+}
+
+.scene6-bg,
+.s6-element,
+#s6-text {
+    position: absolute;
+}
+
+.scene6-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+/* --- TẤT CẢ ELEMENT SCENE 6 --- */
+/* Style này định nghĩa trạng thái CUỐI CÙNG của chúng */
+
+#s6-el3 {
+    width: 100%;
+    /* Không có max-width như bạn yêu cầu */
+    left: 50%;
+    bottom: 0%;
+    /* Vị trí cuối cùng: SÁT ĐÁY */
+    transform: translateX(-50%);
+    /* Chỉ căn giữa ngang */
+    opacity: 0;
+    /* Tất cả ban đầu đều ẩn */
+}
+#s6-el1,
+#s6-el2{
+    width: 100%;
+    /* Không có max-width như bạn yêu cầu */
+    left: 50%;
+    bottom: -30%;
+    /* Vị trí cuối cùng: SÁT ĐÁY */
+    transform: translateX(-50%);
+    /* Chỉ căn giữa ngang */
+    opacity: 0;
+    /* Tất cả ban đầu đều ẩn */
+}
+
+/* --- Text Scene 6 --- */
+#s6-text {
+    bottom: 65%;
+    /* Nằm trên các element một chút */
+    left: 20%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: center;
+    color: #ffffff;
+    opacity: 0;
+}
+
+
+/* Trong file style.css */
+/* ---- SCENE 7 ---- */
+#scene-7 {
+    z-index: 4;
+    /* z-index: 0;  */
+    opacity: 0;
+}
+
+.scene7-bg,
+.s7-element,
+#s7-text {
+    position: absolute;
+}
+
+/* --- Nền Scene 7 --- */
+.scene7-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* --- Element 1 Scene 7 --- */
+#s7-el1 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 2;
+}
+
+/* --- Element 2 Scene 7 --- */
+#s7-el2 {
+    width: 100%;
+    /* max-width: 600px; */
+    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -100%;
+    /* Bắt đầu ở dưới */
+    z-index: 3;
+}
+
+/* --- Element 3 Scene 7 --- */
+#s7-el3 {
+    width: 80%;
+    /* max-width: 600px; */
+    opacity: 0;
+    left: -50%;
+    /* Bắt đầu từ hướng 8 giờ */
+    bottom: -50%;
+    z-index: 4;
+}
+
+/* --- Element 4 Scene 7 --- */
+#s7-el4 {
+    width: 50%;
+    /* max-width: 600px; */
+    opacity: 0;
+    left: -50%;
+    /* Bắt đầu từ hướng 8 giờ */
+    bottom: -50%;
+    z-index: 5;
+}
+
+/* --- Text Scene 7 --- */
+#s7-text {
+    bottom: 60%;
+    left: 80%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: right;
+    color: white;
+    opacity: 0;
+    z-index: 6;
+}
+
+/* Trong file style.css */
+
+/* ---- SCENE 8 ---- */
+/* Trong file style.css */
+
+/* ---- SCENE 8 ---- */
+#scene-8 {
+    z-index: 3;
+    opacity: 0;
+}
+.scene8-bg, .s8-element, #s8-text {
+    position: absolute;
+}
+.scene8-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* --- Style riêng cho từng element của Scene 8 --- */
+/* Tất cả đều bắt đầu ở dưới và ẩn đi */
+#s8-el1 {
+    width: 100%;
+    left: 50%;
+    bottom: -100%;
+    transform: translateX(-50%) scale(1.4); /* Bắt đầu zoom to */
+    opacity: 0;
+    z-index: 2;
+}
+#s8-el2 {
+    width: 50%;
+    left: 50%;
+    bottom: -100%;
+    transform: translateX(-50%); /* Kích thước bình thường */
+    opacity: 0;
+    z-index: 3;
+}
+#s8-el3 {
+    width: 100%;
+    left: 50%;
+    bottom: -100%;
+    transform: translateX(-50%) scale(1.4); /* Bắt đầu zoom to */
+    opacity: 0;
+    z-index: 4;
+}
+#s8-el4 {
+    width: 100%;
+    left: 50%;
+    bottom: -100%;
+    transform: translateX(-50%) scale(1.4); /* Bắt đầu zoom to */
+    opacity: 0;
+    z-index: 5;
+}
+#s8-text {
+    bottom: 70%;
+    left: 20%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: left;
+    color: #000000;
+    opacity: 0;
+    z-index: 6;
+}
+
+
+/* Trong file style.css */
+
+/* ---- SCENE 9 (Cảnh cuối) ---- */
+#scene-9 {
+    z-index: 1; /* Đặt z-index thấp nhất */
+    opacity: 0;
+    background-color: #000;
+}
+
+.scene9-element, #s9-text {
+    position: absolute;
+    opacity: 0;
+}
+
+#s9-el1 {
+    height: 100vh;
+    /* max-width: 800px; */
+    left: 50%;
+    top: 50%;
+    /* transform: translate(-50%, -50%); */
+}
+
+#s9-text {
+    bottom: 55%;
+    left: 20%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: center;
+    font-size: 1.2em;
+    color: rgb(0, 0, 0);
+}
+
+/* --- Màn hình yêu cầu xoay ngang --- */
+#rotate-device-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #020c1b;
+    color: white;
+    z-index: 10000;
+    display: none; /* Mặc định sẽ ẩn đi */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 20px;
+}
+
+/* Media query này sẽ chỉ kích hoạt trên các thiết bị có chiều rộng tối đa 900px
+   VÀ đang ở chế độ màn hình dọc (portrait) */
+@media screen and (max-width: 900px) and (orientation: portrait) {
+    #rotate-device-overlay {
+        display: flex; /* Hiện màn hình yêu cầu xoay */
+    }
+    #story-content, .controls {
+        display: none; /* Ẩn nội dung chính và nút điều khiển đi */
+    }
+}
+
+/* ================================================================== */
+/* PHẦN RESPONSIVE CHO MÀN HÌNH NGANG CỦA ĐIỆN THOẠI (Dưới 500px chiều cao) */
+/* ================================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    /* --- CHUNG --- */
+    /* Giảm kích thước chữ của tất cả phụ đề */
+    #s8-text, #s7-text, #s6-text, #s5-text,#s4-text,#s3-text1, #s3-text2, #s2-text {
+        font-size: 0.8em;
+    }
+    .startButton {
+        transform: translate(-0px, -40px);
+    }
+    
+}

@@ -36,7 +36,6 @@ CREATE TABLE `account` (
   `accountStatus` int DEFAULT '1',
   `money` decimal(15,2) DEFAULT '0.00',
   PRIMARY KEY (`userId`),
-  UNIQUE KEY `userName` (`userName`),
   UNIQUE KEY `email` (`email`),
   KEY `roleId` (`roleId`),
   CONSTRAINT `account_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`)
@@ -182,16 +181,13 @@ CREATE TABLE `detail_product` (
   `productId` varchar(6) NOT NULL,
   `sizeId` int NOT NULL,
   `colorId` int NOT NULL,
-  `imageId` int DEFAULT NULL,
   `quantity` int DEFAULT '0',
   PRIMARY KEY (`productId`,`sizeId`,`colorId`),
   KEY `sizeId` (`sizeId`),
   KEY `colorId` (`colorId`),
-  KEY `imageId` (`imageId`),
   CONSTRAINT `detail_product_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`),
   CONSTRAINT `detail_product_ibfk_2` FOREIGN KEY (`sizeId`) REFERENCES `size` (`sizeId`),
-  CONSTRAINT `detail_product_ibfk_3` FOREIGN KEY (`colorId`) REFERENCES `color` (`colorId`),
-  CONSTRAINT `detail_product_ibfk_4` FOREIGN KEY (`imageId`) REFERENCES `productimage` (`imageId`)
+  CONSTRAINT `detail_product_ibfk_3` FOREIGN KEY (`colorId`) REFERENCES `color` (`colorId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,7 +197,7 @@ CREATE TABLE `detail_product` (
 
 LOCK TABLES `detail_product` WRITE;
 /*!40000 ALTER TABLE `detail_product` DISABLE KEYS */;
-INSERT INTO `detail_product` VALUES ('ST0001',1,1,1,10),('ST0001',1,2,1,10),('ST0001',2,1,1,10),('ST0001',2,2,1,10),('ST0001',3,1,1,10),('ST0001',3,2,1,10),('ST0001',4,1,1,10),('ST0001',4,2,1,10),('ST0001',5,1,1,10),('ST0001',5,2,1,10),('ST0001',6,1,1,10),('ST0001',6,2,1,10),('TT0001',1,1,1,10),('TT0001',1,2,1,10),('TT0001',2,1,1,10),('TT0001',2,2,1,10),('TT0001',3,1,1,10),('TT0001',3,2,1,10),('TT0001',4,1,1,10),('TT0001',4,2,1,10),('TT0001',5,1,1,10),('TT0001',5,2,1,10),('TT0001',6,1,1,10),('TT0001',6,2,1,10);
+INSERT INTO `detail_product` VALUES ('ST0001',1,1,10),('ST0001',1,2,10),('ST0001',2,1,10),('ST0001',2,2,10),('ST0001',3,1,10),('ST0001',3,2,10),('ST0001',4,1,10),('ST0001',4,2,10),('ST0001',5,1,10),('ST0001',5,2,10),('ST0001',6,1,10),('ST0001',6,2,10),('TT0001',1,1,10),('TT0001',1,2,10),('TT0001',2,1,10),('TT0001',2,2,10),('TT0001',3,1,10),('TT0001',3,2,10),('TT0001',4,1,10),('TT0001',4,2,10),('TT0001',5,1,10),('TT0001',5,2,10),('TT0001',6,1,10),('TT0001',6,2,10);
 /*!40000 ALTER TABLE `detail_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +393,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('ST0001','Áo Sự tích Hồ Gươm',200000.00,'Nổi bật với hình in lấy cảm hứng từ truyền thuyết Hồ Gươm, chiếc áo được làm từ chất liệu cotton 100% mềm mại, thoáng mát, giúp người mặc cảm thấy dễ chịu trong mọi hoạt động. Thiết kế đơn giản, dễ phối với nhiều phong cách khác nhau, phù hợp để mặc hằng ngày hoặc đi chơi.',0.00,2,1,1),('TT0001','Áo Sơn Tinh Thủy Tinh',200000.00,'Áo thun in họa tiết Sơn Tinh – Thủy Tinh độc đáo, mang đậm màu sắc văn hóa Việt Nam. Chất liệu cotton cao cấp 100%, thấm hút mồ hôi tốt và giữ form áo bền đẹp sau nhiều lần giặt. Phù hợp cho cả nam và nữ, dễ dàng phối cùng quần jeans hoặc chân váy cho phong cách năng động, hiện đại.',0.00,1,1,1);
+INSERT INTO `product` VALUES ('ST0001','Áo Sự tích Hồ Gươm',169000.00,'Nổi bật với hình in lấy cảm hứng từ truyền thuyết Hồ Gươm, chiếc áo được làm từ chất liệu cotton 100% mềm mại, thoáng mát, giúp người mặc cảm thấy dễ chịu trong mọi hoạt động. Thiết kế đơn giản, dễ phối với nhiều phong cách khác nhau, phù hợp để mặc hằng ngày hoặc đi chơi.',0.00,2,1,1),('TT0001','Áo Sơn Tinh Thủy Tinh',169000.00,'Áo thun in họa tiết Sơn Tinh – Thủy Tinh độc đáo, mang đậm màu sắc văn hóa Việt Nam. Chất liệu cotton cao cấp 100%, thấm hút mồ hôi tốt và giữ form áo bền đẹp sau nhiều lần giặt. Phù hợp cho cả nam và nữ, dễ dàng phối cùng quần jeans hoặc chân váy cho phong cách năng động, hiện đại.',0.00,1,1,1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,9 +406,13 @@ DROP TABLE IF EXISTS `productimage`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productimage` (
   `imageId` int NOT NULL AUTO_INCREMENT,
+  `productId` varchar(6) NOT NULL,
   `imageUrl` varchar(1000) NOT NULL,
-  PRIMARY KEY (`imageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `isMain` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`imageId`),
+  KEY `productId` (`productId`),
+  CONSTRAINT `productimage_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +421,7 @@ CREATE TABLE `productimage` (
 
 LOCK TABLES `productimage` WRITE;
 /*!40000 ALTER TABLE `productimage` DISABLE KEYS */;
-INSERT INTO `productimage` VALUES (1,'avatar-trang-4.jpg');
+INSERT INTO `productimage` VALUES (1,'ST0001','STHGBlackBack.png',1),(2,'ST0001','STHGWhiteBack.png',0),(3,'ST0001','STHG_black.jpg',0),(4,'ST0001','STHG_black_3.jpg',0),(5,'ST0001','STHG_White_2.jpg',0),(6,'ST0001','STHG_White_3.jpg',0),(7,'TT0001','STTTBlackBack.png',1),(8,'TT0001','STTTWhiteBack.png',0),(9,'TT0001','STTT_White.jpg',0),(10,'TT0001','STTT_Black.jpg',0);
 /*!40000 ALTER TABLE `productimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-12 10:55:11
+-- Dump completed on 2025-10-16  3:18:56
