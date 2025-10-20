@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dam Studio</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/thanks.css?v=${System.currentTimeMillis()}" />
+        <link rel="stylesheet" href="css/homePage.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>

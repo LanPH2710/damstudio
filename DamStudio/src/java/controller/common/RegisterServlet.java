@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
+import java.util.regex.Pattern;
 import model.Account;
 
 public class RegisterServlet extends HttpServlet {
@@ -59,7 +60,6 @@ public class RegisterServlet extends HttpServlet {
         String genderStr = request.getParameter("gender");
         String email = request.getParameter("email");
         String mobile = request.getParameter("mobile");
-        String address = request.getParameter("address");
 
         // Kiểm tra các trường bắt buộc
         if (username == null || username.trim().isEmpty()
@@ -71,7 +71,13 @@ public class RegisterServlet extends HttpServlet {
                 || mobile == null || mobile.trim().isEmpty()) {
 
             request.setAttribute("errorMessage", "Vui lòng điền đầy đủ thông tin bắt buộc.");
-            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
+            return;
+        }
+        
+        if (!Pattern.matches("^0\\d{9}$", mobile)) {
+            request.setAttribute("errorMessage", "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.");
+            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
             return;
         }
 
@@ -80,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
             gender = Integer.parseInt(genderStr.trim());
         } catch (NumberFormatException e) {
             request.setAttribute("errorMessage", "Giới tính không hợp lệ.");
-            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
             return;
         }
 
@@ -93,27 +99,26 @@ public class RegisterServlet extends HttpServlet {
 
             if (existingUser != null) {
                 request.setAttribute("errorMessage", "Tên đăng nhập đã tồn tại.");
-                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
                 return;
             } else if (existingEmail != null) {
                 request.setAttribute("errorMessage", "Email đã đăng ký.");
-                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
                 return;
             } else if (existingMobile != null) {
                 request.setAttribute("errorMessage", "Số điện thoại đã đăng ký.");
-                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+                forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
                 return;
             }
             // Tạo mã xác thực (có thể bỏ qua nếu không cần)
-            String confirmationCode = java.util.UUID.randomUUID().toString();
+//            String confirmationCode = java.util.UUID.randomUUID().toString();
 
             // Chèn thông tin vào database và thiết lập trạng thái là pending
             Account newAccount = new Account(username, password, firstName, lastName, email, mobile, gender, 4, "img_testing.jpg", 1);
             dao.insertAccount(newAccount);
 
             // Gửi email xác nhận
-            sendConfirmationEmail(email, confirmationCode);
-
+//            sendConfirmationEmail(email, confirmationCode);
             // Chuyển hướng đến trang đăng nhập với thông báo thành công
             request.setAttribute("successMessage", "Đăng ký thành công! Vui lòng đăng nhập.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -121,7 +126,7 @@ public class RegisterServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại.");
-            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile, address);
+            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
         }
     }
 
@@ -167,7 +172,7 @@ public class RegisterServlet extends HttpServlet {
     private void forwardToRegisterPage(HttpServletRequest request, HttpServletResponse response,
             String username, String password, String firstName,
             String lastName, String gender, String email,
-            String mobile, String address)
+            String mobile)
             throws ServletException, IOException {
         // Set attributes for each field
         request.setAttribute("username", username);
@@ -177,8 +182,6 @@ public class RegisterServlet extends HttpServlet {
         request.setAttribute("gender", gender);
         request.setAttribute("email", email);
         request.setAttribute("mobile", mobile);
-        request.setAttribute("address", address);
-
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 

@@ -19,6 +19,15 @@ public class Order {
     private int shipperId;
     private Date createDate; // Sử dụng Date cho ngày tháng
     private String shippingAddress;
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Order() {
     }

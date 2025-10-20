@@ -33,6 +33,7 @@ main {
     width: 100%;
     text-align: center;
     backdrop-filter: blur(12px);
+    margin: 40px;
 }
 
 .login-container h2 {

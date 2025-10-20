@@ -15,7 +15,7 @@ public class ColorDAO extends DBContext {
         String sql = "SELECT DISTINCT c.colorId, c.colorName, c.colorStatus\n"
                 + "        FROM detail_product dp\n"
                 + "        JOIN color c ON dp.colorId = c.colorId\n"
-                + "        WHERE dp.productId = ?";
+                + "        WHERE dp.productId = ? and c.colorStatus = 1";
 
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, productId);
