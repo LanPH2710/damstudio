@@ -53,4 +53,17 @@ public class ProductImageDAO extends DBContext {
         }
         return null;
     }
+
+    public void insertProductImage(String productId, String imageUrl, boolean isMain) {
+        String sql = "INSERT INTO productimage (productId, imageUrl, isMain) VALUES (?, ?, ?)";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, productId);
+            st.setString(2, imageUrl);
+            st.setBoolean(3, isMain);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -99,11 +99,11 @@ public class Product {
         this.styleId = styleId;
     }
 
-    public int getStatus() {
+    public int getProductStatus() {
         return productStatus;
     }
 
-    public void setStatus(int status) {
+    public void setProductStatus(int status) {
         this.productStatus = status;
     }
 

@@ -71,7 +71,6 @@ public class EditCartAddressServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("account");
         String cartIds = request.getParameter("cartIds");
-        
         int addressId = Integer.parseInt(request.getParameter("addressId"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");

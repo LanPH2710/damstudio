@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
-import model.AddressUser;
 
 public class AddAddressUserServlet extends HttpServlet {
 
@@ -61,7 +60,7 @@ public class AddAddressUserServlet extends HttpServlet {
 
 //        request.setAttribute("addressUser", addressUser);
         request.setAttribute("cartIds", cartIds);
-        request.getRequestDispatcher("editAddress.jsp").forward(request, response);
+        request.getRequestDispatcher("addAddress.jsp").forward(request, response);
     } 
 
     @Override
@@ -71,8 +70,6 @@ public class AddAddressUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("account");
         String cartIds = request.getParameter("cartIds");
-        
-        int addressId = Integer.parseInt(request.getParameter("addressId"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");

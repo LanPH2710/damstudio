@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
               rel="stylesheet">   
-                <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+HU:wght@100..400&family=Roboto+Condensed:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+HU:wght@100..400&family=Roboto+Condensed:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     </head>
     <body>
@@ -28,7 +28,8 @@
                 <div class="centernavbar">
                     <c:choose>
                         <c:when test="${sessionScope.account.roleId == 1}">
-                            <a href="changeorder">ADMIN</a>
+                            <!--<a href="changeorder">ADMIN</a>-->
+                            <a href="manageruser">ADMIN</a>
                         </c:when>
                     </c:choose>
                     <c:choose>
@@ -41,8 +42,8 @@
                     <a href="productlist">SẢN PHẨM</a>
                     <li class="dropdown"><a href="story.jsp">CÂU CHUYỆN</a>
                         <ul class="submenu">
-                            <li><a href="sutichhoguom.html">Sự tích hồ Gươm</a></li>
-                            <li><a href="sontinhthuytinh.html">Sơn tinh thủy tinh</a></li>
+                            <li><a href="https://lanph2710.github.io/damstudio/sutichhoguom.html">Sự tích hồ Gươm</a></li>
+                            <li><a href="#">Sơn tinh thủy tinh</a></li>
                             <!--                            <li><a href="#">Con rồng cháu tiên</a></li>
                                                         <li><a href="#">Thánh Gióng</a></li>
                                                         <li><a href="#">Chử Đồng Tử</a></li>
@@ -79,7 +80,7 @@
             </nav>
         </header>
 
-      
+
         <div id="addToCartAlert" class="cart-alert" style="display:none;">Đã thêm sản phẩm vào giỏ hàng!</div>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -173,6 +174,6 @@
                 }
 
             });
-    </script>
+        </script>
     </body>
 </html>

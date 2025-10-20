@@ -41,6 +41,66 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
+    public List<Account> getAllAccount() {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT * FROM Account";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Account a = new Account(
+                        rs.getInt(1), // userId
+                        rs.getString(2), // userName
+                        rs.getString(3), // password
+                        rs.getString(4), // firstName
+                        rs.getString(5), // lastName
+                        rs.getString(6), // email
+                        rs.getString(7), // mobile
+                        rs.getInt(8), // gender
+                        rs.getInt(9), // roleId
+                        rs.getString(10), // avatar
+                        rs.getInt(11), // accountStatus
+                        rs.getBigDecimal(12) // money
+                );
+                list.add(a);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Account> getAccountByKeyword(String key) {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT * FROM Account "
+                + "WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%')";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, key);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Account a = new Account(
+                            rs.getInt(1), // userId
+                            rs.getString(2), // userName
+                            rs.getString(3), // password
+                            rs.getString(4), // firstName
+                            rs.getString(5), // lastName
+                            rs.getString(6), // email
+                            rs.getString(7), // mobile
+                            rs.getInt(8), // gender
+                            rs.getInt(9), // roleId
+                            rs.getString(10), // avatar
+                            rs.getInt(11), // accountStatus
+                            rs.getBigDecimal(12) // money
+                    );
+                    list.add(a);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error at getAccountByKeyword: " + e.getMessage());
+        }
+        return list;
+    }
+
     public boolean isValidMobile(String mobile) {
         System.out.println("Checking mobile validity: " + mobile);
         return mobile != null && mobile.matches("\\d{10}");

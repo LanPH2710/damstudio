@@ -9,20 +9,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600;400&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/editAddress.css?v=${System.currentTimeMillis()}" />
-                <link rel="stylesheet" href="css/homePage.css">
+        <link rel="stylesheet" href="css/homePage.css">
 
     </head>
     <body>
         <jsp:include page="header.jsp"/>
 
         <div class="edit-address-wrapper">
-            <form class="edit-address-form" action="editcartaddress" method="post" autocomplete="off">
+            <form class="edit-address-form" action="adddaddressuser" method="post" autocomplete="off">
                 <input type="hidden" id="cartIds" name="cartIds" value="${cartIds}">
                 <div class="edit-address-title">
-                    <i class="fa fa-pen-to-square"></i>
+                    <i class="fa fa-pen-to-square"></i><input type="text" id="name" name="name" value="${addressUser.name}" required>
                     Sửa địa chỉ giao hàng
                 </div>
-                <input type="hidden" name="addressId" value="${addressUser.addressId}" />
 
                 <div class="form-group">
                     <label for="name"><i class="fa fa-user"></i> Họ và tên</label>

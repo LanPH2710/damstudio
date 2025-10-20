@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Account;
 import model.Order;
 
 public class OrderDAO extends DBContext {
@@ -118,34 +119,47 @@ public class OrderDAO extends DBContext {
         }
         return orders;
     }
-    
+
     public List<Order> getAllOrderByStatus(int status) {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * FROM `order` "
-                + "WHERE orderStatus = ? "
-                + "ORDER BY createDate DESC";
+        String query = "String query = \"\"\"\n"
+                + "    SELECT o.*, a.firstName, a.lastName, a.email\n"
+                + "    FROM `order` o\n"
+                + "    JOIN account a ON o.userId = a.userId\n"
+                + "    WHERE o.orderStatus = ?\n"
+                + "    ORDER BY o.createDate DESC\n"
+                + "\"\"\";";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, status);
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
                     Order order = new Order(
-                            resultSet.getInt("orderId"),
-                            resultSet.getString("orderDeliverCode"),
-                            resultSet.getInt("userId"),
-                            resultSet.getString("orderName"),
-                            resultSet.getString("orderEmail"),
-                            resultSet.getString("orderPhone"),
-                            resultSet.getBigDecimal("totalPrice"),
-                            resultSet.getString("note"),
-                            resultSet.getInt("orderStatus"),
-                            resultSet.getInt("payMethod"),
-                            resultSet.getInt("voucherId"),
-                            resultSet.getInt("shipId"),
-                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
-                            resultSet.getString("shippingAddress")
+                            rs.getInt("orderId"),
+                            rs.getString("orderDeliverCode"),
+                            rs.getInt("userId"),
+                            rs.getString("orderName"),
+                            rs.getString("orderEmail"),
+                            rs.getString("orderPhone"),
+                            rs.getBigDecimal("totalPrice"),
+                            rs.getString("note"),
+                            rs.getInt("orderStatus"),
+                            rs.getInt("payMethod"),
+                            rs.getInt("voucherId"),
+                            rs.getInt("shipId"),
+                            rs.getTimestamp("createDate"),
+                            rs.getString("shippingAddress")
                     );
+
+                    // Gán thông tin account cho Order
+                    Account acc = new Account();
+                    acc.setUserId(rs.getInt("userId"));
+                    acc.setFirstName(rs.getString("firstName"));
+                    acc.setLastName(rs.getString("lastName"));
+                    acc.setEmail(rs.getString("email"));
+                    order.setAccount(acc);
+
                     orders.add(order);
                 }
             }
@@ -190,7 +204,6 @@ public class OrderDAO extends DBContext {
         }
         return order;
     }
-    
 
     public List<Order> getOrderByUserId(int userId) {
         List<Order> orders = new ArrayList<>();
@@ -228,35 +241,45 @@ public class OrderDAO extends DBContext {
         }
         return orders;
     }
-    
+
     public List<Order> getAllOrder() {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * "
-                + "FROM `order` "
-                + "ORDER BY createDate desc, orderStatus ASC ";
+        String query = """
+        SELECT o.*, a.firstName, a.lastName, a.email
+        FROM `order` o
+        JOIN account a ON o.userId = a.userId
+        ORDER BY o.createDate DESC, o.orderStatus ASC
+    """;
 
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query); ResultSet rs = statement.executeQuery()) {
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Order order = new Order(
-                            resultSet.getInt("orderId"),
-                            resultSet.getString("orderDeliverCode"),
-                            resultSet.getInt("userId"),
-                            resultSet.getString("orderName"),
-                            resultSet.getString("orderEmail"),
-                            resultSet.getString("orderPhone"),
-                            resultSet.getBigDecimal("totalPrice"),
-                            resultSet.getString("note"),
-                            resultSet.getInt("orderStatus"),
-                            resultSet.getInt("payMethod"),
-                            resultSet.getInt("voucherId"),
-                            resultSet.getInt("shipId"),
-                            resultSet.getTimestamp("createDate"), // giữ nguyên cả ngày và giờ
-                            resultSet.getString("shippingAddress")
-                    );
-                    orders.add(order);
-                }
+            while (rs.next()) {
+                Order order = new Order(
+                        rs.getInt("orderId"),
+                        rs.getString("orderDeliverCode"),
+                        rs.getInt("userId"),
+                        rs.getString("orderName"),
+                        rs.getString("orderEmail"),
+                        rs.getString("orderPhone"),
+                        rs.getBigDecimal("totalPrice"),
+                        rs.getString("note"),
+                        rs.getInt("orderStatus"),
+                        rs.getInt("payMethod"),
+                        rs.getInt("voucherId"),
+                        rs.getInt("shipId"),
+                        rs.getTimestamp("createDate"),
+                        rs.getString("shippingAddress")
+                );
+
+                // Gán thông tin account cho Order
+                Account acc = new Account();
+                acc.setUserId(rs.getInt("userId"));
+                acc.setFirstName(rs.getString("firstName"));
+                acc.setLastName(rs.getString("lastName"));
+                acc.setEmail(rs.getString("email"));
+                order.setAccount(acc);
+
+                orders.add(order);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -281,7 +304,7 @@ public class OrderDAO extends DBContext {
             e.printStackTrace();
         }
     }
-    
+
     public void updateOrderStatus(int orderId, int orderStatus) {
         String query = "UPDATE `order` SET orderStatus = ? WHERE orderId = ?;";
         try (PreparedStatement st = connection.prepareStatement(query)) {

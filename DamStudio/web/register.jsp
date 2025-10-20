@@ -5,25 +5,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/register.css" />
         <title>Đăng Ký Tài Khoản</title>
-                <link rel="stylesheet" href="css/homePage.css">
-                
+        <link rel="stylesheet" href="css/homePage.css">
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        
+
         <div class="container">
-            <!-- Hiển thị thông báo lỗi nếu có -->
-            <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-            <% if (errorMessage != null) { %>
+            <form class="register-form" action="register" method="post">
+                <!-- Hiển thị thông báo lỗi nếu có -->
+                <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+                <% if (errorMessage != null) { %>
                 <div class="error-message" style="color: red; text-align: center; margin: 10px 0;">
                     <%= errorMessage %>
                 </div>
-            <% } %>
-            
-            <form class="register-form" action="register" method="post">
+                <% } %>
                 <h2 class="form-title">Đăng Ký</h2>
                 <p class="form-subtitle">Tạo tài khoản mới để bắt đầu</p>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="username">Tên đăng nhập <span class="required">*</span></label>
@@ -38,7 +37,7 @@
                                value="<%= request.getAttribute("password") != null ? request.getAttribute("password") : "" %>">
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">Tên <span class="required">*</span></label>
@@ -53,7 +52,7 @@
                                value="<%= request.getAttribute("lastName") != null ? request.getAttribute("lastName") : "" %>">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Giới tính <span class="required">*</span></label>
                     <div class="gender-options">
@@ -74,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email">Email <span class="required">*</span></label>
@@ -89,37 +88,31 @@
                                value="<%= request.getAttribute("mobile") != null ? request.getAttribute("mobile") : "" %>">
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="address">Địa chỉ</label>
-                    <textarea id="address" name="address" 
-                              placeholder="Nhập địa chỉ của bạn (tùy chọn)"><%= request.getAttribute("address") != null ? request.getAttribute("address") : "" %></textarea>
-                </div>
-                
+
                 <button type="submit" class="btn-register">Đăng Ký</button>
-                
+
                 <div class="login-link">
                     Đã có tài khoản? <a href="login.jsp">Đăng nhập ngay</a>
                 </div>
             </form>
         </div>
-        
+
         <jsp:include page="footer.jsp"/>
-        
+
         <script>
             // Validate form trước khi submit
-            document.querySelector('.register-form').addEventListener('submit', function(e) {
+            document.querySelector('.register-form').addEventListener('submit', function (e) {
                 const password = document.getElementById('password').value;
                 const email = document.getElementById('email').value;
                 const mobile = document.getElementById('mobile').value;
-                
+
                 // Kiểm tra độ dài mật khẩu
                 if (password.length < 6) {
                     alert('Mật khẩu phải có ít nhất 6 ký tự!');
                     e.preventDefault();
                     return;
                 }
-                
+
                 // Kiểm tra format email
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
@@ -127,7 +120,7 @@
                     e.preventDefault();
                     return;
                 }
-                
+
                 // Kiểm tra số điện thoại (10-11 số)
                 const mobileRegex = /^[0-9]{10,11}$/;
                 if (!mobileRegex.test(mobile)) {
@@ -136,15 +129,15 @@
                     return;
                 }
             });
-            
+
             // Thêm hiệu ứng focus cho các input
             const inputs = document.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
-                input.addEventListener('focus', function() {
+                input.addEventListener('focus', function () {
                     this.parentElement.style.transform = 'scale(1.02)';
                 });
-                
-                input.addEventListener('blur', function() {
+
+                input.addEventListener('blur', function () {
                     this.parentElement.style.transform = 'scale(1)';
                 });
             });
