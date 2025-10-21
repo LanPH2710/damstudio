@@ -125,6 +125,18 @@
         <servlet-name>ChangeOrderServlet</servlet-name>
         <servlet-class>controller.admin.ChangeOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerUserServlet</servlet-name>
+        <servlet-class>controller.admin.ManagerUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductServlet</servlet-name>
+        <servlet-class>controller.admin.ManagerProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProductServlet</servlet-name>
+        <servlet-class>controller.admin.EditProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginByAccountServlet</servlet-name>
         <url-pattern>/loginbyaccount</url-pattern>
@@ -216,6 +228,18 @@
     <servlet-mapping>
         <servlet-name>ChangeOrderServlet</servlet-name>
         <url-pattern>/changeorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerUserServlet</servlet-name>
+        <url-pattern>/manageruser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductServlet</servlet-name>
+        <url-pattern>/managerproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProductServlet</servlet-name>
+        <url-pattern>/editproduct</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>

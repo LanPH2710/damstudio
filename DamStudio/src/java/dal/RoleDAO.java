@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class RoleDAO extends DBContext{
     public String getRoleNameById(int roleId) {
-        String sql = "SELECT roleName FROM Role WHERE roleId = ?";
+        String sql = "SELECT roleName FROM role WHERE roleId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, roleId);

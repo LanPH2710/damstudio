@@ -11,7 +11,7 @@ import model.Brand;
 public class BrandDAO extends DBContext {
 
     public String getBrandById(int brandId) {
-        String sql = "select * from Brand where brandId=?";
+        String sql = "select * from brand where brandId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, brandId);

@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class AccountDAO extends DBContext {
 
     public Account getAccountById(int userId) {
-        String sql = "SELECT * FROM Account WHERE userId=?";
+        String sql = "SELECT * FROM account WHERE userId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, userId);
@@ -43,7 +43,7 @@ public class AccountDAO extends DBContext {
 
     public List<Account> getAllAccount() {
         List<Account> list = new ArrayList<>();
-        String sql = "SELECT * FROM Account";
+        String sql = "SELECT * FROM account";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -72,7 +72,7 @@ public class AccountDAO extends DBContext {
 
     public List<Account> getAccountByKeyword(String key) {
         List<Account> list = new ArrayList<>();
-        String sql = "SELECT * FROM Account "
+        String sql = "SELECT * FROM account "
                 + "WHERE REPLACE(name, ' ', '') LIKE CONCAT('%', REPLACE(?, ' ', ''), '%')";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, key);
