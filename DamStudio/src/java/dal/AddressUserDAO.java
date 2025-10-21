@@ -12,7 +12,7 @@ public class AddressUserDAO extends DBContext {
 
     public List<AddressUser> getAddressByUserId(int userId) {
         List<AddressUser> addressList = new ArrayList<>();
-        String sql = "SELECT * FROM addressUser WHERE userId = ?";
+        String sql = "SELECT * FROM addressuser WHERE userId = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, userId);
             ResultSet rs = st.executeQuery();
@@ -37,7 +37,7 @@ public class AddressUserDAO extends DBContext {
 
     public AddressUser getAddressById(int addressId) {
         AddressUser addressUser = null;
-        String sql = "SELECT * FROM addressUser WHERE addressId = ?";
+        String sql = "SELECT * FROM addressuser WHERE addressId = ?";
         try (
                 PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, addressId);
