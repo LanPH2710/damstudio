@@ -78,7 +78,7 @@ public class LoginDAO extends DBContext {
     }
 
     public Account getEmailAndPassword(String username, String password) {
-        String sql = "SELECT * FROM damstudio.account WHERE email = ? AND password = ? AND accountStatus = 1";
+        String sql = "SELECT * FROM account WHERE email = ? AND password = ? AND accountStatus = 1";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);

@@ -195,7 +195,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductByBrandId(String braId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from damstudio.product where brandId = ? AND productStatus = 1";
+            String sql = "select * from product where brandId = ? AND productStatus = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, braId);
 
@@ -227,7 +227,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductByBrandIdAdmin(String braId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from damstudio.product where brandId = ?";
+            String sql = "select * from product where brandId = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, braId);
 
@@ -325,7 +325,7 @@ public class ProductDAO extends DBContext {
     public List<Product> getAllProductBySizeId(String sizeId) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "select * from damstudio.product where sizeId = ? AND productStatus = 1";
+            String sql = "select * from product where sizeId = ? AND productStatus = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, sizeId);
 
@@ -438,7 +438,7 @@ public class ProductDAO extends DBContext {
 
     public List<Product> getProductByPrice(double price) {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM Product WHERE price BETWEEN ? AND ? LIMIT 8;";
+        String sql = "SELECT * FROM product WHERE price BETWEEN ? AND ? LIMIT 8;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setDouble(1, price - 20000);

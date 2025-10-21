@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <title>Quên Mật Khẩu</title>
         <link rel="stylesheet" href="css/forgotpassword.css" />
+        <link rel="stylesheet" href="css/homePage.css">
     </head>
     <body>
         <jsp:include page="header.jsp"/>

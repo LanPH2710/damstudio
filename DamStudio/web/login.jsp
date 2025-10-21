@@ -11,8 +11,7 @@
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
               rel="stylesheet">
-                <link rel="stylesheet" href="css/homePage.css">
-
+        <link rel="stylesheet" href="css/homePage.css">
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -30,13 +29,13 @@
                 %>
 
                 <form action="loginbyaccount" method="post" class="login-form">
-<!--                    <div class="social-login">
-                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email profile openid&redirect_uri=https://damstudio.store/DamStudio/loginbygoogle&response_type=code&client_id=39567511414-g806rgl6qc53stht3sr3sseav6oicv1m.apps.googleusercontent.com&approval_prompt=force" 
-                           class="google-btn">
-                            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon">
-                            Đăng nhập bằng Google
-                        </a>
-                    </div>-->
+                    <!--                    <div class="social-login">
+                                            <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email profile openid&redirect_uri=https://damstudio.store/DamStudio/loginbygoogle&response_type=code&client_id=39567511414-g806rgl6qc53stht3sr3sseav6oicv1m.apps.googleusercontent.com&approval_prompt=force" 
+                                               class="google-btn">
+                                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon">
+                                                Đăng nhập bằng Google
+                                            </a>
+                                        </div>-->
                     <div class="form-group">
                         <label for="username">Tên đăng nhập / Email</label>
                         <input type="text" id="username" name="username" required 

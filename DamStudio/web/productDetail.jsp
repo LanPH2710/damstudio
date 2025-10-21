@@ -110,6 +110,99 @@
                 </div>
             </div>
 
+            <!-- Hướng dẫn chọn size -->
+            <div class="size-guide-block">
+                <h3 class="desc-title"><i class="fa-solid fa-shirt"></i> Mô tả sản phẩm</h3>
+
+                <div class="brand-intro">
+                    <p><b>Chào mừng bạn đến với DamStudio!</b></p>
+                    <p>
+                        Chúng tôi không chỉ bán áo – chúng tôi mang đến cho bạn một tấm vé để thể hiện chính mình.  
+                        Mỗi thiết kế của <b>Dám</b> là một câu chuyện, một tuyên ngôn thời trang dành cho giới trẻ phá cách.  
+                        Chất liệu siêu xịn, form chuẩn “sương sương”, cùng các họa tiết độc quyền chất ngầu giúp bạn tỏa sáng theo cách riêng.  
+                        <b>Dám – lựa chọn của những người trẻ không ngừng cháy!</b>
+                    </p>
+                </div>
+                <div class="desc-section">
+                    <h4>🌿 Chất liệu & Thiết kế</h4>
+                    <ul>
+                        <li>Chất liệu: <b>100% Cotton 250gsm</b> – dày dặn, thoáng mát, bền màu.</li>
+                        <li>Họa tiết: In kỹ thuật cao, sắc nét, bền màu theo thời gian.</li>
+                        <li>Màu sắc: <b>Đen</b> / <b>Trắng</b> – basic nhưng tinh tế, dễ phối đồ.</li>
+                        <li>Kiểu dáng: <b>Dáng rộng (Unisex)</b> – phù hợp cho cả nam và nữ.</li>
+                    </ul>
+                </div>
+                <h3 class="size-guide-title"><i class="fa-solid fa-ruler"></i> Hướng dẫn chọn size</h3>
+                <table class="size-guide-table">
+                    <thead>
+                        <tr>
+                            <th>SIZE ÁO</th>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>L</th>
+                            <th>XL</th>
+                            <th>XXL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>DÀI ÁO</b></td>
+                            <td>66</td>
+                            <td>69</td>
+                            <td>72</td>
+                            <td>75</td>
+                            <td>78</td>
+                        </tr>
+                        <tr>
+                            <td><b>NGANG ÁO</b></td>
+                            <td>49</td>
+                            <td>52</td>
+                            <td>55</td>
+                            <td>58</td>
+                            <td>61</td>
+                        </tr>
+                        <tr>
+                            <td><b>DÀI TAY</b></td>
+                            <td>22</td>
+                            <td>23</td>
+                            <td>24</td>
+                            <td>25</td>
+                            <td>26</td>
+                        </tr>
+                        <tr>
+                            <td><b>CÂN NẶNG</b></td>
+                            <td>~40–55kg</td>
+                            <td>~55–65kg</td>
+                            <td>~65–75kg</td>
+                            <td>~75–85kg</td>
+                            <td>>90kg</td>
+                        </tr>
+                        <tr>
+                            <td><b>CHIỀU CAO</b></td>
+                            <td><1m55</td>
+                            <td><1m65</td>
+                            <td><1m75</td>
+                            <td><1m80</td>
+                            <td><1m90</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="size-guide-note">* Số liệu mang tính chất tham khảo, có thể chênh lệch ±1–2cm tùy sản phẩm.</p>
+                <div class="desc-section">
+                    <h4>🧺 Hướng dẫn sử dụng & bảo quản</h4>
+                    <ul>
+                        <li>Giặt riêng áo trắng và áo màu.</li>
+                        <li>Tránh dùng chất tẩy mạnh, không giặt nước nóng.</li>
+                        <li>Không phơi trực tiếp dưới ánh nắng gắt.</li>
+                        <li>Ủi ở nhiệt độ thấp, bảo quản nơi khô ráo, thoáng mát.</li>
+                    </ul>
+                </div>
+
+                <div class="desc-section highlight">
+                    <p>📞 Hỗ trợ 24/7 – <b>Chỉ cần nhắn tin cho shop</b> là có ngay tư vấn tận tâm!</p>
+                </div>
+            </div>
+
             <!-- Khối 2: Feedback -->
             <div class="product-feedback-section shadow">
                 <h2 class="section-title">Đánh giá sản phẩm</h2>

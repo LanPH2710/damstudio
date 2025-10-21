@@ -8,8 +8,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myOrder.css?v=${System.currentTimeMillis()}"/>
         <title>Đơn hàng của tôi</title>
-                <link rel="stylesheet" href="css/homePage.css">
-
+        <link rel="stylesheet" href="css/homePage.css">
     </head>
     <body>
         <jsp:include page="header.jsp"/>
