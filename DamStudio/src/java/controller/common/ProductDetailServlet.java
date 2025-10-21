@@ -71,7 +71,6 @@ public class ProductDetailServlet extends HttpServlet {
             String selectedSizeId = request.getParameter("sizeId");
             request.setAttribute("selectedColorId", selectedColorId);
             request.setAttribute("selectedSizeId", selectedSizeId);
-
             request.setAttribute("product", pro);
             request.setAttribute("detailList", detailList);
             request.setAttribute("colorList", color);

@@ -4,35 +4,13 @@
         <filter-name>FilterRole</filter-name>
         <filter-class>filter.FilterRole</filter-class>
     </filter>
-    <!--
     <filter-mapping>
         <filter-name>FilterRole</filter-name>
-        <url-pattern>/customerlist</url-pattern>
-        <url-pattern>/userlist</url-pattern>
-        <url-pattern>/userdetails</url-pattern>
-        <url-pattern>/orderlist</url-pattern>
-        <url-pattern>/sliderDetails</url-pattern>
-        <url-pattern>/postlist</url-pattern>
-        <url-pattern>/postdetail</url-pattern>
-        <url-pattern>/productDetails</url-pattern>
-        <url-pattern>/feedbacksList</url-pattern>
-        <url-pattern>/setting</url-pattern>
-        <url-pattern>/orderDetailsSale</url-pattern>
-        <url-pattern>/dash</url-pattern>
-        <url-pattern>/admin</url-pattern>
-        <url-pattern>/marketing</url-pattern>
-        <url-pattern>/sale</url-pattern>
-        <url-pattern>/proformarketing</url-pattern>
-        <url-pattern>/SliderList</url-pattern>
-        <url-pattern>/settingsList</url-pattern>
-        <url-pattern>/editproductbymarketing</url-pattern>
-        <url-pattern>/image</url-pattern>
-        <url-pattern>/addUser</url-pattern>
-        <url-pattern>/marketingdashboard</url-pattern>
-        <url-pattern>/settingdetail</url-pattern>
-        <url-pattern>/salecheck</url-pattern>
-        <url-pattern>/shipper</url-pattern>
-    </filter-mapping>-->
+        <url-pattern>/editproduct</url-pattern>
+        <url-pattern>/managerproduct</url-pattern>
+        <url-pattern>/manageruser</url-pattern>
+        <url-pattern>/changeorder</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginByAccountServlet</servlet-name>
         <servlet-class>controller.common.LoginByAccountServlet</servlet-class>

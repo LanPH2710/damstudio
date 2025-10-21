@@ -19,8 +19,8 @@
             <form class="edit-address-form" action="adddaddressuser" method="post" autocomplete="off">
                 <input type="hidden" id="cartIds" name="cartIds" value="${cartIds}">
                 <div class="edit-address-title">
-                    <i class="fa fa-pen-to-square"></i><input type="text" id="name" name="name" value="${addressUser.name}" required>
-                    Sửa địa chỉ giao hàng
+                    
+                    Thêm địa chỉ giao hàng
                 </div>
 
                 <div class="form-group">

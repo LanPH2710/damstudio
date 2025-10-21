@@ -107,7 +107,7 @@ public class AccountDAO extends DBContext {
     }
 
     public void editAccount(String userName, String password, String firstName, String lastName, int gender, String email, String mobile, int roleId, String avatar, int status, int userId) {
-        String sql = "UPDATE Account SET "
+        String sql = "UPDATE account SET "
                 + "userName = ?, "
                 + "password = ?, "
                 + "firstName = ?, "

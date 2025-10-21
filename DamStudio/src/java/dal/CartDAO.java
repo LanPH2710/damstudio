@@ -161,9 +161,9 @@ public class CartDAO extends DBContext {
     public void updateQuantityByCartId(int cartId, int quantity, boolean isSet) {
         String sql;
         if (isSet) {
-            sql = "UPDATE cart SET cartQuantity = ? WHERE cartId = ?";
+            sql = "UPDATE Cart SET cartQuantity = ? WHERE cartId = ?";
         } else {
-            sql = "UPDATE cart SET cartQuantity = cartQuantity + ? WHERE cartId = ?";
+            sql = "UPDATE Cart SET cartQuantity = cartQuantity + ? WHERE cartId = ?";
         }
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, quantity);
@@ -241,7 +241,7 @@ public class CartDAO extends DBContext {
 
     public int getQuantityByCartId(int cartId) {
         int quantity = 0;
-        String sql = "SELECT cartQuantity FROM cart WHERE cartId = ?";
+        String sql = "SELECT cartQuantity FROM Cart WHERE cartId = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, cartId);
             try (ResultSet rs = st.executeQuery()) {

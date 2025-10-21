@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css?v=${System.currentTimeMillis()}"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600;400&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-                <link rel="stylesheet" href="css/homePage.css">
+        <link rel="stylesheet" href="css/homePage.css">
 
     </head>
     <body>
@@ -101,12 +101,12 @@
                                     </div>
                                 </label>
                                 <!--                                <label class="checkout-payment-card">-->
-<!--                                    <input type="radio" name="payMethod" value="balance">-->
-                                    <!--                                    <div class="payment-info">
-                                                                            <i class="fa fa-wallet"></i> Ví Carpipi<br>
-                                                                            <span class="payment-balance">Số dư: <fmt:formatNumber value="${balance}" type="number"/> đ</span>
-                                                                        </div>-->
-<!--                                </label>-->
+                                <!--                                    <input type="radio" name="payMethod" value="balance">-->
+                                <!--                                    <div class="payment-info">
+                                                                        <i class="fa fa-wallet"></i> Ví Carpipi<br>
+                                                                        <span class="payment-balance">Số dư: <fmt:formatNumber value="${balance}" type="number"/> đ</span>
+                                                                    </div>-->
+                                <!--                                </label>-->
                                 <label class="checkout-payment-card">
                                     <input type="radio" name="payMethod" value="cod">
                                     <div class="payment-info">
@@ -173,10 +173,7 @@
                         <div id="qrPaymentBox" class="checkout-step" style="display:none; margin-top:15px; text-align:center;">
                             <div class="checkout-step-header"><i class="fa fa-qrcode"></i> Quét mã để thanh toán</div>
                             <div>
-                                <img src="${pageContext.request.contextPath}/image/logo/payment.png" alt="QR thanh toán" style="max-width:250px;">
-                                <p><b>Ngân hàng:</b> TP Bank</p>
-                                <p><b>Số tài khoản:</b> 5682446888</p>
-                                <p><b>Chủ tài khoản:</b> Trinh Van Tuan</p>
+                                <img src="${pageContext.request.contextPath}/image/logo/qrpay.jpg" alt="QR thanh toán" style="max-width:250px;">
                             </div>
                         </div>
                     </div>

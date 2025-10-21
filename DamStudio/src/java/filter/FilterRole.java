@@ -16,74 +16,48 @@ import model.Account;
 
 public class FilterRole implements Filter {
 
-    private static final boolean debug = true;
     private FilterConfig filterConfig = null;
 
-    public FilterRole() {
-    }
-
-    // Method to return URLs for different role-based requests
-    private List<String> getAdminUrls() {
-        return Arrays.asList("/userdetails", "/admin", "/settingsList","/userlist","addUser","/settingdetail");
-    }
-
-    private List<String> getAdminMarketingUrls() {
-        return Arrays.asList("/sliderDetails", "/addcustomer", "/customerlist", "/postlist", 
-                             "/postdetail", "/productDetails", "/feedbacksList", "/dash", "/proformarketing","/SliderList","/editproductbymarketing");
-    }
-
-    private List<String> getSaleAdminUrls() {
-        return Arrays.asList("/orderDetailsSale", "/orderlist", "/sale","/salecheck");
-    }
-
-    private List<String> getMarketingUrls() {
-        return Arrays.asList("/marketing","/marketingdashboard");
-    }
-    private List<String> getShipperUrls() {
-        return Arrays.asList("/shipper");
-    }
+    // Chỉ admin mới được phép vào các URL này
+    private List<String> adminOnlyUrls = Arrays.asList(
+            "/editproduct",
+            "/managerproduct",
+            "/manageruser",
+            "/changeorder"
+    );
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
         HttpSession session = req.getSession(false);
-        String loginURI = req.getContextPath() + "/error.jsp";
-        String requestURI = req.getRequestURI();
-        
-        boolean loggedIn = session != null && session.getAttribute("account") != null;
-        boolean loginRequest = requestURI.equals(loginURI);
 
-        if (loggedIn) {
+        String requestURI = req.getRequestURI();
+        String errorPage = req.getContextPath() + "/error.jsp";
+
+        // Kiểm tra xem URL hiện tại có nằm trong danh sách admin-only không
+        boolean requiresAdmin = adminOnlyUrls.stream().anyMatch(requestURI::contains);
+
+        // Nếu URL không cần quyền admin → cho qua luôn
+        if (!requiresAdmin) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        // Nếu URL yêu cầu quyền admin → kiểm tra đăng nhập và role
+        if (session != null && session.getAttribute("account") != null) {
             Account account = (Account) session.getAttribute("account");
             int roleId = account.getRoleId();
 
-            // Check for admin requests
-            if (getAdminUrls().stream().anyMatch(requestURI::contains) && roleId != 1) {
-                res.sendRedirect(loginURI);
-            }
-            // Check for admin + marketing requests
-            else if (getAdminMarketingUrls().stream().anyMatch(requestURI::contains) && roleId != 1 && roleId != 2) {
-                res.sendRedirect(loginURI);
-            }
-            // Check for sales + admin requests
-            else if (getSaleAdminUrls().stream().anyMatch(requestURI::contains) && roleId != 1 && roleId != 3) {
-                res.sendRedirect(loginURI);
-            }
-            // Check for marketing requests
-            else if (getMarketingUrls().stream().anyMatch(requestURI::contains) && roleId != 2) {
-                res.sendRedirect(loginURI);
-            }else if (getShipperUrls().stream().anyMatch(requestURI::contains) && roleId != 5) {
-                res.sendRedirect(loginURI);
+            if (roleId == 1) {
+                chain.doFilter(request, response); // Admin → cho phép
             } else {
-                chain.doFilter(request, response);
+                res.sendRedirect(errorPage); // Không phải admin → chặn
             }
-        } else if (loginRequest) {
-            chain.doFilter(request, response);
         } else {
-            res.sendRedirect(loginURI);
+            res.sendRedirect(errorPage); // Chưa đăng nhập → chặn
         }
     }
 
@@ -94,9 +68,5 @@ public class FilterRole implements Filter {
 
     @Override
     public void destroy() {
-    }
-
-    public void log(String msg) {
-        filterConfig.getServletContext().log(msg);
     }
 }
