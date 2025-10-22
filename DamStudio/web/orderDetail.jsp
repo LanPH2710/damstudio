@@ -79,7 +79,7 @@
                 <div class="order-total">
                     <h5>
                         Tổng tiền: 
-                        <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="$" maxFractionDigits="0"/>
+                        <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                     </h5>
                     <div>
 <!--                        <a href="addtocart?productId=${orderInfor[0].productId}&colorId=${orderInfor[0].colorId}&quantity=1" class="btn-red">Mua lại</a>-->

@@ -20,7 +20,7 @@
                 <div class="thanks-message">
                     🎉 Chúc mừng bạn đã hoàn tất đơn hàng.<br>
                     Chúng tôi sẽ kiểm tra và liên hệ giao hàng đến bạn trong thời gian sớm nhất.<br>
-                    Để xem lại đơn hàng, vui lòng <a href="myorder">nhấn vào đây</a>.
+                    Để xem lại đơn hàng, vui lòng <a href="order">nhấn vào đây</a>.
                 </div>
                 <a href="homepage" class="thanks-btn">Quay lại trang chủ</a>
             </div>     
