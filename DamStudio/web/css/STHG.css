@@ -43,38 +43,6 @@ body {
     z-index: 9999;
 }
 
-/*#startButton {
-    padding: 15px 30px;
-    font-size: 18px;
-    color: #0a192f;
-    background-color: #64ffda;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 250px;
-    z-index: 100;
-    opacity: 0;
-    transform: translateY(20px);
-    visibility: hidden;
-}
-
-.ripple-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#turtle {
-    bottom: 50%;
-    width: 80px;
-    position: absolute;
-    z-index: 10;
-    animation: bobbing 2.5s ease-in-out infinite;
-}*/
-
 
 /* Sửa: Dùng position: absolute để căn giữa, không bị nút bấm ảnh hưởng */
 .ripple-container {
@@ -137,19 +105,6 @@ body {
     animation: ripple 3s linear infinite;
 }
 
-/*@keyframes ripple {
-    0% {
-        width: 100px;
-        height: 100px;
-        opacity: 1;
-    }
-
-    100% {
-        width: 300px;
-        height: 300px;
-        opacity: 0;
-    }
-}*/
 
 @keyframes bobbing {
     0%, 100% {
@@ -272,9 +227,6 @@ body {
 }
 
 
-/* #s2-el1, #s2-el2, #s2-el3, #s2-el4, #s2-el5 {
-    width: 100%;
-} */
 
 .scene2-element {
     /* width: 100%; */

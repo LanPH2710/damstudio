@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Câu Chuyện - Dám Studio</title>
-
+<link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <%-- Các link font và icon (giữ lại từ các trang khác) --%>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

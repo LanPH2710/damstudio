@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css?v=${System.currentTimeMillis()}" />
         <link rel="stylesheet" href="css/homePage.css">
-
+<link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>

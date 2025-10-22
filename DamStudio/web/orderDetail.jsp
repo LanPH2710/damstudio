@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderDetail.css?v=${System.currentTimeMillis()}"/>
         <link href="assets1/css/bootstrap.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="css/homePage.css">
-
+        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -79,7 +79,7 @@
                 <div class="order-total">
                     <h5>
                         Tổng tiền: 
-                        <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="$" maxFractionDigits="0"/>
+                        <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                     </h5>
                     <div>
 <!--                        <a href="addtocart?productId=${orderInfor[0].productId}&colorId=${orderInfor[0].colorId}&quantity=1" class="btn-red">Mua lại</a>-->

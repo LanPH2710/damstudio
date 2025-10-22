@@ -83,21 +83,18 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="image/homeSlider/STHG2.png">
+                    <img src="image/homeSlider/preorder.webp">
                     <div class="content">
                         <div class="title">DÁM</div>
                         <div class="topic">STUDIO</div>
-                        <!--                    <div class="author">Trân Trọng Giới Thiệu</div>
+                                            <div class="author">Trân Trọng Giới Thiệu</div>
                                             <div class="des">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima
-                                                placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et
-                                                quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at
-                                                laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                                                Sự Kiện Ưu Đãi Cực Lớn Dành Cho <br>  Các Khách Hàng Đăng Ký Sớm
                                             </div>
                                             <div class="buttons">
-                                                <button>SEE MORE</button>
-                                                 <button>SUBSCRIBE</button> 
-                                            </div>-->
+                                                <button><a href="https://forms.gle/qV6gEBtwaj3YYrV96" target="_blank">Đăng Ký</a></button>
+                                                 <!--<button>Đăng Ký</button>--> 
+                                            </div>
                     </div>
                 </div>
             </div>
@@ -107,10 +104,10 @@
                     <img src="image/homeSlider/CRCT.png">
                     <div class="content">
                         <div class="title">
-                            Name Slider
+                            
                         </div>
                         <div class="description">
-                            Description
+                            
                         </div>
                     </div>
                 </div>
@@ -118,10 +115,10 @@
                     <img src="image/homeSlider/STHG.png">
                     <div class="content">
                         <div class="title">
-                            Name Slider
+                            
                         </div>
                         <div class="description">
-                            Description
+                            
                         </div>
                     </div>
                 </div>
@@ -129,21 +126,21 @@
                     <img src="image/homeSlider/STTT.png">
                     <div class="content">
                         <div class="title">
-                            Name Slider
+                            
                         </div>
                         <div class="description">
-                            Description
+                            
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="image/homeSlider/STHG2.png">
+                    <img src="image/homeSlider/preorder.webp">
                     <div class="content">
                         <div class="title">
-                            Name Slider
+                            Pre-order
                         </div>
                         <div class="description">
-                            Description
+                            Sale Up to 40%
                         </div>
                     </div>
                 </div>
@@ -215,7 +212,7 @@
         <!-- ...existing code... -->
 
 
-        <section class="frame frame-fourth">
+<!--        <section class="frame frame-fourth">
             <div class="frame-content">
                 <div class="frame-fourth-row">
                     <div class="frame-fourth-text section-animated-content">
@@ -224,16 +221,16 @@
                         <a href="#" class="learn-more-btn">Xem thêm</a>
                     </div>
                     <div class="frame-fourth-slider">
-                        <!-- Image slider example (replace with your slider code if needed) -->
+                         Image slider example (replace with your slider code if needed) 
                         <div class="slider-images">
                             <img src="image/homeSlider/buu-dien-trung-tam-sai-gon-1.jpg" alt="Slider 1">
                             <img src="image/homeSlider/mceu_67032867531716201705287.jpg" alt="Slider 2" style="display:none;">
-                            <!-- Add JS to switch images if you want -->
+                             Add JS to switch images if you want 
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
         <!--<footer class="main-footer">
             <div class="footer-top">
                 <div class="footer-logo">
