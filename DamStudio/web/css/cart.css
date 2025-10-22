@@ -2,6 +2,7 @@ body {
     font-family: 'Inter', Arial, sans-serif;
     background: #f7f8fa;
     margin: 0;
+    
 }
 
 .main-cart {
@@ -12,7 +13,26 @@ body {
     max-width: 1050px;
     margin: 28px auto 28px auto;
 }
+/* ===== CƠ BẢN ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+}
 
+.main-cart {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 4vw;
+  box-sizing: border-box;
+}
 .cart-title {
     font-size: 2rem;
     font-weight: 700;
@@ -687,4 +707,157 @@ body {
     .cart-col-action {
         width: 32px;
     }
+}
+
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .cart-table-header {
+    display: none;
+  }
+
+  .cart-item-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 12px;
+    margin: 10px auto;
+    padding: 12px 14px;
+    width: 95%;
+    max-width: 420px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+  }
+
+  /* Phần ảnh và tên */
+  .cart-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .cart-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .cart-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cart-info h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cart-info p {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Giá, số lượng, xóa */
+  .cart-bottom {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 6px;
+    border-top: 1px solid #f1f1f1;
+    padding-top: 8px;
+  }
+
+  .cart-price {
+    font-size: 15px;
+    color: #e53935;
+    font-weight: 600;
+  }
+
+  .cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cart-qty input {
+    width: 38px;
+    height: 28px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .cart-remove {
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  /* Thanh tổng cộng */
+  .cart-summary-bar {
+    width: 95%;
+    max-width: 420px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .cart-summary-bar p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .cart-checkout-btn {
+    width: 100%;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .cart-checkout-btn:hover {
+    background: #e64a19;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-info h3 {
+    font-size: 14px;
+  }
+
+  .cart-info p {
+    font-size: 12.5px;
+  }
+
+  .cart-price {
+    font-size: 14px;
+  }
+
+  .cart-checkout-btn {
+    font-size: 15px;
+  }
 }

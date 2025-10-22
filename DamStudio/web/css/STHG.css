@@ -710,7 +710,7 @@ body {
 
 /* ---- SCENE 9 (Cảnh cuối) ---- */
 #scene-9 {
-    z-index: 1; /* Đặt z-index thấp nhất */
+    z-index: 2; /* Đặt z-index thấp nhất */
     opacity: 0;
     background-color: #000;
 }
@@ -737,6 +737,60 @@ body {
     font-size: 1.2em;
     color: rgb(0, 0, 0);
 }
+
+/* ======================================================= */
+/* =============== SCENE 10 STYLE (FINAL) =============== */
+/* ======================================================= */
+
+#scene-10 {
+    position: absolute;
+    z-index: 4; /* ✅ LAYER RẤT QUAN TRỌNG: Đặt cao hơn S9 (3) và S8 (2) */
+    opacity: 0; /* Ẩn ban đầu */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+/* Các element con (Bao gồm BG) */
+.scene10-bg, .s10-element, #s10-text {
+    position: absolute;
+    opacity: 0; 
+}
+
+/* --- XẾP LAYER VÀ VỊ TRÍ CUỐI CÙNG (BOTTOM=0) --- */
+
+.scene10-bg {
+    z-index: 5; /* ✅ Layer 5 (BG) */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Các element chính (Sử dụng YPercent để di chuyển từ dưới lên) */
+/* Cần đặt BOTTOM: 0 để YPercent tính toán từ đáy */
+#s10-el1 { z-index: 50; top: auto; bottom: 0; left: 10%; width: 25%; transform: translateY(100%); } /* Layer 50 (CAO NHẤT) */
+#s10-el2 { z-index: 40; top: auto; bottom: 0; right: 10%; width: 25%; transform: translateY(100%); }
+#s10-el3 { z-index: 30; top: auto; bottom: 0; left: 20%; width: 20%; transform: translateY(100%); }
+#s10-el4 { z-index: 20; top: auto; bottom: 0; right: 20%; width: 20%; transform: translateY(100%); }
+#s10-el5 { z-index: 10; top: auto; bottom: 0; left: 45%; width: 15%; transform: translateY(100%); } /* Layer 10 (THẤP NHẤT) */
+
+#s10-text {
+    z-index: 100;
+    bottom: 55%;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%); /* Ẩn dưới màn hình */
+    color: white;
+}
+
+/* Ẩn element trong Scene 9 */
+/*#scene-9 {
+    z-index: 3;  Phải cao hơn Scene 8 
+}
+.scene9-element, #s9-text1, #s9-text2 {
+    opacity: 0;  Đảm bảo các element S9 bị ẩn 
+}*/
 
 /* --- Màn hình yêu cầu xoay ngang --- */
 #rotate-device-overlay {
@@ -782,4 +836,30 @@ body {
         transform: translate(-0px, -40px);
     }
     
+}
+
+#control-panel {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.ctrl-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ctrl-btn:hover {
+  background: rgba(255,255,255,0.2);
 }

@@ -47,21 +47,19 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="image/homeSlider/STHG.png">
+                    <img src="image/homeSlider/preorder.webp">
                     <div class="content">
                         <div class="title">DÁM</div>
                         <div class="topic">STUDIO</div>
-                        <!--                    <div class="author">Trân Trọng Giới Thiệu</div>
-                                            <div class="des">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima
-                                                placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et
-                                                quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at
-                                                laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
-                                            </div>
-                                            <div class="buttons">
-                                                <button>SEE MORE</button>
-                                                 <button>SUBSCRIBE</button> 
-                                            </div>-->
+                        <div class="author">Trân Trọng Giới Thiệu</div>
+                        <div class="des">
+                            Sự Kiện Ưu Đãi Cực Lớn Dành Cho <br>  Các Khách Hàng Đăng Ký Sớm
+                        </div>
+                        <div class="buttons">
+                            <button><a href="https://forms.gle/qV6gEBtwaj3YYrV96" target="_blank">Đăng Ký</a></button>
+                            <!--<button>Đăng Ký</button>--> 
+
+                        </div>
                     </div>
                 </div>
                 <div class="item">
@@ -83,18 +81,21 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="image/homeSlider/preorder.webp">
+                    <img src="image/homeSlider/STHG.png">
                     <div class="content">
                         <div class="title">DÁM</div>
                         <div class="topic">STUDIO</div>
-                                            <div class="author">Trân Trọng Giới Thiệu</div>
+                        <!--                    <div class="author">Trân Trọng Giới Thiệu</div>
                                             <div class="des">
-                                                Sự Kiện Ưu Đãi Cực Lớn Dành Cho <br>  Các Khách Hàng Đăng Ký Sớm
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima
+                                                placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et
+                                                quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at
+                                                laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                                             </div>
                                             <div class="buttons">
-                                                <button><a href="https://forms.gle/qV6gEBtwaj3YYrV96" target="_blank">Đăng Ký</a></button>
-                                                 <!--<button>Đăng Ký</button>--> 
-                                            </div>
+                                                <button>SEE MORE</button>
+                                                 <button>SUBSCRIBE</button> 
+                                            </div>-->
                     </div>
                 </div>
             </div>
@@ -104,32 +105,10 @@
                     <img src="image/homeSlider/CRCT.png">
                     <div class="content">
                         <div class="title">
-                            
+
                         </div>
                         <div class="description">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/homeSlider/STHG.png">
-                    <div class="content">
-                        <div class="title">
-                            
-                        </div>
-                        <div class="description">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/homeSlider/STTT.png">
-                    <div class="content">
-                        <div class="title">
-                            
-                        </div>
-                        <div class="description">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -137,10 +116,32 @@
                     <img src="image/homeSlider/preorder.webp">
                     <div class="content">
                         <div class="title">
-                            Pre-order
+
                         </div>
                         <div class="description">
-                            Sale Up to 40%
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/homeSlider/STTT.png">
+                    <div class="content">
+                        <div class="title">
+
+                        </div>
+                        <div class="description">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/homeSlider/STHG.png">
+                    <div class="content">
+                        <div class="title">
+
+                        </div>
+                        <div class="description">
+
                         </div>
                     </div>
                 </div>
@@ -212,94 +213,46 @@
         <!-- ...existing code... -->
 
 
-<!--        <section class="frame frame-fourth">
-            <div class="frame-content">
-                <div class="frame-fourth-row">
-                    <div class="frame-fourth-text section-animated-content">
-                        <h2>Tiêu đề nổi bật</h2>
-                        <p>Mô tả hoặc nội dung chi tiết ở đây. Bạn có thể thêm nhiều đoạn văn hoặc nút tùy ý.</p>
-                        <a href="#" class="learn-more-btn">Xem thêm</a>
-                    </div>
-                    <div class="frame-fourth-slider">
-                         Image slider example (replace with your slider code if needed) 
-                        <div class="slider-images">
-                            <img src="image/homeSlider/buu-dien-trung-tam-sai-gon-1.jpg" alt="Slider 1">
-                            <img src="image/homeSlider/mceu_67032867531716201705287.jpg" alt="Slider 2" style="display:none;">
-                             Add JS to switch images if you want 
+        <!--        <section class="frame frame-fourth">
+                    <div class="frame-content">
+                        <div class="frame-fourth-row">
+                            <div class="frame-fourth-text section-animated-content">
+                                <h2>Tiêu đề nổi bật</h2>
+                                <p>Mô tả hoặc nội dung chi tiết ở đây. Bạn có thể thêm nhiều đoạn văn hoặc nút tùy ý.</p>
+                                <a href="#" class="learn-more-btn">Xem thêm</a>
+                            </div>
+                            <div class="frame-fourth-slider">
+                                 Image slider example (replace with your slider code if needed) 
+                                <div class="slider-images">
+                                    <img src="image/homeSlider/buu-dien-trung-tam-sai-gon-1.jpg" alt="Slider 1">
+                                    <img src="image/homeSlider/mceu_67032867531716201705287.jpg" alt="Slider 2" style="display:none;">
+                                     Add JS to switch images if you want 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>-->
-        <!--<footer class="main-footer">
-            <div class="footer-top">
-                <div class="footer-logo">
-                    <img src="image/logo/logoLONG.png" alt="Dám Studio Logo">
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact info</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 3541 Fort Meade Road, Laurel, MD 20724</li>
-                        <li><i class="fas fa-phone"></i> (301) 490-5050</li>
-                        <li><i class="fas fa-clock"></i> Open 24 hours, 7 days a week</li>
-                    </ul>
-                </div>
-                <div class="footer-subscribe">
-                    <h3>Subscribe</h3>
-                    <p>Stay informed with our latest news and updates.</p>
-                    <form>
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
-                    <small>By subscribing, you agree to our Privacy Policy and consent to receive updates from our
-                        company.</small>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-links">
-                    <a href="#">Bản Quyền © 2025</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Accessibility Statement</a>
-                    <a href="#">Privacy Request Form</a>
-                    <a href="#">Delivery Policy</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </footer>-->
+                </section>-->
+
 
         <jsp:include page="footer.jsp"/>
-
         <script src="javascript/homePage.js"></script>
-        <!-- ...existing code... -->
-
-
-
-
         <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
         <script>
             new CozeWebSDK.WebChatClient({
-                config: {
-                    bot_id: '7527700457444409362',
-                },
-                componentProps: {
-                    title: 'Coze',
-                },
-                auth: {
+            config: {
+            bot_id: '7527700457444409362';
+            },
+                    componentProps: {
+                    title: 'Coze';
+                    },
+                    auth: {
                     type: 'token',
-                    token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
-                    onRefreshToken: function () {
-                        return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1'
+                            token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
+                            onRefreshToken: function () {
+                            return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1';
+                            }
                     }
-                }
             });
         </script>
     </body>
 </html>
-

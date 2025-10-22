@@ -84,7 +84,9 @@ public class CheckoutServlet extends HttpServlet {
 
         // Đưa cartIds vào form để POST lại
         request.setAttribute("cartIds", cartIdsStr);
-
+        System.out.println("Context Path: " + request.getContextPath());
+        System.out.println("Servlet Path: " + request.getServletPath());
+        System.out.println("Request URI: " + request.getRequestURI());
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
@@ -293,11 +295,8 @@ public class CheckoutServlet extends HttpServlet {
         }
     }
 
-
-@Override
-public String getServletInfo
-        
-            () {
+    @Override
+    public String getServletInfo() {
         return "CheckoutServlet for DamStudio - chuẩn hóa business - Gen Z style!";
-        }
     }
+}

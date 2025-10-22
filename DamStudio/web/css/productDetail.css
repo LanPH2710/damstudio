@@ -826,3 +826,55 @@ body {
         width: 90%;
     }
 }
+
+/* Tablet nhỏ & mobile ngang */
+@media (max-width: 900px) {
+    .size-guide-block {
+        padding: 15px;
+    }
+    .size-guide-title {
+        font-size: 1.15rem;
+        justify-content: center;
+    }
+}
+
+/* Mobile dọc <700px */
+@media (max-width: 700px) {
+    .size-guide-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        border: none;
+    }
+
+    .size-guide-table table {
+        width: 700px; /* đảm bảo không vỡ hàng khi scroll ngang */
+    }
+
+    .size-guide-table th,
+    .size-guide-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .size-guide-note {
+        font-size: 0.85rem;
+        text-align: left;
+        margin-top: 8px;
+    }
+}
+
+/* Mobile nhỏ <480px */
+@media (max-width: 480px) {
+    .size-guide-block {
+        padding: 10px;
+    }
+    .size-guide-title {
+        font-size: 1rem;
+    }
+    .size-guide-table td,
+    .size-guide-table th {
+        font-size: 0.85rem;
+        padding: 6px;
+    }
+}
