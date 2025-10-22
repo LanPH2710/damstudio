@@ -278,27 +278,21 @@
         </footer>-->
 
         <jsp:include page="footer.jsp"/>
-
         <script src="javascript/homePage.js"></script>
-        <!-- ...existing code... -->
-
-
-
-
         <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
         <script>
             new CozeWebSDK.WebChatClient({
                 config: {
-                    bot_id: '7527700457444409362',
+                    bot_id: '7527700457444409362';
                 },
                 componentProps: {
-                    title: 'Coze',
+                    title: 'Coze';
                 },
                 auth: {
                     type: 'token',
                     token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
                     onRefreshToken: function () {
-                        return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1'
+                        return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1';
                     }
                 }
             });
