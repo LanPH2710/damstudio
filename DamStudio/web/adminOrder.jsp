@@ -10,7 +10,6 @@
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminOrder.css?v=${System.currentTimeMillis()}">
         <link rel="stylesheet" href="css/homePage.css">
-        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
 
     <body class="control-user-page">
@@ -46,6 +45,8 @@
 
             <!-- Order List -->
             <div class="container mt-4">
+                <h5>Số lượng áo Sự tích Hồ Gươm đã bán: ${totalQuantitySTHG}</h5>
+                <h5>Số lượng áo Sơn Tinh-Thủy Tinh đã bán: ${totalQuantitySTTT}</h5>
                 <h2 class="page-title mb-3">Orders List</h2>
 
                 <div class="table-responsive bg-white shadow rounded">

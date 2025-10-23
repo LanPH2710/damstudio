@@ -120,6 +120,25 @@ public class OrderDAO extends DBContext {
         return orders;
     }
 
+    public int getTotalQuantitySale(String productId) {
+        String query = "SELECT IFNULL(SUM(od.quantity), 0) AS totalSold "
+                + "FROM orderdetail od "
+                + "JOIN `order` o ON od.orderId = o.orderId "
+                + "WHERE od.productId = ? "
+                + "AND o.orderStatus IN (2, 3, 4)"; // chỉ tính đơn đã xác nhận, đang giao, đã giao xong
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, productId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("totalSold");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public List<Order> getAllOrderByStatus(int status) {
         List<Order> orders = new ArrayList<>();
         String query = "String query = \"\"\"\n"
@@ -318,10 +337,11 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO dao = new OrderDAO();
-
+        int quantity = 0;
         int userId = 1;   // thay bằng userId thực tế có trong DB
         int statusId = 1; // ví dụ: 1 = chờ xác nhận, 2 = đã giao... tùy DB của bạn
-
+        quantity = dao.getTotalQuantitySale("TT0001");
+        System.out.println(quantity);
         System.out.println("===== Test getOrderByUserId =====");
         List<Order> ordersByUser = dao.getOrderByUserId(userId);
         for (Order o : ordersByUser) {
@@ -348,5 +368,6 @@ public class OrderDAO extends DBContext {
         } else {
             System.out.println("Không có đơn hàng để test phân trang!");
         }
+
     }
 }
