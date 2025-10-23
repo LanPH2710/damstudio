@@ -49,7 +49,7 @@ CREATE TABLE color (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 INSERT INTO damstudio.color (colorId, colorName, colorStatus) VALUES
 (1, 'Đen', 1),
-(2, 'Trắng', 0);
+(2, 'Trắng', 1);
 
 -- 4. Bảng size (Kích thước)
 CREATE TABLE size (

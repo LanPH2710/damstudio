@@ -6,6 +6,7 @@
         <title>Quên Mật Khẩu</title>
         <link rel="stylesheet" href="css/forgotpassword.css" />
         <link rel="stylesheet" href="css/homePage.css">
+        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
         <jsp:include page="header.jsp"/>

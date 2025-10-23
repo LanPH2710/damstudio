@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+<link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     <%-- Link tới các file CSS của bạn --%>
     <link rel="stylesheet" href="css/header.css"><link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/homePage.css">

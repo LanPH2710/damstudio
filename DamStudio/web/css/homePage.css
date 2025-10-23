@@ -112,7 +112,7 @@ header.sticky .custom-navbar a {
 }
 .carousel .list .item .content{
     position: absolute;
-    top: 20%;
+    top: 30%;
     width: 1140px;
     max-width: 80%;
     left: 50%;
@@ -120,17 +120,29 @@ header.sticky .custom-navbar a {
     padding-right: 30%;
     box-sizing: border-box;
     color: #FBDB93;
-    text-shadow: 0 5px 10px #0004;
+    text-shadow: 5px 15px 20px black;
 }
 .carousel .list .item .author{
     font-weight: bold;
-    letter-spacing: 10px;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-family: Mulish;!Important
+}
+
+.carousel .list .item .des{
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 17px;
+    font-family: Mulish;!Important
 }
 .carousel .list .item .title,
 .carousel .list .item .topic{
     font-size: 5em;
     font-weight: bold;
     line-height: 1.3em;
+    text-shadow: 0 5px 10px black;!Important
+    font-family: Mulish;!Important
+    
 }
 .carousel .list .item .topic{
     color: #9A3F3F;
@@ -144,7 +156,7 @@ header.sticky .custom-navbar a {
 }
 .carousel .list .item .buttons button{
     border: none;
-    background-color: #9A3F3F;
+    background-color: #FBDB93;
     letter-spacing: 3px;
     font-family: Poppins;
     font-weight: 500;

@@ -22,7 +22,7 @@
                 </button>
 
                 <div class="leftnavbar">
-                    <a href="homepage"><img src="image/logo/logoLONGpng.PNG" alt="Logo" class="mobile-logo"></a>
+                    <a href="homepage"><img src="image/logo/logoBIGpng.PNG" alt="Logo" class="mobile-logo"></a>
                 </div>
 
                 <div class="centernavbar">

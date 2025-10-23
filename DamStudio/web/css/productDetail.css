@@ -649,3 +649,232 @@ body {
         gap: 8px 0;
     }
 }
+/* ==================== RESPONSIVE CẢI TIẾN ==================== */
+
+/* Tablet nhỏ & Mobile lớn */
+@media (max-width: 900px) {
+    .main-product-layout {
+        width: 94%;
+        margin: 25px auto;
+        gap: 24px;
+    }
+
+    .product-main-info, 
+    .product-feedback-section, 
+    .related-products-section {
+        padding: 20px;
+    }
+
+    .product-img-block {
+        min-width: 240px;
+        max-width: 300px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .product-title {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    .product-desc {
+        font-size: 0.98rem;
+        text-align: center;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-buttons .btn {
+        width: 90%;
+        text-align: center;
+    }
+
+    .variant-list {
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .product-feedback-section {
+        padding: 25px 5vw;
+    }
+}
+
+/* Mobile (<700px) */
+@media (max-width: 700px) {
+    .product-main-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .product-img-block {
+        width: 85%;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+
+    .product-info-block {
+        width: 100%;
+        text-align: center;
+    }
+
+    .variant-block {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .variant-block span {
+        margin-bottom: 5px;
+    }
+
+    .quantity-box {
+        justify-content: center;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .feedback-summary-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .feedback-filter-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .review-item {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "user-info"
+            "feedback-content"
+            "feedback-imgs";
+        padding: 15px 5vw;
+        gap: 8px 0;
+    }
+
+    .user-info {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .user-info .avatar {
+        margin: 0 auto 5px auto;
+    }
+
+    .feedback-imgs {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .related-products-list {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .related-product-card {
+        width: 46%;
+        min-width: 150px;
+    }
+
+    .product-description-block {
+        padding: 20px 5vw;
+        text-align: justify;
+    }
+
+    .desc-title {
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+}
+
+/* Mobile nhỏ hơn 480px */
+@media (max-width: 480px) {
+    .product-title {
+        font-size: 1.4rem;
+    }
+
+    .product-price {
+        font-size: 1.4rem;
+    }
+
+    .variant-item {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .action-buttons .btn {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+    .feedback-content {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .related-product-card {
+        width: 90%;
+    }
+}
+
+/* Tablet nhỏ & mobile ngang */
+@media (max-width: 900px) {
+    .size-guide-block {
+        padding: 15px;
+    }
+    .size-guide-title {
+        font-size: 1.15rem;
+        justify-content: center;
+    }
+}
+
+/* Mobile dọc <700px */
+@media (max-width: 700px) {
+    .size-guide-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        border: none;
+    }
+
+    .size-guide-table table {
+        width: 700px; /* đảm bảo không vỡ hàng khi scroll ngang */
+    }
+
+    .size-guide-table th,
+    .size-guide-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .size-guide-note {
+        font-size: 0.85rem;
+        text-align: left;
+        margin-top: 8px;
+    }
+}
+
+/* Mobile nhỏ <480px */
+@media (max-width: 480px) {
+    .size-guide-block {
+        padding: 10px;
+    }
+    .size-guide-title {
+        font-size: 1rem;
+    }
+    .size-guide-table td,
+    .size-guide-table th {
+        font-size: 0.85rem;
+        padding: 6px;
+    }
+}

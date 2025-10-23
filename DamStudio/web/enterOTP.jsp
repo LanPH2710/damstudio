@@ -6,6 +6,7 @@
         <title>Nhập OTP</title>
         <link rel="stylesheet" href="css/otp.css">
         <link rel="stylesheet" href="css/homePage.css">
+        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <style>
             .otp-container {
                 max-width: 500px;

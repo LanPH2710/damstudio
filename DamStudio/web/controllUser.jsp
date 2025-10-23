@@ -9,6 +9,7 @@
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/controllUser.css?v=${System.currentTimeMillis()}">
         <link rel="stylesheet" href="css/homePage.css">
+        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body class="control-user-page">
 

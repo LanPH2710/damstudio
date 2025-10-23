@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/register.css" />
         <title>Đăng Ký Tài Khoản</title>
         <link rel="stylesheet" href="css/homePage.css">
-
+<link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
