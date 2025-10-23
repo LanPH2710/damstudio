@@ -61,6 +61,12 @@ public class ChangeOrderServlet extends HttpServlet {
             return;
         }
         
+        int totalQuantitySTTT = 0;
+        int totalQuantitySTHG = 0;
+        
+        totalQuantitySTTT = odao.getTotalQuantitySale("TT0001");
+        totalQuantitySTHG = odao.getTotalQuantitySale("ST0001");
+        
         int userId = account.getUserId();
         int statusId = 0;
         String statusIdParam = request.getParameter("statusId");
@@ -97,6 +103,8 @@ public class ChangeOrderServlet extends HttpServlet {
         allOrder = odao.getMyOrderListByPage(allOrder, start, end);
 
         request.setAttribute("allOrder", allOrder);
+        request.setAttribute("totalQuantitySTHG", totalQuantitySTHG);
+        request.setAttribute("totalQuantitySTTT", totalQuantitySTTT);
         request.setAttribute("orderDetailsMap", orderDetailsMap);
         request.setAttribute("page", page);
         request.setAttribute("statusId", statusId);
