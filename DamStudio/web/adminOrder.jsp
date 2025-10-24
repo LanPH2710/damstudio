@@ -119,7 +119,7 @@
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mt-4">
                     <c:if test="${page > 1}">
-                        <li class="page-item"><a class="page-link" href="adminorder?page=${page-1}&statusId=${statusId}">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="changeorder?page=${page-1}&statusId=${statusId}">&laquo;</a></li>
                         </c:if>
 
                     <c:forEach var="i" begin="${page-1 <= 1 ? 1 : page-1}" end="${page+1 > num ? num : page+1}">
@@ -129,7 +129,7 @@
                     </c:forEach>
 
                     <c:if test="${page < num}">
-                        <li class="page-item"><a class="page-link" href="adminorder?page=${page+1}&statusId=${statusId}">&raquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="changeorder?page=${page+1}&statusId=${statusId}">&raquo;</a></li>
                         </c:if>
                 </ul>
             </div>
