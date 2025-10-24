@@ -42,6 +42,7 @@
                     <table class="table table-hover table-bordered text-center align-middle">
                         <thead class="table-dark">
                             <tr>
+                                <th>STT</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
@@ -52,8 +53,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="u" items="${accountList}">
+                            <c:forEach var="u" items="${accountList}" varStatus="loop">
                                 <tr>
+                                    <td>${loop.count}</td>
                                     <td>${u.firstName} ${u.lastName}</td>
                                     <td>${u.email}</td>
                                     <td>${u.mobile}</td>

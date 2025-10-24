@@ -34,14 +34,20 @@
                 <!-- Danh sách sản phẩm -->
                 <div class="mb-4">
                     <h5>Sản phẩm</h5>
-                    <c:forEach var="item" items="${orderInfor}">
+                    <c:forEach var="item" items="${pro}" varStatus="loop">
+                        <c:set var="detail" value="${orderInfor[loop.index]}" />
+                        <c:set var="colorItem" value="${color[loop.index]}" />
+                        <c:set var="sizeItem" value="${size[loop.index]}" />
+
                         <div class="product-card">
-                            <img src="image/logo/logoIMG.png" alt="${item.productName}">
+                            <c:if test="${not empty item.images}">
+                                <img src="image/ao/${item.images[0].imageUrl}" alt="${item.name}" />
+                            </c:if>
                             <div>
-                                <h6>${item.productName}</h6>
-                                <p>Màu sắc: ${item.colorName}</p>
-                                <p>Size: ${item.sizeName}</p>
-                                <p>Số lượng: ${item.quantity}</p>
+                                <h6>${item.name}</h6>
+                                <p>Màu sắc: ${colorItem.colorName}</p>
+                                <p>Size: ${sizeItem.sizeName}</p>
+                                <p>Số lượng: ${detail.quantity}</p>
                                 <p>
                                     Thanh toán:
                                     <c:choose>
@@ -52,7 +58,7 @@
                                     </c:choose>
                                 </p>
                                 <p class="text-danger fw-bold">
-                                    <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="$" maxFractionDigits="0"/>
+                                    <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                                 </p>
                             </div>
                         </div>
@@ -82,7 +88,6 @@
                         <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                     </h5>
                     <div>
-<!--                        <a href="addtocart?productId=${orderInfor[0].productId}&colorId=${orderInfor[0].colorId}&quantity=1" class="btn-red">Mua lại</a>-->
                         <c:if test="${order.orderStatus == 1}">
                             <a href="cancelorder?orderId=${order.orderId}&totalPrice=${order.totalPrice}&userId=${order.userId}&payMethod=${order.payMethod}"
                                onclick="return confirm('Bạn có chắc muốn hủy đơn này?');"

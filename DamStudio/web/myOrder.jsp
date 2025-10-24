@@ -113,7 +113,7 @@
 
                                                             <!-- Nút hành động -->
                                                             <div class="button-container">
-                                                                <a href="orderdetail?orderId=${order.orderId}">
+                                                                <a href="orderdetail?orderId=${order.orderId}&userId=${order.userId}">
                                                                     <button class="return-btn">Thông tin đơn hàng</button>
                                                                 </a>
                                                                 <c:if test="${order.orderStatus == 4}">

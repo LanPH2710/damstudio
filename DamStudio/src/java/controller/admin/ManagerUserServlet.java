@@ -13,8 +13,6 @@ import model.Account;
 
 public class ManagerUserServlet extends HttpServlet {
 
-    private static final int RECORDS_PER_PAGE = 10;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -60,14 +58,14 @@ public class ManagerUserServlet extends HttpServlet {
         int totalUsers = allAccounts.size();
 
         // Tính chỉ số bắt đầu và kết thúc
-        int start = (page - 1) * RECORDS_PER_PAGE;
-        int end = Math.min(start + RECORDS_PER_PAGE, totalUsers);
+        int start = (page - 1) * 9;
+        int end = Math.min(start + 9, totalUsers);
 
         // Lấy danh sách user cho trang hiện tại
         List<Account> currentPageList = allAccounts.subList(start, end);
 
         // Tính tổng số trang
-        int totalPages = (int) Math.ceil((double) totalUsers / RECORDS_PER_PAGE);
+        int totalPages = (int) Math.ceil((double) totalUsers / 9);
 
         // Gửi dữ liệu sang JSP
         request.setAttribute("accountList", currentPageList);
