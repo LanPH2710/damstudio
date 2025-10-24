@@ -20,7 +20,7 @@
                 <!--<li><a href="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>-->
                 <li><a href="manageruser"><i class="fas fa-users"></i> User List</a></li>
                 <li><a href="managerproduct"><i class="fas fa-box"></i> Product List</a></li>
-                <li class="active"><a href="adminorder"><i class="fas fa-shopping-cart"></i> Manager Orders</a></li>
+                <li class="active"><a href="changeorder"><i class="fas fa-shopping-cart"></i> Manager Orders</a></li>
             </ul>
         </div>
 
@@ -106,7 +106,7 @@
                                             </td>
 
                                             <td>
-                                                <a href="orderdetail?orderId=${order.orderId}" class="btn btn-outline-primary btn-sm">View</a>
+                                                <a href="orderdetail?orderId=${order.orderId}&userId=${order.userId}" class="btn btn-outline-primary btn-sm">View</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -124,7 +124,7 @@
 
                     <c:forEach var="i" begin="${page-1 <= 1 ? 1 : page-1}" end="${page+1 > num ? num : page+1}">
                         <li class="page-item ${i==page?'active':''}">
-                            <a class="page-link" href="adminorder?page=${i}&statusId=${statusId}">${i}</a>
+                            <a class="page-link" href="changeorder?page=${i}&statusId=${statusId}">${i}</a>
                         </li>
                     </c:forEach>
 

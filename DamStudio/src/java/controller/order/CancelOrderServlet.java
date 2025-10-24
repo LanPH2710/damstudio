@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import model.Order;
 
 public class CancelOrderServlet extends HttpServlet {
 
@@ -38,12 +39,21 @@ public class CancelOrderServlet extends HttpServlet {
         int orderId = Integer.parseInt(request.getParameter("orderId"));
         int payMethod = Integer.parseInt(request.getParameter("payMethod"));
 
+        Order order = od.getOrderById(userId, orderId);
+        if (order == null) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Không tìm thấy đơn hàng hoặc không thuộc về bạn.");
+            return;
+        }
         // Kiểm tra xem tham số totalPrice có tồn tại và hợp lệ không
         String totalPriceStr = request.getParameter("totalPrice");
         BigDecimal totalPrice = (totalPriceStr != null && !totalPriceStr.isEmpty())
                 ? new BigDecimal(totalPriceStr)
                 : BigDecimal.ZERO;  // Giá trị mặc định nếu không có giá trị hợp lệ
-
+        
+        if (order.getOrderStatus() != 1) { // ví dụ 1 = Pending
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Đơn hàng đã được xử lý, không thể hủy.");
+            return;
+        }
         // Hủy đơn hàng
         if (payMethod == 2) {
             // Thanh toán khi nhận hàng => hủy luôn
@@ -51,12 +61,8 @@ public class CancelOrderServlet extends HttpServlet {
         } else if (payMethod == 3) {
             // Thanh toán chuyển khoản => hiện thông báo
             request.getSession().setAttribute("cancelMessage", "Nếu bạn đã chuyển tiền, xin vui lòng nhắn tin với shop qua "
-                    + "<a href='https://www.facebook.com/Bear27102004' target='_blank'>Facebook</a> để lấy lại tiền.");
+                    + "<a href='https://www.facebook.com/profile.php?id=61581282917311' target='_blank'>Facebook</a> để lấy lại tiền.");
         }
-//        // Hoàn lại tiền cho người dùngì
-//        if (payMethod == 1 || payMethod==3) {
-//            adao.payback(userId, totalPrice);
-//        }
         response.sendRedirect("order");
     }
 
