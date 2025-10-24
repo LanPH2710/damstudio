@@ -10,6 +10,30 @@ import model.OrderDetail;
 
 public class OrderDetailDAO extends DBContext {
 
+    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
+        List<OrderDetail> list = new ArrayList<>();
+        String sql = "SELECT * FROM orderdetail WHERE orderId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, orderId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                OrderDetail od = new OrderDetail(
+                        rs.getInt("orderDetailId"),
+                        rs.getInt("orderId"),
+                        rs.getString("productId"),
+                        rs.getInt("sizeId"),
+                        rs.getInt("colorId"),
+                        rs.getInt("quantity"),
+                        rs.getInt("isFeedback")
+                );
+                list.add(od);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public boolean addOrderDetail(int orderId, String productId, int sizeId, int colorId, int quantity, int isFeedback) {
         String sql = "INSERT INTO orderdetail (orderId, productId, sizeId, colorId, quantity, isFeedback) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";

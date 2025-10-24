@@ -1,15 +1,17 @@
 package controller.order;
 
-import dal.AccountDAO;
 import dal.OrderDAO;
+import dal.OrderDetailDAO;
+import dal.ProductDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
+import java.util.List;
 import model.Order;
+import model.OrderDetail;
 
 public class CancelOrderServlet extends HttpServlet {
 
@@ -33,36 +35,41 @@ public class CancelOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO od = new OrderDAO();
-        AccountDAO adao = new AccountDAO();
+        OrderDAO odao = new OrderDAO();
+        OrderDetailDAO oddao = new OrderDetailDAO();
+        ProductDetailDAO dpdao = new ProductDetailDAO();
+
         int userId = Integer.parseInt(request.getParameter("userId"));
         int orderId = Integer.parseInt(request.getParameter("orderId"));
         int payMethod = Integer.parseInt(request.getParameter("payMethod"));
 
-        Order order = od.getOrderById(userId, orderId);
+        Order order = odao.getOrderById(userId, orderId);
         if (order == null) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Không tìm thấy đơn hàng hoặc không thuộc về bạn.");
             return;
         }
-        // Kiểm tra xem tham số totalPrice có tồn tại và hợp lệ không
-        String totalPriceStr = request.getParameter("totalPrice");
-        BigDecimal totalPrice = (totalPriceStr != null && !totalPriceStr.isEmpty())
-                ? new BigDecimal(totalPriceStr)
-                : BigDecimal.ZERO;  // Giá trị mặc định nếu không có giá trị hợp lệ
-        
-        if (order.getOrderStatus() != 1) { // ví dụ 1 = Pending
+
+        if (order.getOrderStatus() != 1) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Đơn hàng đã được xử lý, không thể hủy.");
             return;
         }
-        // Hủy đơn hàng
-        if (payMethod == 2) {
-            // Thanh toán khi nhận hàng => hủy luôn
-            od.cancelOrder(orderId);
-        } else if (payMethod == 3) {
-            // Thanh toán chuyển khoản => hiện thông báo
-            request.getSession().setAttribute("cancelMessage", "Nếu bạn đã chuyển tiền, xin vui lòng nhắn tin với shop qua "
-                    + "<a href='https://www.facebook.com/profile.php?id=61581282917311' target='_blank'>Facebook</a> để lấy lại tiền.");
+
+        // Cập nhật trạng thái
+        odao.cancelOrder(orderId);
+
+        // ✅ Cộng lại tồn kho
+        List<OrderDetail> orderDetails = oddao.getOrderDetailsByOrderId(orderId);
+        for (OrderDetail od : orderDetails) {
+            dpdao.updateQuantity2(od.getProductId(), od.getSizeId(), od.getColorId(), od.getQuantity());
         }
+
+        // ✅ Xử lý riêng nếu có phương thức thanh toán
+        if (payMethod == 3) {
+            request.getSession().setAttribute("cancelMessage",
+                    "Nếu bạn đã chuyển tiền, vui lòng liên hệ với shop qua "
+                    + "<a href='https://www.facebook.com/profile.php?id=61581282917311' target='_blank'>Facebook</a> để hoàn tiền.");
+        }
+
         response.sendRedirect("order");
     }
 

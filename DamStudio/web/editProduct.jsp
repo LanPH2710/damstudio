@@ -83,6 +83,45 @@
                 </div>
             </div>
 
+            <h5 class="mt-4 mb-3">Tồn kho theo Size / Màu</h5>
+            <table class="table table-bordered text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Màu</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="d" items="${detailList}">
+                        <tr>
+                            <td>
+                                <c:forEach var="s" items="${sizeList}">
+                                    <c:if test="${s.sizeId == d.sizeId}">
+                                        ${s.sizeName}
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <c:forEach var="c" items="${colorList}">
+                                    <c:if test="${c.colorId == d.colorId}">
+                                        ${c.colorName}
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <input type="number"
+                                       name="quantity_${d.sizeId}_${d.colorId}"
+                                       value="${d.quantity}"
+                                       min="0" class="form-control text-center"/>
+                                <input type="hidden" name="sizeId" value="${d.sizeId}"/>
+                                <input type="hidden" name="colorId" value="${d.colorId}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="managerproduct" class="btn btn-secondary">Cancel</a>
         </form>
