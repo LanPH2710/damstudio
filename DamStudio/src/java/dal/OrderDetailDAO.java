@@ -10,6 +10,17 @@ import model.OrderDetail;
 
 public class OrderDetailDAO extends DBContext {
 
+    public void updateFeedbackOrder(int id) {
+        String sql = "UPDATE orderdetail SET isfeedback = 1 WHERE orderDetailId = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, id);  // Thiết lập giá trị orderDetailId
+            st.executeUpdate();  // Thực thi truy vấn
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
         List<OrderDetail> list = new ArrayList<>();
         String sql = "SELECT * FROM orderdetail WHERE orderId = ?";
