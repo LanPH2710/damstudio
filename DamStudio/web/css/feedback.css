@@ -1,0 +1,195 @@
+/* Container form */
+:root {
+    --mau-nau-dam: #4D403D; /* Nâu đậm */
+    --mau-do-ruou: #9A3F3F; /* Đỏ rượu */
+    --mau-be: #FBDB93; /* Màu be nhạt */
+    --mau-nen: #FFFBF5; /* Màu nền trắng ngà */
+    --mau-chu-toi: #333; /* Màu chữ chính */
+    --mau-chu-phu: #555; /* Màu chữ phụ */
+    --mau-vien: #ddd; /* Màu viền nhẹ */
+    --mau-highlight: #ffc700; /* Màu vàng sao */
+    --mau-nut-chinh: #b71c1c; /* Đỏ đô/Đỏ sẫm cho nút */
+}
+
+/* Căn chỉnh tổng thể và font chữ */
+body {
+    background-color: var(--mau-nen);
+    color: var(--mau-chu-toi);
+    font-family: Arial, sans-serif; /* Thay font chữ nếu bạn muốn */
+}
+
+.feedback-container {
+    width: 100%;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Form chính */
+.feedback-form {
+    width: 90%; /* Rộng hơn trên màn hình lớn */
+    max-width: 900px; /* Giới hạn rộng nhất tăng lên */
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Shadow đậm hơn, hiện đại hơn */
+    box-sizing: border-box;
+}
+
+.form-title {
+    text-align: center;
+    color: var(--mau-nau-dam);
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--mau-be);
+    padding-bottom: 10px;
+}
+
+.group-title {
+    color: var(--mau-do-ruou);
+    font-size: 1.1em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--mau-do-ruou);
+    padding-left: 10px;
+}
+
+/* Cấu trúc hàng (row) */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 280px; /* Đảm bảo chiều rộng tối thiểu */
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--mau-chu-phu);
+}
+
+.required {
+    color: var(--mau-do-ruou);
+}
+
+/* Input/Textarea cơ bản */
+.form-input, .form-input-file, .input-disabled {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--mau-vien);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    font-size: 1em;
+}
+
+.form-input:focus, .form-input-file:focus {
+    border-color: var(--mau-do-ruou);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(154, 63, 63, 0.2);
+}
+
+.input-disabled {
+    background-color: var(--mau-nen); /* Màu nền nhạt cho input disabled */
+    cursor: not-allowed;
+    color: var(--mau-chu-phu);
+}
+
+/* Star rating */
+.rating-field {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+    justify-content: flex-start;
+}
+
+.star-rating label {
+    font-size: 2.5em; /* Lớn hơn */
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: var(--mau-highlight);
+}
+
+/* Image preview */
+#imagePreview {
+    display: none;
+    max-height: 250px;
+    width: auto;
+    max-width: 100%;
+    margin-top: 15px;
+    border: 2px solid var(--mau-vien);
+    border-radius: 8px;
+    object-fit: cover; /* Giữ tỷ lệ ảnh */
+}
+
+/* Button gửi */
+.form-actions {
+    margin-top: 30px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px 0;
+    background-color: var(--mau-do-ruou);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.submit-btn:hover {
+    background-color: var(--mau-nau-dam); /* Đổi màu khi hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Responsive nhỏ hơn 768px */
+@media screen and (max-width: 768px) {
+    .feedback-form {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column; /* Chuyển thành cột đơn */
+        gap: 0;
+    }
+
+    .form-field {
+        min-width: 100%;
+    }
+
+    .star-rating {
+        justify-content: center;
+    }
+
+    .star-rating label {
+        font-size: 2em; /* Giảm kích thước sao trên mobile */
+    }
+}

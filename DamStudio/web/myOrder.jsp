@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myOrder.css?v=${System.currentTimeMillis()}"/>
         <link rel="stylesheet" href="css/homePage.css">
         <title>Đơn hàng của tôi</title>
-        <link rel="stylesheet" href="css/homePage.css">
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
@@ -95,11 +94,7 @@
 
 
                                                                         </div>
-                                                                        <!-- Đánh giá -->
-                                                                        <c:if test="${order.orderStatus == 4 && detail.isFeedback == 0}">
-                                                                            <a class="buy-again-btn"
-                                                                               href="customerfeedback?productId=${detail.productId}&orderDetailId=${detail.orderDetailId}">Đánh giá</a>
-                                                                        </c:if>
+
                                                                     </div>
                                                                     <c:if test="${order.orderStatus == 4}">
                                                                         <c:choose>
@@ -111,7 +106,11 @@
                                                                             </c:when>
                                                                         </c:choose>
                                                                     </c:if>
-
+                                                                    <!-- Đánh giá -->
+                                                                    <c:if test="${order.orderStatus == 4 && detail.isFeedback == 0}">
+                                                                        <a class="buy-again-btn"
+                                                                           href="feedback?productId=${detail.productId}&orderDetailId=${detail.orderDetailId}">Đánh giá</a>
+                                                                    </c:if>
                                                                 </div>
                                                             </c:forEach>
 
