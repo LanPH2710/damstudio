@@ -7,6 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myOrder.css?v=${System.currentTimeMillis()}"/>
+        <link rel="stylesheet" href="css/homePage.css">
         <title>Đơn hàng của tôi</title>
         <link rel="stylesheet" href="css/homePage.css">
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
@@ -75,7 +76,15 @@
                                                             <c:forEach items="${orderDetailsMap[order.orderId]}" var="detail">
                                                                 <div class="order-detail-item">
                                                                     <div class="product-info">
-                                                                        <img src="image/logo/logoIMG.png" class="product-img" alt="">
+                                                                        <c:set var="printed" value="false" />
+                                                                        <c:forEach var="p" items="${pro}">
+                                                                            <c:if test="${not printed and p.productId == detail.productId}">
+                                                                                <img class="product-img" src="image/ao/${fn:escapeXml(p.images[0].imageUrl)}" 
+                                                                                     alt="${fn:escapeXml(p.name)}" />
+                                                                                <c:set var="printed" value="true" />
+                                                                            </c:if>
+                                                                        </c:forEach>
+
                                                                         <div class="product-description">
                                                                             <h4>
                                                                                 <a href="productdetail?productId=${detail.productId}" class="product-name">${detail.productName}</a>
@@ -92,14 +101,17 @@
                                                                                href="customerfeedback?productId=${detail.productId}&orderDetailId=${detail.orderDetailId}">Đánh giá</a>
                                                                         </c:if>
                                                                     </div>
-                                                                    <c:choose>
-                                                                        <c:when test="${detail.isFeedback == 0}">
-                                                                            <small class="feedback-message">Xin hãy đánh giá sau khi nhận hàng!</small>
-                                                                        </c:when>
-                                                                        <c:when test="${detail.isFeedback == 1}">
-                                                                            <small class="feedback-message">Cảm ơn bạn đã đánh giá!</small>
-                                                                        </c:when>
-                                                                    </c:choose>
+                                                                    <c:if test="${order.orderStatus == 4}">
+                                                                        <c:choose>
+                                                                            <c:when test="${detail.isFeedback == 0}">
+                                                                                <small class="feedback-message">Xin hãy đánh giá sau khi nhận hàng!</small>
+                                                                            </c:when>
+                                                                            <c:when test="${detail.isFeedback == 1}">
+                                                                                <small class="feedback-message">Cảm ơn bạn đã đánh giá!</small>
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                    </c:if>
+
                                                                 </div>
                                                             </c:forEach>
 

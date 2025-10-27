@@ -4,7 +4,6 @@ import dal.ColorDAO;
 import dal.OrderDAO;
 import dal.OrderDetailDAO;
 import dal.ProductDAO;
-import dal.ProductDetailDAO;
 import dal.SizeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,8 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Account;
+import model.Color;
 import model.Order;
 import model.OrderDetail;
+import model.Product;
+import model.Size;
 
 public class OrderServlet extends HttpServlet {
 
@@ -43,62 +45,86 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         OrderDAO odao = new OrderDAO();
-        ProductDAO productDAO = new ProductDAO();
-        ProductDetailDAO pddao = new ProductDetailDAO();
+        OrderDetailDAO oddao = new OrderDetailDAO();
         ColorDAO colorDAO = new ColorDAO();
         SizeDAO sizeDAO = new SizeDAO();
-        OrderDetailDAO oddao = new OrderDetailDAO();
-        List<Order> myOrder = new ArrayList<>();
-        Map<Integer, List<OrderDetail>> orderDetailsMap = new HashMap<>();
-        
+        ProductDAO prodao = new ProductDAO();
+
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
         if (account == null) {
             response.sendRedirect("login.jsp");
             return;
         }
-        
+
         int userId = account.getUserId();
         int statusId = 0;
         String statusIdParam = request.getParameter("statusId");
+
         if (statusIdParam != null && !statusIdParam.isEmpty()) {
             try {
                 statusId = Integer.parseInt(statusIdParam);
             } catch (NumberFormatException e) {
-                // Xử lý ngoại lệ khi chuyển đổi statusId
-                e.printStackTrace(); // Log lỗi
                 request.setAttribute("error", "Status ID không hợp lệ.");
             }
         }
-        if (statusId > 0) {
-            myOrder = odao.getOrderByStatus(userId, statusId);
-        } else {
-            myOrder = odao.getOrderByUserId(userId);
-        }
+
+        List<Product> pro = new ArrayList<>();
+        // Lấy danh sách đơn hàng theo người dùng và trạng thái
+        List<Order> myOrder = (statusId > 0)
+                ? odao.getOrderByStatus(userId, statusId)
+                : odao.getOrderByUserId(userId);
+
+        // Map lưu thông tin chi tiết mỗi đơn
+        Map<Integer, List<OrderDetail>> orderDetailsMap = new HashMap<>();
+
+        // Vòng lặp từng đơn hàng
         for (Order order : myOrder) {
-            List<OrderDetail> orderDetails = oddao.getOrderDetail(order.getOrderId());
+            List<OrderDetail> orderDetails = oddao.getOrderInforById(order.getOrderId());
+
+            for (OrderDetail detail : orderDetails) {
+                int colorId = detail.getColorId();
+                int sizeId = detail.getSizeId();
+                Product p = prodao.getProductInOrder(detail.getProductId());
+                if (p != null) {
+                    pro.add(p);
+                }
+                // Lấy đối tượng Color và Size tương ứng
+                Color color = colorDAO.getColorById(colorId);
+                Size size = sizeDAO.getSize(sizeId);
+
+                // Gắn thêm vào detail nếu bạn có field để hiển thị tên
+                detail.setColorName(color.getColorName());
+                detail.setSizeName(size.getSizeName());
+            }
+
+            // Sau khi hoàn thiện danh sách chi tiết, thêm vào map
             orderDetailsMap.put(order.getOrderId(), orderDetails);
         }
-        // Phân trang
-        int page, numperpage = 5;
+
+        // --- PHÂN TRANG ---
+        int page, numPerPage = 5;
         int size = myOrder.size();
-        int num = (int) Math.ceil((double) size / numperpage); // Số trang, làm tròn lên
+        int num = (int) Math.ceil((double) size / numPerPage);
+
         String xpage = request.getParameter("page");
-        if (xpage == null) {
-            page = 1;
-        } else {
-            page = Integer.parseInt(xpage);
-        }
-        int start = (page - 1) * numperpage;
-        int end = Math.min(page * numperpage, size);
+        page = (xpage == null) ? 1 : Integer.parseInt(xpage);
+
+        int start = (page - 1) * numPerPage;
+        int end = Math.min(page * numPerPage, size);
+
         myOrder = odao.getMyOrderListByPage(myOrder, start, end);
 
+        // --- GỬI DỮ LIỆU QUA JSP ---
         request.setAttribute("myOrder", myOrder);
+        request.setAttribute("pro", pro);
         request.setAttribute("orderDetailsMap", orderDetailsMap);
         request.setAttribute("page", page);
         request.setAttribute("statusId", statusId);
         request.setAttribute("num", num);
+
         request.getRequestDispatcher("myOrder.jsp").forward(request, response);
     }
 

@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
-import model.Brand;
 import model.Color;
 import model.Order;
 import model.OrderDetail;
@@ -79,7 +78,7 @@ public class OrderDetailServlet extends HttpServlet {
             if (s != null) {
                 size.add(s);
             }
-            Color c = cdao.getColorByProductId(od.getColorId());
+            Color c = cdao.getColorById(od.getColorId());
             if (c != null) {
                 color.add(c);
             }
