@@ -6,7 +6,8 @@ body {
     padding: 0px;
 }
 .mid{
-    height: 100vh;
+    min-height: 100vh; /* thay vì height */
+    height: auto;
 }
 /* Tabs */
 .tabs {

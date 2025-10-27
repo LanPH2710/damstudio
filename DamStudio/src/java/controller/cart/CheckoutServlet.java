@@ -51,7 +51,7 @@ public class CheckoutServlet extends HttpServlet {
         Map<Integer, Size> sizeMap = new HashMap<>();
         for (Cart c : cartList) {
             productMap.put(c.getProductId(), productDAO.getProductById(c.getProductId()));
-            colorMap.put(c.getColorId(), colorDAO.getColorByProductId(c.getColorId()));
+            colorMap.put(c.getColorId(), colorDAO.getColorById(c.getColorId()));
             sizeMap.put(c.getSizeId(), sizeDAO.getSizeOfProduct2(c.getSizeId()));
         }
         // Lấy tổng tiền
