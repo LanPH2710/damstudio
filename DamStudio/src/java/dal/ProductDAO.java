@@ -435,6 +435,38 @@ public class ProductDAO extends DBContext {
         }
         return product;
     }
+    
+    public Product getProductInOrder(String productId) {
+        Product product = null;
+        try {
+            String sql = "SELECT * FROM product WHERE productId = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productId);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                product = new Product();
+                product.setProductId(rs.getString("productId"));
+                product.setName(rs.getString("name"));
+                product.setPrice(rs.getDouble("price"));
+                product.setDescription(rs.getString("description"));
+                product.setVAT(rs.getDouble("VAT"));
+                product.setBrandId(rs.getInt("brandId"));
+                product.setStyleId(rs.getInt("styleId"));
+
+                ProductImageDAO imageDAO = new ProductImageDAO();
+                ProductImage mainImage = imageDAO.getMainImageByProductId(product.getProductId());
+                if (mainImage != null) {
+                    List<ProductImage> images = new ArrayList<>();
+                    images.add(mainImage);
+                    product.setImages(images);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi lấy sản phẩm theo ID: " + e.getMessage());
+        }
+        return product;
+    }
 
     public List<Product> getProductByPrice(double price) {
         List<Product> list = new ArrayList<>();

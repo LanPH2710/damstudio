@@ -129,6 +129,24 @@ public class FeedbackDAO extends DBContext {
         }
         return count;
     }
+    
+    public void createFeedback(int userId, String productId, String feedbackInfo, String feedbackImg, int feedbackRate, int status) {
+        String sql = "INSERT INTO feedback (userId, productId, feedbackInfo, feedbackTime, feedbackImg, feedbackRate, status)"
+                + " VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, userId);
+            st.setString(2, productId);
+            st.setString(3, feedbackInfo);
+            st.setString(4, feedbackImg);
+            st.setInt(5, feedbackRate);
+            st.setInt(6, status);
+
+            st.executeUpdate(); // Thực thi câu lệnh INSERT
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ nếu có lỗi xảy ra
+        }
+    }
 
     public static void main(String[] args) {
         FeedbackDAO fdao = new FeedbackDAO();

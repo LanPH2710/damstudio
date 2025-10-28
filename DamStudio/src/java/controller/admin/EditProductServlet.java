@@ -10,9 +10,9 @@ import jakarta.servlet.http.*;
 import model.*;
 
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10MB
-        maxRequestSize = 1024 * 1024 * 50 // 50MB
+        fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50
 )
 public class EditProductServlet extends HttpServlet {
 
@@ -66,7 +66,6 @@ public class EditProductServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         try {
-            // --- Lấy dữ liệu từ form ---
             String productId = request.getParameter("productId");
             String name = request.getParameter("name");
             double price = Double.parseDouble(request.getParameter("price"));
@@ -79,34 +78,10 @@ public class EditProductServlet extends HttpServlet {
             ProductDAO pdao = new ProductDAO();
             ProductImageDAO imgDao = new ProductImageDAO();
 
-            // --- Cập nhật thông tin sản phẩm ---
+            // --- Cập nhật thông tin chính ---
             pdao.updateProduct(productId, name, price, description, vat, brandId, styleId, status);
 
-            // --- Xử lý ảnh ---
-            Part avatarFile = request.getPart("avatar");
-            if (avatarFile != null && avatarFile.getSize() > 0) {
-                String fileName = Paths.get(avatarFile.getSubmittedFileName()).getFileName().toString();
-                String uploadDirPath = getServletContext().getRealPath("/image/ao");
-                File uploadDir = new File(uploadDirPath);
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdirs();
-                }
-
-                String uploadPath = uploadDirPath + File.separator + fileName;
-
-                try (InputStream is = avatarFile.getInputStream(); FileOutputStream fos = new FileOutputStream(uploadPath)) {
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = is.read(buffer)) != -1) {
-                        fos.write(buffer, 0, bytesRead);
-                    }
-                }
-
-                // --- Lưu vào DB ---
-                imgDao.insertProductImage(productId, fileName, true); // true = ảnh chính
-            }
-
-            // --- Xử lý ảnh phụ (nếu có) ---
+            // --- Upload ảnh mới ---
             Part newImage = request.getPart("newImage");
             if (newImage != null && newImage.getSize() > 0) {
                 String fileName = Paths.get(newImage.getSubmittedFileName()).getFileName().toString();
@@ -116,17 +91,27 @@ public class EditProductServlet extends HttpServlet {
                     uploadDir.mkdirs();
                 }
 
-                String uploadPath = uploadDirPath + File.separator + fileName;
-
-                try (InputStream is = newImage.getInputStream(); FileOutputStream fos = new FileOutputStream(uploadPath)) {
+                File file = new File(uploadDir, fileName);
+                try (InputStream is = newImage.getInputStream(); FileOutputStream fos = new FileOutputStream(file)) {
                     byte[] buffer = new byte[1024];
                     int bytesRead;
                     while ((bytesRead = is.read(buffer)) != -1) {
                         fos.write(buffer, 0, bytesRead);
                     }
                 }
+                imgDao.insertProductImage(productId, fileName, false);
+            }
 
-                imgDao.insertProductImage(productId, fileName, false); // false = ảnh phụ
+            // --- Cập nhật tồn kho ---
+            ProductDetailDAO pddao = new ProductDetailDAO();
+            List<DetailProduct> details = pddao.getListProductDetail(productId);
+
+            for (DetailProduct dp : details) {
+                String qtyStr = request.getParameter("quantity_" + dp.getSizeId() + "_" + dp.getColorId());
+                if (qtyStr != null) {
+                    int quantity = Integer.parseInt(qtyStr);
+                    pddao.updateQuantity(productId, dp.getColorId(), dp.getSizeId(), quantity);
+                }
             }
 
             response.sendRedirect("managerproduct");

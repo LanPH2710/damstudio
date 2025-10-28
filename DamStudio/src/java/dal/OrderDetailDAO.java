@@ -10,6 +10,41 @@ import model.OrderDetail;
 
 public class OrderDetailDAO extends DBContext {
 
+    public void updateFeedbackOrder(int id) {
+        String sql = "UPDATE orderdetail SET isfeedback = 1 WHERE orderDetailId = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, id);  // Thiết lập giá trị orderDetailId
+            st.executeUpdate();  // Thực thi truy vấn
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
+        List<OrderDetail> list = new ArrayList<>();
+        String sql = "SELECT * FROM orderdetail WHERE orderId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, orderId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                OrderDetail od = new OrderDetail(
+                        rs.getInt("orderDetailId"),
+                        rs.getInt("orderId"),
+                        rs.getString("productId"),
+                        rs.getInt("sizeId"),
+                        rs.getInt("colorId"),
+                        rs.getInt("quantity"),
+                        rs.getInt("isFeedback")
+                );
+                list.add(od);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public boolean addOrderDetail(int orderId, String productId, int sizeId, int colorId, int quantity, int isFeedback) {
         String sql = "INSERT INTO orderdetail (orderId, productId, sizeId, colorId, quantity, isFeedback) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -93,22 +128,8 @@ public class OrderDetailDAO extends DBContext {
     public List<OrderDetail> getOrderInforById(Integer orderId) {
         List<OrderDetail> list = new ArrayList<>();
         String sql = "SELECT od.orderDetailId, od.orderId, od.productId, od.sizeId, od.colorId, "
-                + "od.quantity, od.isFeedback, "
-                + "p.name AS productName, p.price, "
-                + "c.colorName, s.sizeName, "
-                + "pi.imageUrl, "
-                + "o.createDate "
+                + "od.quantity, od.isFeedback "
                 + "FROM orderdetail od "
-                + "JOIN product p ON od.productId = p.productId "
-                + "JOIN color c ON od.colorId = c.colorId "
-                + "JOIN size s ON od.sizeId = s.sizeId "
-                + "JOIN `order` o ON od.orderId = o.orderId "
-                + "LEFT JOIN detail_product dp "
-                + "       ON dp.productId = od.productId "
-                + "      AND dp.sizeId = od.sizeId "
-                + "      AND dp.colorId = od.colorId "
-                + "LEFT JOIN productimage pi "
-                + "       ON dp.imageId = pi.imageId "
                 + "WHERE od.orderId = ?";
 
         try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -123,25 +144,18 @@ public class OrderDetailDAO extends DBContext {
                         rs.getInt("sizeId"),
                         rs.getInt("colorId"),
                         rs.getInt("quantity"),
-                        rs.getInt("isFeedback"),
-                        rs.getString("productName"),
-                        rs.getString("colorName"),
-                        rs.getString("sizeName"),
-                        rs.getString("imageUrl"),
-                        rs.getTimestamp("createDate"),
-                        rs.getDouble("price"));
+                        rs.getInt("isFeedback"));
                 list.add(o);
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Ghi lại lỗi
         }
-
         return list;
     }
 
     public static void main(String[] args) {
         OrderDetailDAO dao = new OrderDetailDAO();
-        List<OrderDetail> list = dao.getOrderInforById(4); // giả sử orderId = 1
+        List<OrderDetail> list = dao.getOrderInforById(1); // giả sử orderId = 1
 
         if (list.isEmpty()) {
             System.out.println("Không tìm thấy chi tiết đơn hàng!");
@@ -149,13 +163,10 @@ public class OrderDetailDAO extends DBContext {
             for (OrderDetail od : list) {
                 System.out.println("OrderDetailId: " + od.getOrderDetailId()
                         + ", OrderId: " + od.getOrderId()
-                        + ", Product: " + od.getProductName()
-                        + ", Size: " + od.getSizeName()
-                        + ", Color: " + od.getColorName()
-                        + ", Qty: " + od.getQuantity()
-                        + ", Price: " + od.getPrice()
-                        + ", Image: " + od.getImageUrl()
-                        + ", CreateDate: " + od.getCreateDate());
+                        + ", ProductId: " + od.getProductId()
+                        + ", Size: " + od.getSizeId()
+                        + ", Color: " + od.getColorId()
+                        + ", Qty: " + od.getQuantity());
             }
         }
     }

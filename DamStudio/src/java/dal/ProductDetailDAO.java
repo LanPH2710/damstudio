@@ -10,6 +10,63 @@ import model.DetailProduct;
 
 public class ProductDetailDAO extends DBContext {
 
+    public List<DetailProduct> getDetailsByProductId(String productId) {
+        List<DetailProduct> list = new ArrayList<>();
+        String sql = """
+            SELECT dp.productId, dp.sizeId, dp.colorId, dp.quantity
+            FROM detail_product dp
+            WHERE dp.productId = ?;
+        """;
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, productId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new DetailProduct(
+                        rs.getString("productId"),
+                        rs.getInt("sizeId"),
+                        rs.getInt("colorId"),
+                        rs.getInt("quantity")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean updateQuantity(String productId, int sizeId, int colorId, int quantityChange) {
+        String sql = "UPDATE detail_product "
+                + "SET quantity = ? "
+                + "WHERE productId = ? AND sizeId = ? AND colorId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, quantityChange); // +n hoặc -n
+            st.setString(2, productId);
+            st.setInt(3, sizeId);
+            st.setInt(4, colorId);
+            return st.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateQuantity2(String productId, int sizeId, int colorId, int quantityChange) {
+        String sql = "UPDATE detail_product "
+                + "SET quantity = quantity + ? "
+                + "WHERE productId = ? AND sizeId = ? AND colorId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, quantityChange); // +n hoặc -n
+            st.setString(2, productId);
+            st.setInt(3, sizeId);
+            st.setInt(4, colorId);
+            return st.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public int getQuantityByProductColorSize(String productId, int colorId, int sizeId) {
         String sql = "SELECT quantity FROM detail_product WHERE productId = ? AND colorId = ? AND sizeId = ?";
         try (

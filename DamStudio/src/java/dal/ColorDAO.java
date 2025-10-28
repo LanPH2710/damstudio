@@ -31,8 +31,8 @@ public class ColorDAO extends DBContext {
         }
         return colors;
     }
-
-    public Color getColorByProductId(int colorId) {
+    
+    public Color getColorById(int colorId) {
         Color color = null;
         String sql = "SELECT * FROM color WHERE colorId = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
