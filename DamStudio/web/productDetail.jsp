@@ -5,6 +5,15 @@
 <!DOCTYPE html>
 <html lang="vi">
     <head>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VJFMJBKESV');
+</script>
         <meta charset="UTF-8">
         <title>Chi tiết sản phẩm</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetail.css?v=${System.currentTimeMillis()}"/>
