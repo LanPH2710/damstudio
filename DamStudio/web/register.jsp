@@ -2,19 +2,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VJFMJBKESV');
-</script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/register.css" />
         <title>Đăng Ký Tài Khoản</title>
         <link rel="stylesheet" href="css/homePage.css">
-<link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
+        <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -85,10 +77,13 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email">Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required 
+                        <input type="email" id="email" name="email" required
                                placeholder="example@email.com"
+                               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|vn|net|org)"
+                               title="Vui lòng nhập email hợp lệ (.com, .vn, .net, .org)"
                                value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>">
                     </div>
+
                     <div class="form-group">
                         <label for="mobile">Số điện thoại <span class="required">*</span></label>
                         <input type="tel" id="mobile" name="mobile" required 

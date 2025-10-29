@@ -74,7 +74,14 @@ public class RegisterServlet extends HttpServlet {
             forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
             return;
         }
-        
+
+        // Kiểm tra định dạng email
+        if (!Pattern.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.(com|vn|net|org)$", email)) {
+            request.setAttribute("errorMessage", "Email không hợp lệ. Chỉ chấp nhận địa chỉ có đuôi .com, .vn, .net hoặc .org");
+            forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);
+            return;
+        }
+
         if (!Pattern.matches("^0\\d{9}$", mobile)) {
             request.setAttribute("errorMessage", "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.");
             forwardToRegisterPage(request, response, username, password, firstName, lastName, genderStr, email, mobile);

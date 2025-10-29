@@ -1,7 +1,6 @@
 package controller.admin;
 
 import dal.AccountDAO;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -36,50 +35,46 @@ public class ManagerUserServlet extends HttpServlet {
 
         AccountDAO accountDAO = new AccountDAO();
 
-        // Lấy số trang hiện tại (mặc định là 1)
-        int page = 1;
+        // Lấy keyword tìm kiếm (nếu có)
         String keyword = request.getParameter("keyword");
-        String pageParam = request.getParameter("page");
-        if (pageParam != null && !pageParam.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageParam);
-            } catch (NumberFormatException e) {
-                page = 1;
-            }
-        }
 
+        // Lấy danh sách account theo keyword hoặc toàn bộ
         List<Account> allAccounts;
-        if(keyword != null && !keyword.isEmpty()){
-            allAccounts = accountDAO.getAccountByKeyword(keyword);
-        }else{
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            allAccounts = accountDAO.getAccountByKeyword(keyword.trim());
+        } else {
             allAccounts = accountDAO.getAllAccount();
         }
-        
-        int totalUsers = allAccounts.size();
-
-        // Tính chỉ số bắt đầu và kết thúc
-        int start = (page - 1) * 9;
-        int end = Math.min(start + 9, totalUsers);
-
-        // Lấy danh sách user cho trang hiện tại
-        List<Account> currentPageList = allAccounts.subList(start, end);
-
-        // Tính tổng số trang
-        int totalPages = (int) Math.ceil((double) totalUsers / 9);
-
-        // Gửi dữ liệu sang JSP
-        request.setAttribute("accountList", currentPageList);
-        request.setAttribute("totalPage", totalPages);
-        request.setAttribute("page", page);
-        request.setAttribute("keyword", keyword);
 
         // Nếu không có dữ liệu
         if (allAccounts == null || allAccounts.isEmpty()) {
             request.setAttribute("message", "Không có tài khoản nào trong hệ thống.");
+            request.getRequestDispatcher("controllUser.jsp").forward(request, response);
+            return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("controllUser.jsp");
-        dispatcher.forward(request, response);
+        // ===== PHÂN TRANG =====
+        int page, numberPage = 10; // số tài khoản mỗi trang
+        int size = allAccounts.size();
+        int numPage = (int) Math.ceil((double) size / numberPage); // tổng số trang
+        String xpage = request.getParameter("page");
+        if (xpage == null) {
+            page = 1;
+        } else {
+           page = Integer.parseInt(xpage);
+        }
+        int start = (page - 1) * numberPage;
+        int end = Math.min(page * numberPage, size);
+        List<Account> currentPageList = accountDAO.getAccountListByPage(allAccounts, start, end);
+
+        // Gửi dữ liệu sang JSP
+        request.setAttribute("accountList", currentPageList);
+        request.setAttribute("totalPage", numPage);
+        request.setAttribute("page", page);
+        request.setAttribute("keyword", keyword);
+
+        // Chuyển đến trang hiển thị
+        request.getRequestDispatcher("controllUser.jsp").forward(request, response);
     }
 
     @Override

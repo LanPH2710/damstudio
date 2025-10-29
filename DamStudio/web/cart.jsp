@@ -8,7 +8,6 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css?v=${System.currentTimeMillis()}" />
         <link rel="stylesheet" href="css/homePage.css">
-
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>
@@ -339,7 +338,7 @@
                                 return;
                             if (!confirm('Bạn chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?'))
                                 return;
-                            var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                            var contextPath = = '${pageContext.request.contextPath}';
                             fetch(contextPath + '/deletecart', {
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -394,7 +393,7 @@
                             singleDeleteRow = null;
                         } else if (selectedCartIds.length > 0) {
                             // Gọi AJAX để xóa nhiều cartId cùng lúc
-                            var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                            var contextPath = = '${pageContext.request.contextPath}';
                             fetch(contextPath + '/deletecart', {
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -472,7 +471,7 @@
                     });
                     function updateCartQuantityAjax(row, newQty) {
                         var cartId = row.querySelector('.cart-del-btn').getAttribute('data-cart-id');
-                        var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                        var contextPath = = '${pageContext.request.contextPath}';
                         fetch(contextPath + '/updatecartquantity', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -497,7 +496,7 @@
                                 return;
                             if (!confirm('Bạn muốn xóa sản phẩm không hoạt động này khỏi giỏ hàng?'))
                                 return;
-                            var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                            var contextPath = = '${pageContext.request.contextPath}';
                             fetch(contextPath + '/deletecart', {
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -527,7 +526,7 @@
                             if (!confirm('Bạn chắc chắn muốn xóa toàn bộ sản phẩm không hoạt động khỏi giỏ hàng?'))
                                 return;
 
-                            var contextPath = window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] : '';
+                            var contextPath = = '${pageContext.request.contextPath}';
                             let cartIds = Array.from(inactiveRows).map(row => row.getAttribute('data-cart-id')).filter(id => !!id);
                             if (cartIds.length === 0)
                                 return;
