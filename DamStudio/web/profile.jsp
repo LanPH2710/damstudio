@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html lang="vi">
     <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VJFMJBKESV');
+</script>
         <title>User Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

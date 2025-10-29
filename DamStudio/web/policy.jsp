@@ -7,6 +7,14 @@
 <!DOCTYPE html>
 <html lang="vi">
     <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VJFMJBKESV');
+</script>
         <meta charset="UTF-8">
         <link rel="shortcut icon" type="image/icon" href="image/logo/logoIMG.png"/>
         <title>Điều Khoản & Chính Sách</title>

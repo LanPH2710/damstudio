@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-VJFMJBKESV');</script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Trang Chủ - Áo QR Việt Nam</title>
@@ -238,21 +245,21 @@
         <script src="javascript/homePage.js"></script>
         <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
         <script>
-            new CozeWebSDK.WebChatClient({
-            config: {
-            bot_id: '7527700457444409362';
+    new CozeWebSDK.WebChatClient({
+    config: {
+    bot_id: '7527700457444409362';
+    },
+            componentProps: {
+            title: 'Coze';
             },
-                    componentProps: {
-                    title: 'Coze';
-                    },
-                    auth: {
-                    type: 'token',
-                            token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
-                            onRefreshToken: function () {
-                            return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1';
-                            }
+            auth: {
+            type: 'token',
+                    token: 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1',
+                    onRefreshToken: function () {
+                    return 'pat_mEeypgmlIiDCzxueWrgoF92lkVZq4bByUAXYR9y6498rqbfGz3pIHCLi8gPngZb1';
                     }
-            });
+            }
+    });
         </script>
     </body>
 </html>
