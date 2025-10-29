@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJFMJBKESV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VJFMJBKESV');
+</script>
         <title>Giỏ hàng</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css?v=${System.currentTimeMillis()}" />

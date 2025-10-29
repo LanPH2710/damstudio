@@ -116,6 +116,15 @@
         <servlet-class>controller.admin.EditProductServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>OTPServlet</servlet-name>
+        <servlet-class>controller.common.OTPServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewPasswordServlet</servlet-name>
+        <servlet-class>controller.common.NewPasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>FeedbackServlet</servlet-name>
         <servlet-class>controller.common.FeedbackServlet</servlet-class>
     </servlet>
@@ -227,7 +236,7 @@
         <servlet-name>FeedbackServlet</servlet-name>
         <url-pattern>/feedback</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>OTPServlet</servlet-name>
         <url-pattern>/otp</url-pattern>
     </servlet-mapping>

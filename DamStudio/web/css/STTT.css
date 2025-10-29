@@ -651,6 +651,26 @@ body {
 
 
 /* Điều chỉnh kích thước chữ cho màn hình nhỏ (ví dụ: dưới 768px - điện thoại/tablet) */
+@media (max-width: 1100px) {
+
+    .scene1-subtitle,
+    .scene2-subtitle,
+    .scene3-subtitle,
+    .scene4-subtitle,
+    .scene5-subtitle,
+    .scene6-subtitle,
+    .scene7-subtitle,
+    .scene8-subtitle {
+        font-size: 0.8rem;!Important
+        /* Giảm cỡ chữ trên điện thoại */
+    }
+
+    .title-text {
+        font-size: 3rem;
+    }
+}
+
+/* Điều chỉnh kích thước chữ cho màn hình rất nhỏ (ví dụ: dưới 480px) */
 @media (max-width: 768px) {
 
     .scene1-subtitle,
@@ -661,27 +681,7 @@ body {
     .scene6-subtitle,
     .scene7-subtitle,
     .scene8-subtitle {
-        font-size: 1.1rem;
-        /* Giảm cỡ chữ trên điện thoại */
-    }
-
-    .title-text {
-        font-size: 3rem;
-    }
-}
-
-/* Điều chỉnh kích thước chữ cho màn hình rất nhỏ (ví dụ: dưới 480px) */
-@media (max-width: 480px) {
-
-    .scene1-subtitle,
-    .scene2-subtitle,
-    .scene3-subtitle,
-    .scene4-subtitle,
-    .scene5-subtitle,
-    .scene6-subtitle,
-    .scene7-subtitle,
-    .scene8-subtitle {
-        font-size: 0.9rem;
+        font-size: 0.6rem;
         /* Giảm cỡ chữ hơn nữa */
         padding: 8px 15px;
     }

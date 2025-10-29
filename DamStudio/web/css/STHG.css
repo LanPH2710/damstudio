@@ -729,7 +729,7 @@ body {
 }
 
 #s9-text {
-    bottom: 55%;
+    bottom: 45%;
     left: 20%;
     transform: translateX(-50%);
     width: 30%;
@@ -825,11 +825,11 @@ body {
 /* PHẦN RESPONSIVE CHO MÀN HÌNH NGANG CỦA ĐIỆN THOẠI (Dưới 500px chiều cao) */
 /* ================================================================== */
 
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-width: 1100px) and (orientation: landscape) {
 
     /* --- CHUNG --- */
     /* Giảm kích thước chữ của tất cả phụ đề */
-    #s8-text, #s7-text, #s6-text, #s5-text,#s4-text,#s3-text1, #s3-text2, #s2-text {
+    #s10-text,#s9-text,#s8-text, #s7-text, #s6-text, #s5-text,#s4-text,#s3-text1, #s3-text2, #scene2-subtitle {
         font-size: 0.8em;
     }
     .startButton {
