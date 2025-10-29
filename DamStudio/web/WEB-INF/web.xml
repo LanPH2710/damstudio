@@ -227,6 +227,14 @@
         <servlet-name>FeedbackServlet</servlet-name>
         <url-pattern>/feedback</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>OTPServlet</servlet-name>
+        <url-pattern>/otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewPasswordServlet</servlet-name>
+        <url-pattern>/newpassword</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>
     </welcome-file-list>

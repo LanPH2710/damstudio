@@ -41,6 +41,10 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
+    public boolean isValidPassword(String password) {
+        return password != null && password.matches("^(?=.*[A-Z])(?=.*\\d).+$");
+    }
+
     public List<Account> getAllAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT * FROM account";
@@ -307,6 +311,14 @@ public class AccountDAO extends DBContext {
             e.printStackTrace();
         }
         return success;
+    }
+    
+    public List<Account> getAccountListByPage(List<Account> acc, int start, int end) {
+        ArrayList<Account> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(acc.get(i));
+        }
+        return arr;
     }
 
     public static void main(String[] args) {

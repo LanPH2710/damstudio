@@ -89,7 +89,7 @@ public class ChangeOrderServlet extends HttpServlet {
             orderDetailsMap.put(order.getOrderId(), orderDetails);
         }
         // Phân trang
-        int page, numperpage = 5;
+        int page, numperpage = 15;
         int size = allOrder.size();
         int num = (int) Math.ceil((double) size / numperpage); // Số trang, làm tròn lên
         String xpage = request.getParameter("page");
